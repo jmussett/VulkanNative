@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using CSharpComposer;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Formatting;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -8,9 +9,6 @@ using Microsoft.CodeAnalysis.Simplification;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
-using VulkanNative.Generator.Builder;
-using VulkanNative.Generator.Builder.Builders;
-using VulkanNative.Generator.Builder.Types;
 using VulkanNative.Generator.Registry;
 
 // TODO: clear project
@@ -125,57 +123,52 @@ foreach (var require in registry.Feature.SelectMany(x => x.Requires))
 }
 
 
-var compilationUnit = CompilationUnitBuilder.CreateSyntax(x => x
-    .WithFileScopedNamespace("VulkanNative", x => x
-        .WithClass("VkGlobalCommands", x =>
+var compilationUnit = CSharpFactory.CompilationUnit(x => x
+    .AddFileScopedNamespaceDeclaration("VulkanNative", x => x
+        .AddClassDeclaration("VkGlobalCommands", x =>
         {
             x = x
-                .WithAccessModifier(TypeAccessModifier.Public)
-                .WithUnsafeModifier();
+                .AddModifierToken(SyntaxKind.PublicKeyword)
+                .AddModifierToken(SyntaxKind.UnsafeKeyword);
 
             foreach (var commandName in globalCommands)
             {
                 x = AddCommandToClass(x, commandName, commandLookup);
             }
-            return x;
         })
     ));
 
 documentRegistry.Add("Commands/VkGlobalCommands.cs", compilationUnit);
 
-compilationUnit = CompilationUnitBuilder.CreateSyntax(x => x
-    .WithFileScopedNamespace("VulkanNative", x => x
-        .WithClass("VkInstanceCommands", x =>
+compilationUnit = CSharpFactory.CompilationUnit(x => x
+    .AddFileScopedNamespaceDeclaration("VulkanNative", x => x
+        .AddClassDeclaration("VkInstanceCommands", x =>
         {
             x = x
-                .WithAccessModifier(TypeAccessModifier.Public)
-                .WithUnsafeModifier();
+                .AddModifierToken(SyntaxKind.PublicKeyword)
+                .AddModifierToken(SyntaxKind.UnsafeKeyword);
 
             foreach (var commandName in instanceCommands)
             {
                 x = AddCommandToClass(x, commandName, commandLookup);
             }
-
-            return x;
         })
     ));
 
 documentRegistry.Add("Commands/VkInstanceCommands.cs", compilationUnit);
 
-compilationUnit = CompilationUnitBuilder.CreateSyntax(x => x
-    .WithFileScopedNamespace("VulkanNative", x => x
-        .WithClass("VkDeviceCommands", x =>
+compilationUnit = CSharpFactory.CompilationUnit(x => x
+    .AddFileScopedNamespaceDeclaration("VulkanNative", x => x
+        .AddClassDeclaration("VkDeviceCommands", x =>
         {
             x = x
-                .WithAccessModifier(TypeAccessModifier.Public)
-                .WithUnsafeModifier();
+                .AddModifierToken(SyntaxKind.PublicKeyword)
+                .AddModifierToken(SyntaxKind.UnsafeKeyword);
 
             foreach (var commandName in deviceCommands)
             {
                 x = AddCommandToClass(x, commandName, commandLookup);
             }
-
-            return x;
         })
     ));
 
@@ -205,56 +198,59 @@ foreach(var documentEntry in documentRegistry)
 
 workspace.TryApplyChanges(project.Solution);
 
-ITypeBuilder LookupReturnType(ITypeBuilder typeBuilder, string type, string? postTypeData = null)
+void LookupReturnType(ITypeBuilder typeBuilder, string type, string? postTypeData = null)
 {
     if (type == "void")
     {
         if (string.IsNullOrEmpty(postTypeData))
         {
-            return typeBuilder.AsVoid();
+            typeBuilder.AsPredefinedType(PredefinedTypeKeyword.VoidKeyword);
         }
     }
 
-    return LookupType(typeBuilder, type, postTypeData);
+    LookupType(typeBuilder, type, postTypeData);
 }
 
-T BuildPointerType<T>(T typeBuilder, string typeName, int pointerRank) where T : ITypeBuilder<T>
+void BuildPointerType(ITypeBuilder typeBuilder, string typeName, int pointerRank)
 {
     if (pointerRank == 0)
     {
-        return LookupType<T>(typeBuilder, typeName, null);
+        LookupType(typeBuilder, typeName, null);
     }
     else
     {
-        return typeBuilder.AsPointer(x => BuildPointerType(x, typeName, pointerRank - 1));
+        typeBuilder.AsPointerType(x => BuildPointerType(x, typeName, pointerRank - 1));
     }
 }
 
-T LookupType<T>(T typeBuilder, string type, string? postTypeData = null) where T : ITypeBuilder<T>
+void LookupType(ITypeBuilder typeBuilder, string type, string? postTypeData = null)
 {
     var pointerRank = postTypeData?.Count(c => c == '*') ?? 0;
 
     if (pointerRank > 0)
     {
-        return BuildPointerType(typeBuilder, type, pointerRank);
+        BuildPointerType(typeBuilder, type, pointerRank);
+        return;
     }
 
     if (typeRegistry.TryGetValue(type, out var typeName))
     {
-        return typeBuilder.AsType(typeName);
+        typeBuilder.ParseTypeName(typeName);
+        return;
     }
 
     if (structLookup.TryGetValue(type, out var structDefinition))
     {
         var structName = structDefinition.NameAttribute;
 
-        documentRegistry.Add($"Structs/{structName}.cs", CompilationUnitBuilder.CreateSyntax(x => x
-            .WithUsing("System.Runtime.InteropServices")
-            .WithFileScopedNamespace("VulkanNative", x =>
-                x.WithStruct(structName, x => {
-                    x = x.WithAccessModifier(TypeAccessModifier.Public)
-                        .WithAttribute<StructLayoutAttribute>(x => x.WithArgument(LayoutKind.Sequential))
-                        .WithUnsafeModifier();
+        documentRegistry.Add($"Structs/{structName}.cs", CSharpFactory.CompilationUnit(x => x
+            .AddUsingDirective("System.Runtime.InteropServices")
+            .AddFileScopedNamespaceDeclaration("VulkanNative", x =>
+                x.AddStructDeclaration(structName, x => {
+                    x = x
+                        .AddModifierToken(SyntaxKind.PublicKeyword)
+                        .AddModifierToken(SyntaxKind.UnsafeKeyword)
+                        .AddAttribute("StructLayout", x => x.AddAttributeArgument("LayoutKind.Sequential"));
 
                     // returnedonly ?? -> readonly
                     // structextends ?? indicates that struct extends the "structextends" struct. Maybe not necessary for initial code gen.
@@ -265,73 +261,87 @@ T LookupType<T>(T typeBuilder, string type, string? postTypeData = null) where T
                         // optional?
                         // array?
 
-                        x = x.WithField(
-                            fieldDefinition.Name,
+                        if (!string.IsNullOrEmpty(fieldDefinition.Api) && fieldDefinition.Api != "vulkan")
+                        {
+                            // Skip when the field is not part of the standard vulkan api (i.e: vulkansc)
+                            continue;
+                        }
+
+                        x = x.AddFieldDeclaration(
                             x => LookupType(x, fieldDefinition.Type, fieldDefinition.PostTypeText),
-                            x => x
-                                .WithAccessModifier(MemberAccessModifier.Public)
+                            x => x.AddVariableDeclarator(fieldDefinition.Name),
+                            x => x.AddModifierToken(SyntaxKind.PublicKeyword)
                         );
-                        
-
                     }
-
-                    return x;
                 })
             )
         ));
 
         typeRegistry.TryAdd(structName, structName);
 
-        return typeBuilder.AsType(structName);
+        typeBuilder.ParseTypeName(structName);
+
+        return;
     }
 
     if (handleLookup.TryGetValue(type, out var handleDefinition))
     {
         var handleName  = handleDefinition.Name;
 
-        documentRegistry.Add($"Handles/{handleName}.cs", CompilationUnitBuilder.CreateSyntax(x => x
-            .WithUsing("System.Runtime.InteropServices")
-            .WithFileScopedNamespace("VulkanNative", x =>
-                x.WithStruct(handleName, x => x
-                    .WithAccessModifier(TypeAccessModifier.Public)
-                    .WithReadOnlyModifier()
-                    .WithAttribute<StructLayoutAttribute>(x => x.WithArgument(LayoutKind.Sequential)) //TODO add extension for literal arguments
-                    .WithField<nint>("_handle", x => x
-                        .WithAccessModifier(MemberAccessModifier.Private)
-                        .WithReadOnlyModifier()
+        documentRegistry.Add($"Handles/{handleName}.cs", CSharpFactory.CompilationUnit(x => x
+            .AddUsingDirective("System.Runtime.InteropServices")
+            .AddFileScopedNamespaceDeclaration("VulkanNative", x =>
+                x.AddStructDeclaration(handleName, x => x
+                    .AddModifierToken(SyntaxKind.PublicKeyword)
+                    .AddModifierToken(SyntaxKind.ReadOnlyKeyword)
+                    .AddAttribute("StructLayout", x => x.AddAttributeArgument("LayoutKind.Sequential")) //TODO add extension for literal arguments 
+                    .AddFieldDeclaration("nint", 
+                        x => x.AddVariableDeclarator("_handle"), 
+                        x => x
+                            .AddModifierToken(SyntaxKind.PrivateKeyword)
+                            .AddModifierToken(SyntaxKind.ReadOnlyKeyword)
                     )
-                    .WithConstructor(x => x
-                        .WithParameter<nint>("handle")
-                        .WithAccessModifier(MemberAccessModifier.Public)
+                    .AddConstructorDeclaration(handleName, x => x
+                        .AddParameter("handle", x => x.WithType("nint"))
+                        .AddModifierToken(SyntaxKind.PublicKeyword)
                         .WithBody(x => x
-                            .WithExpression(x => x.AsAssignment(
-                                x => x.AsName("_handle"),
-                                AssignmentType.Equal, 
-                                x => x.AsName("handle")
-                            )) // TODO: Create extensions
-                        ) 
-                    )
-                    // TODO: operator extensions
-                    .WithConversionOperator(ConversionOperatorType.Implicit, x => x.AsType(handleName), x => x
-                        .WithParameter<nint>("handle")
-                        .WithBody(x => 
-                            x.WithReturnStatement(x => 
-                                x.AsNew(x => 
-                                    x.AsType(handleName), 
-                                    x => x.WithArgument(x => x.AsName("handle"))
-                                ) // TODO: ImplicitObjectCreation + Create Extensions
+                            .AddExpressionStatement(x => x
+                                .AsAssignmentExpression(
+                                    AssignmentExpressionKind.SimpleAssignmentExpression,
+                                    x => x.AsIdentifierName("_handle"),
+                                    x => x.AsIdentifierName("handle")
+                                )
                             )
                         )
                     )
-                    .WithConversionOperator(ConversionOperatorType.Implicit, x => x.AsType<nint>(), x => x
-                        .WithParameter("value", x => x.AsType(handleName))
-                        .WithBody(x => x
-                            .WithReturnStatement(x => x
-                                .AsMemberAccess(
-                                    x => x.AsName("value"), 
-                                    x => x.AsIdentifier("_handle")
-                                ) // TODO: Create Extensions
-                            ) 
+                    .AddMemberDeclaration(x => x
+                        .AsConversionOperatorDeclaration(
+                            ConversionOperatorDeclarationImplicitOrExplicitKeyword.ImplicitKeyword, 
+                            x => x.ParseTypeName(handleName),
+                            x => x
+                                .AddModifierToken(SyntaxKind.PublicKeyword)
+                                .AddModifierToken(SyntaxKind.StaticKeyword)
+                                .AddParameter("handle", x => x.WithType("nint"))
+                                .WithBody(x => x
+                                    .AddReturnStatement(
+                                        x => x.WithExpression($"new {handleName}(handle)")
+                                    )
+                                )
+                        )
+                    )
+                    .AddMemberDeclaration(x => x
+                        .AsConversionOperatorDeclaration(
+                            ConversionOperatorDeclarationImplicitOrExplicitKeyword.ImplicitKeyword,
+                            x => x.ParseTypeName("nint"),
+                            x => x
+                                .AddModifierToken(SyntaxKind.PublicKeyword)
+                                .AddModifierToken(SyntaxKind.StaticKeyword)
+                                .AddParameter("value", x => x.WithType(handleName))
+                                .WithBody(x => x
+                                    .AddReturnStatement(
+                                        x => x.WithExpression($"value._handle")
+                                    )
+                                )
                         )
                     )
                 )
@@ -340,7 +350,9 @@ T LookupType<T>(T typeBuilder, string type, string? postTypeData = null) where T
 
         typeRegistry.TryAdd(handleName, handleName);
 
-        return typeBuilder.AsType(handleName);
+        typeBuilder.ParseTypeName(handleName);
+
+        return;
     }
 
     if (enumTypeLookup.TryGetValue(type, out var enumTypeDefinition))
@@ -359,24 +371,25 @@ T LookupType<T>(T typeBuilder, string type, string? postTypeData = null) where T
             throw new InvalidOperationException($"Unable to find enum '{enumName}'");
         }
 
-        Type enumType = enumDefinition.Type switch
+        var enumType = enumDefinition.Type switch
         {
-            "enum" => typeof(int),
-            "bitmask" => enumDefinition.BitWidth == "64" ? typeof(ulong) : typeof(uint),
+            "enum" => "int",
+            "bitmask" => enumDefinition.BitWidth == "64" ? "ulong" : "uint",
             _ => throw new InvalidOperationException()
         };
 
-        documentRegistry.Add($"Enums/{enumName}.cs", CompilationUnitBuilder.CreateSyntax(x => x
-            .WithFileScopedNamespace("VulkanNative", x =>
-                x.WithEnum(
+        documentRegistry.Add($"Enums/{enumName}.cs", CSharpFactory.CompilationUnit(x => x
+            .AddFileScopedNamespaceDeclaration("VulkanNative", x =>
+                x.AddEnumDeclaration(
                     enumName,
                     x =>
                     {
-                        x = x.WithAccessModifier(TypeAccessModifier.Public);
+                        x.AddSimpleBaseType(enumType);
+                        x.AddModifierToken(SyntaxKind.PublicKeyword);
 
                         if (enumDefinition.Type == "bitmask")
                         {
-                            x = x.WithAttribute(typeof(FlagsAttribute));
+                            x = x.AddAttribute("Flags");
                         }
 
                         foreach(var enumMember in enumDefinition.Enums)
@@ -388,20 +401,19 @@ T LookupType<T>(T typeBuilder, string type, string? postTypeData = null) where T
                                 : enumMember.Bitpos;
 
                             x = enumValue is not null 
-                                ? x.WithMember(enumMember.Name, x => x.ParseExpression(enumValue)) 
-                                : x.WithMember(enumMember.Name);
+                                ? x.AddEnumMemberDeclaration(enumMember.Name, x => x.WithEqualsValue(enumValue))
+                                : x.AddEnumMemberDeclaration(enumMember.Name);
                         }
-
-                        return x;
-                    },
-                    x => x.AsType(enumType) // TODO: extension
-                ) // TODO: Add fields.
+                    }
+                )
             )
         ));
 
         typeRegistry.TryAdd(enumName, enumName);
 
-        return typeBuilder.AsType(enumName);
+        typeBuilder.ParseTypeName(enumName);
+
+        return;
     }
 
     if (bitmaskLookup.TryGetValue(type, out var bitmaskTypeDefinition))
@@ -410,9 +422,9 @@ T LookupType<T>(T typeBuilder, string type, string? postTypeData = null) where T
 
         var bitmaskName = bitmaskTypeDefinition.Name;
 
-        documentRegistry.Add($"Bitmasks/{bitmaskName}.cs", CompilationUnitBuilder.CreateSyntax(x =>
-            x.WithFileScopedNamespace("VulkanNative", x =>
-                x.WithStruct(bitmaskName, x => x.WithAccessModifier(TypeAccessModifier.Public)
+        documentRegistry.Add($"Bitmasks/{bitmaskName}.cs", CSharpFactory.CompilationUnit(x =>
+            x.AddFileScopedNamespaceDeclaration("VulkanNative", x =>
+                x.AddStructDeclaration(bitmaskName, x => x.AddModifierToken(SyntaxKind.PublicKeyword)
                 //.WithBaseType(x => x.AsType(bitmaskUnderlyingType))
                 ) // TODO: Add fields.
             )
@@ -420,7 +432,9 @@ T LookupType<T>(T typeBuilder, string type, string? postTypeData = null) where T
 
         typeRegistry.TryAdd(bitmaskName, bitmaskName);
 
-        return typeBuilder.AsType(bitmaskName);
+        typeBuilder.ParseTypeName(bitmaskName);
+
+        return;
     }
 
     if (basetypeLookup.TryGetValue(type, out var baseTypeDefinition))
@@ -429,45 +443,51 @@ T LookupType<T>(T typeBuilder, string type, string? postTypeData = null) where T
 
         var baseTypeName = baseTypeDefinition.Name;
 
-        documentRegistry.Add($"BaseTypes/{baseTypeName}.cs", CompilationUnitBuilder.CreateSyntax(x =>
-            x.WithFileScopedNamespace("VulkanNative", x =>
-                x.WithStruct(baseTypeName, x => x.WithAccessModifier(TypeAccessModifier.Public)) // TODO: Add fields.
+        documentRegistry.Add($"BaseTypes/{baseTypeName}.cs", CSharpFactory.CompilationUnit(x =>
+            x.AddFileScopedNamespaceDeclaration("VulkanNative", x =>
+                x.AddStructDeclaration(baseTypeName, x => x.AddModifierToken(SyntaxKind.PublicKeyword)) // TODO: Add fields.
             )
         ));
 
         typeRegistry.TryAdd(baseTypeName, baseTypeName);
 
-        return typeBuilder.AsType(baseTypeName);
+        typeBuilder.ParseTypeName(baseTypeName);
+
+        return;
     }
 
     if (funcPointerLookup.TryGetValue(type, out var funcPointerDefinition))
     {
         // TODO: Add Underlying Type
 
-        documentRegistry.Add($"Functions/{funcPointerDefinition.Name}.cs", CompilationUnitBuilder.CreateSyntax(x =>
-            x.WithFileScopedNamespace("VulkanNative", x =>
-                x.WithStruct(funcPointerDefinition.Name, x => x.WithAccessModifier(TypeAccessModifier.Public)) // TODO: Add fields.
+        documentRegistry.Add($"Functions/{funcPointerDefinition.Name}.cs", CSharpFactory.CompilationUnit(x =>
+            x.AddFileScopedNamespaceDeclaration("VulkanNative", x =>
+                x.AddStructDeclaration(funcPointerDefinition.Name, x => x.AddModifierToken(SyntaxKind.PublicKeyword)) // TODO: Add fields.
             )
         ));
 
         typeRegistry.TryAdd(funcPointerDefinition.Name, funcPointerDefinition.Name);
 
-        return typeBuilder.AsType(funcPointerDefinition.Name);
+        typeBuilder.ParseTypeName(funcPointerDefinition.Name);
+
+        return;
     }
 
     if (unionTypeLookup.TryGetValue(type, out var unionTypeDefinition))
     {
         // TODO: Add Underlying Type
 
-        documentRegistry.Add($"Unions/{unionTypeDefinition.NameAttribute}.cs", CompilationUnitBuilder.CreateSyntax(x =>
-            x.WithFileScopedNamespace("VulkanNative", x =>
-                x.WithStruct(unionTypeDefinition.NameAttribute, x => x.WithAccessModifier(TypeAccessModifier.Public)) // TODO: Add fields.
+        documentRegistry.Add($"Unions/{unionTypeDefinition.NameAttribute}.cs", CSharpFactory.CompilationUnit(x =>
+            x.AddFileScopedNamespaceDeclaration("VulkanNative", x =>
+                x.AddStructDeclaration(unionTypeDefinition.NameAttribute, x => x.AddModifierToken(SyntaxKind.PublicKeyword)) // TODO: Add fields.
             )
         ));
 
         typeRegistry.TryAdd(unionTypeDefinition.NameAttribute, unionTypeDefinition.NameAttribute);
 
-        return typeBuilder.AsType(unionTypeDefinition.NameAttribute);
+        typeBuilder.ParseTypeName(unionTypeDefinition.NameAttribute);
+
+        return;
     }
 
     throw new Exception($"Type '{type}' cannot be found.");
@@ -477,23 +497,28 @@ IClassDeclarationBuilder AddCommandToClass(IClassDeclarationBuilder classBuilder
 {
     var commandDefinition = commandLookup[commandName];
 
-    return classBuilder.WithField(
-        commandName,
-        x => x
-            .AsFunctionPointer(x =>
+    
+    return classBuilder.AddFieldDeclaration(
+        x => x.AsFunctionPointerType(x =>
+        {
+            x.WithCallingConvention(
+                FunctionPointerCallingConventionManagedOrUnmanagedKeyword.UnmanagedKeyword,
+                x => x.AddFunctionPointerUnmanagedCallingConvention("Cdecl")
+            );
+
+            foreach (var param in commandDefinition.Params)
             {
-                x = x.AsUnmanaged(VulkanNative.Generator.Builder.Types.CallingConvention.Cdecl); // TODO: Change type name
+                x.AddFunctionPointerParameter(
+                    x => LookupType(x, param.Type, param.PostTypeText)
+                );
+            }
 
-                foreach (var param in commandDefinition.Params)
-                {
-                    x.WithParameter(x => LookupType(x, param.Type, param.PostTypeText));
-                }
-
-                x.WithReturn(x => LookupReturnType(x, commandDefinition.Proto.Type));
-
-                return x;
-            }),
-        x => x.WithAccessModifier(MemberAccessModifier.Public)
+            x.AddFunctionPointerParameter(
+                x => LookupReturnType(x, commandDefinition.Proto.Type)
+            );
+        }),
+        x => x.AddVariableDeclarator(commandName),
+        x => x.AddModifierToken(SyntaxKind.PublicKeyword)
     );
 }
 
@@ -559,7 +584,7 @@ string GetCommandGroup(VkCommand commandDefinition)
 //static void GenerateCommandSyntax(MSBuildWorkspace workspace, Project project)
 //{
 //    var document = project.AddDocument("Test.cs", CompilationUnitBuilder.CreateSyntax(x => x
-//        .WithFileScopedNamespace(x => x.ParseName("Test.Test"), x => x
+//        .AddFileScopedNamespaceDeclaration(x => x.ParseName("Test.Test"), x => x
 //            .WithEnum("TestEnum", x => x
 //                .WithAccessModifier(TypeAccessModifier.Public)
 //                .WithMember("A", 1)
