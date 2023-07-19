@@ -46,7 +46,12 @@ internal class CommandGroupGenerator
                 var functionName = commandDefinition.Proto.Name;
                 var firstParamType = commandDefinition.Params.FirstOrDefault()?.Type;
 
-                if (functionName == "vkGetDeviceProcAddr" || functionName == "vkGetInstanceProcAddr" || firstParamType is null)
+                if (functionName == "vkGetDeviceProcAddr" || functionName == "vkGetInstanceProcAddr")
+                {
+                    continue;
+                }
+
+                if (firstParamType is null)
                 {
                     globalCommands.Add(command.Name);
                 }
