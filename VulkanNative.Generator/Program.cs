@@ -30,7 +30,7 @@ var typeLocator = new TypeLocator(vkRegistry, typeRegistry, generatorRegistry);
 generatorRegistry.RegisterGenerator("struct", new StructGenerator(documentRegistry, typeLocator));
 generatorRegistry.RegisterGenerator("handle", new HandleGenerator(documentRegistry));
 generatorRegistry.RegisterGenerator("enum", new EnumGenerator(documentRegistry, vkRegistry));
-generatorRegistry.RegisterGenerator("basetype", new BaseTypeGenerator(documentRegistry));
+generatorRegistry.RegisterGenerator("basetype", new BaseTypeGenerator(documentRegistry, typeLocator));
 generatorRegistry.RegisterGenerator("funcpointer", new FuncPointerGenerator(typeLocator));
 generatorRegistry.RegisterGenerator("union", new UnionGenerator(documentRegistry));
 generatorRegistry.RegisterGenerator("bitmask", new BitMaskGenerator(documentRegistry));

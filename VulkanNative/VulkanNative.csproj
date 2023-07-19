@@ -15,8 +15,4 @@
     <ProjectReference Include="..\VulkanNative.Generator\VulkanNative.Generator.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Functions\" />
-  </ItemGroup>
-
 </Project>
