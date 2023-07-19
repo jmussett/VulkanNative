@@ -1,8 +1,9 @@
-﻿using VulkanNative.Generator.Registry;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using VulkanNative.Generator.Registry;
 
 namespace VulkanNative.Generator;
 
 internal interface ITypeGenerator
 {
-    void GenerateType(VkType type);
+    TypeSyntax GenerateType(VkType type);
 }

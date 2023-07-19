@@ -1,4 +1,5 @@
-﻿using VulkanNative.Generator.Registry;
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+using VulkanNative.Generator.Registry;
 
 namespace VulkanNative.Generator
 {
@@ -11,14 +12,14 @@ namespace VulkanNative.Generator
             _generators.Add(name, generator);
         }
 
-        public void GenerateType(VkType type)
+        public TypeSyntax GenerateType(VkType type)
         {
             if (!_generators.TryGetValue(type.Category, out var generator))
             {
                 throw new InvalidOperationException($"Unable to find generator for type '{type.Category}'");
             }
 
-            generator.GenerateType(type);
+            return generator.GenerateType(type);
         }
     }
 }

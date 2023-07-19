@@ -1,5 +1,6 @@
 ﻿using CSharpComposer;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Collections.Generic;
 using VulkanNative.Generator.Generators;
 using VulkanNative.Generator.Registries;
 using VulkanNative.Generator.Registry;
@@ -33,20 +34,20 @@ internal class TypeLocator
             return CSharpFactory.Type(x => BuildPointerType(x, type, pointerRank));
         }
 
-        if (_typeRegistry.Types.TryGetValue(type, out var typeName))
+        if (_typeRegistry.Types.TryGetValue(type, out var typeSyntax))
         {
-            return CSharpFactory.Type(x => x.ParseTypeName(typeName));
+            return typeSyntax;
         }
 
         var vkType = _vkRegistry.Types.FirstOrDefault(x => x.Name == type)
             ?? _vkRegistry.Types.FirstOrDefault(x => x.NameAttribute == type)
             ?? throw new InvalidOperationException($"Unable to find type '{type}'");
 
-        _generatorRegistry.GenerateType(vkType);
+        typeSyntax = _generatorRegistry.GenerateType(vkType);
 
-        _typeRegistry.Types.TryAdd(type, type);
+        _typeRegistry.Types.TryAdd(type, typeSyntax);
 
-        return CSharpFactory.Type(x => x.ParseTypeName(type));
+        return typeSyntax;
     }
 
     private void BuildPointerType(ITypeBuilder typeBuilder, string typeName, int pointerRank)

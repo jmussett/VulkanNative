@@ -1,22 +1,25 @@
-﻿namespace VulkanNative.Generator.Registries;
+﻿using CSharpComposer;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
+namespace VulkanNative.Generator.Registries;
 
 internal class TypeRegistry
 {
-    public Dictionary<string, string> Types { get; } = new()
+    public Dictionary<string, TypeSyntax> Types { get; } = new()
     {
         // Initial primitive types
-        { "void", "void" },
-        { "char", "char" },
-        { "float", "float"},
-        { "double", "double" },
-        { "int8_t", "sbyte" },
-        { "uint8_t", "byte" },
-        { "int16_t", "short" },
-        { "uint16_t", "ushort"},
-        { "int32_t", "int" },
-        { "uint32_t", "uint"},
-        { "int64_t", "long" },
-        { "uint64_t", "ulong"},
-        { "size_t", "nint" }
+        { "void", CSharpFactory.Type("void") },
+        { "char", CSharpFactory.Type("char") },
+        { "float", CSharpFactory.Type("float") },
+        { "double", CSharpFactory.Type("double") },
+        { "int8_t", CSharpFactory.Type("sbyte") },
+        { "uint8_t", CSharpFactory.Type("byte") },
+        { "int16_t", CSharpFactory.Type("short") },
+        { "uint16_t", CSharpFactory.Type("ushort") },
+        { "int32_t", CSharpFactory.Type("int") },
+        { "uint32_t", CSharpFactory.Type("uint") },
+        { "int64_t", CSharpFactory.Type("long") },
+        { "uint64_t", CSharpFactory.Type("ulong") },
+        { "size_t", CSharpFactory.Type("nint") }
     };
 }

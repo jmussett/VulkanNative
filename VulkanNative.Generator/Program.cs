@@ -31,7 +31,7 @@ generatorRegistry.RegisterGenerator("struct", new StructGenerator(documentRegist
 generatorRegistry.RegisterGenerator("handle", new HandleGenerator(documentRegistry));
 generatorRegistry.RegisterGenerator("enum", new EnumGenerator(documentRegistry, vkRegistry));
 generatorRegistry.RegisterGenerator("basetype", new BaseTypeGenerator(documentRegistry));
-generatorRegistry.RegisterGenerator("funcpointer", new FuncPointerGenerator(documentRegistry));
+generatorRegistry.RegisterGenerator("funcpointer", new FuncPointerGenerator(typeLocator));
 generatorRegistry.RegisterGenerator("union", new UnionGenerator(documentRegistry));
 generatorRegistry.RegisterGenerator("bitmask", new BitMaskGenerator(documentRegistry));
 

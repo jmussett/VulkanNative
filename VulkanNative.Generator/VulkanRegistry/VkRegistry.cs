@@ -41,7 +41,7 @@ public class VkType
     public string? Category { get; set; }
 
     [XmlText]
-    public string? Text { get; set; }
+    public List<string> TextEntries { get; set; }
 
     [XmlAttribute("requires")]
     public string? Requires { get; set; }
@@ -50,16 +50,10 @@ public class VkType
     public string? Deprecated { get; set; }
 
     [XmlElement("type")]
-    public string? Type { get; set; }
+    public List<string> Types { get; set; }
 
     [XmlAttribute("api")]
     public string? Api { get; set; }
-
-    [XmlAttribute("comment")]
-    public string? _Comment { get; set; }
-
-    [XmlElement("comment")]
-    public List<string> Comments { get; set; } = new();
 
     [XmlAttribute("alias")]
     public string? Alias { get; set; }

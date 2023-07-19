@@ -16,7 +16,7 @@ internal class BaseTypeGenerator : ITypeGenerator
         _documentRegistry = documentRegistry;
     }
 
-    public void GenerateType(VkType baseTypeDefinition)
+    public TypeSyntax GenerateType(VkType baseTypeDefinition)
     {
         var baseTypeName = baseTypeDefinition.Name;
 
@@ -27,5 +27,7 @@ internal class BaseTypeGenerator : ITypeGenerator
         );
 
         _documentRegistry.Documents.Add($"BaseTypes/{baseTypeName}.cs", compilationUnit);
+
+        return CSharpFactory.Type(baseTypeName);
     }
 }

@@ -17,7 +17,7 @@ internal class EnumGenerator : ITypeGenerator
         _enumRegistry = vkRegistry.Enums.ToDictionary(x => x.Name, x => x);
     }
 
-    public void GenerateType(VkType enumTypeDefinition)
+    public TypeSyntax GenerateType(VkType enumTypeDefinition)
     {
         var enumName = enumTypeDefinition.NameAttribute;
 
@@ -72,5 +72,7 @@ internal class EnumGenerator : ITypeGenerator
         );
 
         _documentRegistry.Documents.Add($"Enums/{enumName}.cs", compilationUnit);
+
+        return CSharpFactory.Type(enumName);
     }
 }

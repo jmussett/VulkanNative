@@ -1,5 +1,6 @@
 ﻿using CSharpComposer;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using VulkanNative.Generator.Registries;
 using VulkanNative.Generator.Registry;
 
@@ -14,7 +15,7 @@ internal class BitMaskGenerator : ITypeGenerator
         _documentRegistry = documentRegistry;
     }
 
-    public void GenerateType(VkType bitmaskDefinition)
+    public TypeSyntax GenerateType(VkType bitmaskDefinition)
     {
         var bitmaskName = bitmaskDefinition.Name;
 
@@ -27,5 +28,7 @@ internal class BitMaskGenerator : ITypeGenerator
         );
 
         _documentRegistry.Documents.Add($"Bitmasks/{bitmaskName}.cs", bitmaskCompilationUnit);
+
+        return CSharpFactory.Type(bitmaskName);
     }
 }

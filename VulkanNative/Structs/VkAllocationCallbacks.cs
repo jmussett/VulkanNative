@@ -6,9 +6,9 @@ namespace VulkanNative;
 public unsafe struct VkAllocationCallbacks
 {
     public void* pUserData;
-    public PFN_vkAllocationFunction pfnAllocation;
-    public PFN_vkReallocationFunction pfnReallocation;
-    public PFN_vkFreeFunction pfnFree;
-    public PFN_vkInternalAllocationNotification pfnInternalAllocation;
-    public PFN_vkInternalFreeNotification pfnInternalFree;
+    public delegate* unmanaged[Cdecl]<void*, nint, nint, VkSystemAllocationScope, void> pfnAllocation;
+    public delegate* unmanaged[Cdecl]<void*, void*, nint, nint, VkSystemAllocationScope, void> pfnReallocation;
+    public delegate* unmanaged[Cdecl]<void*, void*, void> pfnFree;
+    public delegate* unmanaged[Cdecl]<void*, nint, VkInternalAllocationType, VkSystemAllocationScope, void> pfnInternalAllocation;
+    public delegate* unmanaged[Cdecl]<void*, nint, VkInternalAllocationType, VkSystemAllocationScope, void> pfnInternalFree;
 }

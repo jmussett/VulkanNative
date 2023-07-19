@@ -1,28 +1,43 @@
 ﻿using CSharpComposer;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using VulkanNative.Generator.Registries;
 using VulkanNative.Generator.Registry;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace VulkanNative.Generator.Generators;
 
 internal class FuncPointerGenerator : ITypeGenerator
 {
-    private readonly DocumentRegistry _documentRegistry;
+    private readonly TypeLocator _typeLocator;
 
-    public FuncPointerGenerator(DocumentRegistry documentRegistry)
+    public FuncPointerGenerator(TypeLocator typeLocator)
     {
-        _documentRegistry = documentRegistry;
+        _typeLocator = typeLocator;
     }
 
-    public void GenerateType(VkType funcPointerDefinition)
+    public TypeSyntax GenerateType(VkType funcPointerDefinition)
     {
-        var compilationUnit = CSharpFactory.CompilationUnit(x =>
-            x.AddFileScopedNamespaceDeclaration("VulkanNative", x =>
-                x.AddStructDeclaration(funcPointerDefinition.Name, x => x.AddModifierToken(SyntaxKind.PublicKeyword)) // TODO: Add fields.
-            )
-        );
+        return CSharpFactory.Type(x => x.AsFunctionPointerType(x =>
+        {
+            x.WithCallingConvention(
+                FunctionPointerCallingConventionManagedOrUnmanagedKeyword.UnmanagedKeyword,
+                x => x.AddFunctionPointerUnmanagedCallingConvention("Cdecl")
+            );
 
-        _documentRegistry.Documents.Add($"Functions/{funcPointerDefinition.Name}.cs", compilationUnit);
+            for(var i = 0; i < funcPointerDefinition.Types.Count; i++)
+            {
+                var type = funcPointerDefinition.Types[i];
+                var postTypeData = funcPointerDefinition.TextEntries[i + 2]
+                    .Substring(0, funcPointerDefinition.TextEntries[i + 2].IndexOf(' '));
+
+                x.AddFunctionPointerParameter(
+                    x => x.FromSyntax(_typeLocator.LookupType(type, postTypeData))
+                );
+            }
+
+            // TODO: parse return type.
+            x.AddFunctionPointerParameter(
+                x => x.AsPredefinedType(PredefinedTypeKeyword.VoidKeyword)
+            );
+        }));
     }
 }
