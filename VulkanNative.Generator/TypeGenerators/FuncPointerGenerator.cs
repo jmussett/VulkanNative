@@ -14,7 +14,7 @@ internal class FuncPointerGenerator : ITypeGenerator
         _typeLocator = typeLocator;
     }
 
-    public TypeSyntax GenerateType(VkType funcPointerDefinition)
+    public TypeSyntax GenerateType(string _, VkType funcPointerDefinition)
     {
         return CSharpFactory.Type(x => x.AsFunctionPointerType(x =>
         {

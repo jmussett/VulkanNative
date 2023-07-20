@@ -5,5 +5,5 @@ namespace VulkanNative.Generator;
 
 internal interface ITypeGenerator
 {
-    TypeSyntax GenerateType(VkType type);
+    TypeSyntax GenerateType(string typeName, VkType type);
 }

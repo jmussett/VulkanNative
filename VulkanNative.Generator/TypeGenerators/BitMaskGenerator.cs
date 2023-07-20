@@ -8,27 +8,47 @@ namespace VulkanNative.Generator.Generators;
 
 internal class BitMaskGenerator : ITypeGenerator
 {
+    private readonly TypeLocator _typeLocator;
     private readonly DocumentRegistry _documentRegistry;
 
-    public BitMaskGenerator(DocumentRegistry documentRegistry)
+    public BitMaskGenerator(TypeLocator typeLocator, DocumentRegistry documentRegistry)
     {
+        _typeLocator = typeLocator;
         _documentRegistry = documentRegistry;
     }
 
-    public TypeSyntax GenerateType(VkType bitmaskDefinition)
+    public TypeSyntax GenerateType(string typeName, VkType bitmaskDefinition)
     {
-        var bitmaskName = bitmaskDefinition.Name;
+        if (!string.IsNullOrEmpty(bitmaskDefinition.Alias))
+        {
+            return _typeLocator.LookupType(bitmaskDefinition.Alias, alternativeName: typeName);
+        }
+        if (!string.IsNullOrEmpty(bitmaskDefinition.Requires))
+        {
+            return _typeLocator.LookupType(bitmaskDefinition.Requires, alternativeName: typeName);
+        }
+        else
+        {
+            // Bitmask does not have any enumerations, create an empty bitmask enum
 
-        var bitmaskCompilationUnit = CSharpFactory.CompilationUnit(x =>
-            x.AddFileScopedNamespaceDeclaration("VulkanNative", ns =>
-                ns.AddStructDeclaration(bitmaskName, st =>
-                    st.AddModifierToken(SyntaxKind.PublicKeyword)
-                ) // TODO: Add fields.
-            )
-        );
+            var compilationUnit = CSharpFactory.CompilationUnit(x => x
+                .AddFileScopedNamespaceDeclaration("VulkanNative", x =>
+                    x.AddEnumDeclaration(
+                        typeName,
+                        x => x
+                            .AddSimpleBaseType("uint")
+                            .AddModifierToken(SyntaxKind.PublicKeyword)
+                            .AddAttribute("Flags")
+                            .AddEnumMemberDeclaration("None", x => x.WithEqualsValue("1U << 0"))
+                    )
+                )
+            );
 
-        _documentRegistry.Documents.Add($"Bitmasks/{bitmaskName}.cs", bitmaskCompilationUnit);
+            _documentRegistry.Documents.Add($"Enums/{typeName}.cs", compilationUnit);
 
-        return CSharpFactory.Type(bitmaskName);
+            return CSharpFactory.Type(typeName);
+        }
+
+        
     }
 }

@@ -33,7 +33,7 @@ generatorRegistry.RegisterGenerator("enum", new EnumGenerator(documentRegistry, 
 generatorRegistry.RegisterGenerator("basetype", new BaseTypeGenerator(documentRegistry, typeLocator));
 generatorRegistry.RegisterGenerator("funcpointer", new FuncPointerGenerator(typeLocator));
 generatorRegistry.RegisterGenerator("union", new UnionGenerator(documentRegistry));
-generatorRegistry.RegisterGenerator("bitmask", new BitMaskGenerator(documentRegistry));
+generatorRegistry.RegisterGenerator("bitmask", new BitMaskGenerator(typeLocator, documentRegistry));
 
 var commandGenerator = new CommandGenerator(vkRegistry, typeLocator);
 

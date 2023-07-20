@@ -20,7 +20,7 @@ internal class TypeLocator
         _generatorRegistry = generatorRegistry;
     }
 
-    public TypeSyntax LookupType(string type, string? postTypeData = null)
+    public TypeSyntax LookupType(string type, string? postTypeData = null, string? alternativeName = null)
     {
         if (type == "void" && string.IsNullOrEmpty(postTypeData))
         {
@@ -31,10 +31,10 @@ internal class TypeLocator
 
         if (pointerRank > 0)
         {
-            return CSharpFactory.Type(x => BuildPointerType(x, type, pointerRank));
+            return CSharpFactory.Type(x => BuildPointerType(x, type, alternativeName, pointerRank));
         }
 
-        if (_typeRegistry.Types.TryGetValue(type, out var typeSyntax))
+        if (_typeRegistry.Types.TryGetValue(alternativeName ?? type, out var typeSyntax))
         {
             return typeSyntax;
         }
@@ -43,22 +43,22 @@ internal class TypeLocator
             ?? _vkRegistry.Types.FirstOrDefault(x => x.NameAttribute == type)
             ?? throw new InvalidOperationException($"Unable to find type '{type}'");
 
-        typeSyntax = _generatorRegistry.GenerateType(vkType);
+        typeSyntax = _generatorRegistry.GenerateType(alternativeName ?? type, vkType);
 
-        _typeRegistry.Types.TryAdd(type, typeSyntax);
+        _typeRegistry.Types.TryAdd(alternativeName ?? type, typeSyntax);
 
         return typeSyntax;
     }
 
-    private void BuildPointerType(ITypeBuilder typeBuilder, string typeName, int pointerRank)
+    private void BuildPointerType(ITypeBuilder typeBuilder, string typeName, string? alternativeName, int pointerRank)
     {
         if (pointerRank == 0)
         {
-            typeBuilder.FromSyntax(LookupType(typeName, null));
+            typeBuilder.FromSyntax(LookupType(typeName, null, alternativeName));
         }
         else
         {
-            typeBuilder.AsPointerType(x => BuildPointerType(x, typeName, pointerRank - 1));
+            typeBuilder.AsPointerType(x => BuildPointerType(x, typeName, alternativeName, pointerRank - 1));
         }
     }
 }

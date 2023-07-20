@@ -15,14 +15,12 @@ internal class HandleGenerator : ITypeGenerator
         _documentRegistry = documentRegistry;
     }
 
-    public TypeSyntax GenerateType(VkType handleDefinition)
+    public TypeSyntax GenerateType(string typeName, VkType handleDefinition)
     {
-        var handlerName = handleDefinition.Name;
-
         var compilationUnit = CSharpFactory.CompilationUnit(x => x
             .AddUsingDirective("System.Runtime.InteropServices")
             .AddFileScopedNamespaceDeclaration("VulkanNative", x =>
-                x.AddStructDeclaration(handlerName, x => x
+                x.AddStructDeclaration(typeName, x => x
                     .AddModifierToken(SyntaxKind.PublicKeyword)
                     .AddModifierToken(SyntaxKind.ReadOnlyKeyword)
                     .AddAttribute("StructLayout", x => x.AddAttributeArgument("LayoutKind.Sequential")) //TODO add extension for literal arguments 
@@ -32,7 +30,7 @@ internal class HandleGenerator : ITypeGenerator
                             .AddModifierToken(SyntaxKind.PrivateKeyword)
                             .AddModifierToken(SyntaxKind.ReadOnlyKeyword)
                     )
-                    .AddConstructorDeclaration(handlerName, x => x
+                    .AddConstructorDeclaration(typeName, x => x
                         .AddParameter("handle", x => x.WithType("nint"))
                         .AddModifierToken(SyntaxKind.PublicKeyword)
                         .WithBody(x => x
@@ -48,14 +46,14 @@ internal class HandleGenerator : ITypeGenerator
                     .AddMemberDeclaration(x => x
                         .AsConversionOperatorDeclaration(
                             ConversionOperatorDeclarationImplicitOrExplicitKeyword.ImplicitKeyword,
-                            x => x.ParseTypeName(handlerName),
+                            x => x.ParseTypeName(typeName),
                             x => x
                                 .AddModifierToken(SyntaxKind.PublicKeyword)
                                 .AddModifierToken(SyntaxKind.StaticKeyword)
                                 .AddParameter("handle", x => x.WithType("nint"))
                                 .WithBody(x => x
                                     .AddReturnStatement(
-                                        x => x.WithExpression($"new {handleDefinition.Name}(handle)")
+                                        x => x.WithExpression($"new {typeName}(handle)")
                                     )
                                 )
                         )
@@ -67,7 +65,7 @@ internal class HandleGenerator : ITypeGenerator
                             x => x
                                 .AddModifierToken(SyntaxKind.PublicKeyword)
                                 .AddModifierToken(SyntaxKind.StaticKeyword)
-                                .AddParameter("value", x => x.WithType(handlerName))
+                                .AddParameter("value", x => x.WithType(typeName))
                                 .WithBody(x => x
                                     .AddReturnStatement(
                                         x => x.WithExpression($"value._handle")
@@ -79,8 +77,8 @@ internal class HandleGenerator : ITypeGenerator
             )
         );
 
-        _documentRegistry.Documents.Add($"Handles/{handlerName}.cs", compilationUnit);
+        _documentRegistry.Documents.Add($"Handles/{typeName}.cs", compilationUnit);
 
-        return CSharpFactory.Type(handlerName);
+        return CSharpFactory.Type(typeName);
     }
 }

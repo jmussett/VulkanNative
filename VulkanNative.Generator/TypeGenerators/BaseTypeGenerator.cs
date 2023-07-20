@@ -18,16 +18,14 @@ internal class BaseTypeGenerator : ITypeGenerator
         _typeLocator = typeLocator;
     }
 
-    public TypeSyntax GenerateType(VkType baseTypeDefinition)
+    public TypeSyntax GenerateType(string typeName, VkType baseTypeDefinition)
     {
-        var baseTypeName = baseTypeDefinition.Name;
-
         var underlyingTypeSyntax = _typeLocator.LookupType(baseTypeDefinition.Types[0]);
 
         var compilationUnit = CSharpFactory.CompilationUnit(x => x
             .AddUsingDirective("System.Runtime.InteropServices")
             .AddFileScopedNamespaceDeclaration("VulkanNative", x => x
-                .AddStructDeclaration(baseTypeName, x => x
+                .AddStructDeclaration(typeName, x => x
                     .AddModifierToken(SyntaxKind.PublicKeyword)
                     .AddModifierToken(SyntaxKind.ReadOnlyKeyword)
                     .AddAttribute("StructLayout", x => x.AddAttributeArgument("LayoutKind.Sequential")) //TODO add extension for literal arguments 
@@ -38,7 +36,7 @@ internal class BaseTypeGenerator : ITypeGenerator
                             .AddModifierToken(SyntaxKind.PrivateKeyword)
                             .AddModifierToken(SyntaxKind.ReadOnlyKeyword)
                     )
-                    .AddConstructorDeclaration(baseTypeName, x => x
+                    .AddConstructorDeclaration(typeName, x => x
                         .AddParameter("value", x => x.WithType(underlyingTypeSyntax))
                         .AddModifierToken(SyntaxKind.PublicKeyword)
                         .WithBody(x => x
@@ -54,14 +52,14 @@ internal class BaseTypeGenerator : ITypeGenerator
                     .AddMemberDeclaration(x => x
                         .AsConversionOperatorDeclaration(
                             ConversionOperatorDeclarationImplicitOrExplicitKeyword.ImplicitKeyword,
-                            x => x.ParseTypeName(baseTypeName),
+                            x => x.ParseTypeName(typeName),
                             x => x
                                 .AddModifierToken(SyntaxKind.PublicKeyword)
                                 .AddModifierToken(SyntaxKind.StaticKeyword)
                                 .AddParameter("value", x => x.WithType(underlyingTypeSyntax))
                                 .WithBody(x => x
                                     .AddReturnStatement(
-                                        x => x.WithExpression($"new {baseTypeName}(value)")
+                                        x => x.WithExpression($"new {typeName}(value)")
                                     )
                                 )
                         )
@@ -73,7 +71,7 @@ internal class BaseTypeGenerator : ITypeGenerator
                             x => x
                                 .AddModifierToken(SyntaxKind.PublicKeyword)
                                 .AddModifierToken(SyntaxKind.StaticKeyword)
-                                .AddParameter("value", x => x.WithType(baseTypeName))
+                                .AddParameter("value", x => x.WithType(typeName))
                                 .WithBody(x => x
                                     .AddReturnStatement(
                                         x => x.WithExpression($"value._value")
@@ -85,8 +83,8 @@ internal class BaseTypeGenerator : ITypeGenerator
             )
         );
 
-        _documentRegistry.Documents.Add($"BaseTypes/{baseTypeName}.cs", compilationUnit);
+        _documentRegistry.Documents.Add($"BaseTypes/{typeName}.cs", compilationUnit);
 
-        return CSharpFactory.Type(baseTypeName);
+        return CSharpFactory.Type(typeName);
     }
 }

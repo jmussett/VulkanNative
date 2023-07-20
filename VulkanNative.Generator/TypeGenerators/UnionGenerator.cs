@@ -15,18 +15,16 @@ internal class UnionGenerator : ITypeGenerator
         _documentRegistry = documentRegistry;
     }
 
-    public TypeSyntax GenerateType(VkType unionDefinition)
+    public TypeSyntax GenerateType(string typeName, VkType unionDefinition)
     {
-        var unionName = unionDefinition.NameAttribute;
-
         var compilationUnit = CSharpFactory.CompilationUnit(x =>
             x.AddFileScopedNamespaceDeclaration("VulkanNative", x =>
-                x.AddStructDeclaration(unionName, x => x.AddModifierToken(SyntaxKind.PublicKeyword)) // TODO: Add fields.
+                x.AddStructDeclaration(typeName, x => x.AddModifierToken(SyntaxKind.PublicKeyword)) // TODO: Add fields.
             )
         );
 
-        _documentRegistry.Documents.Add($"Unions/{unionName}.cs", compilationUnit);
+        _documentRegistry.Documents.Add($"Unions/{typeName}.cs", compilationUnit);
 
-        return CSharpFactory.Type(unionName);
+        return CSharpFactory.Type(typeName);
     }
 }

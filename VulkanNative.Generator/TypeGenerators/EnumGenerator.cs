@@ -17,13 +17,11 @@ internal class EnumGenerator : ITypeGenerator
         _enumRegistry = vkRegistry.Enums.ToDictionary(x => x.Name, x => x);
     }
 
-    public TypeSyntax GenerateType(VkType enumTypeDefinition)
+    public TypeSyntax GenerateType(string typeName, VkType enumTypeDefinition)
     {
-        var enumName = enumTypeDefinition.NameAttribute;
-
-        if (!_enumRegistry.TryGetValue(enumName, out var enumDefinition))
+        if (!_enumRegistry.TryGetValue(enumTypeDefinition.NameAttribute, out var enumDefinition))
         {
-            throw new InvalidOperationException($"Unable to find enum '{enumName}'");
+            throw new InvalidOperationException($"Unable to find enum '{typeName}'");
         }
 
         /*
@@ -43,7 +41,7 @@ internal class EnumGenerator : ITypeGenerator
         var compilationUnit = CSharpFactory.CompilationUnit(x => x
             .AddFileScopedNamespaceDeclaration("VulkanNative", x =>
                 x.AddEnumDeclaration(
-                    enumName,
+                    typeName,
                     x =>
                     {
                         x.AddSimpleBaseType(enumType);
@@ -56,11 +54,17 @@ internal class EnumGenerator : ITypeGenerator
 
                         foreach (var enumMember in enumDefinition.Enums)
                         {
+                            if (!string.IsNullOrWhiteSpace(enumMember.Alias))
+                            {
+                                // Skip if the member is an alias
+                                continue;
+                            }
+
                             // TODO: comments
 
                             var enumValue = enumMember.Value is not null
                                 ? enumMember.Value
-                                : enumMember.Bitpos;
+                                : $"{(enumType == "ulong" ? "1UL" : "1U")} << {enumMember.Bitpos}";
 
                             x = enumValue is not null
                                 ? x.AddEnumMemberDeclaration(enumMember.Name, x => x.WithEqualsValue(enumValue))
@@ -71,8 +75,8 @@ internal class EnumGenerator : ITypeGenerator
             )
         );
 
-        _documentRegistry.Documents.Add($"Enums/{enumName}.cs", compilationUnit);
+        _documentRegistry.Documents.Add($"Enums/{typeName}.cs", compilationUnit);
 
-        return CSharpFactory.Type(enumName);
+        return CSharpFactory.Type(typeName);
     }
 }

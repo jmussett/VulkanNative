@@ -1,0 +1,11 @@
+﻿namespace VulkanNative;
+
+[Flags]
+public enum VkMemoryPropertyFlags : uint
+{
+    VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT = 1U << 0,
+    VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT = 1U << 1,
+    VK_MEMORY_PROPERTY_HOST_COHERENT_BIT = 1U << 2,
+    VK_MEMORY_PROPERTY_HOST_CACHED_BIT = 1U << 3,
+    VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT = 1U << 4
+}

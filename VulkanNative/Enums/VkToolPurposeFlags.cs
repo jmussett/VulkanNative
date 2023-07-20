@@ -1,0 +1,11 @@
+﻿namespace VulkanNative;
+
+[Flags]
+public enum VkToolPurposeFlags : uint
+{
+    VK_TOOL_PURPOSE_VALIDATION_BIT = 1U << 0,
+    VK_TOOL_PURPOSE_PROFILING_BIT = 1U << 1,
+    VK_TOOL_PURPOSE_TRACING_BIT = 1U << 2,
+    VK_TOOL_PURPOSE_ADDITIONAL_FEATURES_BIT = 1U << 3,
+    VK_TOOL_PURPOSE_MODIFYING_FEATURES_BIT = 1U << 4
+}

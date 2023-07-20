@@ -17,14 +17,12 @@ internal class StructGenerator : ITypeGenerator
         _typeLocator = locator;
     }
 
-    public TypeSyntax GenerateType(VkType structDefinition)
+    public TypeSyntax GenerateType(string typeName, VkType structDefinition)
     {
-        var structName = structDefinition.NameAttribute;
-
         var compilationUnit = CSharpFactory.CompilationUnit(x => x
             .AddUsingDirective("System.Runtime.InteropServices")
             .AddFileScopedNamespaceDeclaration("VulkanNative", x =>
-                x.AddStructDeclaration(structName, x => {
+                x.AddStructDeclaration(typeName, x => {
                     x = x
                         .AddModifierToken(SyntaxKind.PublicKeyword)
                         .AddModifierToken(SyntaxKind.UnsafeKeyword)
@@ -55,8 +53,8 @@ internal class StructGenerator : ITypeGenerator
             )
         );
 
-        _documentRegistry.Documents.Add($"Structs/{structName}.cs", compilationUnit);
+        _documentRegistry.Documents.Add($"Structs/{typeName}.cs", compilationUnit);
 
-        return CSharpFactory.Type(structName);
+        return CSharpFactory.Type(typeName);
     }
 }

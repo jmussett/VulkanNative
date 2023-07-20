@@ -1,0 +1,10 @@
+﻿namespace VulkanNative;
+
+[Flags]
+public enum VkExternalFenceHandleTypeFlags : uint
+{
+    VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_FD_BIT = 1U << 0,
+    VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_BIT = 1U << 1,
+    VK_EXTERNAL_FENCE_HANDLE_TYPE_OPAQUE_WIN32_KMT_BIT = 1U << 2,
+    VK_EXTERNAL_FENCE_HANDLE_TYPE_SYNC_FD_BIT = 1U << 3
+}

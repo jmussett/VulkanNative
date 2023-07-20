@@ -12,14 +12,14 @@ namespace VulkanNative.Generator
             _generators.Add(name, generator);
         }
 
-        public TypeSyntax GenerateType(VkType type)
+        public TypeSyntax GenerateType(string name, VkType type)
         {
             if (!_generators.TryGetValue(type.Category, out var generator))
             {
                 throw new InvalidOperationException($"Unable to find generator for type '{type.Category}'");
             }
 
-            return generator.GenerateType(type);
+            return generator.GenerateType(name, type);
         }
     }
 }
