@@ -28,7 +28,7 @@ internal class CommandGroupGenerator
         _handleLookup = vkRegistry.CreateHandleLookup();
     }
 
-    public void GenerateCommandGroup()
+    public void GenerateCommandGroups()
     {
         var globalCommands = new List<string>();
         var instanceCommands = new List<string>();

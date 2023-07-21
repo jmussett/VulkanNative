@@ -32,14 +32,14 @@ generatorRegistry.RegisterGenerator("handle", new HandleGenerator(documentRegist
 generatorRegistry.RegisterGenerator("enum", new EnumGenerator(documentRegistry, vkRegistry));
 generatorRegistry.RegisterGenerator("basetype", new BaseTypeGenerator(documentRegistry, typeLocator));
 generatorRegistry.RegisterGenerator("funcpointer", new FuncPointerGenerator(typeLocator));
-generatorRegistry.RegisterGenerator("union", new UnionGenerator(documentRegistry));
+generatorRegistry.RegisterGenerator("union", new UnionGenerator(typeLocator, documentRegistry));
 generatorRegistry.RegisterGenerator("bitmask", new BitMaskGenerator(typeLocator, documentRegistry));
 
 var commandGenerator = new CommandGenerator(vkRegistry, typeLocator);
 
 var commandGroupGenerator = new CommandGroupGenerator(vkRegistry, documentRegistry, commandGenerator);
 
-commandGroupGenerator.GenerateCommandGroup();
+commandGroupGenerator.GenerateCommandGroups();
 
 foreach(var documentEntry in documentRegistry.Documents)
 {
