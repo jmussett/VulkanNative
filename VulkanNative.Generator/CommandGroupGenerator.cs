@@ -34,9 +34,15 @@ internal class CommandGroupGenerator
         var instanceCommands = new List<string>();
         var deviceCommands = new List<string>();
 
-        foreach (var require in _vkRegistry.Feature.SelectMany(x => x.Requires))
+        foreach (var feature in _vkRegistry.Feature)
         {
-            foreach (var command in require.Commands)
+            // Skip non-vulkan features (i.e: Vulkan sc only)
+            if (!feature.Api.Split(',').Contains("vulkan"))
+            {
+                continue;
+            }
+
+            foreach (var command in feature.Requires.SelectMany(x => x.Commands))
             {
                 if (!_commandLookup.TryGetValue(command.Name, out var commandDefinition))
                 {

@@ -349,7 +349,7 @@ public class VkFeature
     public List<VkRequire> Requires { get; set; } = new();
 
     [XmlAttribute("api")]
-    public string[] Apis { get; set; } = Array.Empty<string>();
+    public string Api { get; set; } = string.Empty;
 
     [XmlAttribute("name")]
     public string? Name { get; set; }

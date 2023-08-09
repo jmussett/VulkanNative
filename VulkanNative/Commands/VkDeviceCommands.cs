@@ -187,6 +187,4 @@ public unsafe class VkDeviceCommands
     public delegate* unmanaged[Cdecl]<VkDevice, VkDeviceBufferMemoryRequirements*, VkMemoryRequirements2*, void> vkGetDeviceBufferMemoryRequirements;
     public delegate* unmanaged[Cdecl]<VkDevice, VkDeviceImageMemoryRequirements*, VkMemoryRequirements2*, void> vkGetDeviceImageMemoryRequirements;
     public delegate* unmanaged[Cdecl]<VkDevice, VkDeviceImageMemoryRequirements*, uint*, VkSparseImageMemoryRequirements2*, void> vkGetDeviceImageSparseMemoryRequirements;
-    public delegate* unmanaged[Cdecl]<VkDevice, VkCommandPool, VkCommandBuffer, VkCommandPoolMemoryConsumption*, void> vkGetCommandPoolMemoryConsumption;
-    public delegate* unmanaged[Cdecl]<VkDevice, VkFaultQueryBehavior, VkBool32*, uint*, VkFaultData*, VkResult> vkGetFaultData;
 }
