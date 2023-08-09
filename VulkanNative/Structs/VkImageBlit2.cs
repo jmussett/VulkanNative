@@ -8,7 +8,7 @@ public unsafe struct VkImageBlit2
     public VkStructureType sType;
     public void* pNext;
     public VkImageSubresourceLayers srcSubresource;
-    public VkOffset3D srcOffsets;
+    public VkOffset3D* srcOffsets;
     public VkImageSubresourceLayers dstSubresource;
-    public VkOffset3D dstOffsets;
+    public VkOffset3D* dstOffsets;
 }

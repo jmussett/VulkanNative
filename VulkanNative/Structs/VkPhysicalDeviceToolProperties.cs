@@ -7,9 +7,9 @@ public unsafe struct VkPhysicalDeviceToolProperties
 {
     public VkStructureType sType;
     public void* pNext;
-    public char name;
-    public char version;
+    public fixed char name[(int)VulkanApiConstants.VK_MAX_EXTENSION_NAME_SIZE];
+    public fixed char version[(int)VulkanApiConstants.VK_MAX_EXTENSION_NAME_SIZE];
     public VkToolPurposeFlags purposes;
-    public char description;
-    public char layer;
+    public fixed char description[(int)VulkanApiConstants.VK_MAX_DESCRIPTION_SIZE];
+    public fixed char layer[(int)VulkanApiConstants.VK_MAX_EXTENSION_NAME_SIZE];
 }

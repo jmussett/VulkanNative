@@ -83,7 +83,7 @@ public unsafe class VkDeviceCommands
     public delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkRect2D*, void> vkCmdSetScissor;
     public delegate* unmanaged[Cdecl]<VkCommandBuffer, float, void> vkCmdSetLineWidth;
     public delegate* unmanaged[Cdecl]<VkCommandBuffer, float, float, float, void> vkCmdSetDepthBias;
-    public delegate* unmanaged[Cdecl]<VkCommandBuffer, float, void> vkCmdSetBlendConstants;
+    public delegate* unmanaged[Cdecl]<VkCommandBuffer, float*, void> vkCmdSetBlendConstants;
     public delegate* unmanaged[Cdecl]<VkCommandBuffer, float, float, void> vkCmdSetDepthBounds;
     public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkStencilFaceFlags, uint, void> vkCmdSetStencilCompareMask;
     public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkStencilFaceFlags, uint, void> vkCmdSetStencilWriteMask;

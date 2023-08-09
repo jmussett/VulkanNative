@@ -38,7 +38,9 @@ generatorRegistry.RegisterGenerator("bitmask", new BitMaskGenerator(typeLocator,
 var commandGenerator = new CommandGenerator(vkRegistry, typeLocator);
 
 var commandGroupGenerator = new CommandGroupGenerator(vkRegistry, documentRegistry, commandGenerator);
+var apiConstantsGenerator = new ApiConstantsGenerator(vkRegistry, documentRegistry, typeLocator);
 
+apiConstantsGenerator.GenerateApiConstants();
 commandGroupGenerator.GenerateCommandGroups();
 
 foreach(var documentEntry in documentRegistry.Documents)

@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkLayerProperties
 {
-    public char layerName;
+    public fixed char layerName[(int)VulkanApiConstants.VK_MAX_EXTENSION_NAME_SIZE];
     public uint specVersion;
     public uint implementationVersion;
-    public char description;
+    public fixed char description[(int)VulkanApiConstants.VK_MAX_DESCRIPTION_SIZE];
 }

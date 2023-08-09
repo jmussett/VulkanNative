@@ -8,6 +8,6 @@ public unsafe struct VkPhysicalDeviceGroupProperties
     public VkStructureType sType;
     public void* pNext;
     public uint physicalDeviceCount;
-    public VkPhysicalDevice physicalDevices;
+    public VkPhysicalDevice* physicalDevices;
     public VkBool32 subsetAllocation;
 }

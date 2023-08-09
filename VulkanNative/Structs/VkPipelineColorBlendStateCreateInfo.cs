@@ -12,5 +12,5 @@ public unsafe struct VkPipelineColorBlendStateCreateInfo
     public VkLogicOp logicOp;
     public uint attachmentCount;
     public VkPipelineColorBlendAttachmentState* pAttachments;
-    public float blendConstants;
+    public fixed float blendConstants[4];
 }

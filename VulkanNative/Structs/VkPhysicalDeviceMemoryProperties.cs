@@ -6,7 +6,7 @@ namespace VulkanNative;
 public unsafe struct VkPhysicalDeviceMemoryProperties
 {
     public uint memoryTypeCount;
-    public VkMemoryType memoryTypes;
+    public VkMemoryType* memoryTypes;
     public uint memoryHeapCount;
-    public VkMemoryHeap memoryHeaps;
+    public VkMemoryHeap* memoryHeaps;
 }

@@ -33,9 +33,22 @@ internal class CommandGenerator
 
                 foreach (var param in commandDefinition.Params)
                 {
-                    x.AddFunctionPointerParameter(
-                        x => x.FromSyntax(_typeLocator.LookupType(param.Type, param.PostTypeText))
-                    );
+                    var typeDef = _typeLocator.LookupType(param.Type, param.PostTypeText);
+
+                    if (typeDef.Arguments.Length == 0)
+                    {
+                        x.AddFunctionPointerParameter(
+                            x => x.FromSyntax(typeDef.Syntax)
+                        );
+                    }
+                    else
+                    {
+                        // We could use an inline array type, but we'd have to generate this on top of the function pointer.
+                        // So leave it as a pointer for now.
+                        x.AddFunctionPointerParameter(
+                            x => x.AsPointerType(x => x.FromSyntax(typeDef.Syntax))
+                        );
+                    }
                 }
 
                 x.AddFunctionPointerParameter(

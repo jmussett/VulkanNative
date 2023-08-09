@@ -57,9 +57,9 @@ public unsafe struct VkPhysicalDeviceLimits
     public uint maxFragmentDualSrcAttachments;
     public uint maxFragmentCombinedOutputResources;
     public uint maxComputeSharedMemorySize;
-    public uint maxComputeWorkGroupCount;
+    public fixed uint maxComputeWorkGroupCount[3];
     public uint maxComputeWorkGroupInvocations;
-    public uint maxComputeWorkGroupSize;
+    public fixed uint maxComputeWorkGroupSize[3];
     public uint subPixelPrecisionBits;
     public uint subTexelPrecisionBits;
     public uint mipmapPrecisionBits;
@@ -68,8 +68,8 @@ public unsafe struct VkPhysicalDeviceLimits
     public float maxSamplerLodBias;
     public float maxSamplerAnisotropy;
     public uint maxViewports;
-    public uint maxViewportDimensions;
-    public float viewportBoundsRange;
+    public fixed uint maxViewportDimensions[2];
+    public fixed float viewportBoundsRange[2];
     public uint viewportSubPixelBits;
     public nint minMemoryMapAlignment;
     public VkDeviceSize minTexelBufferOffsetAlignment;
@@ -102,8 +102,8 @@ public unsafe struct VkPhysicalDeviceLimits
     public uint maxCullDistances;
     public uint maxCombinedClipAndCullDistances;
     public uint discreteQueuePriorities;
-    public float pointSizeRange;
-    public float lineWidthRange;
+    public fixed float pointSizeRange[2];
+    public fixed float lineWidthRange[2];
     public float pointSizeGranularity;
     public float lineWidthGranularity;
     public VkBool32 strictLines;

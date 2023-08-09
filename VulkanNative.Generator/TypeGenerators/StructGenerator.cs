@@ -43,10 +43,25 @@ internal class StructGenerator : ITypeGenerator
                             continue;
                         }
 
-                        x = x.AddFieldDeclaration(
-                            x => x.FromSyntax(_typeLocator.LookupType(fieldDefinition.Type, fieldDefinition.PostTypeText)),
-                            x => x.AddVariableDeclarator(fieldDefinition.Name),
-                            x => x.AddModifierToken(SyntaxKind.PublicKeyword)
+                        var typeDef = _typeLocator.LookupType(fieldDefinition.Type, fieldDefinition.PostTypeText);
+
+                        x.AddFieldDeclaration(
+                            x => x.FromSyntax(typeDef.Syntax),
+                            x => x.AddVariableDeclarator(fieldDefinition.Name, x =>
+                            {
+                                foreach(var argument in typeDef.Arguments)
+                                {
+                                      x.AddArgument(x => x.FromSyntax(argument));
+                                }
+                            }),
+                            x => {
+                                x.AddModifierToken(SyntaxKind.PublicKeyword);
+
+                                foreach (var modifier in typeDef.Modifiers)
+                                {
+                                    x = x.AddModifierToken(modifier);
+                                }
+                            }
                         );
                     }
                 })

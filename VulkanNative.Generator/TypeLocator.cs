@@ -1,7 +1,7 @@
 ﻿using CSharpComposer;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Collections.Generic;
-using VulkanNative.Generator.Generators;
+using System.Text.RegularExpressions;
 using VulkanNative.Generator.Registries;
 using VulkanNative.Generator.Registry;
 
@@ -20,7 +20,7 @@ internal class TypeLocator
         _generatorRegistry = generatorRegistry;
     }
 
-    public TypeSyntax LookupType(string type, string? postTypeData = null, string? alternativeName = null)
+    public TypeDefinition LookupType(string type, string? postTypeData = null, string? alternativeName = null)
     {
         if (type == "void" && string.IsNullOrEmpty(postTypeData))
         {
@@ -32,6 +32,37 @@ internal class TypeLocator
         if (pointerRank > 0)
         {
             return CSharpFactory.Type(x => BuildPointerType(x, type, alternativeName, pointerRank));
+        }
+
+        // Check for fixed size buffer pattern
+        var arrayMatch = Regex.Match(postTypeData ?? string.Empty, @"\[([a-zA-Z0-9_]+)\]");
+        if (arrayMatch.Success)
+        {
+            TypeSyntax underlyingType = LookupType(type, null, alternativeName);
+
+            // Unfortunately only predefined types can be used for fixed size buffers (for now)
+            // Use pointers for structs instead
+            if (underlyingType is not PredefinedTypeSyntax)
+            {
+                return CSharpFactory.Type(x => x.AsPointerType(x => x.FromSyntax(underlyingType)));
+            }
+
+            if (int.TryParse(arrayMatch.Groups[1].Value, out int arraySize))
+            {
+                return new TypeDefinition(underlyingType)
+                {
+                    Modifiers = new[] { SyntaxKind.FixedKeyword },
+                    Arguments = new[] { CSharpFactory.Expression(x => x.AsLiteralExpression(x => x.AsNumericLiteral(arraySize))) }
+                };
+            }
+            else
+            {
+                return new TypeDefinition(underlyingType)
+                {
+                    Modifiers = new[] { SyntaxKind.FixedKeyword },
+                    Arguments = new[] { CSharpFactory.Expression(x => x.ParseExpression($"(int) VulkanApiConstants.{arrayMatch.Groups[1].Value}")) }
+                };
+            }
         }
 
         if (_typeRegistry.Types.TryGetValue(alternativeName ?? type, out var typeSyntax))

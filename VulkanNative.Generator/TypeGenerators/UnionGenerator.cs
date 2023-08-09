@@ -30,15 +30,28 @@ internal class UnionGenerator : ITypeGenerator
 
                     foreach (var member in unionDefinition.Members)
                     {
-                        var fieldType = _typeLocator.LookupType(member.Type);
+                        var fieldTypeDef = _typeLocator.LookupType(member.Type, member.PostTypeText);
 
                         // TODO: CSharpComposer: optional field builder?
                         x.AddFieldDeclaration(
-                            x => x.FromSyntax(fieldType),
-                            x => x.AddVariableDeclarator(member.Name),
-                            x => x
-                                .AddModifierToken(SyntaxKind.PublicKeyword)
-                                .AddAttribute("FieldOffset", x => x.AddAttributeArgument("0"))
+                            x => x.FromSyntax(fieldTypeDef.Syntax),
+                            x => x.AddVariableDeclarator(member.Name,x =>
+                            {
+                                foreach(var argument in fieldTypeDef.Arguments)
+                                {
+                                    x.AddArgument(x => x.FromSyntax(argument));
+                                }
+                            }),
+                            x => {
+                                x.AddAttribute("FieldOffset", x => x.AddAttributeArgument("0"));
+
+                                x.AddModifierToken(SyntaxKind.PublicKeyword);
+                                
+                                foreach (var modifier in fieldTypeDef.Modifiers)
+                                {
+                                    x.AddModifierToken(modifier);
+                                }
+                            }
                         );
                     }
                 })

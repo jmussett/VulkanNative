@@ -86,8 +86,14 @@ public class VkMember
     [XmlElement("type")]
     public string? Type { get; set; }
 
+    private string? _postTypeText;
+
     [XmlText]
-    public string? PostTypeText { get; set; }
+    public string? PostTypeText
+    {
+        get => _postTypeText;
+        set => _postTypeText = value == "]" ? $"[{Enum}]" : value;
+    }
 
     [XmlElement("name")]
     public string? Name { get; set; }
