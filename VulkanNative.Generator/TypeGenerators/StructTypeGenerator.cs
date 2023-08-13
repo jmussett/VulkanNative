@@ -6,12 +6,12 @@ using VulkanNative.Generator.Registry;
 
 namespace VulkanNative.Generator.Generators;
 
-internal class StructGenerator : ITypeGenerator
+internal class StructTypeGenerator : ITypeGenerator
 {
     private readonly DocumentRegistry _documentRegistry;
     private readonly TypeLocator _typeLocator;
 
-    public StructGenerator(DocumentRegistry documentRegistry, TypeLocator locator)
+    public StructTypeGenerator(DocumentRegistry documentRegistry, TypeLocator locator)
     {
         _documentRegistry = documentRegistry;
         _typeLocator = locator;
@@ -43,7 +43,22 @@ internal class StructGenerator : ITypeGenerator
                             continue;
                         }
 
-                        var typeDef = _typeLocator.LookupType(fieldDefinition.Type, fieldDefinition.PostTypeText);
+                        TypeDefinition typeDef;
+
+                        // Safety check to prevent circular references.
+                        if (fieldDefinition.Type == typeName)
+                        {
+                            typeDef = _typeLocator.LookupType(fieldDefinition.Type, fieldDefinition.PostTypeText, () =>
+                            {
+                                var syntax = CSharpFactory.Type(typeName);
+
+                                return new TypeDefinition(syntax);
+                            });
+                        }
+                        else
+                        {
+                            typeDef = _typeLocator.LookupType(fieldDefinition.Type, fieldDefinition.PostTypeText);
+                        }
 
                         x.AddFieldDeclaration(
                             x => x.FromSyntax(typeDef.Syntax),

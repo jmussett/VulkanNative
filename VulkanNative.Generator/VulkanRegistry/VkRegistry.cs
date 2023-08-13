@@ -270,7 +270,7 @@ public class VkParam
 public class VkCommand
 {
     [XmlElement("proto")]
-    public VkProto? Proto { get; set; }
+    public VkProto Proto { get; set; } = new();
 
     [XmlElement("param")]
     public List<VkParam> Params { get; set; } = new();
@@ -291,7 +291,7 @@ public class VkCommand
     public string[] Queues { get; set; } = Array.Empty<string>();
 
     [XmlAttribute("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [XmlAttribute("alias")]
     public string? Alias { get; set; }
@@ -383,7 +383,7 @@ public class VkExtension
     public string? Contact { get; set; }
 
     [XmlAttribute("supported")]
-    public string? Supported { get; set; }
+    public string Supported { get; set; } = string.Empty;
 
     [XmlAttribute("depends")]
     public string? Depends { get; set; }

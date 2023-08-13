@@ -7,5 +7,5 @@ public unsafe struct VkPhysicalDeviceExternalSemaphoreInfo
 {
     public VkStructureType sType;
     public void* pNext;
-    public VkExternalSemaphoreHandleTypeFlagBits handleType;
+    public VkExternalSemaphoreHandleTypeFlags handleType;
 }

@@ -6,11 +6,11 @@ using VulkanNative.Generator.Registry;
 
 namespace VulkanNative.Generator.Generators;
 
-internal class HandleGenerator : ITypeGenerator
+internal class HandleTypeGenerator : ITypeGenerator
 {
     private readonly DocumentRegistry _documentRegistry;
 
-    public HandleGenerator(DocumentRegistry documentRegistry)
+    public HandleTypeGenerator(DocumentRegistry documentRegistry)
     {
         _documentRegistry = documentRegistry;
     }

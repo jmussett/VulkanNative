@@ -7,5 +7,5 @@ public unsafe struct VkPhysicalDeviceExternalFenceInfo
 {
     public VkStructureType sType;
     public void* pNext;
-    public VkExternalFenceHandleTypeFlagBits handleType;
+    public VkExternalFenceHandleTypeFlags handleType;
 }

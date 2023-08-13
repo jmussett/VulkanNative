@@ -9,7 +9,7 @@ public unsafe struct VkRenderingAttachmentInfo
     public void* pNext;
     public VkImageView imageView;
     public VkImageLayout imageLayout;
-    public VkResolveModeFlagBits resolveMode;
+    public VkResolveModeFlags resolveMode;
     public VkImageView resolveImageView;
     public VkImageLayout resolveImageLayout;
     public VkAttachmentLoadOp loadOp;

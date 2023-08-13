@@ -6,12 +6,12 @@ using VulkanNative.Generator.Registry;
 
 namespace VulkanNative.Generator.Generators;
 
-internal class UnionGenerator : ITypeGenerator
+internal class UnionTypeGenerator : ITypeGenerator
 {
     private readonly TypeLocator _typeLocator;
     private readonly DocumentRegistry _documentRegistry;
 
-    public UnionGenerator(TypeLocator typeLocator, DocumentRegistry documentRegistry)
+    public UnionTypeGenerator(TypeLocator typeLocator, DocumentRegistry documentRegistry)
     {
         _typeLocator = typeLocator;
         _documentRegistry = documentRegistry;

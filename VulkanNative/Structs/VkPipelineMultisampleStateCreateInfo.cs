@@ -8,7 +8,7 @@ public unsafe struct VkPipelineMultisampleStateCreateInfo
     public VkStructureType sType;
     public void* pNext;
     public VkPipelineMultisampleStateCreateFlags flags;
-    public VkSampleCountFlagBits rasterizationSamples;
+    public VkSampleCountFlags rasterizationSamples;
     public VkBool32 sampleShadingEnable;
     public float minSampleShading;
     public VkSampleMask* pSampleMask;

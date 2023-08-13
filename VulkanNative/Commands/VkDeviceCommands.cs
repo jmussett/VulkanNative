@@ -115,7 +115,7 @@ public unsafe class VkDeviceCommands
     public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkQueryPool, uint, VkQueryControlFlags, void> vkCmdBeginQuery;
     public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkQueryPool, uint, void> vkCmdEndQuery;
     public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkQueryPool, uint, uint, void> vkCmdResetQueryPool;
-    public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineStageFlagBits, VkQueryPool, uint, void> vkCmdWriteTimestamp;
+    public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineStageFlags, VkQueryPool, uint, void> vkCmdWriteTimestamp;
     public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkQueryPool, uint, uint, VkBuffer, VkDeviceSize, VkDeviceSize, VkQueryResultFlags, void> vkCmdCopyQueryPoolResults;
     public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineLayout, VkShaderStageFlags, uint, uint, void*, void> vkCmdPushConstants;
     public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkRenderPassBeginInfo*, VkSubpassContents, void> vkCmdBeginRenderPass;

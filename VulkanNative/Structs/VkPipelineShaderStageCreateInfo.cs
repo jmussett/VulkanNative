@@ -8,7 +8,7 @@ public unsafe struct VkPipelineShaderStageCreateInfo
     public VkStructureType sType;
     public void* pNext;
     public VkPipelineShaderStageCreateFlags flags;
-    public VkShaderStageFlagBits stage;
+    public VkShaderStageFlags stage;
     public VkShaderModule module;
     public char* pName;
     public VkSpecializationInfo* pSpecializationInfo;

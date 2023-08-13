@@ -1,0 +1,8 @@
+﻿namespace VulkanNative;
+
+public enum VkShaderFloatControlsIndependence : int
+{
+    VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_32_BIT_ONLY = 0,
+    VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_ALL = 1,
+    VK_SHADER_FLOAT_CONTROLS_INDEPENDENCE_NONE = 2
+}

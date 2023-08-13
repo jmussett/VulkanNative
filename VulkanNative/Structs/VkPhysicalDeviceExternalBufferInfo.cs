@@ -9,5 +9,5 @@ public unsafe struct VkPhysicalDeviceExternalBufferInfo
     public void* pNext;
     public VkBufferCreateFlags flags;
     public VkBufferUsageFlags usage;
-    public VkExternalMemoryHandleTypeFlagBits handleType;
+    public VkExternalMemoryHandleTypeFlags handleType;
 }

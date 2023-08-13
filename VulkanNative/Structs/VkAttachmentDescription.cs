@@ -7,7 +7,7 @@ public unsafe struct VkAttachmentDescription
 {
     public VkAttachmentDescriptionFlags flags;
     public VkFormat format;
-    public VkSampleCountFlagBits samples;
+    public VkSampleCountFlags samples;
     public VkAttachmentLoadOp loadOp;
     public VkAttachmentStoreOp storeOp;
     public VkAttachmentLoadOp stencilLoadOp;

@@ -1,10 +1,5 @@
 ﻿using CSharpComposer;
 using Microsoft.CodeAnalysis.CSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VulkanNative.Generator.Registries;
 using VulkanNative.Generator.Registry;
 
@@ -15,15 +10,19 @@ internal class CommandGroupGenerator
     private readonly VkRegistry _vkRegistry;
     private readonly DocumentRegistry _documentRegistry;
     private readonly CommandGenerator _commandGenerator;
+    private readonly TypeLocator _typeLocator;
+    private readonly EnumRegistry _enumRegistry;
 
     private readonly IReadOnlyDictionary<string, VkCommand> _commandLookup;
     private readonly IReadOnlyDictionary<string, VkType> _handleLookup;
 
-    public CommandGroupGenerator(VkRegistry vkRegistry, DocumentRegistry documentRegistry, CommandGenerator commandGenerator)
+    public CommandGroupGenerator(VkRegistry vkRegistry, DocumentRegistry documentRegistry, CommandGenerator commandGenerator, TypeLocator typeLocator, EnumRegistry enumRegistry)
     {
         _vkRegistry = vkRegistry;
         _documentRegistry = documentRegistry;
         _commandGenerator = commandGenerator;
+        _typeLocator = typeLocator;
+        _enumRegistry = enumRegistry;
         _commandLookup = vkRegistry.CreateCommandLookup();
         _handleLookup = vkRegistry.CreateHandleLookup();
     }
@@ -42,36 +41,60 @@ internal class CommandGroupGenerator
                 continue;
             }
 
-            foreach (var command in feature.Requires.SelectMany(x => x.Commands))
+            foreach(var requires in feature.Requires)
             {
-                if (!_commandLookup.TryGetValue(command.Name, out var commandDefinition))
+                foreach(var type in requires.Types)
                 {
-                    throw new InvalidOperationException($"Unable to find command definition '{command.Name}'");
+                    var vkType = _vkRegistry.Types.FirstOrDefault(x => x.Name == type.NameAttribute)
+                        ?? _vkRegistry.Types.FirstOrDefault(x => x.NameAttribute == type.NameAttribute)
+                        ?? throw new InvalidOperationException($"Unable to find type '{type.NameAttribute}'");
+
+                    if (vkType.Category != "include" && vkType.Category != "define")
+                    {
+                        // Will do a type lookup and register the type if it hasn't been registered already
+                        _ = _typeLocator.LookupType(type.NameAttribute);
+                    }
                 }
 
-                var functionName = commandDefinition.Proto.Name;
-                var firstParamType = commandDefinition.Params.FirstOrDefault()?.Type;
+                foreach (var command in requires.Commands)
+                {
+                    if (!_commandLookup.TryGetValue(command.Name, out var commandDefinition))
+                    {
+                        throw new InvalidOperationException($"Unable to find command definition '{command.Name}'");
+                    }
 
-                if (functionName == "vkGetDeviceProcAddr" || functionName == "vkGetInstanceProcAddr")
-                {
-                    continue;
+                    var functionName = commandDefinition.Proto.Name;
+                    var firstParamType = commandDefinition.Params.FirstOrDefault()?.Type;
+
+                    if (functionName == "vkGetDeviceProcAddr" || functionName == "vkGetInstanceProcAddr")
+                    {
+                        continue;
+                    }
+
+                    if (firstParamType is not null && IsHandleInheritsFrom(firstParamType, "VkDevice"))
+                    {
+                        deviceCommands.Add(command.Name);
+                    }
+                    else if (firstParamType is not null && IsHandleInheritsFrom(firstParamType, "VkInstance"))
+                    {
+                        instanceCommands.Add(command.Name);
+                    }
+                    else
+                    {
+                        globalCommands.Add(command.Name);
+                    }
                 }
 
-                if (firstParamType is null)
+                foreach(var enumMember in requires.Enums)
                 {
-                    globalCommands.Add(command.Name);
-                }
-                else if (IsHandleInheritsFrom(firstParamType, "VkDevice"))
-                {
-                    deviceCommands.Add(command.Name);
-                }
-                else if (IsHandleInheritsFrom(firstParamType, "VkInstance"))
-                {
-                    instanceCommands.Add(command.Name);
-                }
-                else
-                {
-                    globalCommands.Add(command.Name);
+                    if (enumMember.Extends is null)
+                    {
+                        continue;
+                    }
+
+                    _enumRegistry.Enums.TryAdd(enumMember.Extends, new EnumDefinition());
+
+                    _enumRegistry.Enums[enumMember.Extends].Members.Add(enumMember);
                 }
             }
         }

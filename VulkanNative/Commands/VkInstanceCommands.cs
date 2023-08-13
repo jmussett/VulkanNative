@@ -13,7 +13,7 @@ public unsafe class VkInstanceCommands
     public delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDeviceCreateInfo*, VkAllocationCallbacks*, VkDevice*, VkResult> vkCreateDevice;
     public delegate* unmanaged[Cdecl]<VkPhysicalDevice, char*, uint*, VkExtensionProperties*, VkResult> vkEnumerateDeviceExtensionProperties;
     public delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkLayerProperties*, VkResult> vkEnumerateDeviceLayerProperties;
-    public delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkFormat, VkImageType, VkSampleCountFlagBits, VkImageUsageFlags, VkImageTiling, uint*, VkSparseImageFormatProperties*, void> vkGetPhysicalDeviceSparseImageFormatProperties;
+    public delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkFormat, VkImageType, VkSampleCountFlags, VkImageUsageFlags, VkImageTiling, uint*, VkSparseImageFormatProperties*, void> vkGetPhysicalDeviceSparseImageFormatProperties;
     public delegate* unmanaged[Cdecl]<VkInstance, uint*, VkPhysicalDeviceGroupProperties*, VkResult> vkEnumeratePhysicalDeviceGroups;
     public delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceFeatures2*, void> vkGetPhysicalDeviceFeatures2;
     public delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceProperties2*, void> vkGetPhysicalDeviceProperties2;

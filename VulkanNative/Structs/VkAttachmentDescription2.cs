@@ -9,7 +9,7 @@ public unsafe struct VkAttachmentDescription2
     public void* pNext;
     public VkAttachmentDescriptionFlags flags;
     public VkFormat format;
-    public VkSampleCountFlagBits samples;
+    public VkSampleCountFlags samples;
     public VkAttachmentLoadOp loadOp;
     public VkAttachmentStoreOp storeOp;
     public VkAttachmentLoadOp stencilLoadOp;

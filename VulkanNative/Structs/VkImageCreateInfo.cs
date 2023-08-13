@@ -13,7 +13,7 @@ public unsafe struct VkImageCreateInfo
     public VkExtent3D extent;
     public uint mipLevels;
     public uint arrayLayers;
-    public VkSampleCountFlagBits samples;
+    public VkSampleCountFlags samples;
     public VkImageTiling tiling;
     public VkImageUsageFlags usage;
     public VkSharingMode sharingMode;

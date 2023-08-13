@@ -24,24 +24,27 @@ var project = await workspace.OpenProjectAsync("..\\..\\..\\..\\VulkanNative\\Vu
 var documentRegistry = new DocumentRegistry();
 var typeRegistry = new TypeRegistry();
 var generatorRegistry = new TypeGeneratorRegistry();
+var enumRegistry = new EnumRegistry();
 
 var typeLocator = new TypeLocator(vkRegistry, typeRegistry, generatorRegistry);
 
-generatorRegistry.RegisterGenerator("struct", new StructGenerator(documentRegistry, typeLocator));
-generatorRegistry.RegisterGenerator("handle", new HandleGenerator(documentRegistry));
-generatorRegistry.RegisterGenerator("enum", new EnumGenerator(documentRegistry, vkRegistry));
+generatorRegistry.RegisterGenerator("struct", new StructTypeGenerator(documentRegistry, typeLocator));
+generatorRegistry.RegisterGenerator("handle", new HandleTypeGenerator(documentRegistry));
+generatorRegistry.RegisterGenerator("enum", new EnumTypeGenerator(enumRegistry, vkRegistry));
 generatorRegistry.RegisterGenerator("basetype", new BaseTypeGenerator(documentRegistry, typeLocator));
 generatorRegistry.RegisterGenerator("funcpointer", new FuncPointerGenerator(typeLocator));
-generatorRegistry.RegisterGenerator("union", new UnionGenerator(typeLocator, documentRegistry));
-generatorRegistry.RegisterGenerator("bitmask", new BitMaskGenerator(typeLocator, documentRegistry));
+generatorRegistry.RegisterGenerator("union", new UnionTypeGenerator(typeLocator, documentRegistry));
+generatorRegistry.RegisterGenerator("bitmask", new BitMaskTypeGenerator(typeLocator, documentRegistry));
 
 var commandGenerator = new CommandGenerator(vkRegistry, typeLocator);
 
-var commandGroupGenerator = new CommandGroupGenerator(vkRegistry, documentRegistry, commandGenerator);
+var commandGroupGenerator = new CommandGroupGenerator(vkRegistry, documentRegistry, commandGenerator, typeLocator, enumRegistry);
 var apiConstantsGenerator = new ApiConstantsGenerator(vkRegistry, documentRegistry, typeLocator);
+var enumGenerator = new EnumGenerator(enumRegistry, documentRegistry);
 
 apiConstantsGenerator.GenerateApiConstants();
 commandGroupGenerator.GenerateCommandGroups();
+enumGenerator.GenerateEnums();
 
 foreach(var documentEntry in documentRegistry.Documents)
 {
