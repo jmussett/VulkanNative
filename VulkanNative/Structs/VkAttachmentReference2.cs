@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAttachmentReference2
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint attachment;
-    public VkImageLayout layout;
-    public VkImageAspectFlags aspectMask;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint Attachment;
+    public VkImageLayout Layout;
+    public VkImageAspectFlags AspectMask;
 }

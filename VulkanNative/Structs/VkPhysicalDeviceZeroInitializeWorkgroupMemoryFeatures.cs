@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkBool32 shaderZeroInitializeWorkgroupMemory;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkBool32 ShaderZeroInitializeWorkgroupMemory;
 }

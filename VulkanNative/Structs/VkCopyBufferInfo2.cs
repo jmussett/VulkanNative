@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCopyBufferInfo2
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkBuffer srcBuffer;
-    public VkBuffer dstBuffer;
-    public uint regionCount;
-    public VkBufferCopy2* pRegions;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkBuffer SrcBuffer;
+    public VkBuffer DstBuffer;
+    public uint RegionCount;
+    public VkBufferCopy2* PRegions;
 }

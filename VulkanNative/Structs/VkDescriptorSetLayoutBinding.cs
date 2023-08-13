@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDescriptorSetLayoutBinding
 {
-    public uint binding;
-    public VkDescriptorType descriptorType;
-    public uint descriptorCount;
-    public VkShaderStageFlags stageFlags;
-    public VkSampler* pImmutableSamplers;
+    public uint Binding;
+    public VkDescriptorType DescriptorType;
+    public uint DescriptorCount;
+    public VkShaderStageFlags StageFlags;
+    public VkSampler* PImmutableSamplers;
 }

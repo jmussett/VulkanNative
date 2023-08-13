@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAllocationCallbacks
 {
-    public void* pUserData;
-    public delegate* unmanaged[Cdecl]<void*, nint, nint, VkSystemAllocationScope, void> pfnAllocation;
-    public delegate* unmanaged[Cdecl]<void*, void*, nint, nint, VkSystemAllocationScope, void> pfnReallocation;
-    public delegate* unmanaged[Cdecl]<void*, void*, void> pfnFree;
-    public delegate* unmanaged[Cdecl]<void*, nint, VkInternalAllocationType, VkSystemAllocationScope, void> pfnInternalAllocation;
-    public delegate* unmanaged[Cdecl]<void*, nint, VkInternalAllocationType, VkSystemAllocationScope, void> pfnInternalFree;
+    public void* PUserData;
+    public delegate* unmanaged[Cdecl]<void*, nint, nint, VkSystemAllocationScope, void> PfnAllocation;
+    public delegate* unmanaged[Cdecl]<void*, void*, nint, nint, VkSystemAllocationScope, void> PfnReallocation;
+    public delegate* unmanaged[Cdecl]<void*, void*, void> PfnFree;
+    public delegate* unmanaged[Cdecl]<void*, nint, VkInternalAllocationType, VkSystemAllocationScope, void> PfnInternalAllocation;
+    public delegate* unmanaged[Cdecl]<void*, nint, VkInternalAllocationType, VkSystemAllocationScope, void> PfnInternalFree;
 }

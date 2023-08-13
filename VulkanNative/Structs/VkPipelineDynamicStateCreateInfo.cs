@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineDynamicStateCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkPipelineDynamicStateCreateFlags flags;
-    public uint dynamicStateCount;
-    public VkDynamicState* pDynamicStates;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkPipelineDynamicStateCreateFlags Flags;
+    public uint DynamicStateCount;
+    public VkDynamicState* PDynamicStates;
 }

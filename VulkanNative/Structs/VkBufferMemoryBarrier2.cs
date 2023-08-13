@@ -5,15 +5,15 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBufferMemoryBarrier2
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkPipelineStageFlags2 srcStageMask;
-    public VkAccessFlags2 srcAccessMask;
-    public VkPipelineStageFlags2 dstStageMask;
-    public VkAccessFlags2 dstAccessMask;
-    public uint srcQueueFamilyIndex;
-    public uint dstQueueFamilyIndex;
-    public VkBuffer buffer;
-    public VkDeviceSize offset;
-    public VkDeviceSize size;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkPipelineStageFlags2 SrcStageMask;
+    public VkAccessFlags2 SrcAccessMask;
+    public VkPipelineStageFlags2 DstStageMask;
+    public VkAccessFlags2 DstAccessMask;
+    public uint SrcQueueFamilyIndex;
+    public uint DstQueueFamilyIndex;
+    public VkBuffer Buffer;
+    public VkDeviceSize Offset;
+    public VkDeviceSize Size;
 }

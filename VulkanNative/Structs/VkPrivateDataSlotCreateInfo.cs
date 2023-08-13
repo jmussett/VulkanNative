@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPrivateDataSlotCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkPrivateDataSlotCreateFlags flags;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkPrivateDataSlotCreateFlags Flags;
 }

@@ -5,13 +5,13 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCommandBufferInheritanceRenderingInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkRenderingFlags flags;
-    public uint viewMask;
-    public uint colorAttachmentCount;
-    public VkFormat* pColorAttachmentFormats;
-    public VkFormat depthAttachmentFormat;
-    public VkFormat stencilAttachmentFormat;
-    public VkSampleCountFlags rasterizationSamples;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkRenderingFlags Flags;
+    public uint ViewMask;
+    public uint ColorAttachmentCount;
+    public VkFormat* PColorAttachmentFormats;
+    public VkFormat DepthAttachmentFormat;
+    public VkFormat StencilAttachmentFormat;
+    public VkSampleCountFlags RasterizationSamples;
 }

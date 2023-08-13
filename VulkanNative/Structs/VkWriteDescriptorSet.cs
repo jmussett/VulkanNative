@@ -5,14 +5,14 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkWriteDescriptorSet
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkDescriptorSet dstSet;
-    public uint dstBinding;
-    public uint dstArrayElement;
-    public uint descriptorCount;
-    public VkDescriptorType descriptorType;
-    public VkDescriptorImageInfo* pImageInfo;
-    public VkDescriptorBufferInfo* pBufferInfo;
-    public VkBufferView* pTexelBufferView;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkDescriptorSet DstSet;
+    public uint DstBinding;
+    public uint DstArrayElement;
+    public uint DescriptorCount;
+    public VkDescriptorType DescriptorType;
+    public VkDescriptorImageInfo* PImageInfo;
+    public VkDescriptorBufferInfo* PBufferInfo;
+    public VkBufferView* PTexelBufferView;
 }

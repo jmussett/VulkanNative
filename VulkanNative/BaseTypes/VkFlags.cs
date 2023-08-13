@@ -3,7 +3,7 @@
 namespace VulkanNative;
 
 [StructLayout(LayoutKind.Sequential)]
-public readonly struct VkFlags
+public readonly unsafe struct VkFlags
 {
     private readonly uint _value;
 

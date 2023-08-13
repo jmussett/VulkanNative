@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMemoryAllocateFlagsInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkMemoryAllocateFlags flags;
-    public uint deviceMask;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkMemoryAllocateFlags Flags;
+    public uint DeviceMask;
 }

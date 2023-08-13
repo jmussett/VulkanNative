@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkExportSemaphoreCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkExternalSemaphoreHandleTypeFlags handleTypes;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkExternalSemaphoreHandleTypeFlags HandleTypes;
 }

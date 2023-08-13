@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceExternalSemaphoreInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkExternalSemaphoreHandleTypeFlags handleType;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkExternalSemaphoreHandleTypeFlags HandleType;
 }

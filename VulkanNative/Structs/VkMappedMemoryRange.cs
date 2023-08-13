@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMappedMemoryRange
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkDeviceMemory memory;
-    public VkDeviceSize offset;
-    public VkDeviceSize size;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkDeviceMemory Memory;
+    public VkDeviceSize Offset;
+    public VkDeviceSize Size;
 }

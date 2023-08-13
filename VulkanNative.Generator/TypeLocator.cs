@@ -72,16 +72,28 @@ internal class TypeLocator
     {
         return LookupType(type, postTypeData, () =>
         {
-            if (_typeRegistry.Types.TryGetValue(type, out var typeSyntax))
+            VkType vkType; 
+
+            while(true)
             {
-                return typeSyntax;
+                if (_typeRegistry.Types.TryGetValue(type, out var existingSyntax))
+                {
+                    return existingSyntax;
+                }
+
+                vkType = _vkRegistry.Types.FirstOrDefault(x => x.Name == type)
+                    ?? _vkRegistry.Types.FirstOrDefault(x => x.NameAttribute == type)
+                    ?? throw new InvalidOperationException($"Unable to find type '{type}'");
+
+                if (string.IsNullOrEmpty(vkType.Alias))
+                {
+                    break;
+                }
+
+                type = vkType.Alias;
             }
 
-            var vkType = _vkRegistry.Types.FirstOrDefault(x => x.Name == type)
-                ?? _vkRegistry.Types.FirstOrDefault(x => x.NameAttribute == type)
-                ?? throw new InvalidOperationException($"Unable to find type '{type}'");
-
-            typeSyntax = _generatorRegistry.GenerateType(type, vkType);
+            var typeSyntax = _generatorRegistry.GenerateType(type, vkType);
 
             _typeRegistry.Types.TryAdd(type, typeSyntax);
 

@@ -1,0 +1,5 @@
+﻿namespace VulkanNative;
+
+class VkNvSampleMaskOverrideCoverageExtension
+{
+}

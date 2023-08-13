@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRenderPassInputAttachmentAspectCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint aspectReferenceCount;
-    public VkInputAttachmentAspectReference* pAspectReferences;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint AspectReferenceCount;
+    public VkInputAttachmentAspectReference* PAspectReferences;
 }

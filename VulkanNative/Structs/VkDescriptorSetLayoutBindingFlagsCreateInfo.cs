@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDescriptorSetLayoutBindingFlagsCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint bindingCount;
-    public VkDescriptorBindingFlags* pBindingFlags;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint BindingCount;
+    public VkDescriptorBindingFlags* PBindingFlags;
 }

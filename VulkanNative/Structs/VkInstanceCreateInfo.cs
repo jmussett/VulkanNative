@@ -5,12 +5,12 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkInstanceCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkInstanceCreateFlags flags;
-    public VkApplicationInfo* pApplicationInfo;
-    public uint enabledLayerCount;
-    public char** ppEnabledLayerNames;
-    public uint enabledExtensionCount;
-    public char** ppEnabledExtensionNames;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkInstanceCreateFlags Flags;
+    public VkApplicationInfo* PApplicationInfo;
+    public uint EnabledLayerCount;
+    public char** PpEnabledLayerNames;
+    public uint EnabledExtensionCount;
+    public char** PpEnabledExtensionNames;
 }

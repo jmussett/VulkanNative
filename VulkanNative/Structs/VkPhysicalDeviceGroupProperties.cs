@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceGroupProperties
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint physicalDeviceCount;
-    public VkPhysicalDevice* physicalDevices;
-    public VkBool32 subsetAllocation;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint PhysicalDeviceCount;
+    public VkPhysicalDevice* PhysicalDevices;
+    public VkBool32 SubsetAllocation;
 }

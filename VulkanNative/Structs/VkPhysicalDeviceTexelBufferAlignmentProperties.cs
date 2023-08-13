@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceTexelBufferAlignmentProperties
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkDeviceSize storageTexelBufferOffsetAlignmentBytes;
-    public VkBool32 storageTexelBufferOffsetSingleTexelAlignment;
-    public VkDeviceSize uniformTexelBufferOffsetAlignmentBytes;
-    public VkBool32 uniformTexelBufferOffsetSingleTexelAlignment;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkDeviceSize StorageTexelBufferOffsetAlignmentBytes;
+    public VkBool32 StorageTexelBufferOffsetSingleTexelAlignment;
+    public VkDeviceSize UniformTexelBufferOffsetAlignmentBytes;
+    public VkBool32 UniformTexelBufferOffsetSingleTexelAlignment;
 }

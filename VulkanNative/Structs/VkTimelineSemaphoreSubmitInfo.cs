@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkTimelineSemaphoreSubmitInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint waitSemaphoreValueCount;
-    public ulong* pWaitSemaphoreValues;
-    public uint signalSemaphoreValueCount;
-    public ulong* pSignalSemaphoreValues;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint WaitSemaphoreValueCount;
+    public ulong* PWaitSemaphoreValues;
+    public uint SignalSemaphoreValueCount;
+    public ulong* PSignalSemaphoreValues;
 }

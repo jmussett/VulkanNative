@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSpecializationMapEntry
 {
-    public uint constantID;
-    public uint offset;
-    public nint size;
+    public uint ConstantID;
+    public uint Offset;
+    public nint Size;
 }

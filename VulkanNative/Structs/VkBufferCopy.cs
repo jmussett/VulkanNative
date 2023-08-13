@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBufferCopy
 {
-    public VkDeviceSize srcOffset;
-    public VkDeviceSize dstOffset;
-    public VkDeviceSize size;
+    public VkDeviceSize SrcOffset;
+    public VkDeviceSize DstOffset;
+    public VkDeviceSize Size;
 }

@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkWriteDescriptorSetInlineUniformBlock
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint dataSize;
-    public void* pData;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint DataSize;
+    public void* PData;
 }

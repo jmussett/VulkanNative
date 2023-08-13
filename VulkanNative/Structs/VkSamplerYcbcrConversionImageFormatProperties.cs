@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSamplerYcbcrConversionImageFormatProperties
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint combinedImageSamplerDescriptorCount;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint CombinedImageSamplerDescriptorCount;
 }

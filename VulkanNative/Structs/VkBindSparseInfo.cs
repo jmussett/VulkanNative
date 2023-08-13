@@ -5,16 +5,16 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBindSparseInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint waitSemaphoreCount;
-    public VkSemaphore* pWaitSemaphores;
-    public uint bufferBindCount;
-    public VkSparseBufferMemoryBindInfo* pBufferBinds;
-    public uint imageOpaqueBindCount;
-    public VkSparseImageOpaqueMemoryBindInfo* pImageOpaqueBinds;
-    public uint imageBindCount;
-    public VkSparseImageMemoryBindInfo* pImageBinds;
-    public uint signalSemaphoreCount;
-    public VkSemaphore* pSignalSemaphores;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint WaitSemaphoreCount;
+    public VkSemaphore* PWaitSemaphores;
+    public uint BufferBindCount;
+    public VkSparseBufferMemoryBindInfo* PBufferBinds;
+    public uint ImageOpaqueBindCount;
+    public VkSparseImageOpaqueMemoryBindInfo* PImageOpaqueBinds;
+    public uint ImageBindCount;
+    public VkSparseImageMemoryBindInfo* PImageBinds;
+    public uint SignalSemaphoreCount;
+    public VkSemaphore* PSignalSemaphores;
 }

@@ -1,0 +1,10 @@
+﻿namespace VulkanNative;
+
+[Flags]
+public enum VkVideoDecodeUsageFlagsKHR : uint
+{
+    VK_VIDEO_DECODE_USAGE_DEFAULT_KHR = 0,
+    VK_VIDEO_DECODE_USAGE_TRANSCODING_BIT_KHR = 1U << 0,
+    VK_VIDEO_DECODE_USAGE_OFFLINE_BIT_KHR = 1U << 1,
+    VK_VIDEO_DECODE_USAGE_STREAMING_BIT_KHR = 1U << 2
+}

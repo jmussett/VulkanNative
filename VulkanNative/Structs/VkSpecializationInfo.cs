@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSpecializationInfo
 {
-    public uint mapEntryCount;
-    public VkSpecializationMapEntry* pMapEntries;
-    public nint dataSize;
-    public void* pData;
+    public uint MapEntryCount;
+    public VkSpecializationMapEntry* PMapEntries;
+    public nint DataSize;
+    public void* PData;
 }

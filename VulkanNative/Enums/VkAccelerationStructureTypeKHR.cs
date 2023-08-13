@@ -1,0 +1,8 @@
+﻿namespace VulkanNative;
+
+public enum VkAccelerationStructureTypeKHR : int
+{
+    VK_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL_KHR = 0,
+    VK_ACCELERATION_STRUCTURE_TYPE_BOTTOM_LEVEL_KHR = 1,
+    VK_ACCELERATION_STRUCTURE_TYPE_GENERIC_KHR = 2
+}

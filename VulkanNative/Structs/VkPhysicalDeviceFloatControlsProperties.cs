@@ -5,23 +5,23 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceFloatControlsProperties
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkShaderFloatControlsIndependence denormBehaviorIndependence;
-    public VkShaderFloatControlsIndependence roundingModeIndependence;
-    public VkBool32 shaderSignedZeroInfNanPreserveFloat16;
-    public VkBool32 shaderSignedZeroInfNanPreserveFloat32;
-    public VkBool32 shaderSignedZeroInfNanPreserveFloat64;
-    public VkBool32 shaderDenormPreserveFloat16;
-    public VkBool32 shaderDenormPreserveFloat32;
-    public VkBool32 shaderDenormPreserveFloat64;
-    public VkBool32 shaderDenormFlushToZeroFloat16;
-    public VkBool32 shaderDenormFlushToZeroFloat32;
-    public VkBool32 shaderDenormFlushToZeroFloat64;
-    public VkBool32 shaderRoundingModeRTEFloat16;
-    public VkBool32 shaderRoundingModeRTEFloat32;
-    public VkBool32 shaderRoundingModeRTEFloat64;
-    public VkBool32 shaderRoundingModeRTZFloat16;
-    public VkBool32 shaderRoundingModeRTZFloat32;
-    public VkBool32 shaderRoundingModeRTZFloat64;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkShaderFloatControlsIndependence DenormBehaviorIndependence;
+    public VkShaderFloatControlsIndependence RoundingModeIndependence;
+    public VkBool32 ShaderSignedZeroInfNanPreserveFloat16;
+    public VkBool32 ShaderSignedZeroInfNanPreserveFloat32;
+    public VkBool32 ShaderSignedZeroInfNanPreserveFloat64;
+    public VkBool32 ShaderDenormPreserveFloat16;
+    public VkBool32 ShaderDenormPreserveFloat32;
+    public VkBool32 ShaderDenormPreserveFloat64;
+    public VkBool32 ShaderDenormFlushToZeroFloat16;
+    public VkBool32 ShaderDenormFlushToZeroFloat32;
+    public VkBool32 ShaderDenormFlushToZeroFloat64;
+    public VkBool32 ShaderRoundingModeRTEFloat16;
+    public VkBool32 ShaderRoundingModeRTEFloat32;
+    public VkBool32 ShaderRoundingModeRTEFloat64;
+    public VkBool32 ShaderRoundingModeRTZFloat16;
+    public VkBool32 ShaderRoundingModeRTZFloat32;
+    public VkBool32 ShaderRoundingModeRTZFloat64;
 }

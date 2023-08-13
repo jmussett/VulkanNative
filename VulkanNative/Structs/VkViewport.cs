@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkViewport
 {
-    public float x;
-    public float y;
-    public float width;
-    public float height;
-    public float minDepth;
-    public float maxDepth;
+    public float X;
+    public float Y;
+    public float Width;
+    public float Height;
+    public float MinDepth;
+    public float MaxDepth;
 }

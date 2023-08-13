@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSubresourceLayout
 {
-    public VkDeviceSize offset;
-    public VkDeviceSize size;
-    public VkDeviceSize rowPitch;
-    public VkDeviceSize arrayPitch;
-    public VkDeviceSize depthPitch;
+    public VkDeviceSize Offset;
+    public VkDeviceSize Size;
+    public VkDeviceSize RowPitch;
+    public VkDeviceSize ArrayPitch;
+    public VkDeviceSize DepthPitch;
 }

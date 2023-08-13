@@ -1,0 +1,10 @@
+﻿namespace VulkanNative;
+
+[Flags]
+public enum VkDisplayPlaneAlphaFlagsKHR : uint
+{
+    VK_DISPLAY_PLANE_ALPHA_OPAQUE_BIT_KHR = 1U << 0,
+    VK_DISPLAY_PLANE_ALPHA_GLOBAL_BIT_KHR = 1U << 1,
+    VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_BIT_KHR = 1U << 2,
+    VK_DISPLAY_PLANE_ALPHA_PER_PIXEL_PREMULTIPLIED_BIT_KHR = 1U << 3
+}

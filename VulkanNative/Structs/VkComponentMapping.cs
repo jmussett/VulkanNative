@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkComponentMapping
 {
-    public VkComponentSwizzle r;
-    public VkComponentSwizzle g;
-    public VkComponentSwizzle b;
-    public VkComponentSwizzle a;
+    public VkComponentSwizzle R;
+    public VkComponentSwizzle G;
+    public VkComponentSwizzle B;
+    public VkComponentSwizzle A;
 }

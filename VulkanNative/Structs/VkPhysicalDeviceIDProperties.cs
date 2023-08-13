@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceIDProperties
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public fixed byte deviceUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
-    public fixed byte driverUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
-    public fixed byte deviceLUID[(int)VulkanApiConstants.VK_LUID_SIZE];
-    public uint deviceNodeMask;
-    public VkBool32 deviceLUIDValid;
+    public VkStructureType SType;
+    public void* PNext;
+    public fixed byte DeviceUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
+    public fixed byte DriverUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
+    public fixed byte DeviceLUID[(int)VulkanApiConstants.VK_LUID_SIZE];
+    public uint DeviceNodeMask;
+    public VkBool32 DeviceLUIDValid;
 }

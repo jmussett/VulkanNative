@@ -1,0 +1,10 @@
+﻿namespace VulkanNative;
+
+[Flags]
+public enum VkImageCompressionFlagsEXT : uint
+{
+    VK_IMAGE_COMPRESSION_DEFAULT_EXT = 0,
+    VK_IMAGE_COMPRESSION_FIXED_RATE_DEFAULT_EXT = 1U << 0,
+    VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT = 1U << 1,
+    VK_IMAGE_COMPRESSION_DISABLED_EXT = 1U << 2
+}

@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceSparseImageFormatInfo2
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkFormat format;
-    public VkImageType type;
-    public VkSampleCountFlags samples;
-    public VkImageUsageFlags usage;
-    public VkImageTiling tiling;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkFormat Format;
+    public VkImageType Type;
+    public VkSampleCountFlags Samples;
+    public VkImageUsageFlags Usage;
+    public VkImageTiling Tiling;
 }

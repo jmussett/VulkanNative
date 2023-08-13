@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSparseImageFormatProperties
 {
-    public VkImageAspectFlags aspectMask;
-    public VkExtent3D imageGranularity;
-    public VkSparseImageFormatFlags flags;
+    public VkImageAspectFlags AspectMask;
+    public VkExtent3D ImageGranularity;
+    public VkSparseImageFormatFlags Flags;
 }

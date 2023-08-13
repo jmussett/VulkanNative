@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkInputAttachmentAspectReference
 {
-    public uint subpass;
-    public uint inputAttachmentIndex;
-    public VkImageAspectFlags aspectMask;
+    public uint Subpass;
+    public uint InputAttachmentIndex;
+    public VkImageAspectFlags AspectMask;
 }

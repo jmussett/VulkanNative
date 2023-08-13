@@ -151,7 +151,7 @@ public class VkEnum
     public string? Value { get; set; }
 
     [XmlAttribute("name")]
-    public string? Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [XmlAttribute("alias")]
     public string? Alias { get; set; }

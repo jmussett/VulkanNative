@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceInlineUniformBlockFeatures
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkBool32 inlineUniformBlock;
-    public VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkBool32 InlineUniformBlock;
+    public VkBool32 DescriptorBindingInlineUniformBlockUpdateAfterBind;
 }

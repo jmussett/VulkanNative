@@ -1,4 +1,5 @@
 ﻿using CSharpComposer;
+using Humanizer;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using VulkanNative.Generator.Registries;
@@ -35,7 +36,7 @@ internal class UnionTypeGenerator : ITypeGenerator
                         // TODO: CSharpComposer: optional field builder?
                         x.AddFieldDeclaration(
                             x => x.FromSyntax(fieldTypeDef.Syntax),
-                            x => x.AddVariableDeclarator(member.Name,x =>
+                            x => x.AddVariableDeclarator(member.Name.Pascalize(),x =>
                             {
                                 foreach(var argument in fieldTypeDef.Arguments)
                                 {

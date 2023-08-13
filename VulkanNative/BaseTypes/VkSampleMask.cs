@@ -3,7 +3,7 @@
 namespace VulkanNative;
 
 [StructLayout(LayoutKind.Sequential)]
-public readonly struct VkSampleMask
+public readonly unsafe struct VkSampleMask
 {
     private readonly uint _value;
 

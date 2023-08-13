@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageResolve
 {
-    public VkImageSubresourceLayers srcSubresource;
-    public VkOffset3D srcOffset;
-    public VkImageSubresourceLayers dstSubresource;
-    public VkOffset3D dstOffset;
-    public VkExtent3D extent;
+    public VkImageSubresourceLayers SrcSubresource;
+    public VkOffset3D SrcOffset;
+    public VkImageSubresourceLayers DstSubresource;
+    public VkOffset3D DstOffset;
+    public VkExtent3D Extent;
 }

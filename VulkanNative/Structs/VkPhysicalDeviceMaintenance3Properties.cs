@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceMaintenance3Properties
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint maxPerSetDescriptors;
-    public VkDeviceSize maxMemoryAllocationSize;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint MaxPerSetDescriptors;
+    public VkDeviceSize MaxMemoryAllocationSize;
 }

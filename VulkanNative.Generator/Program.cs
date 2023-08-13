@@ -38,12 +38,14 @@ generatorRegistry.RegisterGenerator("bitmask", new BitMaskTypeGenerator(typeLoca
 
 var commandGenerator = new CommandGenerator(vkRegistry, typeLocator);
 
-var commandGroupGenerator = new CommandGroupGenerator(vkRegistry, documentRegistry, commandGenerator, typeLocator, enumRegistry);
+var featureGenerator = new FeatureGenerator(vkRegistry, documentRegistry, commandGenerator, typeLocator, enumRegistry);
+var extensionGenerator = new ExtensionGenerator(vkRegistry, documentRegistry, commandGenerator, typeLocator, enumRegistry);
 var apiConstantsGenerator = new ApiConstantsGenerator(vkRegistry, documentRegistry, typeLocator);
 var enumGenerator = new EnumGenerator(enumRegistry, documentRegistry);
 
 apiConstantsGenerator.GenerateApiConstants();
-commandGroupGenerator.GenerateCommandGroups();
+featureGenerator.GenerateFeatures();
+extensionGenerator.GenerateExtensions();
 enumGenerator.GenerateEnums();
 
 foreach(var documentEntry in documentRegistry.Documents)

@@ -1,0 +1,12 @@
+﻿namespace VulkanNative;
+
+[Flags]
+public enum VkOpticalFlowUsageFlagsNV : uint
+{
+    VK_OPTICAL_FLOW_USAGE_UNKNOWN_NV = 0,
+    VK_OPTICAL_FLOW_USAGE_INPUT_BIT_NV = 1U << 0,
+    VK_OPTICAL_FLOW_USAGE_OUTPUT_BIT_NV = 1U << 1,
+    VK_OPTICAL_FLOW_USAGE_HINT_BIT_NV = 1U << 2,
+    VK_OPTICAL_FLOW_USAGE_COST_BIT_NV = 1U << 3,
+    VK_OPTICAL_FLOW_USAGE_GLOBAL_FLOW_BIT_NV = 1U << 4
+}

@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSemaphoreSignalInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkSemaphore semaphore;
-    public ulong value;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkSemaphore Semaphore;
+    public ulong Value;
 }

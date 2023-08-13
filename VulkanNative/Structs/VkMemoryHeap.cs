@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMemoryHeap
 {
-    public VkDeviceSize size;
-    public VkMemoryHeapFlags flags;
+    public VkDeviceSize Size;
+    public VkMemoryHeapFlags Flags;
 }

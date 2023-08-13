@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceGroupCommandBufferBeginInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint deviceMask;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint DeviceMask;
 }

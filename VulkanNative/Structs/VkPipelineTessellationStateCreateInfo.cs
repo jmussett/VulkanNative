@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineTessellationStateCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkPipelineTessellationStateCreateFlags flags;
-    public uint patchControlPoints;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkPipelineTessellationStateCreateFlags Flags;
+    public uint PatchControlPoints;
 }

@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageSubresourceLayers
 {
-    public VkImageAspectFlags aspectMask;
-    public uint mipLevel;
-    public uint baseArrayLayer;
-    public uint layerCount;
+    public VkImageAspectFlags AspectMask;
+    public uint MipLevel;
+    public uint BaseArrayLayer;
+    public uint LayerCount;
 }

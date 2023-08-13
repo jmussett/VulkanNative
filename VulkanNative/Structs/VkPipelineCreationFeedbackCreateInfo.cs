@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineCreationFeedbackCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkPipelineCreationFeedback* pPipelineCreationFeedback;
-    public uint pipelineStageCreationFeedbackCount;
-    public VkPipelineCreationFeedback* pPipelineStageCreationFeedbacks;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkPipelineCreationFeedback* PPipelineCreationFeedback;
+    public uint PipelineStageCreationFeedbackCount;
+    public VkPipelineCreationFeedback* PPipelineStageCreationFeedbacks;
 }

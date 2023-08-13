@@ -1,0 +1,7 @@
+﻿namespace VulkanNative;
+
+public enum VkAccelerationStructureCompatibilityKHR : int
+{
+    VK_ACCELERATION_STRUCTURE_COMPATIBILITY_COMPATIBLE_KHR = 0,
+    VK_ACCELERATION_STRUCTURE_COMPATIBILITY_INCOMPATIBLE_KHR = 1
+}

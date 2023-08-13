@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkQueueFamilyProperties2
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkQueueFamilyProperties queueFamilyProperties;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkQueueFamilyProperties QueueFamilyProperties;
 }

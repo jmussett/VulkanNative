@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMemoryDedicatedAllocateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkImage image;
-    public VkBuffer buffer;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkImage Image;
+    public VkBuffer Buffer;
 }

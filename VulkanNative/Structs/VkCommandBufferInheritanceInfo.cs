@@ -5,12 +5,12 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCommandBufferInheritanceInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkRenderPass renderPass;
-    public uint subpass;
-    public VkFramebuffer framebuffer;
-    public VkBool32 occlusionQueryEnable;
-    public VkQueryControlFlags queryFlags;
-    public VkQueryPipelineStatisticFlags pipelineStatistics;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkRenderPass RenderPass;
+    public uint Subpass;
+    public VkFramebuffer Framebuffer;
+    public VkBool32 OcclusionQueryEnable;
+    public VkQueryControlFlags QueryFlags;
+    public VkQueryPipelineStatisticFlags PipelineStatistics;
 }

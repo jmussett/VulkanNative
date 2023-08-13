@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkFormatProperties3
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkFormatFeatureFlags2 linearTilingFeatures;
-    public VkFormatFeatureFlags2 optimalTilingFeatures;
-    public VkFormatFeatureFlags2 bufferFeatures;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkFormatFeatureFlags2 LinearTilingFeatures;
+    public VkFormatFeatureFlags2 OptimalTilingFeatures;
+    public VkFormatFeatureFlags2 BufferFeatures;
 }

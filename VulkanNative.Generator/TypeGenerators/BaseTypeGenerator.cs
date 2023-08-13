@@ -20,7 +20,9 @@ internal class BaseTypeGenerator : ITypeGenerator
 
     public TypeSyntax GenerateType(string typeName, VkType baseTypeDefinition)
     {
-        var underlyingTypeSyntax = _typeLocator.LookupType(baseTypeDefinition.Types[0]);
+        var underlyingTypeSyntax = baseTypeDefinition.Types.Count == 0
+            ? new TypeDefinition(CSharpFactory.Type("nint"))
+            : _typeLocator.LookupType(baseTypeDefinition.Types[0], baseTypeDefinition.TextEntries.ElementAtOrDefault(1));
 
         var compilationUnit = CSharpFactory.CompilationUnit(x => x
             .AddUsingDirective("System.Runtime.InteropServices")
@@ -28,6 +30,7 @@ internal class BaseTypeGenerator : ITypeGenerator
                 .AddStructDeclaration(typeName, x => x
                     .AddModifierToken(SyntaxKind.PublicKeyword)
                     .AddModifierToken(SyntaxKind.ReadOnlyKeyword)
+                    .AddModifierToken(SyntaxKind.UnsafeKeyword)
                     .AddAttribute("StructLayout", x => x.AddAttributeArgument("LayoutKind.Sequential")) //TODO add extension for literal arguments 
                     .AddFieldDeclaration(
                         x => x.FromSyntax(underlyingTypeSyntax),

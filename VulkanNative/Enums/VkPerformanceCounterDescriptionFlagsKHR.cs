@@ -1,0 +1,8 @@
+﻿namespace VulkanNative;
+
+[Flags]
+public enum VkPerformanceCounterDescriptionFlagsKHR : uint
+{
+    VK_PERFORMANCE_COUNTER_DESCRIPTION_PERFORMANCE_IMPACTING_BIT_KHR = 1U << 0,
+    VK_PERFORMANCE_COUNTER_DESCRIPTION_CONCURRENTLY_IMPACTED_BIT_KHR = 1U << 1
+}

@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineCreationFeedback
 {
-    public VkPipelineCreationFeedbackFlags flags;
-    public ulong duration;
+    public VkPipelineCreationFeedbackFlags Flags;
+    public ulong Duration;
 }

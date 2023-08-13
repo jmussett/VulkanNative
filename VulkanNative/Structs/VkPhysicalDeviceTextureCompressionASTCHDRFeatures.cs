@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceTextureCompressionASTCHDRFeatures
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkBool32 textureCompressionASTC_HDR;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkBool32 TextureCompressionASTCHDR;
 }

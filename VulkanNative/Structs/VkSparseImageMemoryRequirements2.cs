@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSparseImageMemoryRequirements2
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkSparseImageMemoryRequirements memoryRequirements;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkSparseImageMemoryRequirements MemoryRequirements;
 }

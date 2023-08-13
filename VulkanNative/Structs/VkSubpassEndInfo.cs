@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSubpassEndInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
+    public VkStructureType SType;
+    public void* PNext;
 }

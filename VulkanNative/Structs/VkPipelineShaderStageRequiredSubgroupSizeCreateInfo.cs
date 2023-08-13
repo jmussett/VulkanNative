@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineShaderStageRequiredSubgroupSizeCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint requiredSubgroupSize;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint RequiredSubgroupSize;
 }

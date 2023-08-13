@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceTimelineSemaphoreProperties
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public ulong maxTimelineSemaphoreValueDifference;
+    public VkStructureType SType;
+    public void* PNext;
+    public ulong MaxTimelineSemaphoreValueDifference;
 }

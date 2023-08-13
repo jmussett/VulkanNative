@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineCacheCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkPipelineCacheCreateFlags flags;
-    public nint initialDataSize;
-    public void* pInitialData;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkPipelineCacheCreateFlags Flags;
+    public nint InitialDataSize;
+    public void* PInitialData;
 }

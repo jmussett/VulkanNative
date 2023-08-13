@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineInputAssemblyStateCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkPipelineInputAssemblyStateCreateFlags flags;
-    public VkPrimitiveTopology topology;
-    public VkBool32 primitiveRestartEnable;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkPipelineInputAssemblyStateCreateFlags Flags;
+    public VkPrimitiveTopology Topology;
+    public VkBool32 PrimitiveRestartEnable;
 }

@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkEventCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkEventCreateFlags flags;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkEventCreateFlags Flags;
 }

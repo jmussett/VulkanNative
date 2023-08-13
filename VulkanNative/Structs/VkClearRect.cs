@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkClearRect
 {
-    public VkRect2D rect;
-    public uint baseArrayLayer;
-    public uint layerCount;
+    public VkRect2D Rect;
+    public uint BaseArrayLayer;
+    public uint LayerCount;
 }

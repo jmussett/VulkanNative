@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkExportFenceCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkExternalFenceHandleTypeFlags handleTypes;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkExternalFenceHandleTypeFlags HandleTypes;
 }

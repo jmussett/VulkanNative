@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSubpassDescriptionDepthStencilResolve
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkResolveModeFlags depthResolveMode;
-    public VkResolveModeFlags stencilResolveMode;
-    public VkAttachmentReference2* pDepthStencilResolveAttachment;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkResolveModeFlags DepthResolveMode;
+    public VkResolveModeFlags StencilResolveMode;
+    public VkAttachmentReference2* PDepthStencilResolveAttachment;
 }

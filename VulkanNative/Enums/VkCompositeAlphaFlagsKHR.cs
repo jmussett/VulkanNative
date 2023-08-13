@@ -1,0 +1,10 @@
+﻿namespace VulkanNative;
+
+[Flags]
+public enum VkCompositeAlphaFlagsKHR : uint
+{
+    VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR = 1U << 0,
+    VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR = 1U << 1,
+    VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR = 1U << 2,
+    VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR = 1U << 3
+}

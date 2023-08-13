@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRenderPassAttachmentBeginInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint attachmentCount;
-    public VkImageView* pAttachments;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint AttachmentCount;
+    public VkImageView* PAttachments;
 }

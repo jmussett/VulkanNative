@@ -5,18 +5,18 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceVulkan11Features
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkBool32 storageBuffer16BitAccess;
-    public VkBool32 uniformAndStorageBuffer16BitAccess;
-    public VkBool32 storagePushConstant16;
-    public VkBool32 storageInputOutput16;
-    public VkBool32 multiview;
-    public VkBool32 multiviewGeometryShader;
-    public VkBool32 multiviewTessellationShader;
-    public VkBool32 variablePointersStorageBuffer;
-    public VkBool32 variablePointers;
-    public VkBool32 protectedMemory;
-    public VkBool32 samplerYcbcrConversion;
-    public VkBool32 shaderDrawParameters;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkBool32 StorageBuffer16BitAccess;
+    public VkBool32 UniformAndStorageBuffer16BitAccess;
+    public VkBool32 StoragePushConstant16;
+    public VkBool32 StorageInputOutput16;
+    public VkBool32 Multiview;
+    public VkBool32 MultiviewGeometryShader;
+    public VkBool32 MultiviewTessellationShader;
+    public VkBool32 VariablePointersStorageBuffer;
+    public VkBool32 VariablePointers;
+    public VkBool32 ProtectedMemory;
+    public VkBool32 SamplerYcbcrConversion;
+    public VkBool32 ShaderDrawParameters;
 }

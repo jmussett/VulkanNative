@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkBool32 shaderDemoteToHelperInvocation;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkBool32 ShaderDemoteToHelperInvocation;
 }

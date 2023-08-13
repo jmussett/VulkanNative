@@ -5,13 +5,13 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineMultisampleStateCreateInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkPipelineMultisampleStateCreateFlags flags;
-    public VkSampleCountFlags rasterizationSamples;
-    public VkBool32 sampleShadingEnable;
-    public float minSampleShading;
-    public VkSampleMask* pSampleMask;
-    public VkBool32 alphaToCoverageEnable;
-    public VkBool32 alphaToOneEnable;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkPipelineMultisampleStateCreateFlags Flags;
+    public VkSampleCountFlags RasterizationSamples;
+    public VkBool32 SampleShadingEnable;
+    public float MinSampleShading;
+    public VkSampleMask* PSampleMask;
+    public VkBool32 AlphaToCoverageEnable;
+    public VkBool32 AlphaToOneEnable;
 }

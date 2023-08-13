@@ -1,4 +1,5 @@
 ﻿using CSharpComposer;
+using Humanizer;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using VulkanNative.Generator.Registries;
@@ -62,7 +63,7 @@ internal class StructTypeGenerator : ITypeGenerator
 
                         x.AddFieldDeclaration(
                             x => x.FromSyntax(typeDef.Syntax),
-                            x => x.AddVariableDeclarator(fieldDefinition.Name, x =>
+                            x => x.AddVariableDeclarator(fieldDefinition.Name.Pascalize(), x =>
                             {
                                 foreach(var argument in typeDef.Arguments)
                                 {

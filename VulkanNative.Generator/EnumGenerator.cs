@@ -52,7 +52,13 @@ namespace VulkanNative.Generator
                                     x = x.AddAttribute("Flags");
                                 }
 
-                                foreach (var enumMember in enumDefinition.Members)
+                                if (enumDefinition.Members.Count == 0)
+                                {
+                                    x.AddEnumMemberDeclaration("None", x => x.WithEqualsValue("0"));
+                                    return;
+                                }
+
+                                foreach (var enumMember in enumDefinition.Members.Values)
                                 {
                                     if (!string.IsNullOrWhiteSpace(enumMember.Alias))
                                     {
@@ -68,7 +74,26 @@ namespace VulkanNative.Generator
                                     {
                                         enumValue = enumMember.Value;
                                     }
-                                    else if (enumMember.Offset is not null && enumMember.Extnumber is not null)
+                                    else if (enumMember.Offset is not null)
+                                    {
+                                        // base_value = 1000000000
+                                        // range_size = 1000
+                                        // enum_offset(extension_number, offset) = base_value + (extension_number - 1) × range_size + offset
+
+                                        var offset = int.Parse(enumMember.Offset);
+
+                                        var extensionNumber = !string.IsNullOrWhiteSpace(enumMember.Extnumber)
+                                            ? int.Parse(enumMember.Extnumber)
+                                            : enumDefinition.ExtensionNumber;
+
+                                        if (extensionNumber is null)
+                                        {
+                                            throw new InvalidOperationException($"No extension number defined for enum member '{enumMember.Name}'");
+                                        }
+
+                                        enumValue = $"{enumMember.Dir ?? string.Empty}{1000000000 + (extensionNumber - 1) * 1000 + offset}";
+                                    }
+                                    else if (enumMember.Offset is not null)
                                     {
                                         // base_value = 1000000000
                                         // range_size = 1000

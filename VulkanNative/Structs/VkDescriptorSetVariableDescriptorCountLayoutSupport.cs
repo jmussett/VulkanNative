@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDescriptorSetVariableDescriptorCountLayoutSupport
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint maxVariableDescriptorCount;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint MaxVariableDescriptorCount;
 }

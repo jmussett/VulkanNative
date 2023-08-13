@@ -3,7 +3,7 @@
 namespace VulkanNative;
 
 [StructLayout(LayoutKind.Sequential)]
-public readonly struct VkDeviceAddress
+public readonly unsafe struct VkDeviceAddress
 {
     private readonly ulong _value;
 

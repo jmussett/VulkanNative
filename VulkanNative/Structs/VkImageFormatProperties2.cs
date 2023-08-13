@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageFormatProperties2
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkImageFormatProperties imageFormatProperties;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkImageFormatProperties ImageFormatProperties;
 }

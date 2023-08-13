@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSamplerYcbcrConversionInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public VkSamplerYcbcrConversion conversion;
+    public VkStructureType SType;
+    public void* PNext;
+    public VkSamplerYcbcrConversion Conversion;
 }

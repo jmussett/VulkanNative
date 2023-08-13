@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceGroupBindSparseInfo
 {
-    public VkStructureType sType;
-    public void* pNext;
-    public uint resourceDeviceIndex;
-    public uint memoryDeviceIndex;
+    public VkStructureType SType;
+    public void* PNext;
+    public uint ResourceDeviceIndex;
+    public uint MemoryDeviceIndex;
 }
