@@ -1,5 +1,6 @@
 ﻿namespace VulkanNative;
 
-class VkKhrMaintenance1Extension
+public unsafe class VkKhrMaintenance1Extension
 {
+    public delegate* unmanaged[Cdecl]<VkDevice, VkCommandPool, VkCommandPoolTrimFlags, void> vkTrimCommandPool;
 }

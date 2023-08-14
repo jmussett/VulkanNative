@@ -1,5 +1,6 @@
 ﻿namespace VulkanNative;
 
-class VkNvCooperativeMatrixExtension
+public unsafe class VkNvCooperativeMatrixExtension
 {
+    public delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkCooperativeMatrixPropertiesNV*, VkResult> vkGetPhysicalDeviceCooperativeMatrixPropertiesNV;
 }

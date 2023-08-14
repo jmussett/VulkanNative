@@ -1,5 +1,6 @@
 ﻿namespace VulkanNative;
 
-class VkKhrSharedPresentableImageExtension
+public unsafe class VkKhrSharedPresentableImageExtension
 {
+    public delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkResult> vkGetSwapchainStatusKHR;
 }

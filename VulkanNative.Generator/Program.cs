@@ -5,6 +5,7 @@ using VulkanNative.Generator;
 using VulkanNative.Generator.Generators;
 using VulkanNative.Generator.Registries;
 using VulkanNative.Generator.Registry;
+using VulkanNative.Generator.SyntaxGenerators;
 
 // TODO: clear project
 
@@ -38,8 +39,9 @@ generatorRegistry.RegisterGenerator("bitmask", new BitMaskTypeGenerator(typeLoca
 
 var commandGenerator = new CommandGenerator(vkRegistry, typeLocator);
 
-var featureGenerator = new FeatureGenerator(vkRegistry, documentRegistry, commandGenerator, typeLocator, enumRegistry);
-var extensionGenerator = new ExtensionGenerator(vkRegistry, documentRegistry, commandGenerator, typeLocator, enumRegistry);
+var commandGroupGenerator = new CommandGroupGenerator(documentRegistry, commandGenerator);
+var featureGenerator = new FeatureGenerator(vkRegistry, commandGroupGenerator, typeLocator, enumRegistry);
+var extensionGenerator = new ExtensionGenerator(vkRegistry, commandGroupGenerator, typeLocator, enumRegistry);
 var apiConstantsGenerator = new ApiConstantsGenerator(vkRegistry, documentRegistry, typeLocator);
 var enumGenerator = new EnumGenerator(enumRegistry, documentRegistry);
 

@@ -1,5 +1,6 @@
 ﻿namespace VulkanNative;
 
-class VkNnViSurfaceExtension
+public unsafe class VkNnViSurfaceExtension
 {
+    public delegate* unmanaged[Cdecl]<VkInstance, VkViSurfaceCreateInfoNN*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> vkCreateViSurfaceNN;
 }

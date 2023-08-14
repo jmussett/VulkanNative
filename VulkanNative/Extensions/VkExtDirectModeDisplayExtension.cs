@@ -1,5 +1,6 @@
 ﻿namespace VulkanNative;
 
-class VkExtDirectModeDisplayExtension
+public unsafe class VkExtDirectModeDisplayExtension
 {
+    public delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayKHR, VkResult> vkReleaseDisplayEXT;
 }

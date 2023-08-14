@@ -1,5 +1,6 @@
 ﻿namespace VulkanNative;
 
-class VkExtExternalMemoryHostExtension
+public unsafe class VkExtExternalMemoryHostExtension
 {
+    public delegate* unmanaged[Cdecl]<VkDevice, VkExternalMemoryHandleTypeFlags, void*, VkMemoryHostPointerPropertiesEXT*, VkResult> vkGetMemoryHostPointerPropertiesEXT;
 }

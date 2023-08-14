@@ -1,5 +1,6 @@
 ﻿namespace VulkanNative;
 
-class VkKhrVideoDecodeQueueExtension
+public unsafe class VkKhrVideoDecodeQueueExtension
 {
+    public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoDecodeInfoKHR*, void> vkCmdDecodeVideoKHR;
 }

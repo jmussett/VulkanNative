@@ -1,5 +1,7 @@
 ﻿namespace VulkanNative;
 
-class VkNvMemoryDecompressionExtension
+public unsafe class VkNvMemoryDecompressionExtension
 {
+    public delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkDecompressMemoryRegionNV*, void> vkCmdDecompressMemoryNV;
+    public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDeviceAddress, VkDeviceAddress, uint, void> vkCmdDecompressMemoryIndirectCountNV;
 }

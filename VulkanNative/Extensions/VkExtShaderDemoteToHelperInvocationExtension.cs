@@ -1,5 +1,0 @@
-﻿namespace VulkanNative;
-
-class VkExtShaderDemoteToHelperInvocationExtension
-{
-}

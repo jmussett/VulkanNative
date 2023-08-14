@@ -1,5 +1,6 @@
 ﻿namespace VulkanNative;
 
-class VkKhrExternalFenceCapabilitiesExtension
+public unsafe class VkKhrExternalFenceCapabilitiesExtension
 {
+    public delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalFenceInfo*, VkExternalFenceProperties*, void> vkGetPhysicalDeviceExternalFenceProperties;
 }

@@ -1,5 +1,6 @@
 ﻿namespace VulkanNative;
 
-class VkNvClipSpaceWScalingExtension
+public unsafe class VkNvClipSpaceWScalingExtension
 {
+    public delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkViewportWScalingNV*, void> vkCmdSetViewportWScalingNV;
 }

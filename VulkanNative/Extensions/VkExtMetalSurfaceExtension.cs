@@ -1,5 +1,6 @@
 ﻿namespace VulkanNative;
 
-class VkExtMetalSurfaceExtension
+public unsafe class VkExtMetalSurfaceExtension
 {
+    public delegate* unmanaged[Cdecl]<VkInstance, VkMetalSurfaceCreateInfoEXT*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> vkCreateMetalSurfaceEXT;
 }

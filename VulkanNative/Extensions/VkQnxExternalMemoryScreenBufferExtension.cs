@@ -1,5 +1,6 @@
 ﻿namespace VulkanNative;
 
-class VkQnxExternalMemoryScreenBufferExtension
+public unsafe class VkQnxExternalMemoryScreenBufferExtension
 {
+    public delegate* unmanaged[Cdecl]<VkDevice, nint*, VkScreenBufferPropertiesQNX*, VkResult> vkGetScreenBufferPropertiesQNX;
 }

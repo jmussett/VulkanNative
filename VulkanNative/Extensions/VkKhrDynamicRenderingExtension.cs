@@ -1,5 +1,7 @@
 ﻿namespace VulkanNative;
 
-class VkKhrDynamicRenderingExtension
+public unsafe class VkKhrDynamicRenderingExtension
 {
+    public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkRenderingInfo*, void> vkCmdBeginRendering;
+    public delegate* unmanaged[Cdecl]<VkCommandBuffer, void> vkCmdEndRendering;
 }
