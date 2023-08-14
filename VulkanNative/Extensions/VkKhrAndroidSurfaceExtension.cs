@@ -1,6 +1,14 @@
-﻿namespace VulkanNative;
+﻿using System.Runtime.CompilerServices;
+
+namespace VulkanNative;
 
 public unsafe class VkKhrAndroidSurfaceExtension
 {
-    public delegate* unmanaged[Cdecl]<VkInstance, VkAndroidSurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> vkCreateAndroidSurfaceKHR;
+    private delegate* unmanaged[Cdecl]<VkInstance, VkAndroidSurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> _vkCreateAndroidSurfaceKHR;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public VkResult VkCreateAndroidSurfaceKHR(VkInstance instance, VkAndroidSurfaceCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface)
+    {
+        return _vkCreateAndroidSurfaceKHR(instance, pCreateInfo, pAllocator, pSurface);
+    }
 }

@@ -18,6 +18,7 @@ internal class CommandGroupGenerator
     public void GenerateCommandGroup(string commandGroupName, string folder, List<string> commands)
     {
         var compilationUnit = CSharpFactory.CompilationUnit(x => x
+            .AddUsingDirective("System.Runtime.CompilerServices")
             .AddFileScopedNamespaceDeclaration("VulkanNative", x => x
                 .AddClassDeclaration(commandGroupName, x =>
                 {
@@ -26,7 +27,12 @@ internal class CommandGroupGenerator
 
                     foreach (var commandName in commands)
                     {
-                        x.AddMemberDeclaration(_commandGenerator.GenerateCommand(commandName));
+                        x.AddMemberDeclaration(_commandGenerator.GenerateFunctionPointer(commandName));
+                    }
+
+                    foreach (var commandName in commands)
+                    {
+                        x.AddMemberDeclaration(_commandGenerator.GenerateMethod(commandName));
                     }
                 })
         ));

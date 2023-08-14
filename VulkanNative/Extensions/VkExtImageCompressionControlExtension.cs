@@ -1,6 +1,14 @@
-﻿namespace VulkanNative;
+﻿using System.Runtime.CompilerServices;
+
+namespace VulkanNative;
 
 public unsafe class VkExtImageCompressionControlExtension
 {
-    public delegate* unmanaged[Cdecl]<VkDevice, VkImage, VkImageSubresource2KHR*, VkSubresourceLayout2KHR*, void> vkGetImageSubresourceLayout2KHR;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkImage, VkImageSubresource2KHR*, VkSubresourceLayout2KHR*, void> _vkGetImageSubresourceLayout2KHR;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void VkGetImageSubresourceLayout2KHR(VkDevice device, VkImage image, VkImageSubresource2KHR* pSubresource, VkSubresourceLayout2KHR* pLayout)
+    {
+        _vkGetImageSubresourceLayout2KHR(device, image, pSubresource, pLayout);
+    }
 }

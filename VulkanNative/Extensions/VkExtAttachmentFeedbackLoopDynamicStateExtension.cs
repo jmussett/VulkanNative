@@ -1,6 +1,14 @@
-﻿namespace VulkanNative;
+﻿using System.Runtime.CompilerServices;
+
+namespace VulkanNative;
 
 public unsafe class VkExtAttachmentFeedbackLoopDynamicStateExtension
 {
-    public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkImageAspectFlags, void> vkCmdSetAttachmentFeedbackLoopEnableEXT;
+    private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkImageAspectFlags, void> _vkCmdSetAttachmentFeedbackLoopEnableEXT;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void VkCmdSetAttachmentFeedbackLoopEnableEXT(VkCommandBuffer commandBuffer, VkImageAspectFlags aspectMask)
+    {
+        _vkCmdSetAttachmentFeedbackLoopEnableEXT(commandBuffer, aspectMask);
+    }
 }

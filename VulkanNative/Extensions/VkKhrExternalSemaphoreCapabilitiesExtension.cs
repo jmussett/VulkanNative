@@ -1,6 +1,14 @@
-﻿namespace VulkanNative;
+﻿using System.Runtime.CompilerServices;
+
+namespace VulkanNative;
 
 public unsafe class VkKhrExternalSemaphoreCapabilitiesExtension
 {
-    public delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalSemaphoreInfo*, VkExternalSemaphoreProperties*, void> vkGetPhysicalDeviceExternalSemaphoreProperties;
+    private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalSemaphoreInfo*, VkExternalSemaphoreProperties*, void> _vkGetPhysicalDeviceExternalSemaphoreProperties;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void VkGetPhysicalDeviceExternalSemaphoreProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalSemaphoreInfo* pExternalSemaphoreInfo, VkExternalSemaphoreProperties* pExternalSemaphoreProperties)
+    {
+        _vkGetPhysicalDeviceExternalSemaphoreProperties(physicalDevice, pExternalSemaphoreInfo, pExternalSemaphoreProperties);
+    }
 }

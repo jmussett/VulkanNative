@@ -1,6 +1,14 @@
-﻿namespace VulkanNative;
+﻿using System.Runtime.CompilerServices;
+
+namespace VulkanNative;
 
 public unsafe class VkKhrSharedPresentableImageExtension
 {
-    public delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkResult> vkGetSwapchainStatusKHR;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkResult> _vkGetSwapchainStatusKHR;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public VkResult VkGetSwapchainStatusKHR(VkDevice device, VkSwapchainKHR swapchain)
+    {
+        return _vkGetSwapchainStatusKHR(device, swapchain);
+    }
 }

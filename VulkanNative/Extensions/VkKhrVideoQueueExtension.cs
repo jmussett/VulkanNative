@@ -1,17 +1,91 @@
-﻿namespace VulkanNative;
+﻿using System.Runtime.CompilerServices;
+
+namespace VulkanNative;
 
 public unsafe class VkKhrVideoQueueExtension
 {
-    public delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkVideoProfileInfoKHR*, VkVideoCapabilitiesKHR*, VkResult> vkGetPhysicalDeviceVideoCapabilitiesKHR;
-    public delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceVideoFormatInfoKHR*, uint*, VkVideoFormatPropertiesKHR*, VkResult> vkGetPhysicalDeviceVideoFormatPropertiesKHR;
-    public delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionCreateInfoKHR*, VkAllocationCallbacks*, VkVideoSessionKHR*, VkResult> vkCreateVideoSessionKHR;
-    public delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionKHR, VkAllocationCallbacks*, void> vkDestroyVideoSessionKHR;
-    public delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionKHR, uint*, VkVideoSessionMemoryRequirementsKHR*, VkResult> vkGetVideoSessionMemoryRequirementsKHR;
-    public delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionKHR, uint, VkBindVideoSessionMemoryInfoKHR*, VkResult> vkBindVideoSessionMemoryKHR;
-    public delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionParametersCreateInfoKHR*, VkAllocationCallbacks*, VkVideoSessionParametersKHR*, VkResult> vkCreateVideoSessionParametersKHR;
-    public delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionParametersKHR, VkVideoSessionParametersUpdateInfoKHR*, VkResult> vkUpdateVideoSessionParametersKHR;
-    public delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionParametersKHR, VkAllocationCallbacks*, void> vkDestroyVideoSessionParametersKHR;
-    public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoBeginCodingInfoKHR*, void> vkCmdBeginVideoCodingKHR;
-    public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoEndCodingInfoKHR*, void> vkCmdEndVideoCodingKHR;
-    public delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoCodingControlInfoKHR*, void> vkCmdControlVideoCodingKHR;
+    private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkVideoProfileInfoKHR*, VkVideoCapabilitiesKHR*, VkResult> _vkGetPhysicalDeviceVideoCapabilitiesKHR;
+    private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceVideoFormatInfoKHR*, uint*, VkVideoFormatPropertiesKHR*, VkResult> _vkGetPhysicalDeviceVideoFormatPropertiesKHR;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionCreateInfoKHR*, VkAllocationCallbacks*, VkVideoSessionKHR*, VkResult> _vkCreateVideoSessionKHR;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionKHR, VkAllocationCallbacks*, void> _vkDestroyVideoSessionKHR;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionKHR, uint*, VkVideoSessionMemoryRequirementsKHR*, VkResult> _vkGetVideoSessionMemoryRequirementsKHR;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionKHR, uint, VkBindVideoSessionMemoryInfoKHR*, VkResult> _vkBindVideoSessionMemoryKHR;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionParametersCreateInfoKHR*, VkAllocationCallbacks*, VkVideoSessionParametersKHR*, VkResult> _vkCreateVideoSessionParametersKHR;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionParametersKHR, VkVideoSessionParametersUpdateInfoKHR*, VkResult> _vkUpdateVideoSessionParametersKHR;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionParametersKHR, VkAllocationCallbacks*, void> _vkDestroyVideoSessionParametersKHR;
+    private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoBeginCodingInfoKHR*, void> _vkCmdBeginVideoCodingKHR;
+    private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoEndCodingInfoKHR*, void> _vkCmdEndVideoCodingKHR;
+    private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoCodingControlInfoKHR*, void> _vkCmdControlVideoCodingKHR;
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public VkResult VkGetPhysicalDeviceVideoCapabilitiesKHR(VkPhysicalDevice physicalDevice, VkVideoProfileInfoKHR* pVideoProfile, VkVideoCapabilitiesKHR* pCapabilities)
+    {
+        return _vkGetPhysicalDeviceVideoCapabilitiesKHR(physicalDevice, pVideoProfile, pCapabilities);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public VkResult VkGetPhysicalDeviceVideoFormatPropertiesKHR(VkPhysicalDevice physicalDevice, VkPhysicalDeviceVideoFormatInfoKHR* pVideoFormatInfo, uint* pVideoFormatPropertyCount, VkVideoFormatPropertiesKHR* pVideoFormatProperties)
+    {
+        return _vkGetPhysicalDeviceVideoFormatPropertiesKHR(physicalDevice, pVideoFormatInfo, pVideoFormatPropertyCount, pVideoFormatProperties);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public VkResult VkCreateVideoSessionKHR(VkDevice device, VkVideoSessionCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkVideoSessionKHR* pVideoSession)
+    {
+        return _vkCreateVideoSessionKHR(device, pCreateInfo, pAllocator, pVideoSession);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void VkDestroyVideoSessionKHR(VkDevice device, VkVideoSessionKHR videoSession, VkAllocationCallbacks* pAllocator)
+    {
+        _vkDestroyVideoSessionKHR(device, videoSession, pAllocator);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public VkResult VkGetVideoSessionMemoryRequirementsKHR(VkDevice device, VkVideoSessionKHR videoSession, uint* pMemoryRequirementsCount, VkVideoSessionMemoryRequirementsKHR* pMemoryRequirements)
+    {
+        return _vkGetVideoSessionMemoryRequirementsKHR(device, videoSession, pMemoryRequirementsCount, pMemoryRequirements);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public VkResult VkBindVideoSessionMemoryKHR(VkDevice device, VkVideoSessionKHR videoSession, uint bindSessionMemoryInfoCount, VkBindVideoSessionMemoryInfoKHR* pBindSessionMemoryInfos)
+    {
+        return _vkBindVideoSessionMemoryKHR(device, videoSession, bindSessionMemoryInfoCount, pBindSessionMemoryInfos);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public VkResult VkCreateVideoSessionParametersKHR(VkDevice device, VkVideoSessionParametersCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkVideoSessionParametersKHR* pVideoSessionParameters)
+    {
+        return _vkCreateVideoSessionParametersKHR(device, pCreateInfo, pAllocator, pVideoSessionParameters);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public VkResult VkUpdateVideoSessionParametersKHR(VkDevice device, VkVideoSessionParametersKHR videoSessionParameters, VkVideoSessionParametersUpdateInfoKHR* pUpdateInfo)
+    {
+        return _vkUpdateVideoSessionParametersKHR(device, videoSessionParameters, pUpdateInfo);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void VkDestroyVideoSessionParametersKHR(VkDevice device, VkVideoSessionParametersKHR videoSessionParameters, VkAllocationCallbacks* pAllocator)
+    {
+        _vkDestroyVideoSessionParametersKHR(device, videoSessionParameters, pAllocator);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void VkCmdBeginVideoCodingKHR(VkCommandBuffer commandBuffer, VkVideoBeginCodingInfoKHR* pBeginInfo)
+    {
+        _vkCmdBeginVideoCodingKHR(commandBuffer, pBeginInfo);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void VkCmdEndVideoCodingKHR(VkCommandBuffer commandBuffer, VkVideoEndCodingInfoKHR* pEndCodingInfo)
+    {
+        _vkCmdEndVideoCodingKHR(commandBuffer, pEndCodingInfo);
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void VkCmdControlVideoCodingKHR(VkCommandBuffer commandBuffer, VkVideoCodingControlInfoKHR* pCodingControlInfo)
+    {
+        _vkCmdControlVideoCodingKHR(commandBuffer, pCodingControlInfo);
+    }
 }

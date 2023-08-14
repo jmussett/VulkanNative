@@ -69,8 +69,12 @@ internal class ExtensionGenerator
                 extensionCommands.AddRange(requires.Commands.Select(x => x.Name));
             }
 
+            
+
             if (extensionCommands.Count > 0)
             {
+                extensionCommands = extensionCommands.Distinct().ToList();
+
                 var extensionClassName = $"{extension.Name.ToLowerInvariant().Pascalize()}Extension";
 
                 _commandGroupGenerator.GenerateCommandGroup(extensionClassName, "Extensions", extensionCommands);
