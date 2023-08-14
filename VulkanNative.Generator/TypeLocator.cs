@@ -4,18 +4,19 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Text.RegularExpressions;
 using VulkanNative.Generator.Registries;
 using VulkanNative.Generator.Registry;
+using VulkanNative.Generator.VulkanRegistry;
 
 namespace VulkanNative.Generator;
 
 internal class TypeLocator
 {
-    private readonly VkRegistry _vkRegistry;
+    private readonly VulkanApiRegistry _vulkanRegistry;
     private readonly TypeRegistry _typeRegistry;
     private readonly TypeGeneratorRegistry _generatorRegistry;
 
-    public TypeLocator(VkRegistry vkRegistry, TypeRegistry typeRegistry, TypeGeneratorRegistry generatorRegistry)
+    public TypeLocator(VulkanApiRegistry vulkanRegisrty, TypeRegistry typeRegistry, TypeGeneratorRegistry generatorRegistry)
     {
-        _vkRegistry = vkRegistry;
+        _vulkanRegistry = vulkanRegisrty;
         _typeRegistry = typeRegistry;
         _generatorRegistry = generatorRegistry;
     }
@@ -81,8 +82,8 @@ internal class TypeLocator
                     return existingSyntax;
                 }
 
-                vkType = _vkRegistry.Types.FirstOrDefault(x => x.Name == type)
-                    ?? _vkRegistry.Types.FirstOrDefault(x => x.NameAttribute == type)
+                vkType = _vulkanRegistry.Root.Types.FirstOrDefault(x => x.Name == type)
+                    ?? _vulkanRegistry.Root.Types.FirstOrDefault(x => x.NameAttribute == type)
                     ?? throw new InvalidOperationException($"Unable to find type '{type}'");
 
                 if (string.IsNullOrEmpty(vkType.Alias))

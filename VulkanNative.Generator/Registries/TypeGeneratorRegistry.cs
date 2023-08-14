@@ -1,15 +1,24 @@
 ﻿using CSharpComposer;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Extensions.DependencyInjection;
 using VulkanNative.Generator.Registry;
 
-namespace VulkanNative.Generator
+namespace VulkanNative.Generator.Registries
 {
     internal class TypeGeneratorRegistry
     {
+        private readonly IServiceProvider _serviceProvider;
         private readonly Dictionary<string, ITypeGenerator> _generators = new();
 
-        public void RegisterGenerator(string name, ITypeGenerator generator)
+        public TypeGeneratorRegistry(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
+        }
+
+        public void RegisterGenerator<T>(string name) where T : ITypeGenerator
+        {
+            var generator = _serviceProvider.GetRequiredService<T>();
+
             _generators.Add(name, generator);
         }
 

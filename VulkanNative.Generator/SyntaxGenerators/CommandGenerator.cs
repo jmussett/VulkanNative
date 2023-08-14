@@ -1,35 +1,37 @@
 ﻿using CSharpComposer;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using VulkanNative.Generator.Registry;
+using VulkanNative.Generator.VulkanRegistry;
 
-namespace VulkanNative.Generator;
+namespace VulkanNative.Generator.SyntaxGenerators;
 
 internal class CommandGenerator
 {
+    private readonly VulkanApiRegistry _vulkanRegistry;
     private readonly TypeLocator _typeLocator;
-    private readonly IReadOnlyDictionary<string, VkCommand> _commandLookup;
-    private readonly IReadOnlyDictionary<string, string> _aliasMap;
 
-    public CommandGenerator(VkRegistry vkRegistry, TypeLocator typeLocator)
+    public CommandGenerator(VulkanApiRegistry vulkanRegistry, TypeLocator typeLocator)
     {
+        _vulkanRegistry = vulkanRegistry;
         _typeLocator = typeLocator;
-        _commandLookup = vkRegistry.CreateCommandLookup();
-
-        _aliasMap = vkRegistry.Commands
-            .Where(x => x.Api is null || x.Api == "vulkan")
-            .Where(x => x.Alias is not null)
-            .ToDictionary(x => x.Name, x => x.Alias!);
     }
 
     public FieldDeclarationSyntax GenerateCommand(string commandName)
     {
-        if (_aliasMap.TryGetValue(commandName, out var aliasName))
+        // TODO: Cache?
+        var aliasMap = _vulkanRegistry.Root.Commands
+            .Where(x => x.Api is null || x.Api == "vulkan")
+            .Where(x => x.Alias is not null)
+            .ToDictionary(x => x.Name, x => x.Alias!);
+
+        if (aliasMap.TryGetValue(commandName, out var aliasName))
         {
             commandName = aliasName;
         }
 
-        if (!_commandLookup.TryGetValue(commandName, out var commandDefinition))
+        var commandLookup = _vulkanRegistry.Root.CreateCommandLookup();
+
+        if (!commandLookup.TryGetValue(commandName, out var commandDefinition))
         {
             throw new InvalidOperationException($"Unable to find command '{commandName}'");
         }

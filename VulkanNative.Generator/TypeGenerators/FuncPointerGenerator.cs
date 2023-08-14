@@ -1,7 +1,6 @@
 ﻿using CSharpComposer;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using VulkanNative.Generator.Registry;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace VulkanNative.Generator.Generators;
 

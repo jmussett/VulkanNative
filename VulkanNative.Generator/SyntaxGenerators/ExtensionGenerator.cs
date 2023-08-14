@@ -1,35 +1,28 @@
-﻿using CSharpComposer;
-using Humanizer;
-using Microsoft.CodeAnalysis.CSharp;
+﻿using Humanizer;
 using VulkanNative.Generator.Registries;
 using VulkanNative.Generator.Registry;
+using VulkanNative.Generator.VulkanRegistry;
 
 namespace VulkanNative.Generator.SyntaxGenerators;
 
 internal class ExtensionGenerator
 {
-    private readonly VkRegistry _vkRegistry;
+    private readonly VulkanApiRegistry _vulkanRegistry;
     private readonly CommandGroupGenerator _commandGroupGenerator;
     private readonly TypeLocator _typeLocator;
     private readonly EnumRegistry _enumRegistry;
 
-    private readonly IReadOnlyDictionary<string, VkCommand> _commandLookup;
-    private readonly IReadOnlyDictionary<string, VkType> _handleLookup;
-
-    public ExtensionGenerator(VkRegistry vkRegistry, CommandGroupGenerator commandGroupGenerator, TypeLocator typeLocator, EnumRegistry enumRegistry)
+    public ExtensionGenerator(VulkanApiRegistry vulkanRegistry, CommandGroupGenerator commandGroupGenerator, TypeLocator typeLocator, EnumRegistry enumRegistry)
     {
-        _vkRegistry = vkRegistry;
+        _vulkanRegistry = vulkanRegistry;
         _commandGroupGenerator = commandGroupGenerator;
         _typeLocator = typeLocator;
         _enumRegistry = enumRegistry;
-
-        _commandLookup = vkRegistry.CreateCommandLookup();
-        _handleLookup = vkRegistry.CreateHandleLookup();
     }
 
     public void GenerateExtensions()
     {
-        foreach (var extension in _vkRegistry.Extensions)
+        foreach (var extension in _vulkanRegistry.Root.Extensions)
         {
             // Skip non-vulkan features (i.e: Vulkan sc, deprecated, obsolete, or provisional)
             if (!extension.Supported.Split(',').Contains("vulkan") ||
@@ -48,8 +41,8 @@ internal class ExtensionGenerator
             {
                 foreach (var type in requires.Types)
                 {
-                    var vkType = _vkRegistry.Types.FirstOrDefault(x => x.Name == type.NameAttribute)
-                        ?? _vkRegistry.Types.FirstOrDefault(x => x.NameAttribute == type.NameAttribute)
+                    var vkType = _vulkanRegistry.Root.Types.FirstOrDefault(x => x.Name == type.NameAttribute)
+                        ?? _vulkanRegistry.Root.Types.FirstOrDefault(x => x.NameAttribute == type.NameAttribute)
                         ?? throw new InvalidOperationException($"Unable to find type '{type.NameAttribute}'");
 
                     if (vkType.Category != "include" && vkType.Category != "define")

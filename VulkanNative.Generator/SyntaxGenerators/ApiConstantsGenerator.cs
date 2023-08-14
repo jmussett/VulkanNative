@@ -1,24 +1,20 @@
 ﻿using CSharpComposer;
 using Microsoft.CodeAnalysis.CSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VulkanNative.Generator.Registries;
 using VulkanNative.Generator.Registry;
+using VulkanNative.Generator.VulkanRegistry;
 
-namespace VulkanNative.Generator;
+namespace VulkanNative.Generator.SyntaxGenerators;
 
 internal class ApiConstantsGenerator
 {
-    private readonly VkRegistry _vkRegistry;
+    private readonly VulkanApiRegistry _vulkanRegistry;
     private readonly DocumentRegistry _documentRegistry;
     private readonly TypeLocator _typeLocator;
 
-    public ApiConstantsGenerator(VkRegistry vkRegistry, DocumentRegistry documentRegistry, TypeLocator typeLocator)
+    public ApiConstantsGenerator(VulkanApiRegistry vulkanRegistry, DocumentRegistry documentRegistry, TypeLocator typeLocator)
     {
-        _vkRegistry = vkRegistry;
+        _vulkanRegistry = vulkanRegistry;
         _documentRegistry = documentRegistry;
         _typeLocator = typeLocator;
     }
@@ -32,7 +28,7 @@ internal class ApiConstantsGenerator
                     x.AddModifierToken(SyntaxKind.PublicKeyword);
                     x.AddModifierToken(SyntaxKind.StaticKeyword);
 
-                    var constantEnumeration = _vkRegistry.Enums.First(x => x.Name == "API Constants");
+                    var constantEnumeration = _vulkanRegistry.Root.Enums.First(x => x.Name == "API Constants");
 
                     foreach (VkEnum constant in constantEnumeration.Enums)
                     {
