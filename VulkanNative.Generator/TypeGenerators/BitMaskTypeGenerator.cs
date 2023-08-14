@@ -49,7 +49,7 @@ internal class BitMaskTypeGenerator : ITypeGenerator
             )
         );
 
-        _documentRegistry.Documents.Add($"Enums/{typeName}.cs", compilationUnit);
+        _documentRegistry.Documents.Add($"Generated/Enums/{typeName}.cs", compilationUnit);
 
         return CSharpFactory.Type(typeName);
     }

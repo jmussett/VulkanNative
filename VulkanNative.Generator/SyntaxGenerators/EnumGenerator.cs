@@ -117,7 +117,7 @@ namespace VulkanNative.Generator.SyntaxGenerators
                     )
                 );
 
-                _documentRegistry.Documents.Add($"Enums/{enumDefinition.ClrTypeName}.cs", compilationUnit);
+                _documentRegistry.Documents.Add($"Generated/Enums/{enumDefinition.ClrTypeName}.cs", compilationUnit);
             }
 
         }

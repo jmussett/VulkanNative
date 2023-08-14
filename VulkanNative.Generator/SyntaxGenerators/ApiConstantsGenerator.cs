@@ -51,6 +51,6 @@ internal class ApiConstantsGenerator
             )
         );
 
-        _documentRegistry.Documents.Add("VulkanApiConstants.cs", compilationUnit);
+        _documentRegistry.Documents.Add("Generated/VulkanApiConstants.cs", compilationUnit);
     }
 }

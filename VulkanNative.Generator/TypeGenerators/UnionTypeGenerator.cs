@@ -59,7 +59,7 @@ internal class UnionTypeGenerator : ITypeGenerator
             )
         );
 
-        _documentRegistry.Documents.Add($"Unions/{typeName}.cs", compilationUnit);
+        _documentRegistry.Documents.Add($"Generated/Unions/{typeName}.cs", compilationUnit);
 
         return CSharpFactory.Type(typeName);
     }

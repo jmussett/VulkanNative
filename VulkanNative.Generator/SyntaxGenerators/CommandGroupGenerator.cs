@@ -37,7 +37,7 @@ internal class CommandGroupGenerator
                 })
         ));
 
-        _documentRegistry.Documents.Add($"{folder}/{commandGroupName}.cs", compilationUnit);
+        _documentRegistry.Documents.Add($"Generated/{folder}/{commandGroupName}.cs", compilationUnit);
 
     }
 }

@@ -85,7 +85,7 @@ internal class BaseTypeGenerator : ITypeGenerator
             )
         );
 
-        _documentRegistry.Documents.Add($"BaseTypes/{typeName}.cs", compilationUnit);
+        _documentRegistry.Documents.Add($"Generated/BaseTypes/{typeName}.cs", compilationUnit);
 
         return CSharpFactory.Type(typeName);
     }

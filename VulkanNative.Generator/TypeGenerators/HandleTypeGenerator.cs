@@ -77,7 +77,7 @@ internal class HandleTypeGenerator : ITypeGenerator
             )
         );
 
-        _documentRegistry.Documents.Add($"Handles/{typeName}.cs", compilationUnit);
+        _documentRegistry.Documents.Add($"Generated/Handles/{typeName}.cs", compilationUnit);
 
         return CSharpFactory.Type(typeName);
     }

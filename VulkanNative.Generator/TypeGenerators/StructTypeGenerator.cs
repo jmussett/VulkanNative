@@ -84,7 +84,7 @@ internal class StructTypeGenerator : ITypeGenerator
             )
         );
 
-        _documentRegistry.Documents.Add($"Structs/{typeName}.cs", compilationUnit);
+        _documentRegistry.Documents.Add($"Generated/Structs/{typeName}.cs", compilationUnit);
 
         return CSharpFactory.Type(typeName);
     }
