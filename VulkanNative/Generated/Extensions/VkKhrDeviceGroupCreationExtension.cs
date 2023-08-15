@@ -1,10 +1,16 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
 public unsafe class VkKhrDeviceGroupCreationExtension
 {
     private delegate* unmanaged[Cdecl]<VkInstance, uint*, VkPhysicalDeviceGroupProperties*, VkResult> _vkEnumeratePhysicalDeviceGroups;
+
+    public VkKhrDeviceGroupCreationExtension(VkInstance instance, IVulkanLoader loader)
+    {
+        _vkEnumeratePhysicalDeviceGroups = (delegate* unmanaged[Cdecl]<VkInstance, uint*, VkPhysicalDeviceGroupProperties*, VkResult>)loader.GetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceGroups");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkEnumeratePhysicalDeviceGroups(VkInstance instance, uint* pPhysicalDeviceGroupCount, VkPhysicalDeviceGroupProperties* pPhysicalDeviceGroupProperties)

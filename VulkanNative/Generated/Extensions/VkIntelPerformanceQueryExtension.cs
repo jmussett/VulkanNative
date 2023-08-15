@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -13,6 +14,19 @@ public unsafe class VkIntelPerformanceQueryExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkPerformanceConfigurationINTEL, VkResult> _vkReleasePerformanceConfigurationINTEL;
     private delegate* unmanaged[Cdecl]<VkQueue, VkPerformanceConfigurationINTEL, VkResult> _vkQueueSetPerformanceConfigurationINTEL;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPerformanceParameterTypeINTEL, VkPerformanceValueINTEL*, VkResult> _vkGetPerformanceParameterINTEL;
+
+    public VkIntelPerformanceQueryExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkInitializePerformanceApiINTEL = (delegate* unmanaged[Cdecl]<VkDevice, VkInitializePerformanceApiInfoINTEL*, VkResult>)loader.GetDeviceProcAddr(device, "vkInitializePerformanceApiINTEL");
+        _vkUninitializePerformanceApiINTEL = (delegate* unmanaged[Cdecl]<VkDevice, void>)loader.GetDeviceProcAddr(device, "vkUninitializePerformanceApiINTEL");
+        _vkCmdSetPerformanceMarkerINTEL = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPerformanceMarkerInfoINTEL*, VkResult>)loader.GetDeviceProcAddr(device, "vkCmdSetPerformanceMarkerINTEL");
+        _vkCmdSetPerformanceStreamMarkerINTEL = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPerformanceStreamMarkerInfoINTEL*, VkResult>)loader.GetDeviceProcAddr(device, "vkCmdSetPerformanceStreamMarkerINTEL");
+        _vkCmdSetPerformanceOverrideINTEL = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPerformanceOverrideInfoINTEL*, VkResult>)loader.GetDeviceProcAddr(device, "vkCmdSetPerformanceOverrideINTEL");
+        _vkAcquirePerformanceConfigurationINTEL = (delegate* unmanaged[Cdecl]<VkDevice, VkPerformanceConfigurationAcquireInfoINTEL*, VkPerformanceConfigurationINTEL*, VkResult>)loader.GetDeviceProcAddr(device, "vkAcquirePerformanceConfigurationINTEL");
+        _vkReleasePerformanceConfigurationINTEL = (delegate* unmanaged[Cdecl]<VkDevice, VkPerformanceConfigurationINTEL, VkResult>)loader.GetDeviceProcAddr(device, "vkReleasePerformanceConfigurationINTEL");
+        _vkQueueSetPerformanceConfigurationINTEL = (delegate* unmanaged[Cdecl]<VkQueue, VkPerformanceConfigurationINTEL, VkResult>)loader.GetDeviceProcAddr(device, "vkQueueSetPerformanceConfigurationINTEL");
+        _vkGetPerformanceParameterINTEL = (delegate* unmanaged[Cdecl]<VkDevice, VkPerformanceParameterTypeINTEL, VkPerformanceValueINTEL*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPerformanceParameterINTEL");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkInitializePerformanceApiINTEL(VkDevice device, VkInitializePerformanceApiInfoINTEL* pInitializeInfo)

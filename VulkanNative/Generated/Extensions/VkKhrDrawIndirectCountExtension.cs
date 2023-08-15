@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -6,6 +7,12 @@ public unsafe class VkKhrDrawIndirectCountExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, VkBuffer, VkDeviceSize, uint, uint, void> _vkCmdDrawIndirectCount;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, VkBuffer, VkDeviceSize, uint, uint, void> _vkCmdDrawIndexedIndirectCount;
+
+    public VkKhrDrawIndirectCountExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCmdDrawIndirectCount = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, VkBuffer, VkDeviceSize, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdDrawIndirectCount");
+        _vkCmdDrawIndexedIndirectCount = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, VkBuffer, VkDeviceSize, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdDrawIndexedIndirectCount");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkCmdDrawIndirectCount(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint maxDrawCount, uint stride)

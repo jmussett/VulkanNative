@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -11,6 +12,17 @@ public unsafe class VkKhrGetPhysicalDeviceProperties2Extension
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkQueueFamilyProperties2*, void> _vkGetPhysicalDeviceQueueFamilyProperties2;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceMemoryProperties2*, void> _vkGetPhysicalDeviceMemoryProperties2;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceSparseImageFormatInfo2*, uint*, VkSparseImageFormatProperties2*, void> _vkGetPhysicalDeviceSparseImageFormatProperties2;
+
+    public VkKhrGetPhysicalDeviceProperties2Extension(VkInstance instance, IVulkanLoader loader)
+    {
+        _vkGetPhysicalDeviceFeatures2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceFeatures2*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceFeatures2");
+        _vkGetPhysicalDeviceProperties2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceProperties2*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceProperties2");
+        _vkGetPhysicalDeviceFormatProperties2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkFormat, VkFormatProperties2*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceFormatProperties2");
+        _vkGetPhysicalDeviceImageFormatProperties2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceImageFormatInfo2*, VkImageFormatProperties2*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceImageFormatProperties2");
+        _vkGetPhysicalDeviceQueueFamilyProperties2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkQueueFamilyProperties2*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyProperties2");
+        _vkGetPhysicalDeviceMemoryProperties2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceMemoryProperties2*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceMemoryProperties2");
+        _vkGetPhysicalDeviceSparseImageFormatProperties2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceSparseImageFormatInfo2*, uint*, VkSparseImageFormatProperties2*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceSparseImageFormatProperties2");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkGetPhysicalDeviceFeatures2(VkPhysicalDevice physicalDevice, VkPhysicalDeviceFeatures2* pFeatures)

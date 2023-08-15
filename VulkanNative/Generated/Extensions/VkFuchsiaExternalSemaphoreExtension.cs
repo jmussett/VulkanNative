@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -6,6 +7,12 @@ public unsafe class VkFuchsiaExternalSemaphoreExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkImportSemaphoreZirconHandleInfoFUCHSIA*, VkResult> _vkImportSemaphoreZirconHandleFUCHSIA;
     private delegate* unmanaged[Cdecl]<VkDevice, VkSemaphoreGetZirconHandleInfoFUCHSIA*, nint*, VkResult> _vkGetSemaphoreZirconHandleFUCHSIA;
+
+    public VkFuchsiaExternalSemaphoreExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkImportSemaphoreZirconHandleFUCHSIA = (delegate* unmanaged[Cdecl]<VkDevice, VkImportSemaphoreZirconHandleInfoFUCHSIA*, VkResult>)loader.GetDeviceProcAddr(device, "vkImportSemaphoreZirconHandleFUCHSIA");
+        _vkGetSemaphoreZirconHandleFUCHSIA = (delegate* unmanaged[Cdecl]<VkDevice, VkSemaphoreGetZirconHandleInfoFUCHSIA*, nint*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetSemaphoreZirconHandleFUCHSIA");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkImportSemaphoreZirconHandleFUCHSIA(VkDevice device, VkImportSemaphoreZirconHandleInfoFUCHSIA* pImportSemaphoreZirconHandleInfo)

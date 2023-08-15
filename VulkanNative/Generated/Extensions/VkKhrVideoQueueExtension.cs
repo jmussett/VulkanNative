@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -16,6 +17,22 @@ public unsafe class VkKhrVideoQueueExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoBeginCodingInfoKHR*, void> _vkCmdBeginVideoCodingKHR;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoEndCodingInfoKHR*, void> _vkCmdEndVideoCodingKHR;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoCodingControlInfoKHR*, void> _vkCmdControlVideoCodingKHR;
+
+    public VkKhrVideoQueueExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkGetPhysicalDeviceVideoCapabilitiesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkVideoProfileInfoKHR*, VkVideoCapabilitiesKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceVideoCapabilitiesKHR");
+        _vkGetPhysicalDeviceVideoFormatPropertiesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceVideoFormatInfoKHR*, uint*, VkVideoFormatPropertiesKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceVideoFormatPropertiesKHR");
+        _vkCreateVideoSessionKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionCreateInfoKHR*, VkAllocationCallbacks*, VkVideoSessionKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateVideoSessionKHR");
+        _vkDestroyVideoSessionKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionKHR, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyVideoSessionKHR");
+        _vkGetVideoSessionMemoryRequirementsKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionKHR, uint*, VkVideoSessionMemoryRequirementsKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetVideoSessionMemoryRequirementsKHR");
+        _vkBindVideoSessionMemoryKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionKHR, uint, VkBindVideoSessionMemoryInfoKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkBindVideoSessionMemoryKHR");
+        _vkCreateVideoSessionParametersKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionParametersCreateInfoKHR*, VkAllocationCallbacks*, VkVideoSessionParametersKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateVideoSessionParametersKHR");
+        _vkUpdateVideoSessionParametersKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionParametersKHR, VkVideoSessionParametersUpdateInfoKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkUpdateVideoSessionParametersKHR");
+        _vkDestroyVideoSessionParametersKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkVideoSessionParametersKHR, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyVideoSessionParametersKHR");
+        _vkCmdBeginVideoCodingKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoBeginCodingInfoKHR*, void>)loader.GetDeviceProcAddr(device, "vkCmdBeginVideoCodingKHR");
+        _vkCmdEndVideoCodingKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoEndCodingInfoKHR*, void>)loader.GetDeviceProcAddr(device, "vkCmdEndVideoCodingKHR");
+        _vkCmdControlVideoCodingKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoCodingControlInfoKHR*, void>)loader.GetDeviceProcAddr(device, "vkCmdControlVideoCodingKHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkGetPhysicalDeviceVideoCapabilitiesKHR(VkPhysicalDevice physicalDevice, VkVideoProfileInfoKHR* pVideoProfile, VkVideoCapabilitiesKHR* pCapabilities)

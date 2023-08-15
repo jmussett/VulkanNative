@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -9,6 +10,15 @@ public unsafe class VkKhrDeferredHostOperationsExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, uint> _vkGetDeferredOperationMaxConcurrencyKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkResult> _vkGetDeferredOperationResultKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkResult> _vkDeferredOperationJoinKHR;
+
+    public VkKhrDeferredHostOperationsExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCreateDeferredOperationKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkAllocationCallbacks*, VkDeferredOperationKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateDeferredOperationKHR");
+        _vkDestroyDeferredOperationKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyDeferredOperationKHR");
+        _vkGetDeferredOperationMaxConcurrencyKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, uint>)loader.GetDeviceProcAddr(device, "vkGetDeferredOperationMaxConcurrencyKHR");
+        _vkGetDeferredOperationResultKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkResult>)loader.GetDeviceProcAddr(device, "vkGetDeferredOperationResultKHR");
+        _vkDeferredOperationJoinKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkResult>)loader.GetDeviceProcAddr(device, "vkDeferredOperationJoinKHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateDeferredOperationKHR(VkDevice device, VkAllocationCallbacks* pAllocator, VkDeferredOperationKHR* pDeferredOperation)

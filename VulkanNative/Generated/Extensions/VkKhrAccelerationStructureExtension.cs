@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -20,6 +21,26 @@ public unsafe class VkKhrAccelerationStructureExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkAccelerationStructureKHR*, VkQueryType, VkQueryPool, uint, void> _vkCmdWriteAccelerationStructuresPropertiesKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureVersionInfoKHR*, VkAccelerationStructureCompatibilityKHR*, void> _vkGetDeviceAccelerationStructureCompatibilityKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureBuildTypeKHR, VkAccelerationStructureBuildGeometryInfoKHR*, uint*, VkAccelerationStructureBuildSizesInfoKHR*, void> _vkGetAccelerationStructureBuildSizesKHR;
+
+    public VkKhrAccelerationStructureExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCreateAccelerationStructureKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureCreateInfoKHR*, VkAllocationCallbacks*, VkAccelerationStructureKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateAccelerationStructureKHR");
+        _vkDestroyAccelerationStructureKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureKHR, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyAccelerationStructureKHR");
+        _vkCmdBuildAccelerationStructuresKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkAccelerationStructureBuildGeometryInfoKHR*, VkAccelerationStructureBuildRangeInfoKHR**, void>)loader.GetDeviceProcAddr(device, "vkCmdBuildAccelerationStructuresKHR");
+        _vkCmdBuildAccelerationStructuresIndirectKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkAccelerationStructureBuildGeometryInfoKHR*, VkDeviceAddress*, uint*, uint**, void>)loader.GetDeviceProcAddr(device, "vkCmdBuildAccelerationStructuresIndirectKHR");
+        _vkBuildAccelerationStructuresKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, uint, VkAccelerationStructureBuildGeometryInfoKHR*, VkAccelerationStructureBuildRangeInfoKHR**, VkResult>)loader.GetDeviceProcAddr(device, "vkBuildAccelerationStructuresKHR");
+        _vkCopyAccelerationStructureKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkCopyAccelerationStructureInfoKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyAccelerationStructureKHR");
+        _vkCopyAccelerationStructureToMemoryKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkCopyAccelerationStructureToMemoryInfoKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyAccelerationStructureToMemoryKHR");
+        _vkCopyMemoryToAccelerationStructureKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkCopyMemoryToAccelerationStructureInfoKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyMemoryToAccelerationStructureKHR");
+        _vkWriteAccelerationStructuresPropertiesKHR = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkAccelerationStructureKHR*, VkQueryType, nint, void*, nint, VkResult>)loader.GetDeviceProcAddr(device, "vkWriteAccelerationStructuresPropertiesKHR");
+        _vkCmdCopyAccelerationStructureKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyAccelerationStructureInfoKHR*, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyAccelerationStructureKHR");
+        _vkCmdCopyAccelerationStructureToMemoryKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyAccelerationStructureToMemoryInfoKHR*, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyAccelerationStructureToMemoryKHR");
+        _vkCmdCopyMemoryToAccelerationStructureKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyMemoryToAccelerationStructureInfoKHR*, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyMemoryToAccelerationStructureKHR");
+        _vkGetAccelerationStructureDeviceAddressKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureDeviceAddressInfoKHR*, VkDeviceAddress>)loader.GetDeviceProcAddr(device, "vkGetAccelerationStructureDeviceAddressKHR");
+        _vkCmdWriteAccelerationStructuresPropertiesKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkAccelerationStructureKHR*, VkQueryType, VkQueryPool, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdWriteAccelerationStructuresPropertiesKHR");
+        _vkGetDeviceAccelerationStructureCompatibilityKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureVersionInfoKHR*, VkAccelerationStructureCompatibilityKHR*, void>)loader.GetDeviceProcAddr(device, "vkGetDeviceAccelerationStructureCompatibilityKHR");
+        _vkGetAccelerationStructureBuildSizesKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureBuildTypeKHR, VkAccelerationStructureBuildGeometryInfoKHR*, uint*, VkAccelerationStructureBuildSizesInfoKHR*, void>)loader.GetDeviceProcAddr(device, "vkGetAccelerationStructureBuildSizesKHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateAccelerationStructureKHR(VkDevice device, VkAccelerationStructureCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkAccelerationStructureKHR* pAccelerationStructure)

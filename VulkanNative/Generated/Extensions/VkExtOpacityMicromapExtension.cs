@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -18,6 +19,24 @@ public unsafe class VkExtOpacityMicromapExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkMicromapEXT*, VkQueryType, VkQueryPool, uint, void> _vkCmdWriteMicromapsPropertiesEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkMicromapVersionInfoEXT*, VkAccelerationStructureCompatibilityKHR*, void> _vkGetDeviceMicromapCompatibilityEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureBuildTypeKHR, VkMicromapBuildInfoEXT*, VkMicromapBuildSizesInfoEXT*, void> _vkGetMicromapBuildSizesEXT;
+
+    public VkExtOpacityMicromapExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCreateMicromapEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkMicromapCreateInfoEXT*, VkAllocationCallbacks*, VkMicromapEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateMicromapEXT");
+        _vkDestroyMicromapEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkMicromapEXT, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyMicromapEXT");
+        _vkCmdBuildMicromapsEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkMicromapBuildInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdBuildMicromapsEXT");
+        _vkBuildMicromapsEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, uint, VkMicromapBuildInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkBuildMicromapsEXT");
+        _vkCopyMicromapEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkCopyMicromapInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyMicromapEXT");
+        _vkCopyMicromapToMemoryEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkCopyMicromapToMemoryInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyMicromapToMemoryEXT");
+        _vkCopyMemoryToMicromapEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkCopyMemoryToMicromapInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyMemoryToMicromapEXT");
+        _vkWriteMicromapsPropertiesEXT = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkMicromapEXT*, VkQueryType, nint, void*, nint, VkResult>)loader.GetDeviceProcAddr(device, "vkWriteMicromapsPropertiesEXT");
+        _vkCmdCopyMicromapEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyMicromapInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyMicromapEXT");
+        _vkCmdCopyMicromapToMemoryEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyMicromapToMemoryInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyMicromapToMemoryEXT");
+        _vkCmdCopyMemoryToMicromapEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyMemoryToMicromapInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyMemoryToMicromapEXT");
+        _vkCmdWriteMicromapsPropertiesEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkMicromapEXT*, VkQueryType, VkQueryPool, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdWriteMicromapsPropertiesEXT");
+        _vkGetDeviceMicromapCompatibilityEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkMicromapVersionInfoEXT*, VkAccelerationStructureCompatibilityKHR*, void>)loader.GetDeviceProcAddr(device, "vkGetDeviceMicromapCompatibilityEXT");
+        _vkGetMicromapBuildSizesEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureBuildTypeKHR, VkMicromapBuildInfoEXT*, VkMicromapBuildSizesInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkGetMicromapBuildSizesEXT");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateMicromapEXT(VkDevice device, VkMicromapCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkMicromapEXT* pMicromap)

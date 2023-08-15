@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -9,6 +10,15 @@ public unsafe class VkFuchsiaBufferCollectionExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkBufferCollectionFUCHSIA, VkBufferConstraintsInfoFUCHSIA*, VkResult> _vkSetBufferCollectionBufferConstraintsFUCHSIA;
     private delegate* unmanaged[Cdecl]<VkDevice, VkBufferCollectionFUCHSIA, VkAllocationCallbacks*, void> _vkDestroyBufferCollectionFUCHSIA;
     private delegate* unmanaged[Cdecl]<VkDevice, VkBufferCollectionFUCHSIA, VkBufferCollectionPropertiesFUCHSIA*, VkResult> _vkGetBufferCollectionPropertiesFUCHSIA;
+
+    public VkFuchsiaBufferCollectionExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCreateBufferCollectionFUCHSIA = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferCollectionCreateInfoFUCHSIA*, VkAllocationCallbacks*, VkBufferCollectionFUCHSIA*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateBufferCollectionFUCHSIA");
+        _vkSetBufferCollectionImageConstraintsFUCHSIA = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferCollectionFUCHSIA, VkImageConstraintsInfoFUCHSIA*, VkResult>)loader.GetDeviceProcAddr(device, "vkSetBufferCollectionImageConstraintsFUCHSIA");
+        _vkSetBufferCollectionBufferConstraintsFUCHSIA = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferCollectionFUCHSIA, VkBufferConstraintsInfoFUCHSIA*, VkResult>)loader.GetDeviceProcAddr(device, "vkSetBufferCollectionBufferConstraintsFUCHSIA");
+        _vkDestroyBufferCollectionFUCHSIA = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferCollectionFUCHSIA, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyBufferCollectionFUCHSIA");
+        _vkGetBufferCollectionPropertiesFUCHSIA = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferCollectionFUCHSIA, VkBufferCollectionPropertiesFUCHSIA*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetBufferCollectionPropertiesFUCHSIA");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateBufferCollectionFUCHSIA(VkDevice device, VkBufferCollectionCreateInfoFUCHSIA* pCreateInfo, VkAllocationCallbacks* pAllocator, VkBufferCollectionFUCHSIA* pCollection)

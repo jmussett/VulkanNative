@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -6,6 +7,12 @@ public unsafe class VkKhrXcbSurfaceExtension
 {
     private delegate* unmanaged[Cdecl]<VkInstance, VkXcbSurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> _vkCreateXcbSurfaceKHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, nint*, nint, VkBool32> _vkGetPhysicalDeviceXcbPresentationSupportKHR;
+
+    public VkKhrXcbSurfaceExtension(VkInstance instance, IVulkanLoader loader)
+    {
+        _vkCreateXcbSurfaceKHR = (delegate* unmanaged[Cdecl]<VkInstance, VkXcbSurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateXcbSurfaceKHR");
+        _vkGetPhysicalDeviceXcbPresentationSupportKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, nint*, nint, VkBool32>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceXcbPresentationSupportKHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateXcbSurfaceKHR(VkInstance instance, VkXcbSurfaceCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface)

@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -10,6 +11,16 @@ public unsafe class VkNvDeviceGeneratedCommandsExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineBindPoint, VkPipeline, uint, void> _vkCmdBindPipelineShaderGroupNV;
     private delegate* unmanaged[Cdecl]<VkDevice, VkIndirectCommandsLayoutCreateInfoNV*, VkAllocationCallbacks*, VkIndirectCommandsLayoutNV*, VkResult> _vkCreateIndirectCommandsLayoutNV;
     private delegate* unmanaged[Cdecl]<VkDevice, VkIndirectCommandsLayoutNV, VkAllocationCallbacks*, void> _vkDestroyIndirectCommandsLayoutNV;
+
+    public VkNvDeviceGeneratedCommandsExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkGetGeneratedCommandsMemoryRequirementsNV = (delegate* unmanaged[Cdecl]<VkDevice, VkGeneratedCommandsMemoryRequirementsInfoNV*, VkMemoryRequirements2*, void>)loader.GetDeviceProcAddr(device, "vkGetGeneratedCommandsMemoryRequirementsNV");
+        _vkCmdPreprocessGeneratedCommandsNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkGeneratedCommandsInfoNV*, void>)loader.GetDeviceProcAddr(device, "vkCmdPreprocessGeneratedCommandsNV");
+        _vkCmdExecuteGeneratedCommandsNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, VkGeneratedCommandsInfoNV*, void>)loader.GetDeviceProcAddr(device, "vkCmdExecuteGeneratedCommandsNV");
+        _vkCmdBindPipelineShaderGroupNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineBindPoint, VkPipeline, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdBindPipelineShaderGroupNV");
+        _vkCreateIndirectCommandsLayoutNV = (delegate* unmanaged[Cdecl]<VkDevice, VkIndirectCommandsLayoutCreateInfoNV*, VkAllocationCallbacks*, VkIndirectCommandsLayoutNV*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateIndirectCommandsLayoutNV");
+        _vkDestroyIndirectCommandsLayoutNV = (delegate* unmanaged[Cdecl]<VkDevice, VkIndirectCommandsLayoutNV, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyIndirectCommandsLayoutNV");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkGetGeneratedCommandsMemoryRequirementsNV(VkDevice device, VkGeneratedCommandsMemoryRequirementsInfoNV* pInfo, VkMemoryRequirements2* pMemoryRequirements)

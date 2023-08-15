@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -15,6 +16,21 @@ public unsafe class VkExtDebugUtilsExtension
     private delegate* unmanaged[Cdecl]<VkInstance, VkDebugUtilsMessengerCreateInfoEXT*, VkAllocationCallbacks*, VkDebugUtilsMessengerEXT*, VkResult> _vkCreateDebugUtilsMessengerEXT;
     private delegate* unmanaged[Cdecl]<VkInstance, VkDebugUtilsMessengerEXT, VkAllocationCallbacks*, void> _vkDestroyDebugUtilsMessengerEXT;
     private delegate* unmanaged[Cdecl]<VkInstance, VkDebugUtilsMessageSeverityFlagsEXT, VkDebugUtilsMessageTypeFlagsEXT, VkDebugUtilsMessengerCallbackDataEXT*, void> _vkSubmitDebugUtilsMessageEXT;
+
+    public VkExtDebugUtilsExtension(VkInstance instance, IVulkanLoader loader)
+    {
+        _vkSetDebugUtilsObjectNameEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDebugUtilsObjectNameInfoEXT*, VkResult>)loader.GetInstanceProcAddr(instance, "vkSetDebugUtilsObjectNameEXT");
+        _vkSetDebugUtilsObjectTagEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDebugUtilsObjectTagInfoEXT*, VkResult>)loader.GetInstanceProcAddr(instance, "vkSetDebugUtilsObjectTagEXT");
+        _vkQueueBeginDebugUtilsLabelEXT = (delegate* unmanaged[Cdecl]<VkQueue, VkDebugUtilsLabelEXT*, void>)loader.GetInstanceProcAddr(instance, "vkQueueBeginDebugUtilsLabelEXT");
+        _vkQueueEndDebugUtilsLabelEXT = (delegate* unmanaged[Cdecl]<VkQueue, void>)loader.GetInstanceProcAddr(instance, "vkQueueEndDebugUtilsLabelEXT");
+        _vkQueueInsertDebugUtilsLabelEXT = (delegate* unmanaged[Cdecl]<VkQueue, VkDebugUtilsLabelEXT*, void>)loader.GetInstanceProcAddr(instance, "vkQueueInsertDebugUtilsLabelEXT");
+        _vkCmdBeginDebugUtilsLabelEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDebugUtilsLabelEXT*, void>)loader.GetInstanceProcAddr(instance, "vkCmdBeginDebugUtilsLabelEXT");
+        _vkCmdEndDebugUtilsLabelEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, void>)loader.GetInstanceProcAddr(instance, "vkCmdEndDebugUtilsLabelEXT");
+        _vkCmdInsertDebugUtilsLabelEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDebugUtilsLabelEXT*, void>)loader.GetInstanceProcAddr(instance, "vkCmdInsertDebugUtilsLabelEXT");
+        _vkCreateDebugUtilsMessengerEXT = (delegate* unmanaged[Cdecl]<VkInstance, VkDebugUtilsMessengerCreateInfoEXT*, VkAllocationCallbacks*, VkDebugUtilsMessengerEXT*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateDebugUtilsMessengerEXT");
+        _vkDestroyDebugUtilsMessengerEXT = (delegate* unmanaged[Cdecl]<VkInstance, VkDebugUtilsMessengerEXT, VkAllocationCallbacks*, void>)loader.GetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
+        _vkSubmitDebugUtilsMessageEXT = (delegate* unmanaged[Cdecl]<VkInstance, VkDebugUtilsMessageSeverityFlagsEXT, VkDebugUtilsMessageTypeFlagsEXT, VkDebugUtilsMessengerCallbackDataEXT*, void>)loader.GetInstanceProcAddr(instance, "vkSubmitDebugUtilsMessageEXT");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkSetDebugUtilsObjectNameEXT(VkDevice device, VkDebugUtilsObjectNameInfoEXT* pNameInfo)

@@ -1,10 +1,16 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
 public unsafe class VkKhrExternalMemoryCapabilitiesExtension
 {
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalBufferInfo*, VkExternalBufferProperties*, void> _vkGetPhysicalDeviceExternalBufferProperties;
+
+    public VkKhrExternalMemoryCapabilitiesExtension(VkInstance instance, IVulkanLoader loader)
+    {
+        _vkGetPhysicalDeviceExternalBufferProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalBufferInfo*, VkExternalBufferProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalBufferProperties");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkGetPhysicalDeviceExternalBufferProperties(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalBufferInfo* pExternalBufferInfo, VkExternalBufferProperties* pExternalBufferProperties)

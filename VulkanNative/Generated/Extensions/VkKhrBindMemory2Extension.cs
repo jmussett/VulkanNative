@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -6,6 +7,12 @@ public unsafe class VkKhrBindMemory2Extension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, uint, VkBindBufferMemoryInfo*, VkResult> _vkBindBufferMemory2;
     private delegate* unmanaged[Cdecl]<VkDevice, uint, VkBindImageMemoryInfo*, VkResult> _vkBindImageMemory2;
+
+    public VkKhrBindMemory2Extension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkBindBufferMemory2 = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkBindBufferMemoryInfo*, VkResult>)loader.GetDeviceProcAddr(device, "vkBindBufferMemory2");
+        _vkBindImageMemory2 = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkBindImageMemoryInfo*, VkResult>)loader.GetDeviceProcAddr(device, "vkBindImageMemory2");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkBindBufferMemory2(VkDevice device, uint bindInfoCount, VkBindBufferMemoryInfo* pBindInfos)

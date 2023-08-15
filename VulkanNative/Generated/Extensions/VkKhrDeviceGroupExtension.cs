@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -11,6 +12,17 @@ public unsafe class VkKhrDeviceGroupExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkSurfaceKHR, VkDeviceGroupPresentModeFlagsKHR*, VkResult> _vkGetDeviceGroupSurfacePresentModesKHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, uint*, VkRect2D*, VkResult> _vkGetPhysicalDevicePresentRectanglesKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkAcquireNextImageInfoKHR*, uint*, VkResult> _vkAcquireNextImage2KHR;
+
+    public VkKhrDeviceGroupExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkGetDeviceGroupPeerMemoryFeatures = (delegate* unmanaged[Cdecl]<VkDevice, uint, uint, uint, VkPeerMemoryFeatureFlags*, void>)loader.GetDeviceProcAddr(device, "vkGetDeviceGroupPeerMemoryFeatures");
+        _vkCmdSetDeviceMask = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDeviceMask");
+        _vkCmdDispatchBase = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, uint, uint, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdDispatchBase");
+        _vkGetDeviceGroupPresentCapabilitiesKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkDeviceGroupPresentCapabilitiesKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetDeviceGroupPresentCapabilitiesKHR");
+        _vkGetDeviceGroupSurfacePresentModesKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkSurfaceKHR, VkDeviceGroupPresentModeFlagsKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetDeviceGroupSurfacePresentModesKHR");
+        _vkGetPhysicalDevicePresentRectanglesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, uint*, VkRect2D*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDevicePresentRectanglesKHR");
+        _vkAcquireNextImage2KHR = (delegate* unmanaged[Cdecl]<VkDevice, VkAcquireNextImageInfoKHR*, uint*, VkResult>)loader.GetDeviceProcAddr(device, "vkAcquireNextImage2KHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkGetDeviceGroupPeerMemoryFeatures(VkDevice device, uint heapIndex, uint localDeviceIndex, uint remoteDeviceIndex, VkPeerMemoryFeatureFlags* pPeerMemoryFeatures)

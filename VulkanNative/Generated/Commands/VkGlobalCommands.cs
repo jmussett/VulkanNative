@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -8,6 +9,14 @@ public unsafe class VkGlobalCommands
     private delegate* unmanaged[Cdecl]<char*, uint*, VkExtensionProperties*, VkResult> _vkEnumerateInstanceExtensionProperties;
     private delegate* unmanaged[Cdecl]<uint*, VkLayerProperties*, VkResult> _vkEnumerateInstanceLayerProperties;
     private delegate* unmanaged[Cdecl]<uint*, VkResult> _vkEnumerateInstanceVersion;
+
+    public VkGlobalCommands(IVulkanLoader loader)
+    {
+        _vkCreateInstance = (delegate* unmanaged[Cdecl]<VkInstanceCreateInfo*, VkAllocationCallbacks*, VkInstance*, VkResult>)loader.GetProcAddr("vkCreateInstance");
+        _vkEnumerateInstanceExtensionProperties = (delegate* unmanaged[Cdecl]<char*, uint*, VkExtensionProperties*, VkResult>)loader.GetProcAddr("vkEnumerateInstanceExtensionProperties");
+        _vkEnumerateInstanceLayerProperties = (delegate* unmanaged[Cdecl]<uint*, VkLayerProperties*, VkResult>)loader.GetProcAddr("vkEnumerateInstanceLayerProperties");
+        _vkEnumerateInstanceVersion = (delegate* unmanaged[Cdecl]<uint*, VkResult>)loader.GetProcAddr("vkEnumerateInstanceVersion");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateInstance(VkInstanceCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkInstance* pInstance)

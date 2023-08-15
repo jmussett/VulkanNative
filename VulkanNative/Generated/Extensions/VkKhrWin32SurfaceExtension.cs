@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -6,6 +7,12 @@ public unsafe class VkKhrWin32SurfaceExtension
 {
     private delegate* unmanaged[Cdecl]<VkInstance, VkWin32SurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> _vkCreateWin32SurfaceKHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, VkBool32> _vkGetPhysicalDeviceWin32PresentationSupportKHR;
+
+    public VkKhrWin32SurfaceExtension(VkInstance instance, IVulkanLoader loader)
+    {
+        _vkCreateWin32SurfaceKHR = (delegate* unmanaged[Cdecl]<VkInstance, VkWin32SurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateWin32SurfaceKHR");
+        _vkGetPhysicalDeviceWin32PresentationSupportKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, VkBool32>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceWin32PresentationSupportKHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateWin32SurfaceKHR(VkInstance instance, VkWin32SurfaceCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface)

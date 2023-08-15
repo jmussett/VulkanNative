@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -8,6 +9,14 @@ public unsafe class VkExtValidationCacheExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkValidationCacheEXT, VkAllocationCallbacks*, void> _vkDestroyValidationCacheEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkValidationCacheEXT, uint, VkValidationCacheEXT*, VkResult> _vkMergeValidationCachesEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkValidationCacheEXT, nint*, void*, VkResult> _vkGetValidationCacheDataEXT;
+
+    public VkExtValidationCacheExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCreateValidationCacheEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkValidationCacheCreateInfoEXT*, VkAllocationCallbacks*, VkValidationCacheEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateValidationCacheEXT");
+        _vkDestroyValidationCacheEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkValidationCacheEXT, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyValidationCacheEXT");
+        _vkMergeValidationCachesEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkValidationCacheEXT, uint, VkValidationCacheEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkMergeValidationCachesEXT");
+        _vkGetValidationCacheDataEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkValidationCacheEXT, nint*, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetValidationCacheDataEXT");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateValidationCacheEXT(VkDevice device, VkValidationCacheCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkValidationCacheEXT* pValidationCache)

@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -12,6 +13,18 @@ public unsafe class VkKhrSynchronization2Extension
     private delegate* unmanaged[Cdecl]<VkQueue, uint, VkSubmitInfo2*, VkFence, VkResult> _vkQueueSubmit2;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineStageFlags2, VkBuffer, VkDeviceSize, uint, void> _vkCmdWriteBufferMarker2AMD;
     private delegate* unmanaged[Cdecl]<VkQueue, uint*, VkCheckpointData2NV*, void> _vkGetQueueCheckpointData2NV;
+
+    public VkKhrSynchronization2Extension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCmdSetEvent2 = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkEvent, VkDependencyInfo*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetEvent2");
+        _vkCmdResetEvent2 = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkEvent, VkPipelineStageFlags2, void>)loader.GetDeviceProcAddr(device, "vkCmdResetEvent2");
+        _vkCmdWaitEvents2 = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkEvent*, VkDependencyInfo*, void>)loader.GetDeviceProcAddr(device, "vkCmdWaitEvents2");
+        _vkCmdPipelineBarrier2 = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDependencyInfo*, void>)loader.GetDeviceProcAddr(device, "vkCmdPipelineBarrier2");
+        _vkCmdWriteTimestamp2 = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineStageFlags2, VkQueryPool, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdWriteTimestamp2");
+        _vkQueueSubmit2 = (delegate* unmanaged[Cdecl]<VkQueue, uint, VkSubmitInfo2*, VkFence, VkResult>)loader.GetDeviceProcAddr(device, "vkQueueSubmit2");
+        _vkCmdWriteBufferMarker2AMD = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineStageFlags2, VkBuffer, VkDeviceSize, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdWriteBufferMarker2AMD");
+        _vkGetQueueCheckpointData2NV = (delegate* unmanaged[Cdecl]<VkQueue, uint*, VkCheckpointData2NV*, void>)loader.GetDeviceProcAddr(device, "vkGetQueueCheckpointData2NV");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkCmdSetEvent2(VkCommandBuffer commandBuffer, VkEvent @event, VkDependencyInfo* pDependencyInfo)

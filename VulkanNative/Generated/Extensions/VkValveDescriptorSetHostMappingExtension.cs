@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -6,6 +7,12 @@ public unsafe class VkValveDescriptorSetHostMappingExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetBindingReferenceVALVE*, VkDescriptorSetLayoutHostMappingInfoVALVE*, void> _vkGetDescriptorSetLayoutHostMappingInfoVALVE;
     private delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSet, void**, void> _vkGetDescriptorSetHostMappingVALVE;
+
+    public VkValveDescriptorSetHostMappingExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkGetDescriptorSetLayoutHostMappingInfoVALVE = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetBindingReferenceVALVE*, VkDescriptorSetLayoutHostMappingInfoVALVE*, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorSetLayoutHostMappingInfoVALVE");
+        _vkGetDescriptorSetHostMappingVALVE = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSet, void**, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorSetHostMappingVALVE");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkGetDescriptorSetLayoutHostMappingInfoVALVE(VkDevice device, VkDescriptorSetBindingReferenceVALVE* pBindingReference, VkDescriptorSetLayoutHostMappingInfoVALVE* pHostMapping)

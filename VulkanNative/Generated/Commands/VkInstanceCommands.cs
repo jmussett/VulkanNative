@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -28,6 +29,34 @@ public unsafe class VkInstanceCommands
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalFenceInfo*, VkExternalFenceProperties*, void> _vkGetPhysicalDeviceExternalFenceProperties;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalSemaphoreInfo*, VkExternalSemaphoreProperties*, void> _vkGetPhysicalDeviceExternalSemaphoreProperties;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkPhysicalDeviceToolProperties*, VkResult> _vkGetPhysicalDeviceToolProperties;
+
+    public VkInstanceCommands(VkInstance instance, IVulkanLoader loader)
+    {
+        _vkDestroyInstance = (delegate* unmanaged[Cdecl]<VkInstance, VkAllocationCallbacks*, void>)loader.GetInstanceProcAddr(instance, "vkDestroyInstance");
+        _vkEnumeratePhysicalDevices = (delegate* unmanaged[Cdecl]<VkInstance, uint*, VkPhysicalDevice*, VkResult>)loader.GetInstanceProcAddr(instance, "vkEnumeratePhysicalDevices");
+        _vkGetPhysicalDeviceFeatures = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceFeatures*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceFeatures");
+        _vkGetPhysicalDeviceFormatProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkFormat, VkFormatProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceFormatProperties");
+        _vkGetPhysicalDeviceImageFormatProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkFormat, VkImageType, VkImageTiling, VkImageUsageFlags, VkImageCreateFlags, VkImageFormatProperties*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceImageFormatProperties");
+        _vkGetPhysicalDeviceProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceProperties");
+        _vkGetPhysicalDeviceQueueFamilyProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkQueueFamilyProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyProperties");
+        _vkGetPhysicalDeviceMemoryProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceMemoryProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceMemoryProperties");
+        _vkCreateDevice = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDeviceCreateInfo*, VkAllocationCallbacks*, VkDevice*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateDevice");
+        _vkEnumerateDeviceExtensionProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, char*, uint*, VkExtensionProperties*, VkResult>)loader.GetInstanceProcAddr(instance, "vkEnumerateDeviceExtensionProperties");
+        _vkEnumerateDeviceLayerProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkLayerProperties*, VkResult>)loader.GetInstanceProcAddr(instance, "vkEnumerateDeviceLayerProperties");
+        _vkGetPhysicalDeviceSparseImageFormatProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkFormat, VkImageType, VkSampleCountFlags, VkImageUsageFlags, VkImageTiling, uint*, VkSparseImageFormatProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceSparseImageFormatProperties");
+        _vkEnumeratePhysicalDeviceGroups = (delegate* unmanaged[Cdecl]<VkInstance, uint*, VkPhysicalDeviceGroupProperties*, VkResult>)loader.GetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceGroups");
+        _vkGetPhysicalDeviceFeatures2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceFeatures2*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceFeatures2");
+        _vkGetPhysicalDeviceProperties2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceProperties2*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceProperties2");
+        _vkGetPhysicalDeviceFormatProperties2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkFormat, VkFormatProperties2*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceFormatProperties2");
+        _vkGetPhysicalDeviceImageFormatProperties2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceImageFormatInfo2*, VkImageFormatProperties2*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceImageFormatProperties2");
+        _vkGetPhysicalDeviceQueueFamilyProperties2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkQueueFamilyProperties2*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyProperties2");
+        _vkGetPhysicalDeviceMemoryProperties2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceMemoryProperties2*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceMemoryProperties2");
+        _vkGetPhysicalDeviceSparseImageFormatProperties2 = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceSparseImageFormatInfo2*, uint*, VkSparseImageFormatProperties2*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceSparseImageFormatProperties2");
+        _vkGetPhysicalDeviceExternalBufferProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalBufferInfo*, VkExternalBufferProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalBufferProperties");
+        _vkGetPhysicalDeviceExternalFenceProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalFenceInfo*, VkExternalFenceProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalFenceProperties");
+        _vkGetPhysicalDeviceExternalSemaphoreProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalSemaphoreInfo*, VkExternalSemaphoreProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalSemaphoreProperties");
+        _vkGetPhysicalDeviceToolProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkPhysicalDeviceToolProperties*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceToolProperties");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkDestroyInstance(VkInstance instance, VkAllocationCallbacks* pAllocator)

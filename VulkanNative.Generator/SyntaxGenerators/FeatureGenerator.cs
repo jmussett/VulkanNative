@@ -95,9 +95,9 @@ internal class FeatureGenerator
             }
         }
 
-        _commandGroupGenerator.GenerateCommandGroup("VkGlobalCommands", "Commands", globalCommands);
-        _commandGroupGenerator.GenerateCommandGroup("VkInstanceCommands", "Commands", instanceCommands);
-        _commandGroupGenerator.GenerateCommandGroup("VkDeviceCommands", "Commands", deviceCommands);
+        _commandGroupGenerator.GenerateCommandGroup("VkGlobalCommands", "Commands", CommandGroupType.Global, globalCommands);
+        _commandGroupGenerator.GenerateCommandGroup("VkInstanceCommands", "Commands", CommandGroupType.Instance, instanceCommands);
+        _commandGroupGenerator.GenerateCommandGroup("VkDeviceCommands", "Commands", CommandGroupType.Device, deviceCommands);
     }
 
     private bool IsHandleInheritsFrom(IReadOnlyDictionary<string, VkType> handleLookup, string handleType, string parentType)

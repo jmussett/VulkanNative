@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -15,6 +16,21 @@ public unsafe class VkExtDescriptorBufferExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkImageViewCaptureDescriptorDataInfoEXT*, void*, VkResult> _vkGetImageViewOpaqueCaptureDescriptorDataEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkSamplerCaptureDescriptorDataInfoEXT*, void*, VkResult> _vkGetSamplerOpaqueCaptureDescriptorDataEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureCaptureDescriptorDataInfoEXT*, void*, VkResult> _vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT;
+
+    public VkExtDescriptorBufferExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkGetDescriptorSetLayoutSizeEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetLayout, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorSetLayoutSizeEXT");
+        _vkGetDescriptorSetLayoutBindingOffsetEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetLayout, uint, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorSetLayoutBindingOffsetEXT");
+        _vkGetDescriptorEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorGetInfoEXT*, nint, void*, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorEXT");
+        _vkCmdBindDescriptorBuffersEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkDescriptorBufferBindingInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdBindDescriptorBuffersEXT");
+        _vkCmdSetDescriptorBufferOffsetsEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineBindPoint, VkPipelineLayout, uint, uint, uint*, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDescriptorBufferOffsetsEXT");
+        _vkCmdBindDescriptorBufferEmbeddedSamplersEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineBindPoint, VkPipelineLayout, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdBindDescriptorBufferEmbeddedSamplersEXT");
+        _vkGetBufferOpaqueCaptureDescriptorDataEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferCaptureDescriptorDataInfoEXT*, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetBufferOpaqueCaptureDescriptorDataEXT");
+        _vkGetImageOpaqueCaptureDescriptorDataEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkImageCaptureDescriptorDataInfoEXT*, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetImageOpaqueCaptureDescriptorDataEXT");
+        _vkGetImageViewOpaqueCaptureDescriptorDataEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkImageViewCaptureDescriptorDataInfoEXT*, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetImageViewOpaqueCaptureDescriptorDataEXT");
+        _vkGetSamplerOpaqueCaptureDescriptorDataEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkSamplerCaptureDescriptorDataInfoEXT*, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetSamplerOpaqueCaptureDescriptorDataEXT");
+        _vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureCaptureDescriptorDataInfoEXT*, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkGetDescriptorSetLayoutSizeEXT(VkDevice device, VkDescriptorSetLayout layout, VkDeviceSize* pLayoutSizeInBytes)

@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -9,6 +10,15 @@ public unsafe class VkNvxBinaryImportExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkCuModuleNVX, VkAllocationCallbacks*, void> _vkDestroyCuModuleNVX;
     private delegate* unmanaged[Cdecl]<VkDevice, VkCuFunctionNVX, VkAllocationCallbacks*, void> _vkDestroyCuFunctionNVX;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCuLaunchInfoNVX*, void> _vkCmdCuLaunchKernelNVX;
+
+    public VkNvxBinaryImportExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCreateCuModuleNVX = (delegate* unmanaged[Cdecl]<VkDevice, VkCuModuleCreateInfoNVX*, VkAllocationCallbacks*, VkCuModuleNVX*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateCuModuleNVX");
+        _vkCreateCuFunctionNVX = (delegate* unmanaged[Cdecl]<VkDevice, VkCuFunctionCreateInfoNVX*, VkAllocationCallbacks*, VkCuFunctionNVX*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateCuFunctionNVX");
+        _vkDestroyCuModuleNVX = (delegate* unmanaged[Cdecl]<VkDevice, VkCuModuleNVX, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyCuModuleNVX");
+        _vkDestroyCuFunctionNVX = (delegate* unmanaged[Cdecl]<VkDevice, VkCuFunctionNVX, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyCuFunctionNVX");
+        _vkCmdCuLaunchKernelNVX = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCuLaunchInfoNVX*, void>)loader.GetDeviceProcAddr(device, "vkCmdCuLaunchKernelNVX");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateCuModuleNVX(VkDevice device, VkCuModuleCreateInfoNVX* pCreateInfo, VkAllocationCallbacks* pAllocator, VkCuModuleNVX* pModule)

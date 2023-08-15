@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -13,6 +14,19 @@ public unsafe class VkKhrSwapchainExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkSurfaceKHR, VkDeviceGroupPresentModeFlagsKHR*, VkResult> _vkGetDeviceGroupSurfacePresentModesKHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, uint*, VkRect2D*, VkResult> _vkGetPhysicalDevicePresentRectanglesKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkAcquireNextImageInfoKHR*, uint*, VkResult> _vkAcquireNextImage2KHR;
+
+    public VkKhrSwapchainExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCreateSwapchainKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainCreateInfoKHR*, VkAllocationCallbacks*, VkSwapchainKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateSwapchainKHR");
+        _vkDestroySwapchainKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroySwapchainKHR");
+        _vkGetSwapchainImagesKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, uint*, VkImage*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetSwapchainImagesKHR");
+        _vkAcquireNextImageKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, ulong, VkSemaphore, VkFence, uint*, VkResult>)loader.GetDeviceProcAddr(device, "vkAcquireNextImageKHR");
+        _vkQueuePresentKHR = (delegate* unmanaged[Cdecl]<VkQueue, VkPresentInfoKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkQueuePresentKHR");
+        _vkGetDeviceGroupPresentCapabilitiesKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkDeviceGroupPresentCapabilitiesKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetDeviceGroupPresentCapabilitiesKHR");
+        _vkGetDeviceGroupSurfacePresentModesKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkSurfaceKHR, VkDeviceGroupPresentModeFlagsKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetDeviceGroupSurfacePresentModesKHR");
+        _vkGetPhysicalDevicePresentRectanglesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, uint*, VkRect2D*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDevicePresentRectanglesKHR");
+        _vkAcquireNextImage2KHR = (delegate* unmanaged[Cdecl]<VkDevice, VkAcquireNextImageInfoKHR*, uint*, VkResult>)loader.GetDeviceProcAddr(device, "vkAcquireNextImage2KHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateSwapchainKHR(VkDevice device, VkSwapchainCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSwapchainKHR* pSwapchain)

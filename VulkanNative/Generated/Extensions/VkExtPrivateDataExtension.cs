@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -8,6 +9,14 @@ public unsafe class VkExtPrivateDataExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkPrivateDataSlot, VkAllocationCallbacks*, void> _vkDestroyPrivateDataSlot;
     private delegate* unmanaged[Cdecl]<VkDevice, VkObjectType, ulong, VkPrivateDataSlot, ulong, VkResult> _vkSetPrivateData;
     private delegate* unmanaged[Cdecl]<VkDevice, VkObjectType, ulong, VkPrivateDataSlot, ulong*, void> _vkGetPrivateData;
+
+    public VkExtPrivateDataExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCreatePrivateDataSlot = (delegate* unmanaged[Cdecl]<VkDevice, VkPrivateDataSlotCreateInfo*, VkAllocationCallbacks*, VkPrivateDataSlot*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreatePrivateDataSlot");
+        _vkDestroyPrivateDataSlot = (delegate* unmanaged[Cdecl]<VkDevice, VkPrivateDataSlot, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyPrivateDataSlot");
+        _vkSetPrivateData = (delegate* unmanaged[Cdecl]<VkDevice, VkObjectType, ulong, VkPrivateDataSlot, ulong, VkResult>)loader.GetDeviceProcAddr(device, "vkSetPrivateData");
+        _vkGetPrivateData = (delegate* unmanaged[Cdecl]<VkDevice, VkObjectType, ulong, VkPrivateDataSlot, ulong*, void>)loader.GetDeviceProcAddr(device, "vkGetPrivateData");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreatePrivateDataSlot(VkDevice device, VkPrivateDataSlotCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkPrivateDataSlot* pPrivateDataSlot)

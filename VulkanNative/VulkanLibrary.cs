@@ -15,23 +15,25 @@ internal class VulkanLibrary
         _vulkanLoader = vulkanLoader;
     }
 
-    public VkGlobalCommands LoadGlobalCommands()
-    {
-        // TODO: internal constructor with IVulkanLoader
-        return new VkGlobalCommands();
-    }
+    // TODO:
 
-    public VkInstanceCommands LoadInstanceCommands(VkInstance instance)
-    {
-        // TODO: internal constructor with VkInstance and IVulkanLoader
-        return new VkInstanceCommands();
-    }
+    //public VkGlobalCommands LoadGlobalCommands()
+    //{
+    //    // TODO: initialize with IVulkanLoader
+    //    return new VkGlobalCommands();
+    //}
 
-    public VkDeviceCommands LoadDeviceCommands(VkDevice device)
-    {
-        // TODO: internal constructor with VkDevice and IVulkanLoader
-        return new VkDeviceCommands();
-    }
+    //public VkInstanceCommands LoadInstanceCommands(VkInstance instance)
+    //{
+    //    // TODO: initialize with VkInstance and IVulkanLoader
+    //    return new VkInstanceCommands();
+    //}
+
+    //public VkDeviceCommands LoadDeviceCommands(VkDevice device)
+    //{
+    //    // TODO: initialize with VkDevice and IVulkanLoader
+    //    return new VkDeviceCommands();
+    //}
 
     public T LoadExtension<T>(VkDevice device) where T : IDeviceExtension, new()
     {

@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -6,6 +7,12 @@ public unsafe class VkAndroidExternalMemoryAndroidHardwareBufferExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, AHardwareBuffer*, VkAndroidHardwareBufferPropertiesANDROID*, VkResult> _vkGetAndroidHardwareBufferPropertiesANDROID;
     private delegate* unmanaged[Cdecl]<VkDevice, VkMemoryGetAndroidHardwareBufferInfoANDROID*, AHardwareBuffer**, VkResult> _vkGetMemoryAndroidHardwareBufferANDROID;
+
+    public VkAndroidExternalMemoryAndroidHardwareBufferExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkGetAndroidHardwareBufferPropertiesANDROID = (delegate* unmanaged[Cdecl]<VkDevice, AHardwareBuffer*, VkAndroidHardwareBufferPropertiesANDROID*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetAndroidHardwareBufferPropertiesANDROID");
+        _vkGetMemoryAndroidHardwareBufferANDROID = (delegate* unmanaged[Cdecl]<VkDevice, VkMemoryGetAndroidHardwareBufferInfoANDROID*, AHardwareBuffer**, VkResult>)loader.GetDeviceProcAddr(device, "vkGetMemoryAndroidHardwareBufferANDROID");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkGetAndroidHardwareBufferPropertiesANDROID(VkDevice device, AHardwareBuffer* buffer, VkAndroidHardwareBufferPropertiesANDROID* pProperties)

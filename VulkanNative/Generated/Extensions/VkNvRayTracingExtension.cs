@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -16,6 +17,22 @@ public unsafe class VkNvRayTracingExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureNV, nint, void*, VkResult> _vkGetAccelerationStructureHandleNV;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkAccelerationStructureNV*, VkQueryType, VkQueryPool, uint, void> _vkCmdWriteAccelerationStructuresPropertiesNV;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, uint, VkResult> _vkCompileDeferredNV;
+
+    public VkNvRayTracingExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCreateAccelerationStructureNV = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureCreateInfoNV*, VkAllocationCallbacks*, VkAccelerationStructureNV*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateAccelerationStructureNV");
+        _vkDestroyAccelerationStructureNV = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureNV, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyAccelerationStructureNV");
+        _vkGetAccelerationStructureMemoryRequirementsNV = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureMemoryRequirementsInfoNV*, VkMemoryRequirements2*, void>)loader.GetDeviceProcAddr(device, "vkGetAccelerationStructureMemoryRequirementsNV");
+        _vkBindAccelerationStructureMemoryNV = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkBindAccelerationStructureMemoryInfoNV*, VkResult>)loader.GetDeviceProcAddr(device, "vkBindAccelerationStructureMemoryNV");
+        _vkCmdBuildAccelerationStructureNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkAccelerationStructureInfoNV*, VkBuffer, VkDeviceSize, VkBool32, VkAccelerationStructureNV, VkAccelerationStructureNV, VkBuffer, VkDeviceSize, void>)loader.GetDeviceProcAddr(device, "vkCmdBuildAccelerationStructureNV");
+        _vkCmdCopyAccelerationStructureNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkAccelerationStructureNV, VkAccelerationStructureNV, VkCopyAccelerationStructureModeKHR, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyAccelerationStructureNV");
+        _vkCmdTraceRaysNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, VkBuffer, VkDeviceSize, VkDeviceSize, VkBuffer, VkDeviceSize, VkDeviceSize, VkBuffer, VkDeviceSize, VkDeviceSize, uint, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdTraceRaysNV");
+        _vkCreateRayTracingPipelinesNV = (delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, uint, VkRayTracingPipelineCreateInfoNV*, VkAllocationCallbacks*, VkPipeline*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateRayTracingPipelinesNV");
+        _vkGetRayTracingShaderGroupHandlesKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, uint, uint, nint, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetRayTracingShaderGroupHandlesKHR");
+        _vkGetAccelerationStructureHandleNV = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureNV, nint, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetAccelerationStructureHandleNV");
+        _vkCmdWriteAccelerationStructuresPropertiesNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkAccelerationStructureNV*, VkQueryType, VkQueryPool, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdWriteAccelerationStructuresPropertiesNV");
+        _vkCompileDeferredNV = (delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, uint, VkResult>)loader.GetDeviceProcAddr(device, "vkCompileDeferredNV");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateAccelerationStructureNV(VkDevice device, VkAccelerationStructureCreateInfoNV* pCreateInfo, VkAllocationCallbacks* pAllocator, VkAccelerationStructureNV* pAccelerationStructure)

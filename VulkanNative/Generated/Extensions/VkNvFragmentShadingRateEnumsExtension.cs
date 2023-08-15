@@ -1,10 +1,16 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
 public unsafe class VkNvFragmentShadingRateEnumsExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkFragmentShadingRateNV, VkFragmentShadingRateCombinerOpKHR*, void> _vkCmdSetFragmentShadingRateEnumNV;
+
+    public VkNvFragmentShadingRateEnumsExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCmdSetFragmentShadingRateEnumNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkFragmentShadingRateNV, VkFragmentShadingRateCombinerOpKHR*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetFragmentShadingRateEnumNV");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkCmdSetFragmentShadingRateEnumNV(VkCommandBuffer commandBuffer, VkFragmentShadingRateNV shadingRate, VkFragmentShadingRateCombinerOpKHR* combinerOps)

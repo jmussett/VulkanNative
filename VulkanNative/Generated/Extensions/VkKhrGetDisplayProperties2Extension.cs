@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -8,6 +9,14 @@ public unsafe class VkKhrGetDisplayProperties2Extension
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkDisplayPlaneProperties2KHR*, VkResult> _vkGetPhysicalDeviceDisplayPlaneProperties2KHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayKHR, uint*, VkDisplayModeProperties2KHR*, VkResult> _vkGetDisplayModeProperties2KHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayPlaneInfo2KHR*, VkDisplayPlaneCapabilities2KHR*, VkResult> _vkGetDisplayPlaneCapabilities2KHR;
+
+    public VkKhrGetDisplayProperties2Extension(VkInstance instance, IVulkanLoader loader)
+    {
+        _vkGetPhysicalDeviceDisplayProperties2KHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkDisplayProperties2KHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceDisplayProperties2KHR");
+        _vkGetPhysicalDeviceDisplayPlaneProperties2KHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkDisplayPlaneProperties2KHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceDisplayPlaneProperties2KHR");
+        _vkGetDisplayModeProperties2KHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayKHR, uint*, VkDisplayModeProperties2KHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetDisplayModeProperties2KHR");
+        _vkGetDisplayPlaneCapabilities2KHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayPlaneInfo2KHR*, VkDisplayPlaneCapabilities2KHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetDisplayPlaneCapabilities2KHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkGetPhysicalDeviceDisplayProperties2KHR(VkPhysicalDevice physicalDevice, uint* pPropertyCount, VkDisplayProperties2KHR* pProperties)

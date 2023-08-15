@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -10,6 +11,16 @@ public unsafe class VkExtTransformFeedbackExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkQueryPool, uint, VkQueryControlFlags, uint, void> _vkCmdBeginQueryIndexedEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkQueryPool, uint, uint, void> _vkCmdEndQueryIndexedEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkBuffer, VkDeviceSize, uint, uint, void> _vkCmdDrawIndirectByteCountEXT;
+
+    public VkExtTransformFeedbackExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCmdBindTransformFeedbackBuffersEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkBuffer*, VkDeviceSize*, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkCmdBindTransformFeedbackBuffersEXT");
+        _vkCmdBeginTransformFeedbackEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkBuffer*, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkCmdBeginTransformFeedbackEXT");
+        _vkCmdEndTransformFeedbackEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkBuffer*, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkCmdEndTransformFeedbackEXT");
+        _vkCmdBeginQueryIndexedEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkQueryPool, uint, VkQueryControlFlags, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdBeginQueryIndexedEXT");
+        _vkCmdEndQueryIndexedEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkQueryPool, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdEndQueryIndexedEXT");
+        _vkCmdDrawIndirectByteCountEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkBuffer, VkDeviceSize, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdDrawIndirectByteCountEXT");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkCmdBindTransformFeedbackBuffersEXT(VkCommandBuffer commandBuffer, uint firstBinding, uint bindingCount, VkBuffer* pBuffers, VkDeviceSize* pOffsets, VkDeviceSize* pSizes)

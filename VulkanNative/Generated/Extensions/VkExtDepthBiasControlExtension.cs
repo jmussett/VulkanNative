@@ -1,10 +1,16 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
 public unsafe class VkExtDepthBiasControlExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDepthBiasInfoEXT*, void> _vkCmdSetDepthBias2EXT;
+
+    public VkExtDepthBiasControlExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCmdSetDepthBias2EXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDepthBiasInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthBias2EXT");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkCmdSetDepthBias2EXT(VkCommandBuffer commandBuffer, VkDepthBiasInfoEXT* pDepthBiasInfo)

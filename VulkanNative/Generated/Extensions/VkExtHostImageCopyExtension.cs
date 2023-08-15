@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -9,6 +10,15 @@ public unsafe class VkExtHostImageCopyExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkCopyImageToImageInfoEXT*, VkResult> _vkCopyImageToImageEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, uint, VkHostImageLayoutTransitionInfoEXT*, VkResult> _vkTransitionImageLayoutEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkImage, VkImageSubresource2KHR*, VkSubresourceLayout2KHR*, void> _vkGetImageSubresourceLayout2KHR;
+
+    public VkExtHostImageCopyExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCopyMemoryToImageEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkCopyMemoryToImageInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyMemoryToImageEXT");
+        _vkCopyImageToMemoryEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkCopyImageToMemoryInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyImageToMemoryEXT");
+        _vkCopyImageToImageEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkCopyImageToImageInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyImageToImageEXT");
+        _vkTransitionImageLayoutEXT = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkHostImageLayoutTransitionInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkTransitionImageLayoutEXT");
+        _vkGetImageSubresourceLayout2KHR = (delegate* unmanaged[Cdecl]<VkDevice, VkImage, VkImageSubresource2KHR*, VkSubresourceLayout2KHR*, void>)loader.GetDeviceProcAddr(device, "vkGetImageSubresourceLayout2KHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCopyMemoryToImageEXT(VkDevice device, VkCopyMemoryToImageInfoEXT* pCopyMemoryToImageInfo)

@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -8,6 +9,14 @@ public unsafe class VkKhrDescriptorUpdateTemplateExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorUpdateTemplate, VkAllocationCallbacks*, void> _vkDestroyDescriptorUpdateTemplate;
     private delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSet, VkDescriptorUpdateTemplate, void*, void> _vkUpdateDescriptorSetWithTemplate;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDescriptorUpdateTemplate, VkPipelineLayout, uint, void*, void> _vkCmdPushDescriptorSetWithTemplateKHR;
+
+    public VkKhrDescriptorUpdateTemplateExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCreateDescriptorUpdateTemplate = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorUpdateTemplateCreateInfo*, VkAllocationCallbacks*, VkDescriptorUpdateTemplate*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateDescriptorUpdateTemplate");
+        _vkDestroyDescriptorUpdateTemplate = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorUpdateTemplate, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyDescriptorUpdateTemplate");
+        _vkUpdateDescriptorSetWithTemplate = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSet, VkDescriptorUpdateTemplate, void*, void>)loader.GetDeviceProcAddr(device, "vkUpdateDescriptorSetWithTemplate");
+        _vkCmdPushDescriptorSetWithTemplateKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDescriptorUpdateTemplate, VkPipelineLayout, uint, void*, void>)loader.GetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplateKHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateDescriptorUpdateTemplate(VkDevice device, VkDescriptorUpdateTemplateCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkDescriptorUpdateTemplate* pDescriptorUpdateTemplate)

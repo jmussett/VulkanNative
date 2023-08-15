@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -9,6 +10,15 @@ public unsafe class VkNvOpticalFlowExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkOpticalFlowSessionNV, VkAllocationCallbacks*, void> _vkDestroyOpticalFlowSessionNV;
     private delegate* unmanaged[Cdecl]<VkDevice, VkOpticalFlowSessionNV, VkOpticalFlowSessionBindingPointNV, VkImageView, VkImageLayout, VkResult> _vkBindOpticalFlowSessionImageNV;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkOpticalFlowSessionNV, VkOpticalFlowExecuteInfoNV*, void> _vkCmdOpticalFlowExecuteNV;
+
+    public VkNvOpticalFlowExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkGetPhysicalDeviceOpticalFlowImageFormatsNV = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkOpticalFlowImageFormatInfoNV*, uint*, VkOpticalFlowImageFormatPropertiesNV*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceOpticalFlowImageFormatsNV");
+        _vkCreateOpticalFlowSessionNV = (delegate* unmanaged[Cdecl]<VkDevice, VkOpticalFlowSessionCreateInfoNV*, VkAllocationCallbacks*, VkOpticalFlowSessionNV*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateOpticalFlowSessionNV");
+        _vkDestroyOpticalFlowSessionNV = (delegate* unmanaged[Cdecl]<VkDevice, VkOpticalFlowSessionNV, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyOpticalFlowSessionNV");
+        _vkBindOpticalFlowSessionImageNV = (delegate* unmanaged[Cdecl]<VkDevice, VkOpticalFlowSessionNV, VkOpticalFlowSessionBindingPointNV, VkImageView, VkImageLayout, VkResult>)loader.GetDeviceProcAddr(device, "vkBindOpticalFlowSessionImageNV");
+        _vkCmdOpticalFlowExecuteNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkOpticalFlowSessionNV, VkOpticalFlowExecuteInfoNV*, void>)loader.GetDeviceProcAddr(device, "vkCmdOpticalFlowExecuteNV");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkGetPhysicalDeviceOpticalFlowImageFormatsNV(VkPhysicalDevice physicalDevice, VkOpticalFlowImageFormatInfoNV* pOpticalFlowImageFormatInfo, uint* pFormatCount, VkOpticalFlowImageFormatPropertiesNV* pImageFormatProperties)

@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -57,6 +58,63 @@ public unsafe class VkExtShaderObjectExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void> _vkCmdSetShadingRateImageEnableNV;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void> _vkCmdSetRepresentativeFragmentTestEnableNV;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCoverageReductionModeNV, void> _vkCmdSetCoverageReductionModeNV;
+
+    public VkExtShaderObjectExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCreateShadersEXT = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkShaderCreateInfoEXT*, VkAllocationCallbacks*, VkShaderEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateShadersEXT");
+        _vkDestroyShaderEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkShaderEXT, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyShaderEXT");
+        _vkGetShaderBinaryDataEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkShaderEXT, nint*, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetShaderBinaryDataEXT");
+        _vkCmdBindShadersEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkShaderStageFlags*, VkShaderEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdBindShadersEXT");
+        _vkCmdSetCullMode = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCullModeFlags, void>)loader.GetDeviceProcAddr(device, "vkCmdSetCullMode");
+        _vkCmdSetFrontFace = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkFrontFace, void>)loader.GetDeviceProcAddr(device, "vkCmdSetFrontFace");
+        _vkCmdSetPrimitiveTopology = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPrimitiveTopology, void>)loader.GetDeviceProcAddr(device, "vkCmdSetPrimitiveTopology");
+        _vkCmdSetViewportWithCount = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkViewport*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetViewportWithCount");
+        _vkCmdSetScissorWithCount = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkRect2D*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetScissorWithCount");
+        _vkCmdBindVertexBuffers2 = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkBuffer*, VkDeviceSize*, VkDeviceSize*, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkCmdBindVertexBuffers2");
+        _vkCmdSetDepthTestEnable = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthTestEnable");
+        _vkCmdSetDepthWriteEnable = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthWriteEnable");
+        _vkCmdSetDepthCompareOp = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCompareOp, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthCompareOp");
+        _vkCmdSetDepthBoundsTestEnable = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthBoundsTestEnable");
+        _vkCmdSetStencilTestEnable = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetStencilTestEnable");
+        _vkCmdSetStencilOp = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkStencilFaceFlags, VkStencilOp, VkStencilOp, VkStencilOp, VkCompareOp, void>)loader.GetDeviceProcAddr(device, "vkCmdSetStencilOp");
+        _vkCmdSetVertexInputEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkVertexInputBindingDescription2EXT*, uint, VkVertexInputAttributeDescription2EXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetVertexInputEXT");
+        _vkCmdSetPatchControlPointsEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdSetPatchControlPointsEXT");
+        _vkCmdSetRasterizerDiscardEnable = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetRasterizerDiscardEnable");
+        _vkCmdSetDepthBiasEnable = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthBiasEnable");
+        _vkCmdSetLogicOpEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkLogicOp, void>)loader.GetDeviceProcAddr(device, "vkCmdSetLogicOpEXT");
+        _vkCmdSetPrimitiveRestartEnable = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetPrimitiveRestartEnable");
+        _vkCmdSetTessellationDomainOriginEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkTessellationDomainOrigin, void>)loader.GetDeviceProcAddr(device, "vkCmdSetTessellationDomainOriginEXT");
+        _vkCmdSetDepthClampEnableEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthClampEnableEXT");
+        _vkCmdSetPolygonModeEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPolygonMode, void>)loader.GetDeviceProcAddr(device, "vkCmdSetPolygonModeEXT");
+        _vkCmdSetRasterizationSamplesEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkSampleCountFlags, void>)loader.GetDeviceProcAddr(device, "vkCmdSetRasterizationSamplesEXT");
+        _vkCmdSetSampleMaskEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkSampleCountFlags, VkSampleMask*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetSampleMaskEXT");
+        _vkCmdSetAlphaToCoverageEnableEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetAlphaToCoverageEnableEXT");
+        _vkCmdSetAlphaToOneEnableEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetAlphaToOneEnableEXT");
+        _vkCmdSetLogicOpEnableEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetLogicOpEnableEXT");
+        _vkCmdSetColorBlendEnableEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkBool32*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetColorBlendEnableEXT");
+        _vkCmdSetColorBlendEquationEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkColorBlendEquationEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetColorBlendEquationEXT");
+        _vkCmdSetColorWriteMaskEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkColorComponentFlags*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetColorWriteMaskEXT");
+        _vkCmdSetRasterizationStreamEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdSetRasterizationStreamEXT");
+        _vkCmdSetConservativeRasterizationModeEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkConservativeRasterizationModeEXT, void>)loader.GetDeviceProcAddr(device, "vkCmdSetConservativeRasterizationModeEXT");
+        _vkCmdSetExtraPrimitiveOverestimationSizeEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, float, void>)loader.GetDeviceProcAddr(device, "vkCmdSetExtraPrimitiveOverestimationSizeEXT");
+        _vkCmdSetDepthClipEnableEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthClipEnableEXT");
+        _vkCmdSetSampleLocationsEnableEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetSampleLocationsEnableEXT");
+        _vkCmdSetColorBlendAdvancedEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkColorBlendAdvancedEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetColorBlendAdvancedEXT");
+        _vkCmdSetProvokingVertexModeEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkProvokingVertexModeEXT, void>)loader.GetDeviceProcAddr(device, "vkCmdSetProvokingVertexModeEXT");
+        _vkCmdSetLineRasterizationModeEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkLineRasterizationModeEXT, void>)loader.GetDeviceProcAddr(device, "vkCmdSetLineRasterizationModeEXT");
+        _vkCmdSetLineStippleEnableEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetLineStippleEnableEXT");
+        _vkCmdSetDepthClipNegativeOneToOneEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthClipNegativeOneToOneEXT");
+        _vkCmdSetViewportWScalingEnableNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetViewportWScalingEnableNV");
+        _vkCmdSetViewportSwizzleNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkViewportSwizzleNV*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetViewportSwizzleNV");
+        _vkCmdSetCoverageToColorEnableNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetCoverageToColorEnableNV");
+        _vkCmdSetCoverageToColorLocationNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdSetCoverageToColorLocationNV");
+        _vkCmdSetCoverageModulationModeNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCoverageModulationModeNV, void>)loader.GetDeviceProcAddr(device, "vkCmdSetCoverageModulationModeNV");
+        _vkCmdSetCoverageModulationTableEnableNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetCoverageModulationTableEnableNV");
+        _vkCmdSetCoverageModulationTableNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, float*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetCoverageModulationTableNV");
+        _vkCmdSetShadingRateImageEnableNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetShadingRateImageEnableNV");
+        _vkCmdSetRepresentativeFragmentTestEnableNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetRepresentativeFragmentTestEnableNV");
+        _vkCmdSetCoverageReductionModeNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCoverageReductionModeNV, void>)loader.GetDeviceProcAddr(device, "vkCmdSetCoverageReductionModeNV");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkCreateShadersEXT(VkDevice device, uint createInfoCount, VkShaderCreateInfoEXT* pCreateInfos, VkAllocationCallbacks* pAllocator, VkShaderEXT* pShaders)

@@ -1,10 +1,16 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
 public unsafe class VkNvCoverageReductionModeExtension
 {
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkFramebufferMixedSamplesCombinationNV*, VkResult> _vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV;
+
+    public VkNvCoverageReductionModeExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkFramebufferMixedSamplesCombinationNV*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV(VkPhysicalDevice physicalDevice, uint* pCombinationCount, VkFramebufferMixedSamplesCombinationNV* pCombinations)

@@ -69,15 +69,20 @@ internal class ExtensionGenerator
                 extensionCommands.AddRange(requires.Commands.Select(x => x.Name));
             }
 
-            
-
             if (extensionCommands.Count > 0)
             {
                 extensionCommands = extensionCommands.Distinct().ToList();
 
                 var extensionClassName = $"{extension.Name.ToLowerInvariant().Pascalize()}Extension";
 
-                _commandGroupGenerator.GenerateCommandGroup(extensionClassName, "Extensions", extensionCommands);
+                var commandGroupType = extension.Type switch
+                {
+                    "instance" => CommandGroupType.Instance,
+                    "device" => CommandGroupType.Device,
+                    _ => throw new InvalidOperationException($"Unknown extension type '{extension.Type}'")
+                };
+
+                _commandGroupGenerator.GenerateCommandGroup(extensionClassName, "Extensions", commandGroupType, extensionCommands);
             }
         }
     }

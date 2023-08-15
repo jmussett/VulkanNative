@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -7,6 +8,13 @@ public unsafe class VkKhrGetMemoryRequirements2Extension
     private delegate* unmanaged[Cdecl]<VkDevice, VkImageMemoryRequirementsInfo2*, VkMemoryRequirements2*, void> _vkGetImageMemoryRequirements2;
     private delegate* unmanaged[Cdecl]<VkDevice, VkBufferMemoryRequirementsInfo2*, VkMemoryRequirements2*, void> _vkGetBufferMemoryRequirements2;
     private delegate* unmanaged[Cdecl]<VkDevice, VkImageSparseMemoryRequirementsInfo2*, uint*, VkSparseImageMemoryRequirements2*, void> _vkGetImageSparseMemoryRequirements2;
+
+    public VkKhrGetMemoryRequirements2Extension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkGetImageMemoryRequirements2 = (delegate* unmanaged[Cdecl]<VkDevice, VkImageMemoryRequirementsInfo2*, VkMemoryRequirements2*, void>)loader.GetDeviceProcAddr(device, "vkGetImageMemoryRequirements2");
+        _vkGetBufferMemoryRequirements2 = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferMemoryRequirementsInfo2*, VkMemoryRequirements2*, void>)loader.GetDeviceProcAddr(device, "vkGetBufferMemoryRequirements2");
+        _vkGetImageSparseMemoryRequirements2 = (delegate* unmanaged[Cdecl]<VkDevice, VkImageSparseMemoryRequirementsInfo2*, uint*, VkSparseImageMemoryRequirements2*, void>)loader.GetDeviceProcAddr(device, "vkGetImageSparseMemoryRequirements2");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkGetImageMemoryRequirements2(VkDevice device, VkImageMemoryRequirementsInfo2* pInfo, VkMemoryRequirements2* pMemoryRequirements)

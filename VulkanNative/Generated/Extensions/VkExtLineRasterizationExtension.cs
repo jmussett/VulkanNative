@@ -1,10 +1,16 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
 public unsafe class VkExtLineRasterizationExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, ushort, void> _vkCmdSetLineStippleEXT;
+
+    public VkExtLineRasterizationExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCmdSetLineStippleEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, ushort, void>)loader.GetDeviceProcAddr(device, "vkCmdSetLineStippleEXT");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkCmdSetLineStippleEXT(VkCommandBuffer commandBuffer, uint lineStippleFactor, ushort lineStipplePattern)

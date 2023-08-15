@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -9,6 +10,15 @@ public unsafe class VkKhrSurfaceExtension
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, VkSurfaceCapabilitiesKHR*, VkResult> _vkGetPhysicalDeviceSurfaceCapabilitiesKHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, uint*, VkSurfaceFormatKHR*, VkResult> _vkGetPhysicalDeviceSurfaceFormatsKHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, uint*, VkPresentModeKHR*, VkResult> _vkGetPhysicalDeviceSurfacePresentModesKHR;
+
+    public VkKhrSurfaceExtension(VkInstance instance, IVulkanLoader loader)
+    {
+        _vkDestroySurfaceKHR = (delegate* unmanaged[Cdecl]<VkInstance, VkSurfaceKHR, VkAllocationCallbacks*, void>)loader.GetInstanceProcAddr(instance, "vkDestroySurfaceKHR");
+        _vkGetPhysicalDeviceSurfaceSupportKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, VkSurfaceKHR, VkBool32*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfaceSupportKHR");
+        _vkGetPhysicalDeviceSurfaceCapabilitiesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, VkSurfaceCapabilitiesKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfaceCapabilitiesKHR");
+        _vkGetPhysicalDeviceSurfaceFormatsKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, uint*, VkSurfaceFormatKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfaceFormatsKHR");
+        _vkGetPhysicalDeviceSurfacePresentModesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, uint*, VkPresentModeKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfacePresentModesKHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkDestroySurfaceKHR(VkInstance instance, VkSurfaceKHR surface, VkAllocationCallbacks* pAllocator)

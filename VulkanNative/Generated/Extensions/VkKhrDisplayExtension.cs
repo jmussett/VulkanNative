@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -11,6 +12,17 @@ public unsafe class VkKhrDisplayExtension
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayKHR, VkDisplayModeCreateInfoKHR*, VkAllocationCallbacks*, VkDisplayModeKHR*, VkResult> _vkCreateDisplayModeKHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayModeKHR, uint, VkDisplayPlaneCapabilitiesKHR*, VkResult> _vkGetDisplayPlaneCapabilitiesKHR;
     private delegate* unmanaged[Cdecl]<VkInstance, VkDisplaySurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> _vkCreateDisplayPlaneSurfaceKHR;
+
+    public VkKhrDisplayExtension(VkInstance instance, IVulkanLoader loader)
+    {
+        _vkGetPhysicalDeviceDisplayPropertiesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkDisplayPropertiesKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceDisplayPropertiesKHR");
+        _vkGetPhysicalDeviceDisplayPlanePropertiesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkDisplayPlanePropertiesKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceDisplayPlanePropertiesKHR");
+        _vkGetDisplayPlaneSupportedDisplaysKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, uint*, VkDisplayKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetDisplayPlaneSupportedDisplaysKHR");
+        _vkGetDisplayModePropertiesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayKHR, uint*, VkDisplayModePropertiesKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetDisplayModePropertiesKHR");
+        _vkCreateDisplayModeKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayKHR, VkDisplayModeCreateInfoKHR*, VkAllocationCallbacks*, VkDisplayModeKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateDisplayModeKHR");
+        _vkGetDisplayPlaneCapabilitiesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayModeKHR, uint, VkDisplayPlaneCapabilitiesKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetDisplayPlaneCapabilitiesKHR");
+        _vkCreateDisplayPlaneSurfaceKHR = (delegate* unmanaged[Cdecl]<VkInstance, VkDisplaySurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateDisplayPlaneSurfaceKHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkGetPhysicalDeviceDisplayPropertiesKHR(VkPhysicalDevice physicalDevice, uint* pPropertyCount, VkDisplayPropertiesKHR* pProperties)

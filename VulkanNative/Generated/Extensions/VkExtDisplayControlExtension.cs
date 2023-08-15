@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -8,6 +9,14 @@ public unsafe class VkExtDisplayControlExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeviceEventInfoEXT*, VkAllocationCallbacks*, VkFence*, VkResult> _vkRegisterDeviceEventEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkDisplayKHR, VkDisplayEventInfoEXT*, VkAllocationCallbacks*, VkFence*, VkResult> _vkRegisterDisplayEventEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkSurfaceCounterFlagsEXT, ulong*, VkResult> _vkGetSwapchainCounterEXT;
+
+    public VkExtDisplayControlExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkDisplayPowerControlEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDisplayKHR, VkDisplayPowerInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkDisplayPowerControlEXT");
+        _vkRegisterDeviceEventEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDeviceEventInfoEXT*, VkAllocationCallbacks*, VkFence*, VkResult>)loader.GetDeviceProcAddr(device, "vkRegisterDeviceEventEXT");
+        _vkRegisterDisplayEventEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDisplayKHR, VkDisplayEventInfoEXT*, VkAllocationCallbacks*, VkFence*, VkResult>)loader.GetDeviceProcAddr(device, "vkRegisterDisplayEventEXT");
+        _vkGetSwapchainCounterEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkSurfaceCounterFlagsEXT, ulong*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetSwapchainCounterEXT");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkDisplayPowerControlEXT(VkDevice device, VkDisplayKHR display, VkDisplayPowerInfoEXT* pDisplayPowerInfo)

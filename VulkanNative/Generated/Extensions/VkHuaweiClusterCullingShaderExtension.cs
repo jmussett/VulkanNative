@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -6,6 +7,12 @@ public unsafe class VkHuaweiClusterCullingShaderExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, uint, void> _vkCmdDrawClusterHUAWEI;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, void> _vkCmdDrawClusterIndirectHUAWEI;
+
+    public VkHuaweiClusterCullingShaderExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCmdDrawClusterHUAWEI = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdDrawClusterHUAWEI");
+        _vkCmdDrawClusterIndirectHUAWEI = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, void>)loader.GetDeviceProcAddr(device, "vkCmdDrawClusterIndirectHUAWEI");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkCmdDrawClusterHUAWEI(VkCommandBuffer commandBuffer, uint groupCountX, uint groupCountY, uint groupCountZ)

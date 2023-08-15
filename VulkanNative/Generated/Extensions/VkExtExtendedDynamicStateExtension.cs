@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -16,6 +17,22 @@ public unsafe class VkExtExtendedDynamicStateExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void> _vkCmdSetDepthBoundsTestEnable;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void> _vkCmdSetStencilTestEnable;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkStencilFaceFlags, VkStencilOp, VkStencilOp, VkStencilOp, VkCompareOp, void> _vkCmdSetStencilOp;
+
+    public VkExtExtendedDynamicStateExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkCmdSetCullMode = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCullModeFlags, void>)loader.GetDeviceProcAddr(device, "vkCmdSetCullMode");
+        _vkCmdSetFrontFace = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkFrontFace, void>)loader.GetDeviceProcAddr(device, "vkCmdSetFrontFace");
+        _vkCmdSetPrimitiveTopology = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPrimitiveTopology, void>)loader.GetDeviceProcAddr(device, "vkCmdSetPrimitiveTopology");
+        _vkCmdSetViewportWithCount = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkViewport*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetViewportWithCount");
+        _vkCmdSetScissorWithCount = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkRect2D*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetScissorWithCount");
+        _vkCmdBindVertexBuffers2 = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkBuffer*, VkDeviceSize*, VkDeviceSize*, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkCmdBindVertexBuffers2");
+        _vkCmdSetDepthTestEnable = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthTestEnable");
+        _vkCmdSetDepthWriteEnable = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthWriteEnable");
+        _vkCmdSetDepthCompareOp = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCompareOp, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthCompareOp");
+        _vkCmdSetDepthBoundsTestEnable = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthBoundsTestEnable");
+        _vkCmdSetStencilTestEnable = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetStencilTestEnable");
+        _vkCmdSetStencilOp = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkStencilFaceFlags, VkStencilOp, VkStencilOp, VkStencilOp, VkCompareOp, void>)loader.GetDeviceProcAddr(device, "vkCmdSetStencilOp");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void VkCmdSetCullMode(VkCommandBuffer commandBuffer, VkCullModeFlags cullMode)

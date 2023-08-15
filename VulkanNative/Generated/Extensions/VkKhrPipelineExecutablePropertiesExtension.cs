@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using VulkanNative.Abstractions;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative;
 
@@ -7,6 +8,13 @@ public unsafe class VkKhrPipelineExecutablePropertiesExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipelineInfoKHR*, uint*, VkPipelineExecutablePropertiesKHR*, VkResult> _vkGetPipelineExecutablePropertiesKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipelineExecutableInfoKHR*, uint*, VkPipelineExecutableStatisticKHR*, VkResult> _vkGetPipelineExecutableStatisticsKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipelineExecutableInfoKHR*, uint*, VkPipelineExecutableInternalRepresentationKHR*, VkResult> _vkGetPipelineExecutableInternalRepresentationsKHR;
+
+    public VkKhrPipelineExecutablePropertiesExtension(VkDevice device, IVulkanLoader loader)
+    {
+        _vkGetPipelineExecutablePropertiesKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkPipelineInfoKHR*, uint*, VkPipelineExecutablePropertiesKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPipelineExecutablePropertiesKHR");
+        _vkGetPipelineExecutableStatisticsKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkPipelineExecutableInfoKHR*, uint*, VkPipelineExecutableStatisticKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPipelineExecutableStatisticsKHR");
+        _vkGetPipelineExecutableInternalRepresentationsKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkPipelineExecutableInfoKHR*, uint*, VkPipelineExecutableInternalRepresentationKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPipelineExecutableInternalRepresentationsKHR");
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VkResult VkGetPipelineExecutablePropertiesKHR(VkDevice device, VkPipelineInfoKHR* pPipelineInfo, uint* pExecutableCount, VkPipelineExecutablePropertiesKHR* pProperties)
