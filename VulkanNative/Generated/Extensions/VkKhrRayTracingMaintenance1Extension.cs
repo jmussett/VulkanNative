@@ -7,7 +7,7 @@ public unsafe class VkKhrRayTracingMaintenance1Extension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDeviceAddress, void> _vkCmdTraceRaysIndirect2KHR;
 
-    public VkKhrRayTracingMaintenance1Extension(VkDevice device, IVulkanLoader loader)
+    public VkKhrRayTracingMaintenance1Extension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdTraceRaysIndirect2KHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDeviceAddress, void>)loader.GetDeviceProcAddr(device, "vkCmdTraceRaysIndirect2KHR");
     }

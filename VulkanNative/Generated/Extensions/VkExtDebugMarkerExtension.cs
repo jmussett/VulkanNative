@@ -11,7 +11,7 @@ public unsafe class VkExtDebugMarkerExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, void> _vkCmdDebugMarkerEndEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDebugMarkerMarkerInfoEXT*, void> _vkCmdDebugMarkerInsertEXT;
 
-    public VkExtDebugMarkerExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtDebugMarkerExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkDebugMarkerSetObjectTagEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDebugMarkerObjectTagInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkDebugMarkerSetObjectTagEXT");
         _vkDebugMarkerSetObjectNameEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDebugMarkerObjectNameInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkDebugMarkerSetObjectNameEXT");

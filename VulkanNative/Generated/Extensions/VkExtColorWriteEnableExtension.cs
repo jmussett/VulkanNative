@@ -7,7 +7,7 @@ public unsafe class VkExtColorWriteEnableExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkBool32*, void> _vkCmdSetColorWriteEnableEXT;
 
-    public VkExtColorWriteEnableExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtColorWriteEnableExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdSetColorWriteEnableEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkBool32*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetColorWriteEnableEXT");
     }

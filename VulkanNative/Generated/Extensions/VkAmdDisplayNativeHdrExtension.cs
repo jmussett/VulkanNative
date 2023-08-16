@@ -7,7 +7,7 @@ public unsafe class VkAmdDisplayNativeHdrExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkBool32, void> _vkSetLocalDimmingAMD;
 
-    public VkAmdDisplayNativeHdrExtension(VkDevice device, IVulkanLoader loader)
+    public VkAmdDisplayNativeHdrExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkSetLocalDimmingAMD = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkSetLocalDimmingAMD");
     }

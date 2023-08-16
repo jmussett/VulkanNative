@@ -13,7 +13,7 @@ public unsafe class VkKhrRayTracingPipelineExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, uint, VkShaderGroupShaderKHR, VkDeviceSize> _vkGetRayTracingShaderGroupStackSizeKHR;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, void> _vkCmdSetRayTracingPipelineStackSizeKHR;
 
-    public VkKhrRayTracingPipelineExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrRayTracingPipelineExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdTraceRaysKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkStridedDeviceAddressRegionKHR*, VkStridedDeviceAddressRegionKHR*, VkStridedDeviceAddressRegionKHR*, VkStridedDeviceAddressRegionKHR*, uint, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdTraceRaysKHR");
         _vkCreateRayTracingPipelinesKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkPipelineCache, uint, VkRayTracingPipelineCreateInfoKHR*, VkAllocationCallbacks*, VkPipeline*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateRayTracingPipelinesKHR");

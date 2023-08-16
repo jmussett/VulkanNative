@@ -10,7 +10,7 @@ public unsafe class VkExtValidationCacheExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkValidationCacheEXT, uint, VkValidationCacheEXT*, VkResult> _vkMergeValidationCachesEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkValidationCacheEXT, nint*, void*, VkResult> _vkGetValidationCacheDataEXT;
 
-    public VkExtValidationCacheExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtValidationCacheExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCreateValidationCacheEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkValidationCacheCreateInfoEXT*, VkAllocationCallbacks*, VkValidationCacheEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateValidationCacheEXT");
         _vkDestroyValidationCacheEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkValidationCacheEXT, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyValidationCacheEXT");

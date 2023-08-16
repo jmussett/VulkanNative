@@ -7,7 +7,7 @@ public unsafe class VkExtDirectModeDisplayExtension
 {
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayKHR, VkResult> _vkReleaseDisplayEXT;
 
-    public VkExtDirectModeDisplayExtension(VkInstance instance, IVulkanLoader loader)
+    public VkExtDirectModeDisplayExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkReleaseDisplayEXT = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayKHR, VkResult>)loader.GetInstanceProcAddr(instance, "vkReleaseDisplayEXT");
     }

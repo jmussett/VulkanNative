@@ -17,7 +17,7 @@ public unsafe class VkExtDebugUtilsExtension
     private delegate* unmanaged[Cdecl]<VkInstance, VkDebugUtilsMessengerEXT, VkAllocationCallbacks*, void> _vkDestroyDebugUtilsMessengerEXT;
     private delegate* unmanaged[Cdecl]<VkInstance, VkDebugUtilsMessageSeverityFlagsEXT, VkDebugUtilsMessageTypeFlagsEXT, VkDebugUtilsMessengerCallbackDataEXT*, void> _vkSubmitDebugUtilsMessageEXT;
 
-    public VkExtDebugUtilsExtension(VkInstance instance, IVulkanLoader loader)
+    public VkExtDebugUtilsExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkSetDebugUtilsObjectNameEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDebugUtilsObjectNameInfoEXT*, VkResult>)loader.GetInstanceProcAddr(instance, "vkSetDebugUtilsObjectNameEXT");
         _vkSetDebugUtilsObjectTagEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDebugUtilsObjectTagInfoEXT*, VkResult>)loader.GetInstanceProcAddr(instance, "vkSetDebugUtilsObjectTagEXT");

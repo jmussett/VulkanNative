@@ -48,7 +48,7 @@ internal class CommandGroupGenerator
                                 break;
                         }
 
-                        x.AddParameter("loader", x => x.WithType("IVulkanLoader"));
+                        x.AddParameter("loader", x => x.WithType("IFunctionLoader"));
 
                         x.WithBody(x =>
                         {

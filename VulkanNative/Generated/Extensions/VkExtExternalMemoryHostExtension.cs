@@ -7,7 +7,7 @@ public unsafe class VkExtExternalMemoryHostExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkExternalMemoryHandleTypeFlags, void*, VkMemoryHostPointerPropertiesEXT*, VkResult> _vkGetMemoryHostPointerPropertiesEXT;
 
-    public VkExtExternalMemoryHostExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtExternalMemoryHostExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetMemoryHostPointerPropertiesEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkExternalMemoryHandleTypeFlags, void*, VkMemoryHostPointerPropertiesEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetMemoryHostPointerPropertiesEXT");
     }

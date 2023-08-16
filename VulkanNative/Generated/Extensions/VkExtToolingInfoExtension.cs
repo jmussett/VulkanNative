@@ -7,7 +7,7 @@ public unsafe class VkExtToolingInfoExtension
 {
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkPhysicalDeviceToolProperties*, VkResult> _vkGetPhysicalDeviceToolProperties;
 
-    public VkExtToolingInfoExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtToolingInfoExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetPhysicalDeviceToolProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkPhysicalDeviceToolProperties*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceToolProperties");
     }

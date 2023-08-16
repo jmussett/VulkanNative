@@ -7,7 +7,7 @@ public unsafe class VkQnxExternalMemoryScreenBufferExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, nint*, VkScreenBufferPropertiesQNX*, VkResult> _vkGetScreenBufferPropertiesQNX;
 
-    public VkQnxExternalMemoryScreenBufferExtension(VkDevice device, IVulkanLoader loader)
+    public VkQnxExternalMemoryScreenBufferExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetScreenBufferPropertiesQNX = (delegate* unmanaged[Cdecl]<VkDevice, nint*, VkScreenBufferPropertiesQNX*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetScreenBufferPropertiesQNX");
     }

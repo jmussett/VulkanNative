@@ -7,7 +7,7 @@ public unsafe class VkKhrSharedPresentableImageExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkResult> _vkGetSwapchainStatusKHR;
 
-    public VkKhrSharedPresentableImageExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrSharedPresentableImageExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetSwapchainStatusKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkResult>)loader.GetDeviceProcAddr(device, "vkGetSwapchainStatusKHR");
     }

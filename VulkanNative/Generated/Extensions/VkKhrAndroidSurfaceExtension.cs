@@ -7,7 +7,7 @@ public unsafe class VkKhrAndroidSurfaceExtension
 {
     private delegate* unmanaged[Cdecl]<VkInstance, VkAndroidSurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> _vkCreateAndroidSurfaceKHR;
 
-    public VkKhrAndroidSurfaceExtension(VkInstance instance, IVulkanLoader loader)
+    public VkKhrAndroidSurfaceExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkCreateAndroidSurfaceKHR = (delegate* unmanaged[Cdecl]<VkInstance, VkAndroidSurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateAndroidSurfaceKHR");
     }

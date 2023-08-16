@@ -8,7 +8,7 @@ public unsafe class VkNvCopyMemoryIndirectExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDeviceAddress, uint, uint, void> _vkCmdCopyMemoryIndirectNV;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDeviceAddress, uint, uint, VkImage, VkImageLayout, VkImageSubresourceLayers*, void> _vkCmdCopyMemoryToImageIndirectNV;
 
-    public VkNvCopyMemoryIndirectExtension(VkDevice device, IVulkanLoader loader)
+    public VkNvCopyMemoryIndirectExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdCopyMemoryIndirectNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDeviceAddress, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyMemoryIndirectNV");
         _vkCmdCopyMemoryToImageIndirectNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDeviceAddress, uint, uint, VkImage, VkImageLayout, VkImageSubresourceLayers*, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyMemoryToImageIndirectNV");

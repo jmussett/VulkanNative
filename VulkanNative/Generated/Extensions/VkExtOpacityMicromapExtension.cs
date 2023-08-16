@@ -20,7 +20,7 @@ public unsafe class VkExtOpacityMicromapExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkMicromapVersionInfoEXT*, VkAccelerationStructureCompatibilityKHR*, void> _vkGetDeviceMicromapCompatibilityEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureBuildTypeKHR, VkMicromapBuildInfoEXT*, VkMicromapBuildSizesInfoEXT*, void> _vkGetMicromapBuildSizesEXT;
 
-    public VkExtOpacityMicromapExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtOpacityMicromapExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCreateMicromapEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkMicromapCreateInfoEXT*, VkAllocationCallbacks*, VkMicromapEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateMicromapEXT");
         _vkDestroyMicromapEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkMicromapEXT, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyMicromapEXT");

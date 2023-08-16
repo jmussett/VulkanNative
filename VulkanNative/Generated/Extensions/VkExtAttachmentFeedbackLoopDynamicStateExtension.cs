@@ -7,7 +7,7 @@ public unsafe class VkExtAttachmentFeedbackLoopDynamicStateExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkImageAspectFlags, void> _vkCmdSetAttachmentFeedbackLoopEnableEXT;
 
-    public VkExtAttachmentFeedbackLoopDynamicStateExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtAttachmentFeedbackLoopDynamicStateExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdSetAttachmentFeedbackLoopEnableEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkImageAspectFlags, void>)loader.GetDeviceProcAddr(device, "vkCmdSetAttachmentFeedbackLoopEnableEXT");
     }

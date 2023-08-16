@@ -22,7 +22,7 @@ public unsafe class VkKhrAccelerationStructureExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureVersionInfoKHR*, VkAccelerationStructureCompatibilityKHR*, void> _vkGetDeviceAccelerationStructureCompatibilityKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureBuildTypeKHR, VkAccelerationStructureBuildGeometryInfoKHR*, uint*, VkAccelerationStructureBuildSizesInfoKHR*, void> _vkGetAccelerationStructureBuildSizesKHR;
 
-    public VkKhrAccelerationStructureExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrAccelerationStructureExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCreateAccelerationStructureKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureCreateInfoKHR*, VkAllocationCallbacks*, VkAccelerationStructureKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateAccelerationStructureKHR");
         _vkDestroyAccelerationStructureKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureKHR, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyAccelerationStructureKHR");

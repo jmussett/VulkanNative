@@ -10,7 +10,7 @@ public unsafe class VkExtPrivateDataExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkObjectType, ulong, VkPrivateDataSlot, ulong, VkResult> _vkSetPrivateData;
     private delegate* unmanaged[Cdecl]<VkDevice, VkObjectType, ulong, VkPrivateDataSlot, ulong*, void> _vkGetPrivateData;
 
-    public VkExtPrivateDataExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtPrivateDataExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCreatePrivateDataSlot = (delegate* unmanaged[Cdecl]<VkDevice, VkPrivateDataSlotCreateInfo*, VkAllocationCallbacks*, VkPrivateDataSlot*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreatePrivateDataSlot");
         _vkDestroyPrivateDataSlot = (delegate* unmanaged[Cdecl]<VkDevice, VkPrivateDataSlot, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyPrivateDataSlot");

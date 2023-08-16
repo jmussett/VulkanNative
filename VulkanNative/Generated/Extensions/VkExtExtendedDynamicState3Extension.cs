@@ -37,7 +37,7 @@ public unsafe class VkExtExtendedDynamicState3Extension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void> _vkCmdSetRepresentativeFragmentTestEnableNV;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCoverageReductionModeNV, void> _vkCmdSetCoverageReductionModeNV;
 
-    public VkExtExtendedDynamicState3Extension(VkDevice device, IVulkanLoader loader)
+    public VkExtExtendedDynamicState3Extension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdSetTessellationDomainOriginEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkTessellationDomainOrigin, void>)loader.GetDeviceProcAddr(device, "vkCmdSetTessellationDomainOriginEXT");
         _vkCmdSetDepthClampEnableEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthClampEnableEXT");

@@ -12,7 +12,7 @@ public unsafe class VkKhrCopyCommands2Extension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBlitImageInfo2*, void> _vkCmdBlitImage2;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkResolveImageInfo2*, void> _vkCmdResolveImage2;
 
-    public VkKhrCopyCommands2Extension(VkDevice device, IVulkanLoader loader)
+    public VkKhrCopyCommands2Extension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdCopyBuffer2 = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyBufferInfo2*, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyBuffer2");
         _vkCmdCopyImage2 = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyImageInfo2*, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyImage2");

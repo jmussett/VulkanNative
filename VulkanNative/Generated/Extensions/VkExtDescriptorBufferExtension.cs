@@ -17,7 +17,7 @@ public unsafe class VkExtDescriptorBufferExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkSamplerCaptureDescriptorDataInfoEXT*, void*, VkResult> _vkGetSamplerOpaqueCaptureDescriptorDataEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureCaptureDescriptorDataInfoEXT*, void*, VkResult> _vkGetAccelerationStructureOpaqueCaptureDescriptorDataEXT;
 
-    public VkExtDescriptorBufferExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtDescriptorBufferExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetDescriptorSetLayoutSizeEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetLayout, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorSetLayoutSizeEXT");
         _vkGetDescriptorSetLayoutBindingOffsetEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetLayout, uint, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorSetLayoutBindingOffsetEXT");

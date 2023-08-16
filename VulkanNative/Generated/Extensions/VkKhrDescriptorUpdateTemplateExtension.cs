@@ -10,7 +10,7 @@ public unsafe class VkKhrDescriptorUpdateTemplateExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSet, VkDescriptorUpdateTemplate, void*, void> _vkUpdateDescriptorSetWithTemplate;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDescriptorUpdateTemplate, VkPipelineLayout, uint, void*, void> _vkCmdPushDescriptorSetWithTemplateKHR;
 
-    public VkKhrDescriptorUpdateTemplateExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrDescriptorUpdateTemplateExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCreateDescriptorUpdateTemplate = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorUpdateTemplateCreateInfo*, VkAllocationCallbacks*, VkDescriptorUpdateTemplate*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateDescriptorUpdateTemplate");
         _vkDestroyDescriptorUpdateTemplate = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorUpdateTemplate, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyDescriptorUpdateTemplate");

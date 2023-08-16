@@ -16,11 +16,12 @@ internal class GeneratorService : BackgroundService
     private readonly ApiConstantsGenerator _apiConstantsGenerator;
     private readonly FeatureGenerator _featureGenerator;
     private readonly ExtensionGenerator _extensionGenerator;
+    private readonly ExtensionsLoaderGenerator _extensionsLoaderGenerator;
     private readonly EnumGenerator _enumGenerator;
 
     private readonly IHostApplicationLifetime _lifetime;
 
-    public GeneratorService(VulkanApiRegistry vulkanApiRegistry, TypeGeneratorRegistry generatorRegistry, DocumentRegistry documentRegistry, ApiConstantsGenerator apiConstantsGenerator, FeatureGenerator featureGenerator, ExtensionGenerator extensionGenerator, EnumGenerator enumGenerator, IHostApplicationLifetime lifetime)
+    public GeneratorService(VulkanApiRegistry vulkanApiRegistry, TypeGeneratorRegistry generatorRegistry, DocumentRegistry documentRegistry, ApiConstantsGenerator apiConstantsGenerator, FeatureGenerator featureGenerator, ExtensionGenerator extensionGenerator, ExtensionsLoaderGenerator extensionsLoaderGenerator, EnumGenerator enumGenerator, IHostApplicationLifetime lifetime)
     {
         _vulkanApiRegistry = vulkanApiRegistry;
         _generatorRegistry = generatorRegistry;
@@ -28,6 +29,7 @@ internal class GeneratorService : BackgroundService
         _apiConstantsGenerator = apiConstantsGenerator;
         _featureGenerator = featureGenerator;
         _extensionGenerator = extensionGenerator;
+        _extensionsLoaderGenerator = extensionsLoaderGenerator;
         _enumGenerator = enumGenerator;
         _lifetime = lifetime;
     }
@@ -56,6 +58,7 @@ internal class GeneratorService : BackgroundService
             _featureGenerator.GenerateFeatures();
             _extensionGenerator.GenerateExtensions();
             _enumGenerator.GenerateEnums();
+            _extensionsLoaderGenerator.GenerateExtensionLoader();
 
             foreach (var documentEntry in _documentRegistry.Documents)
             {

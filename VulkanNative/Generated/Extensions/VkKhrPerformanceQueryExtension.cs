@@ -10,7 +10,7 @@ public unsafe class VkKhrPerformanceQueryExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkAcquireProfilingLockInfoKHR*, VkResult> _vkAcquireProfilingLockKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, void> _vkReleaseProfilingLockKHR;
 
-    public VkKhrPerformanceQueryExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrPerformanceQueryExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, uint*, VkPerformanceCounterKHR*, VkPerformanceCounterDescriptionKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR");
         _vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkQueryPoolPerformanceCreateInfoKHR*, uint*, void>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR");

@@ -8,7 +8,7 @@ public unsafe class VkQnxScreenSurfaceExtension
     private delegate* unmanaged[Cdecl]<VkInstance, VkScreenSurfaceCreateInfoQNX*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> _vkCreateScreenSurfaceQNX;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, nint*, VkBool32> _vkGetPhysicalDeviceScreenPresentationSupportQNX;
 
-    public VkQnxScreenSurfaceExtension(VkInstance instance, IVulkanLoader loader)
+    public VkQnxScreenSurfaceExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkCreateScreenSurfaceQNX = (delegate* unmanaged[Cdecl]<VkInstance, VkScreenSurfaceCreateInfoQNX*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateScreenSurfaceQNX");
         _vkGetPhysicalDeviceScreenPresentationSupportQNX = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, nint*, VkBool32>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceScreenPresentationSupportQNX");

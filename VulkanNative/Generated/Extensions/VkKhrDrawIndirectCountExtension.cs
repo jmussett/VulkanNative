@@ -8,7 +8,7 @@ public unsafe class VkKhrDrawIndirectCountExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, VkBuffer, VkDeviceSize, uint, uint, void> _vkCmdDrawIndirectCount;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, VkBuffer, VkDeviceSize, uint, uint, void> _vkCmdDrawIndexedIndirectCount;
 
-    public VkKhrDrawIndirectCountExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrDrawIndirectCountExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdDrawIndirectCount = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, VkBuffer, VkDeviceSize, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdDrawIndirectCount");
         _vkCmdDrawIndexedIndirectCount = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, VkBuffer, VkDeviceSize, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdDrawIndexedIndirectCount");

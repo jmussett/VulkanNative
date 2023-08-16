@@ -8,7 +8,7 @@ public unsafe class VkKhrBindMemory2Extension
     private delegate* unmanaged[Cdecl]<VkDevice, uint, VkBindBufferMemoryInfo*, VkResult> _vkBindBufferMemory2;
     private delegate* unmanaged[Cdecl]<VkDevice, uint, VkBindImageMemoryInfo*, VkResult> _vkBindImageMemory2;
 
-    public VkKhrBindMemory2Extension(VkDevice device, IVulkanLoader loader)
+    public VkKhrBindMemory2Extension(VkDevice device, IFunctionLoader loader)
     {
         _vkBindBufferMemory2 = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkBindBufferMemoryInfo*, VkResult>)loader.GetDeviceProcAddr(device, "vkBindBufferMemory2");
         _vkBindImageMemory2 = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkBindImageMemoryInfo*, VkResult>)loader.GetDeviceProcAddr(device, "vkBindImageMemory2");

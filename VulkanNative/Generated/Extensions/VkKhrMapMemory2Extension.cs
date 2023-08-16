@@ -8,7 +8,7 @@ public unsafe class VkKhrMapMemory2Extension
     private delegate* unmanaged[Cdecl]<VkDevice, VkMemoryMapInfoKHR*, void**, VkResult> _vkMapMemory2KHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkMemoryUnmapInfoKHR*, VkResult> _vkUnmapMemory2KHR;
 
-    public VkKhrMapMemory2Extension(VkDevice device, IVulkanLoader loader)
+    public VkKhrMapMemory2Extension(VkDevice device, IFunctionLoader loader)
     {
         _vkMapMemory2KHR = (delegate* unmanaged[Cdecl]<VkDevice, VkMemoryMapInfoKHR*, void**, VkResult>)loader.GetDeviceProcAddr(device, "vkMapMemory2KHR");
         _vkUnmapMemory2KHR = (delegate* unmanaged[Cdecl]<VkDevice, VkMemoryUnmapInfoKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkUnmapMemory2KHR");

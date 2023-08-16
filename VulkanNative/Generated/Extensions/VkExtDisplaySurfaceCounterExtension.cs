@@ -7,7 +7,7 @@ public unsafe class VkExtDisplaySurfaceCounterExtension
 {
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, VkSurfaceCapabilities2EXT*, VkResult> _vkGetPhysicalDeviceSurfaceCapabilities2EXT;
 
-    public VkExtDisplaySurfaceCounterExtension(VkInstance instance, IVulkanLoader loader)
+    public VkExtDisplaySurfaceCounterExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkGetPhysicalDeviceSurfaceCapabilities2EXT = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, VkSurfaceCapabilities2EXT*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfaceCapabilities2EXT");
     }

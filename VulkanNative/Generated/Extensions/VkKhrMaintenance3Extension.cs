@@ -7,7 +7,7 @@ public unsafe class VkKhrMaintenance3Extension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetLayoutCreateInfo*, VkDescriptorSetLayoutSupport*, void> _vkGetDescriptorSetLayoutSupport;
 
-    public VkKhrMaintenance3Extension(VkDevice device, IVulkanLoader loader)
+    public VkKhrMaintenance3Extension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetDescriptorSetLayoutSupport = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetLayoutCreateInfo*, VkDescriptorSetLayoutSupport*, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorSetLayoutSupport");
     }

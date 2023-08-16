@@ -8,7 +8,7 @@ public unsafe class VkKhrWaylandSurfaceExtension
     private delegate* unmanaged[Cdecl]<VkInstance, VkWaylandSurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> _vkCreateWaylandSurfaceKHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, nint*, VkBool32> _vkGetPhysicalDeviceWaylandPresentationSupportKHR;
 
-    public VkKhrWaylandSurfaceExtension(VkInstance instance, IVulkanLoader loader)
+    public VkKhrWaylandSurfaceExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkCreateWaylandSurfaceKHR = (delegate* unmanaged[Cdecl]<VkInstance, VkWaylandSurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateWaylandSurfaceKHR");
         _vkGetPhysicalDeviceWaylandPresentationSupportKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, nint*, VkBool32>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceWaylandPresentationSupportKHR");

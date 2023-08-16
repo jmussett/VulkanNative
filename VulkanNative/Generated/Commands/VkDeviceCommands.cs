@@ -191,7 +191,7 @@ public unsafe class VkDeviceCommands
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeviceImageMemoryRequirements*, VkMemoryRequirements2*, void> _vkGetDeviceImageMemoryRequirements;
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeviceImageMemoryRequirements*, uint*, VkSparseImageMemoryRequirements2*, void> _vkGetDeviceImageSparseMemoryRequirements;
 
-    public VkDeviceCommands(VkDevice device, IVulkanLoader loader)
+    public VkDeviceCommands(VkDevice device, IFunctionLoader loader)
     {
         _vkDestroyDevice = (delegate* unmanaged[Cdecl]<VkDevice, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyDevice");
         _vkGetDeviceQueue = (delegate* unmanaged[Cdecl]<VkDevice, uint, uint, VkQueue*, void>)loader.GetDeviceProcAddr(device, "vkGetDeviceQueue");

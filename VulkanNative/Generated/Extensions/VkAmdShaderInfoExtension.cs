@@ -7,7 +7,7 @@ public unsafe class VkAmdShaderInfoExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, VkShaderStageFlags, VkShaderInfoTypeAMD, nint*, void*, VkResult> _vkGetShaderInfoAMD;
 
-    public VkAmdShaderInfoExtension(VkDevice device, IVulkanLoader loader)
+    public VkAmdShaderInfoExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetShaderInfoAMD = (delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, VkShaderStageFlags, VkShaderInfoTypeAMD, nint*, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetShaderInfoAMD");
     }

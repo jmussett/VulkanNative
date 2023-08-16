@@ -8,7 +8,7 @@ public unsafe class VkKhrExternalMemoryWin32Extension
     private delegate* unmanaged[Cdecl]<VkDevice, VkMemoryGetWin32HandleInfoKHR*, nint*, VkResult> _vkGetMemoryWin32HandleKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkExternalMemoryHandleTypeFlags, nint, VkMemoryWin32HandlePropertiesKHR*, VkResult> _vkGetMemoryWin32HandlePropertiesKHR;
 
-    public VkKhrExternalMemoryWin32Extension(VkDevice device, IVulkanLoader loader)
+    public VkKhrExternalMemoryWin32Extension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetMemoryWin32HandleKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkMemoryGetWin32HandleInfoKHR*, nint*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetMemoryWin32HandleKHR");
         _vkGetMemoryWin32HandlePropertiesKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkExternalMemoryHandleTypeFlags, nint, VkMemoryWin32HandlePropertiesKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetMemoryWin32HandlePropertiesKHR");

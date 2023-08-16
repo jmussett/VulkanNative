@@ -8,7 +8,7 @@ public unsafe class VkNvDeviceDiagnosticCheckpointsExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, void*, void> _vkCmdSetCheckpointNV;
     private delegate* unmanaged[Cdecl]<VkQueue, uint*, VkCheckpointDataNV*, void> _vkGetQueueCheckpointDataNV;
 
-    public VkNvDeviceDiagnosticCheckpointsExtension(VkDevice device, IVulkanLoader loader)
+    public VkNvDeviceDiagnosticCheckpointsExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdSetCheckpointNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, void*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetCheckpointNV");
         _vkGetQueueCheckpointDataNV = (delegate* unmanaged[Cdecl]<VkQueue, uint*, VkCheckpointDataNV*, void>)loader.GetDeviceProcAddr(device, "vkGetQueueCheckpointDataNV");

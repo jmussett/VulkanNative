@@ -8,7 +8,7 @@ public unsafe class VkExtAcquireDrmDisplayExtension
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, int, VkDisplayKHR, VkResult> _vkAcquireDrmDisplayEXT;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, int, uint, VkDisplayKHR*, VkResult> _vkGetDrmDisplayEXT;
 
-    public VkExtAcquireDrmDisplayExtension(VkInstance instance, IVulkanLoader loader)
+    public VkExtAcquireDrmDisplayExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkAcquireDrmDisplayEXT = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, int, VkDisplayKHR, VkResult>)loader.GetInstanceProcAddr(instance, "vkAcquireDrmDisplayEXT");
         _vkGetDrmDisplayEXT = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, int, uint, VkDisplayKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetDrmDisplayEXT");

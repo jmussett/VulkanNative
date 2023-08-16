@@ -7,7 +7,7 @@ public unsafe class VkExtVertexInputDynamicStateExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkVertexInputBindingDescription2EXT*, uint, VkVertexInputAttributeDescription2EXT*, void> _vkCmdSetVertexInputEXT;
 
-    public VkExtVertexInputDynamicStateExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtVertexInputDynamicStateExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdSetVertexInputEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkVertexInputBindingDescription2EXT*, uint, VkVertexInputAttributeDescription2EXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetVertexInputEXT");
     }

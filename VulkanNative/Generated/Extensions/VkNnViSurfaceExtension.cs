@@ -7,7 +7,7 @@ public unsafe class VkNnViSurfaceExtension
 {
     private delegate* unmanaged[Cdecl]<VkInstance, VkViSurfaceCreateInfoNN*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> _vkCreateViSurfaceNN;
 
-    public VkNnViSurfaceExtension(VkInstance instance, IVulkanLoader loader)
+    public VkNnViSurfaceExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkCreateViSurfaceNN = (delegate* unmanaged[Cdecl]<VkInstance, VkViSurfaceCreateInfoNN*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateViSurfaceNN");
     }

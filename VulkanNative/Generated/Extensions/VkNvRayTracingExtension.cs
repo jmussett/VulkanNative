@@ -18,7 +18,7 @@ public unsafe class VkNvRayTracingExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkAccelerationStructureNV*, VkQueryType, VkQueryPool, uint, void> _vkCmdWriteAccelerationStructuresPropertiesNV;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, uint, VkResult> _vkCompileDeferredNV;
 
-    public VkNvRayTracingExtension(VkDevice device, IVulkanLoader loader)
+    public VkNvRayTracingExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCreateAccelerationStructureNV = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureCreateInfoNV*, VkAllocationCallbacks*, VkAccelerationStructureNV*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateAccelerationStructureNV");
         _vkDestroyAccelerationStructureNV = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureNV, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyAccelerationStructureNV");

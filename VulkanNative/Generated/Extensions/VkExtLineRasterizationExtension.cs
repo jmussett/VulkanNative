@@ -7,7 +7,7 @@ public unsafe class VkExtLineRasterizationExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, ushort, void> _vkCmdSetLineStippleEXT;
 
-    public VkExtLineRasterizationExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtLineRasterizationExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdSetLineStippleEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, ushort, void>)loader.GetDeviceProcAddr(device, "vkCmdSetLineStippleEXT");
     }

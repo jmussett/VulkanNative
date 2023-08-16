@@ -8,7 +8,7 @@ public unsafe class VkKhrDynamicRenderingExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkRenderingInfo*, void> _vkCmdBeginRendering;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, void> _vkCmdEndRendering;
 
-    public VkKhrDynamicRenderingExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrDynamicRenderingExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdBeginRendering = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkRenderingInfo*, void>)loader.GetDeviceProcAddr(device, "vkCmdBeginRendering");
         _vkCmdEndRendering = (delegate* unmanaged[Cdecl]<VkCommandBuffer, void>)loader.GetDeviceProcAddr(device, "vkCmdEndRendering");

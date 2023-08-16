@@ -15,7 +15,7 @@ public unsafe class VkIntelPerformanceQueryExtension
     private delegate* unmanaged[Cdecl]<VkQueue, VkPerformanceConfigurationINTEL, VkResult> _vkQueueSetPerformanceConfigurationINTEL;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPerformanceParameterTypeINTEL, VkPerformanceValueINTEL*, VkResult> _vkGetPerformanceParameterINTEL;
 
-    public VkIntelPerformanceQueryExtension(VkDevice device, IVulkanLoader loader)
+    public VkIntelPerformanceQueryExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkInitializePerformanceApiINTEL = (delegate* unmanaged[Cdecl]<VkDevice, VkInitializePerformanceApiInfoINTEL*, VkResult>)loader.GetDeviceProcAddr(device, "vkInitializePerformanceApiINTEL");
         _vkUninitializePerformanceApiINTEL = (delegate* unmanaged[Cdecl]<VkDevice, void>)loader.GetDeviceProcAddr(device, "vkUninitializePerformanceApiINTEL");

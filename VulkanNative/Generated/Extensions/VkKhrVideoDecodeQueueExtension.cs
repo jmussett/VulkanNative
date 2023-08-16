@@ -7,7 +7,7 @@ public unsafe class VkKhrVideoDecodeQueueExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoDecodeInfoKHR*, void> _vkCmdDecodeVideoKHR;
 
-    public VkKhrVideoDecodeQueueExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrVideoDecodeQueueExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdDecodeVideoKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoDecodeInfoKHR*, void>)loader.GetDeviceProcAddr(device, "vkCmdDecodeVideoKHR");
     }

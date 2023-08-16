@@ -7,7 +7,7 @@ public unsafe class VkNvExternalMemoryRdmaExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkMemoryGetRemoteAddressInfoNV*, VkRemoteAddressNV*, VkResult> _vkGetMemoryRemoteAddressNV;
 
-    public VkNvExternalMemoryRdmaExtension(VkDevice device, IVulkanLoader loader)
+    public VkNvExternalMemoryRdmaExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetMemoryRemoteAddressNV = (delegate* unmanaged[Cdecl]<VkDevice, VkMemoryGetRemoteAddressInfoNV*, VkRemoteAddressNV*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetMemoryRemoteAddressNV");
     }

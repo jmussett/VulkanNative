@@ -11,7 +11,7 @@ public unsafe class VkKhrDeferredHostOperationsExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkResult> _vkGetDeferredOperationResultKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkResult> _vkDeferredOperationJoinKHR;
 
-    public VkKhrDeferredHostOperationsExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrDeferredHostOperationsExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCreateDeferredOperationKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkAllocationCallbacks*, VkDeferredOperationKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateDeferredOperationKHR");
         _vkDestroyDeferredOperationKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyDeferredOperationKHR");

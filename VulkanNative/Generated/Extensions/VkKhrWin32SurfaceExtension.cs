@@ -8,7 +8,7 @@ public unsafe class VkKhrWin32SurfaceExtension
     private delegate* unmanaged[Cdecl]<VkInstance, VkWin32SurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> _vkCreateWin32SurfaceKHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, VkBool32> _vkGetPhysicalDeviceWin32PresentationSupportKHR;
 
-    public VkKhrWin32SurfaceExtension(VkInstance instance, IVulkanLoader loader)
+    public VkKhrWin32SurfaceExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkCreateWin32SurfaceKHR = (delegate* unmanaged[Cdecl]<VkInstance, VkWin32SurfaceCreateInfoKHR*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateWin32SurfaceKHR");
         _vkGetPhysicalDeviceWin32PresentationSupportKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, VkBool32>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceWin32PresentationSupportKHR");

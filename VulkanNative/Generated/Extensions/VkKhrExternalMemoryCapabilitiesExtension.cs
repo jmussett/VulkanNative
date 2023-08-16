@@ -7,7 +7,7 @@ public unsafe class VkKhrExternalMemoryCapabilitiesExtension
 {
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalBufferInfo*, VkExternalBufferProperties*, void> _vkGetPhysicalDeviceExternalBufferProperties;
 
-    public VkKhrExternalMemoryCapabilitiesExtension(VkInstance instance, IVulkanLoader loader)
+    public VkKhrExternalMemoryCapabilitiesExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkGetPhysicalDeviceExternalBufferProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalBufferInfo*, VkExternalBufferProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceExternalBufferProperties");
     }

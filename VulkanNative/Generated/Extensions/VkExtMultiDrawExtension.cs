@@ -8,7 +8,7 @@ public unsafe class VkExtMultiDrawExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkMultiDrawInfoEXT*, uint, uint, uint, void> _vkCmdDrawMultiEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkMultiDrawIndexedInfoEXT*, uint, uint, uint, int*, void> _vkCmdDrawMultiIndexedEXT;
 
-    public VkExtMultiDrawExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtMultiDrawExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdDrawMultiEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkMultiDrawInfoEXT*, uint, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdDrawMultiEXT");
         _vkCmdDrawMultiIndexedEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkMultiDrawIndexedInfoEXT*, uint, uint, uint, int*, void>)loader.GetDeviceProcAddr(device, "vkCmdDrawMultiIndexedEXT");

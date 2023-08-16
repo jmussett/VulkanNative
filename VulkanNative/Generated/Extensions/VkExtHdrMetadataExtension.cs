@@ -7,7 +7,7 @@ public unsafe class VkExtHdrMetadataExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, uint, VkSwapchainKHR*, VkHdrMetadataEXT*, void> _vkSetHdrMetadataEXT;
 
-    public VkExtHdrMetadataExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtHdrMetadataExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkSetHdrMetadataEXT = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkSwapchainKHR*, VkHdrMetadataEXT*, void>)loader.GetDeviceProcAddr(device, "vkSetHdrMetadataEXT");
     }

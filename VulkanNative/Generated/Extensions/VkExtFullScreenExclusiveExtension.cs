@@ -10,7 +10,7 @@ public unsafe class VkExtFullScreenExclusiveExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkResult> _vkReleaseFullScreenExclusiveModeEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPhysicalDeviceSurfaceInfo2KHR*, VkDeviceGroupPresentModeFlagsKHR*, VkResult> _vkGetDeviceGroupSurfacePresentModes2EXT;
 
-    public VkExtFullScreenExclusiveExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtFullScreenExclusiveExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetPhysicalDeviceSurfacePresentModes2EXT = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceSurfaceInfo2KHR*, uint*, VkPresentModeKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceSurfacePresentModes2EXT");
         _vkAcquireFullScreenExclusiveModeEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkResult>)loader.GetDeviceProcAddr(device, "vkAcquireFullScreenExclusiveModeEXT");

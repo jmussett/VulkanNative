@@ -10,7 +10,7 @@ public unsafe class VkKhrCreateRenderpass2Extension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkSubpassBeginInfo*, VkSubpassEndInfo*, void> _vkCmdNextSubpass2;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkSubpassEndInfo*, void> _vkCmdEndRenderPass2;
 
-    public VkKhrCreateRenderpass2Extension(VkDevice device, IVulkanLoader loader)
+    public VkKhrCreateRenderpass2Extension(VkDevice device, IFunctionLoader loader)
     {
         _vkCreateRenderPass2 = (delegate* unmanaged[Cdecl]<VkDevice, VkRenderPassCreateInfo2*, VkAllocationCallbacks*, VkRenderPass*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateRenderPass2");
         _vkCmdBeginRenderPass2 = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkRenderPassBeginInfo*, VkSubpassBeginInfo*, void>)loader.GetDeviceProcAddr(device, "vkCmdBeginRenderPass2");

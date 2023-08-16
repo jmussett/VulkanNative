@@ -10,7 +10,7 @@ public unsafe class VkGlobalCommands
     private delegate* unmanaged[Cdecl]<uint*, VkLayerProperties*, VkResult> _vkEnumerateInstanceLayerProperties;
     private delegate* unmanaged[Cdecl]<uint*, VkResult> _vkEnumerateInstanceVersion;
 
-    public VkGlobalCommands(IVulkanLoader loader)
+    public VkGlobalCommands(IFunctionLoader loader)
     {
         _vkCreateInstance = (delegate* unmanaged[Cdecl]<VkInstanceCreateInfo*, VkAllocationCallbacks*, VkInstance*, VkResult>)loader.GetProcAddr("vkCreateInstance");
         _vkEnumerateInstanceExtensionProperties = (delegate* unmanaged[Cdecl]<char*, uint*, VkExtensionProperties*, VkResult>)loader.GetProcAddr("vkEnumerateInstanceExtensionProperties");

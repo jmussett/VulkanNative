@@ -9,7 +9,7 @@ public unsafe class VkKhrTimelineSemaphoreExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkSemaphoreWaitInfo*, ulong, VkResult> _vkWaitSemaphores;
     private delegate* unmanaged[Cdecl]<VkDevice, VkSemaphoreSignalInfo*, VkResult> _vkSignalSemaphore;
 
-    public VkKhrTimelineSemaphoreExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrTimelineSemaphoreExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetSemaphoreCounterValue = (delegate* unmanaged[Cdecl]<VkDevice, VkSemaphore, ulong*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetSemaphoreCounterValue");
         _vkWaitSemaphores = (delegate* unmanaged[Cdecl]<VkDevice, VkSemaphoreWaitInfo*, ulong, VkResult>)loader.GetDeviceProcAddr(device, "vkWaitSemaphores");

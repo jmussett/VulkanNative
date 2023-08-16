@@ -9,7 +9,7 @@ public unsafe class VkKhrBufferDeviceAddressExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkBufferDeviceAddressInfo*, ulong> _vkGetBufferOpaqueCaptureAddress;
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeviceMemoryOpaqueCaptureAddressInfo*, ulong> _vkGetDeviceMemoryOpaqueCaptureAddress;
 
-    public VkKhrBufferDeviceAddressExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrBufferDeviceAddressExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetBufferDeviceAddress = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferDeviceAddressInfo*, VkDeviceAddress>)loader.GetDeviceProcAddr(device, "vkGetBufferDeviceAddress");
         _vkGetBufferOpaqueCaptureAddress = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferDeviceAddressInfo*, ulong>)loader.GetDeviceProcAddr(device, "vkGetBufferOpaqueCaptureAddress");

@@ -7,7 +7,7 @@ public unsafe class VkExtImageCompressionControlExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkImage, VkImageSubresource2KHR*, VkSubresourceLayout2KHR*, void> _vkGetImageSubresourceLayout2KHR;
 
-    public VkExtImageCompressionControlExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtImageCompressionControlExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetImageSubresourceLayout2KHR = (delegate* unmanaged[Cdecl]<VkDevice, VkImage, VkImageSubresource2KHR*, VkSubresourceLayout2KHR*, void>)loader.GetDeviceProcAddr(device, "vkGetImageSubresourceLayout2KHR");
     }

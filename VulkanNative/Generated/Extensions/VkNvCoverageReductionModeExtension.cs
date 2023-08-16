@@ -7,7 +7,7 @@ public unsafe class VkNvCoverageReductionModeExtension
 {
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkFramebufferMixedSamplesCombinationNV*, VkResult> _vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV;
 
-    public VkNvCoverageReductionModeExtension(VkDevice device, IVulkanLoader loader)
+    public VkNvCoverageReductionModeExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkFramebufferMixedSamplesCombinationNV*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
     }

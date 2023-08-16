@@ -9,7 +9,7 @@ public unsafe class VkNvShadingRateImageExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkShadingRatePaletteNV*, void> _vkCmdSetViewportShadingRatePaletteNV;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCoarseSampleOrderTypeNV, uint, VkCoarseSampleOrderCustomNV*, void> _vkCmdSetCoarseSampleOrderNV;
 
-    public VkNvShadingRateImageExtension(VkDevice device, IVulkanLoader loader)
+    public VkNvShadingRateImageExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdBindShadingRateImageNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkImageView, VkImageLayout, void>)loader.GetDeviceProcAddr(device, "vkCmdBindShadingRateImageNV");
         _vkCmdSetViewportShadingRatePaletteNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkShadingRatePaletteNV*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetViewportShadingRatePaletteNV");

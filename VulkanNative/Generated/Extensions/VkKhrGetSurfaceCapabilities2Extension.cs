@@ -8,7 +8,7 @@ public unsafe class VkKhrGetSurfaceCapabilities2Extension
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceSurfaceInfo2KHR*, VkSurfaceCapabilities2KHR*, VkResult> _vkGetPhysicalDeviceSurfaceCapabilities2KHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceSurfaceInfo2KHR*, uint*, VkSurfaceFormat2KHR*, VkResult> _vkGetPhysicalDeviceSurfaceFormats2KHR;
 
-    public VkKhrGetSurfaceCapabilities2Extension(VkInstance instance, IVulkanLoader loader)
+    public VkKhrGetSurfaceCapabilities2Extension(VkInstance instance, IFunctionLoader loader)
     {
         _vkGetPhysicalDeviceSurfaceCapabilities2KHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceSurfaceInfo2KHR*, VkSurfaceCapabilities2KHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfaceCapabilities2KHR");
         _vkGetPhysicalDeviceSurfaceFormats2KHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceSurfaceInfo2KHR*, uint*, VkSurfaceFormat2KHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfaceFormats2KHR");

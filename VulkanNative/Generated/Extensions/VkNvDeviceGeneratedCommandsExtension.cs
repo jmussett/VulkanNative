@@ -12,7 +12,7 @@ public unsafe class VkNvDeviceGeneratedCommandsExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkIndirectCommandsLayoutCreateInfoNV*, VkAllocationCallbacks*, VkIndirectCommandsLayoutNV*, VkResult> _vkCreateIndirectCommandsLayoutNV;
     private delegate* unmanaged[Cdecl]<VkDevice, VkIndirectCommandsLayoutNV, VkAllocationCallbacks*, void> _vkDestroyIndirectCommandsLayoutNV;
 
-    public VkNvDeviceGeneratedCommandsExtension(VkDevice device, IVulkanLoader loader)
+    public VkNvDeviceGeneratedCommandsExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetGeneratedCommandsMemoryRequirementsNV = (delegate* unmanaged[Cdecl]<VkDevice, VkGeneratedCommandsMemoryRequirementsInfoNV*, VkMemoryRequirements2*, void>)loader.GetDeviceProcAddr(device, "vkGetGeneratedCommandsMemoryRequirementsNV");
         _vkCmdPreprocessGeneratedCommandsNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkGeneratedCommandsInfoNV*, void>)loader.GetDeviceProcAddr(device, "vkCmdPreprocessGeneratedCommandsNV");

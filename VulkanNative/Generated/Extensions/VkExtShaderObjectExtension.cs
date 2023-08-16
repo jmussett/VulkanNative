@@ -59,7 +59,7 @@ public unsafe class VkExtShaderObjectExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void> _vkCmdSetRepresentativeFragmentTestEnableNV;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCoverageReductionModeNV, void> _vkCmdSetCoverageReductionModeNV;
 
-    public VkExtShaderObjectExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtShaderObjectExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCreateShadersEXT = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkShaderCreateInfoEXT*, VkAllocationCallbacks*, VkShaderEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateShadersEXT");
         _vkDestroyShaderEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkShaderEXT, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyShaderEXT");

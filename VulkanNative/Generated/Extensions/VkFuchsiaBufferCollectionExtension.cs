@@ -11,7 +11,7 @@ public unsafe class VkFuchsiaBufferCollectionExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkBufferCollectionFUCHSIA, VkAllocationCallbacks*, void> _vkDestroyBufferCollectionFUCHSIA;
     private delegate* unmanaged[Cdecl]<VkDevice, VkBufferCollectionFUCHSIA, VkBufferCollectionPropertiesFUCHSIA*, VkResult> _vkGetBufferCollectionPropertiesFUCHSIA;
 
-    public VkFuchsiaBufferCollectionExtension(VkDevice device, IVulkanLoader loader)
+    public VkFuchsiaBufferCollectionExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCreateBufferCollectionFUCHSIA = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferCollectionCreateInfoFUCHSIA*, VkAllocationCallbacks*, VkBufferCollectionFUCHSIA*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateBufferCollectionFUCHSIA");
         _vkSetBufferCollectionImageConstraintsFUCHSIA = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferCollectionFUCHSIA, VkImageConstraintsInfoFUCHSIA*, VkResult>)loader.GetDeviceProcAddr(device, "vkSetBufferCollectionImageConstraintsFUCHSIA");

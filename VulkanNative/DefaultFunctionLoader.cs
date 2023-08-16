@@ -4,14 +4,14 @@ using VulkanNative.Abstractions;
 
 namespace VulkanNative;
 
-internal unsafe class DefaultVulkanLoader : IVulkanLoader
+internal unsafe class DefaultFunctionLoader : IFunctionLoader
 {
     private readonly IntPtr _libraryHandle;
 
     private delegate* unmanaged[Cdecl]<VkInstance, char*, IntPtr> _vkGetInstanceProcAddr;
     private delegate* unmanaged[Cdecl]<VkDevice, char*, IntPtr> _vkGetDeviceProcAddr;
 
-    public DefaultVulkanLoader()
+    public DefaultFunctionLoader()
     {
         string libraryName = GetVulkanLibraryName();
         

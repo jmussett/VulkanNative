@@ -7,7 +7,7 @@ public unsafe class VkExtDepthBiasControlExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDepthBiasInfoEXT*, void> _vkCmdSetDepthBias2EXT;
 
-    public VkExtDepthBiasControlExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtDepthBiasControlExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdSetDepthBias2EXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDepthBiasInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDepthBias2EXT");
     }

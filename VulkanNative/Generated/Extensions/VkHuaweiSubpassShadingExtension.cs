@@ -8,7 +8,7 @@ public unsafe class VkHuaweiSubpassShadingExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkRenderPass, VkExtent2D*, VkResult> _vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, void> _vkCmdSubpassShadingHUAWEI;
 
-    public VkHuaweiSubpassShadingExtension(VkDevice device, IVulkanLoader loader)
+    public VkHuaweiSubpassShadingExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI = (delegate* unmanaged[Cdecl]<VkDevice, VkRenderPass, VkExtent2D*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI");
         _vkCmdSubpassShadingHUAWEI = (delegate* unmanaged[Cdecl]<VkCommandBuffer, void>)loader.GetDeviceProcAddr(device, "vkCmdSubpassShadingHUAWEI");

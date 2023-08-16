@@ -8,7 +8,7 @@ public unsafe class VkExtSampleLocationsExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkSampleLocationsInfoEXT*, void> _vkCmdSetSampleLocationsEXT;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSampleCountFlags, VkMultisamplePropertiesEXT*, void> _vkGetPhysicalDeviceMultisamplePropertiesEXT;
 
-    public VkExtSampleLocationsExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtSampleLocationsExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdSetSampleLocationsEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkSampleLocationsInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetSampleLocationsEXT");
         _vkGetPhysicalDeviceMultisamplePropertiesEXT = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSampleCountFlags, VkMultisamplePropertiesEXT*, void>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceMultisamplePropertiesEXT");

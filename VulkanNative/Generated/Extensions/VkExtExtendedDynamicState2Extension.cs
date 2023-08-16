@@ -11,7 +11,7 @@ public unsafe class VkExtExtendedDynamicState2Extension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkLogicOp, void> _vkCmdSetLogicOpEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void> _vkCmdSetPrimitiveRestartEnable;
 
-    public VkExtExtendedDynamicState2Extension(VkDevice device, IVulkanLoader loader)
+    public VkExtExtendedDynamicState2Extension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdSetPatchControlPointsEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdSetPatchControlPointsEXT");
         _vkCmdSetRasterizerDiscardEnable = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBool32, void>)loader.GetDeviceProcAddr(device, "vkCmdSetRasterizerDiscardEnable");

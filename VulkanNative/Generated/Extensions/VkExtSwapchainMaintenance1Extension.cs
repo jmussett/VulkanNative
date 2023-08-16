@@ -7,7 +7,7 @@ public unsafe class VkExtSwapchainMaintenance1Extension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkReleaseSwapchainImagesInfoEXT*, VkResult> _vkReleaseSwapchainImagesEXT;
 
-    public VkExtSwapchainMaintenance1Extension(VkDevice device, IVulkanLoader loader)
+    public VkExtSwapchainMaintenance1Extension(VkDevice device, IFunctionLoader loader)
     {
         _vkReleaseSwapchainImagesEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkReleaseSwapchainImagesInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkReleaseSwapchainImagesEXT");
     }

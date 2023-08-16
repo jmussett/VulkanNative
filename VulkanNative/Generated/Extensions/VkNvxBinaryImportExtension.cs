@@ -11,7 +11,7 @@ public unsafe class VkNvxBinaryImportExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkCuFunctionNVX, VkAllocationCallbacks*, void> _vkDestroyCuFunctionNVX;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCuLaunchInfoNVX*, void> _vkCmdCuLaunchKernelNVX;
 
-    public VkNvxBinaryImportExtension(VkDevice device, IVulkanLoader loader)
+    public VkNvxBinaryImportExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCreateCuModuleNVX = (delegate* unmanaged[Cdecl]<VkDevice, VkCuModuleCreateInfoNVX*, VkAllocationCallbacks*, VkCuModuleNVX*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateCuModuleNVX");
         _vkCreateCuFunctionNVX = (delegate* unmanaged[Cdecl]<VkDevice, VkCuFunctionCreateInfoNVX*, VkAllocationCallbacks*, VkCuFunctionNVX*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateCuFunctionNVX");

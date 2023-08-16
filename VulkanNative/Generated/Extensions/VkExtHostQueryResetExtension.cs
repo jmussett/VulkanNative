@@ -7,7 +7,7 @@ public unsafe class VkExtHostQueryResetExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkQueryPool, uint, uint, void> _vkResetQueryPool;
 
-    public VkExtHostQueryResetExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtHostQueryResetExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkResetQueryPool = (delegate* unmanaged[Cdecl]<VkDevice, VkQueryPool, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkResetQueryPool");
     }

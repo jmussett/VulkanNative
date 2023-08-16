@@ -7,7 +7,7 @@ public unsafe class VkKhrCooperativeMatrixExtension
 {
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkCooperativeMatrixPropertiesKHR*, VkResult> _vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR;
 
-    public VkKhrCooperativeMatrixExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrCooperativeMatrixExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkCooperativeMatrixPropertiesKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR");
     }

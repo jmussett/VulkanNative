@@ -8,7 +8,7 @@ public unsafe class VkExtDirectfbSurfaceExtension
     private delegate* unmanaged[Cdecl]<VkInstance, VkDirectFBSurfaceCreateInfoEXT*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> _vkCreateDirectFBSurfaceEXT;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, nint*, VkBool32> _vkGetPhysicalDeviceDirectFBPresentationSupportEXT;
 
-    public VkExtDirectfbSurfaceExtension(VkInstance instance, IVulkanLoader loader)
+    public VkExtDirectfbSurfaceExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkCreateDirectFBSurfaceEXT = (delegate* unmanaged[Cdecl]<VkInstance, VkDirectFBSurfaceCreateInfoEXT*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateDirectFBSurfaceEXT");
         _vkGetPhysicalDeviceDirectFBPresentationSupportEXT = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, nint*, VkBool32>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceDirectFBPresentationSupportEXT");

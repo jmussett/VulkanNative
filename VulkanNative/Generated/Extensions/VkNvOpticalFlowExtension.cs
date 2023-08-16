@@ -11,7 +11,7 @@ public unsafe class VkNvOpticalFlowExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkOpticalFlowSessionNV, VkOpticalFlowSessionBindingPointNV, VkImageView, VkImageLayout, VkResult> _vkBindOpticalFlowSessionImageNV;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkOpticalFlowSessionNV, VkOpticalFlowExecuteInfoNV*, void> _vkCmdOpticalFlowExecuteNV;
 
-    public VkNvOpticalFlowExtension(VkDevice device, IVulkanLoader loader)
+    public VkNvOpticalFlowExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetPhysicalDeviceOpticalFlowImageFormatsNV = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkOpticalFlowImageFormatInfoNV*, uint*, VkOpticalFlowImageFormatPropertiesNV*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceOpticalFlowImageFormatsNV");
         _vkCreateOpticalFlowSessionNV = (delegate* unmanaged[Cdecl]<VkDevice, VkOpticalFlowSessionCreateInfoNV*, VkAllocationCallbacks*, VkOpticalFlowSessionNV*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateOpticalFlowSessionNV");

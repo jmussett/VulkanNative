@@ -7,7 +7,7 @@ public unsafe class VkKhrPresentWaitExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, ulong, ulong, VkResult> _vkWaitForPresentKHR;
 
-    public VkKhrPresentWaitExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrPresentWaitExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkWaitForPresentKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, ulong, ulong, VkResult>)loader.GetDeviceProcAddr(device, "vkWaitForPresentKHR");
     }

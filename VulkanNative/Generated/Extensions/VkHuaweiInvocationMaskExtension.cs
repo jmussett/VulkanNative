@@ -7,7 +7,7 @@ public unsafe class VkHuaweiInvocationMaskExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkImageView, VkImageLayout, void> _vkCmdBindInvocationMaskHUAWEI;
 
-    public VkHuaweiInvocationMaskExtension(VkDevice device, IVulkanLoader loader)
+    public VkHuaweiInvocationMaskExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdBindInvocationMaskHUAWEI = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkImageView, VkImageLayout, void>)loader.GetDeviceProcAddr(device, "vkCmdBindInvocationMaskHUAWEI");
     }

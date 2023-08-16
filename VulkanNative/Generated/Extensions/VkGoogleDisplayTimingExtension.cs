@@ -8,7 +8,7 @@ public unsafe class VkGoogleDisplayTimingExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkRefreshCycleDurationGOOGLE*, VkResult> _vkGetRefreshCycleDurationGOOGLE;
     private delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, uint*, VkPastPresentationTimingGOOGLE*, VkResult> _vkGetPastPresentationTimingGOOGLE;
 
-    public VkGoogleDisplayTimingExtension(VkDevice device, IVulkanLoader loader)
+    public VkGoogleDisplayTimingExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetRefreshCycleDurationGOOGLE = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkRefreshCycleDurationGOOGLE*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetRefreshCycleDurationGOOGLE");
         _vkGetPastPresentationTimingGOOGLE = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, uint*, VkPastPresentationTimingGOOGLE*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPastPresentationTimingGOOGLE");

@@ -7,7 +7,7 @@ public unsafe class VkExtPageableDeviceLocalMemoryExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeviceMemory, float, void> _vkSetDeviceMemoryPriorityEXT;
 
-    public VkExtPageableDeviceLocalMemoryExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtPageableDeviceLocalMemoryExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkSetDeviceMemoryPriorityEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDeviceMemory, float, void>)loader.GetDeviceProcAddr(device, "vkSetDeviceMemoryPriorityEXT");
     }

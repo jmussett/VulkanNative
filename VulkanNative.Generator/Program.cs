@@ -23,6 +23,7 @@ builder.Services
     .AddTransient<FeatureGenerator>()
     .AddTransient<FeatureGenerator>()
     .AddTransient<ExtensionGenerator>()
+    .AddTransient<ExtensionsLoaderGenerator>()
     .AddTransient<ApiConstantsGenerator>()
     .AddTransient<EnumGenerator>()
     .AddTransient<StructTypeGenerator>()

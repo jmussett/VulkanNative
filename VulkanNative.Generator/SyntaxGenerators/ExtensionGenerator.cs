@@ -27,7 +27,6 @@ internal class ExtensionGenerator
             // Skip non-vulkan features (i.e: Vulkan sc, deprecated, obsolete, or provisional)
             if (!extension.Supported.Split(',').Contains("vulkan") ||
                 extension.Provisional == "true" ||
-                //!string.IsNullOrWhiteSpace(extension.PromotedTo) ||
                 !string.IsNullOrWhiteSpace(extension.DeprecatedBy) ||
                 !string.IsNullOrWhiteSpace(extension.ObsoletedBy)
                 )

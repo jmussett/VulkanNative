@@ -10,7 +10,7 @@ public unsafe class VkExtDisplayControlExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkDisplayKHR, VkDisplayEventInfoEXT*, VkAllocationCallbacks*, VkFence*, VkResult> _vkRegisterDisplayEventEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkSurfaceCounterFlagsEXT, ulong*, VkResult> _vkGetSwapchainCounterEXT;
 
-    public VkExtDisplayControlExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtDisplayControlExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkDisplayPowerControlEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDisplayKHR, VkDisplayPowerInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkDisplayPowerControlEXT");
         _vkRegisterDeviceEventEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDeviceEventInfoEXT*, VkAllocationCallbacks*, VkFence*, VkResult>)loader.GetDeviceProcAddr(device, "vkRegisterDeviceEventEXT");

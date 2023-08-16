@@ -9,7 +9,7 @@ public unsafe class VkNvDeviceGeneratedCommandsComputeExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineBindPoint, VkPipeline, void> _vkCmdUpdatePipelineIndirectBufferNV;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipelineIndirectDeviceAddressInfoNV*, VkDeviceAddress> _vkGetPipelineIndirectDeviceAddressNV;
 
-    public VkNvDeviceGeneratedCommandsComputeExtension(VkDevice device, IVulkanLoader loader)
+    public VkNvDeviceGeneratedCommandsComputeExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetPipelineIndirectMemoryRequirementsNV = (delegate* unmanaged[Cdecl]<VkDevice, VkComputePipelineCreateInfo*, VkMemoryRequirements2*, void>)loader.GetDeviceProcAddr(device, "vkGetPipelineIndirectMemoryRequirementsNV");
         _vkCmdUpdatePipelineIndirectBufferNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineBindPoint, VkPipeline, void>)loader.GetDeviceProcAddr(device, "vkCmdUpdatePipelineIndirectBufferNV");

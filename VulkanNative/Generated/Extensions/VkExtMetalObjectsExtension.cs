@@ -7,7 +7,7 @@ public unsafe class VkExtMetalObjectsExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkExportMetalObjectsInfoEXT*, void> _vkExportMetalObjectsEXT;
 
-    public VkExtMetalObjectsExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtMetalObjectsExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkExportMetalObjectsEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkExportMetalObjectsInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkExportMetalObjectsEXT");
     }

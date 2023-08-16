@@ -30,7 +30,7 @@ public unsafe class VkInstanceCommands
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceExternalSemaphoreInfo*, VkExternalSemaphoreProperties*, void> _vkGetPhysicalDeviceExternalSemaphoreProperties;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkPhysicalDeviceToolProperties*, VkResult> _vkGetPhysicalDeviceToolProperties;
 
-    public VkInstanceCommands(VkInstance instance, IVulkanLoader loader)
+    public VkInstanceCommands(VkInstance instance, IFunctionLoader loader)
     {
         _vkDestroyInstance = (delegate* unmanaged[Cdecl]<VkInstance, VkAllocationCallbacks*, void>)loader.GetInstanceProcAddr(instance, "vkDestroyInstance");
         _vkEnumeratePhysicalDevices = (delegate* unmanaged[Cdecl]<VkInstance, uint*, VkPhysicalDevice*, VkResult>)loader.GetInstanceProcAddr(instance, "vkEnumeratePhysicalDevices");

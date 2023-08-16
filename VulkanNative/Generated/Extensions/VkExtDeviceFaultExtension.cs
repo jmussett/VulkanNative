@@ -7,7 +7,7 @@ public unsafe class VkExtDeviceFaultExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeviceFaultCountsEXT*, VkDeviceFaultInfoEXT*, VkResult> _vkGetDeviceFaultInfoEXT;
 
-    public VkExtDeviceFaultExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtDeviceFaultExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetDeviceFaultInfoEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDeviceFaultCountsEXT*, VkDeviceFaultInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetDeviceFaultInfoEXT");
     }

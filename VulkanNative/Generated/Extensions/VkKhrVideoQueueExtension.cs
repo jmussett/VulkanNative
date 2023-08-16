@@ -18,7 +18,7 @@ public unsafe class VkKhrVideoQueueExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoEndCodingInfoKHR*, void> _vkCmdEndVideoCodingKHR;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkVideoCodingControlInfoKHR*, void> _vkCmdControlVideoCodingKHR;
 
-    public VkKhrVideoQueueExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrVideoQueueExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetPhysicalDeviceVideoCapabilitiesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkVideoProfileInfoKHR*, VkVideoCapabilitiesKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceVideoCapabilitiesKHR");
         _vkGetPhysicalDeviceVideoFormatPropertiesKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceVideoFormatInfoKHR*, uint*, VkVideoFormatPropertiesKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPhysicalDeviceVideoFormatPropertiesKHR");

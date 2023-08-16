@@ -7,7 +7,7 @@ public unsafe class VkKhrDeviceGroupCreationExtension
 {
     private delegate* unmanaged[Cdecl]<VkInstance, uint*, VkPhysicalDeviceGroupProperties*, VkResult> _vkEnumeratePhysicalDeviceGroups;
 
-    public VkKhrDeviceGroupCreationExtension(VkInstance instance, IVulkanLoader loader)
+    public VkKhrDeviceGroupCreationExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkEnumeratePhysicalDeviceGroups = (delegate* unmanaged[Cdecl]<VkInstance, uint*, VkPhysicalDeviceGroupProperties*, VkResult>)loader.GetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceGroups");
     }

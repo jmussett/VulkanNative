@@ -11,7 +11,7 @@ public unsafe class VkKhrSurfaceExtension
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, uint*, VkSurfaceFormatKHR*, VkResult> _vkGetPhysicalDeviceSurfaceFormatsKHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, uint*, VkPresentModeKHR*, VkResult> _vkGetPhysicalDeviceSurfacePresentModesKHR;
 
-    public VkKhrSurfaceExtension(VkInstance instance, IVulkanLoader loader)
+    public VkKhrSurfaceExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkDestroySurfaceKHR = (delegate* unmanaged[Cdecl]<VkInstance, VkSurfaceKHR, VkAllocationCallbacks*, void>)loader.GetInstanceProcAddr(instance, "vkDestroySurfaceKHR");
         _vkGetPhysicalDeviceSurfaceSupportKHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint, VkSurfaceKHR, VkBool32*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceSurfaceSupportKHR");

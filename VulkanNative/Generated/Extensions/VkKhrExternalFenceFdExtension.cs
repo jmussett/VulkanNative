@@ -8,7 +8,7 @@ public unsafe class VkKhrExternalFenceFdExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkImportFenceFdInfoKHR*, VkResult> _vkImportFenceFdKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkFenceGetFdInfoKHR*, nint*, VkResult> _vkGetFenceFdKHR;
 
-    public VkKhrExternalFenceFdExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrExternalFenceFdExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkImportFenceFdKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkImportFenceFdInfoKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkImportFenceFdKHR");
         _vkGetFenceFdKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkFenceGetFdInfoKHR*, nint*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetFenceFdKHR");

@@ -10,7 +10,7 @@ public unsafe class VkKhrGetDisplayProperties2Extension
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayKHR, uint*, VkDisplayModeProperties2KHR*, VkResult> _vkGetDisplayModeProperties2KHR;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDisplayPlaneInfo2KHR*, VkDisplayPlaneCapabilities2KHR*, VkResult> _vkGetDisplayPlaneCapabilities2KHR;
 
-    public VkKhrGetDisplayProperties2Extension(VkInstance instance, IVulkanLoader loader)
+    public VkKhrGetDisplayProperties2Extension(VkInstance instance, IFunctionLoader loader)
     {
         _vkGetPhysicalDeviceDisplayProperties2KHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkDisplayProperties2KHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceDisplayProperties2KHR");
         _vkGetPhysicalDeviceDisplayPlaneProperties2KHR = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkDisplayPlaneProperties2KHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceDisplayPlaneProperties2KHR");

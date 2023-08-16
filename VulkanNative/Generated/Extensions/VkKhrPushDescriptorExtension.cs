@@ -8,7 +8,7 @@ public unsafe class VkKhrPushDescriptorExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineBindPoint, VkPipelineLayout, uint, uint, VkWriteDescriptorSet*, void> _vkCmdPushDescriptorSetKHR;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDescriptorUpdateTemplate, VkPipelineLayout, uint, void*, void> _vkCmdPushDescriptorSetWithTemplateKHR;
 
-    public VkKhrPushDescriptorExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrPushDescriptorExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdPushDescriptorSetKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineBindPoint, VkPipelineLayout, uint, uint, VkWriteDescriptorSet*, void>)loader.GetDeviceProcAddr(device, "vkCmdPushDescriptorSetKHR");
         _vkCmdPushDescriptorSetWithTemplateKHR = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkDescriptorUpdateTemplate, VkPipelineLayout, uint, void*, void>)loader.GetDeviceProcAddr(device, "vkCmdPushDescriptorSetWithTemplateKHR");

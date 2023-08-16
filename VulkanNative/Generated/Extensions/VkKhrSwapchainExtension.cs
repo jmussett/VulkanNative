@@ -15,7 +15,7 @@ public unsafe class VkKhrSwapchainExtension
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, uint*, VkRect2D*, VkResult> _vkGetPhysicalDevicePresentRectanglesKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkAcquireNextImageInfoKHR*, uint*, VkResult> _vkAcquireNextImage2KHR;
 
-    public VkKhrSwapchainExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrSwapchainExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCreateSwapchainKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainCreateInfoKHR*, VkAllocationCallbacks*, VkSwapchainKHR*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateSwapchainKHR");
         _vkDestroySwapchainKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkSwapchainKHR, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroySwapchainKHR");

@@ -8,7 +8,7 @@ public unsafe class VkValveDescriptorSetHostMappingExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetBindingReferenceVALVE*, VkDescriptorSetLayoutHostMappingInfoVALVE*, void> _vkGetDescriptorSetLayoutHostMappingInfoVALVE;
     private delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSet, void**, void> _vkGetDescriptorSetHostMappingVALVE;
 
-    public VkValveDescriptorSetHostMappingExtension(VkDevice device, IVulkanLoader loader)
+    public VkValveDescriptorSetHostMappingExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetDescriptorSetLayoutHostMappingInfoVALVE = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetBindingReferenceVALVE*, VkDescriptorSetLayoutHostMappingInfoVALVE*, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorSetLayoutHostMappingInfoVALVE");
         _vkGetDescriptorSetHostMappingVALVE = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSet, void**, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorSetHostMappingVALVE");

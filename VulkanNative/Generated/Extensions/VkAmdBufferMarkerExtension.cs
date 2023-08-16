@@ -7,7 +7,7 @@ public unsafe class VkAmdBufferMarkerExtension
 {
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineStageFlags, VkBuffer, VkDeviceSize, uint, void> _vkCmdWriteBufferMarkerAMD;
 
-    public VkAmdBufferMarkerExtension(VkDevice device, IVulkanLoader loader)
+    public VkAmdBufferMarkerExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdWriteBufferMarkerAMD = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineStageFlags, VkBuffer, VkDeviceSize, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdWriteBufferMarkerAMD");
     }

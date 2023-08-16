@@ -7,7 +7,7 @@ public unsafe class VkExtMetalSurfaceExtension
 {
     private delegate* unmanaged[Cdecl]<VkInstance, VkMetalSurfaceCreateInfoEXT*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> _vkCreateMetalSurfaceEXT;
 
-    public VkExtMetalSurfaceExtension(VkInstance instance, IVulkanLoader loader)
+    public VkExtMetalSurfaceExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkCreateMetalSurfaceEXT = (delegate* unmanaged[Cdecl]<VkInstance, VkMetalSurfaceCreateInfoEXT*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateMetalSurfaceEXT");
     }

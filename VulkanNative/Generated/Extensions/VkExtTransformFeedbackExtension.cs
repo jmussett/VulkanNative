@@ -12,7 +12,7 @@ public unsafe class VkExtTransformFeedbackExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkQueryPool, uint, uint, void> _vkCmdEndQueryIndexedEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkBuffer, VkDeviceSize, uint, uint, void> _vkCmdDrawIndirectByteCountEXT;
 
-    public VkExtTransformFeedbackExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtTransformFeedbackExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdBindTransformFeedbackBuffersEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkBuffer*, VkDeviceSize*, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkCmdBindTransformFeedbackBuffersEXT");
         _vkCmdBeginTransformFeedbackEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, uint, VkBuffer*, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkCmdBeginTransformFeedbackEXT");

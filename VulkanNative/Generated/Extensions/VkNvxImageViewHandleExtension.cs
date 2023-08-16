@@ -8,7 +8,7 @@ public unsafe class VkNvxImageViewHandleExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkImageViewHandleInfoNVX*, uint> _vkGetImageViewHandleNVX;
     private delegate* unmanaged[Cdecl]<VkDevice, VkImageView, VkImageViewAddressPropertiesNVX*, VkResult> _vkGetImageViewAddressNVX;
 
-    public VkNvxImageViewHandleExtension(VkDevice device, IVulkanLoader loader)
+    public VkNvxImageViewHandleExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetImageViewHandleNVX = (delegate* unmanaged[Cdecl]<VkDevice, VkImageViewHandleInfoNVX*, uint>)loader.GetDeviceProcAddr(device, "vkGetImageViewHandleNVX");
         _vkGetImageViewAddressNVX = (delegate* unmanaged[Cdecl]<VkDevice, VkImageView, VkImageViewAddressPropertiesNVX*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetImageViewAddressNVX");

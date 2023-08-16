@@ -14,7 +14,7 @@ public unsafe class VkKhrSynchronization2Extension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineStageFlags2, VkBuffer, VkDeviceSize, uint, void> _vkCmdWriteBufferMarker2AMD;
     private delegate* unmanaged[Cdecl]<VkQueue, uint*, VkCheckpointData2NV*, void> _vkGetQueueCheckpointData2NV;
 
-    public VkKhrSynchronization2Extension(VkDevice device, IVulkanLoader loader)
+    public VkKhrSynchronization2Extension(VkDevice device, IFunctionLoader loader)
     {
         _vkCmdSetEvent2 = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkEvent, VkDependencyInfo*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetEvent2");
         _vkCmdResetEvent2 = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkEvent, VkPipelineStageFlags2, void>)loader.GetDeviceProcAddr(device, "vkCmdResetEvent2");

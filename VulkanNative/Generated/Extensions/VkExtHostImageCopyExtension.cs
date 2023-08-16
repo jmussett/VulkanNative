@@ -11,7 +11,7 @@ public unsafe class VkExtHostImageCopyExtension
     private delegate* unmanaged[Cdecl]<VkDevice, uint, VkHostImageLayoutTransitionInfoEXT*, VkResult> _vkTransitionImageLayoutEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkImage, VkImageSubresource2KHR*, VkSubresourceLayout2KHR*, void> _vkGetImageSubresourceLayout2KHR;
 
-    public VkExtHostImageCopyExtension(VkDevice device, IVulkanLoader loader)
+    public VkExtHostImageCopyExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkCopyMemoryToImageEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkCopyMemoryToImageInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyMemoryToImageEXT");
         _vkCopyImageToMemoryEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkCopyImageToMemoryInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyImageToMemoryEXT");

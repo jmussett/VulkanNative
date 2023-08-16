@@ -7,7 +7,7 @@ public unsafe class VkFuchsiaImagepipeSurfaceExtension
 {
     private delegate* unmanaged[Cdecl]<VkInstance, VkImagePipeSurfaceCreateInfoFUCHSIA*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult> _vkCreateImagePipeSurfaceFUCHSIA;
 
-    public VkFuchsiaImagepipeSurfaceExtension(VkInstance instance, IVulkanLoader loader)
+    public VkFuchsiaImagepipeSurfaceExtension(VkInstance instance, IFunctionLoader loader)
     {
         _vkCreateImagePipeSurfaceFUCHSIA = (delegate* unmanaged[Cdecl]<VkInstance, VkImagePipeSurfaceCreateInfoFUCHSIA*, VkAllocationCallbacks*, VkSurfaceKHR*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateImagePipeSurfaceFUCHSIA");
     }

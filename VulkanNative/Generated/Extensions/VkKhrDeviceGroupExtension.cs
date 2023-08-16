@@ -13,7 +13,7 @@ public unsafe class VkKhrDeviceGroupExtension
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkSurfaceKHR, uint*, VkRect2D*, VkResult> _vkGetPhysicalDevicePresentRectanglesKHR;
     private delegate* unmanaged[Cdecl]<VkDevice, VkAcquireNextImageInfoKHR*, uint*, VkResult> _vkAcquireNextImage2KHR;
 
-    public VkKhrDeviceGroupExtension(VkDevice device, IVulkanLoader loader)
+    public VkKhrDeviceGroupExtension(VkDevice device, IFunctionLoader loader)
     {
         _vkGetDeviceGroupPeerMemoryFeatures = (delegate* unmanaged[Cdecl]<VkDevice, uint, uint, uint, VkPeerMemoryFeatureFlags*, void>)loader.GetDeviceProcAddr(device, "vkGetDeviceGroupPeerMemoryFeatures");
         _vkCmdSetDeviceMask = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDeviceMask");
