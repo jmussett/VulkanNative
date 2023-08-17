@@ -6,6 +6,6 @@ namespace VulkanNative;
 public unsafe struct VkRenderPassSubpassFeedbackInfoEXT
 {
     public VkSubpassMergeStatusEXT SubpassMergeStatus;
-    public fixed char Description[(int)VulkanApiConstants.VK_MAX_DESCRIPTION_SIZE];
+    public fixed byte Description[(int)VulkanApiConstants.VK_MAX_DESCRIPTION_SIZE];
     public uint PostMergeIndex;
 }

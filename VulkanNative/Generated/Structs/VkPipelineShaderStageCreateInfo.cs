@@ -10,6 +10,6 @@ public unsafe struct VkPipelineShaderStageCreateInfo
     public VkPipelineShaderStageCreateFlags Flags;
     public VkShaderStageFlags Stage;
     public VkShaderModule Module;
-    public char* PName;
+    public byte* PName;
     public VkSpecializationInfo* PSpecializationInfo;
 }

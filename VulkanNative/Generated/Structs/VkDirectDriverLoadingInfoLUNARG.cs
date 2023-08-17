@@ -8,5 +8,5 @@ public unsafe struct VkDirectDriverLoadingInfoLUNARG
     public VkStructureType SType;
     public void* PNext;
     public VkDirectDriverLoadingFlagsLUNARG Flags;
-    public delegate* unmanaged[Cdecl]<VkInstance, char*, void> PfnGetInstanceProcAddr;
+    public delegate* unmanaged[Cdecl]<VkInstance, byte*, void> PfnGetInstanceProcAddr;
 }

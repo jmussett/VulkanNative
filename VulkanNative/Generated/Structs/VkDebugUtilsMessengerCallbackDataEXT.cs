@@ -8,9 +8,9 @@ public unsafe struct VkDebugUtilsMessengerCallbackDataEXT
     public VkStructureType SType;
     public void* PNext;
     public VkDebugUtilsMessengerCallbackDataFlagsEXT Flags;
-    public char* PMessageIdName;
+    public byte* PMessageIdName;
     public int MessageIdNumber;
-    public char* PMessage;
+    public byte* PMessage;
     public uint QueueLabelCount;
     public VkDebugUtilsLabelEXT* PQueueLabels;
     public uint CmdBufLabelCount;

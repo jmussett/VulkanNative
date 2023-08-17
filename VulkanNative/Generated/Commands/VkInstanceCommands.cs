@@ -14,7 +14,7 @@ public unsafe class VkInstanceCommands
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkQueueFamilyProperties*, void> _vkGetPhysicalDeviceQueueFamilyProperties;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceMemoryProperties*, void> _vkGetPhysicalDeviceMemoryProperties;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDeviceCreateInfo*, VkAllocationCallbacks*, VkDevice*, VkResult> _vkCreateDevice;
-    private delegate* unmanaged[Cdecl]<VkPhysicalDevice, char*, uint*, VkExtensionProperties*, VkResult> _vkEnumerateDeviceExtensionProperties;
+    private delegate* unmanaged[Cdecl]<VkPhysicalDevice, byte*, uint*, VkExtensionProperties*, VkResult> _vkEnumerateDeviceExtensionProperties;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkLayerProperties*, VkResult> _vkEnumerateDeviceLayerProperties;
     private delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkFormat, VkImageType, VkSampleCountFlags, VkImageUsageFlags, VkImageTiling, uint*, VkSparseImageFormatProperties*, void> _vkGetPhysicalDeviceSparseImageFormatProperties;
     private delegate* unmanaged[Cdecl]<VkInstance, uint*, VkPhysicalDeviceGroupProperties*, VkResult> _vkEnumeratePhysicalDeviceGroups;
@@ -41,7 +41,7 @@ public unsafe class VkInstanceCommands
         _vkGetPhysicalDeviceQueueFamilyProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkQueueFamilyProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceQueueFamilyProperties");
         _vkGetPhysicalDeviceMemoryProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkPhysicalDeviceMemoryProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceMemoryProperties");
         _vkCreateDevice = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkDeviceCreateInfo*, VkAllocationCallbacks*, VkDevice*, VkResult>)loader.GetInstanceProcAddr(instance, "vkCreateDevice");
-        _vkEnumerateDeviceExtensionProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, char*, uint*, VkExtensionProperties*, VkResult>)loader.GetInstanceProcAddr(instance, "vkEnumerateDeviceExtensionProperties");
+        _vkEnumerateDeviceExtensionProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, byte*, uint*, VkExtensionProperties*, VkResult>)loader.GetInstanceProcAddr(instance, "vkEnumerateDeviceExtensionProperties");
         _vkEnumerateDeviceLayerProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, uint*, VkLayerProperties*, VkResult>)loader.GetInstanceProcAddr(instance, "vkEnumerateDeviceLayerProperties");
         _vkGetPhysicalDeviceSparseImageFormatProperties = (delegate* unmanaged[Cdecl]<VkPhysicalDevice, VkFormat, VkImageType, VkSampleCountFlags, VkImageUsageFlags, VkImageTiling, uint*, VkSparseImageFormatProperties*, void>)loader.GetInstanceProcAddr(instance, "vkGetPhysicalDeviceSparseImageFormatProperties");
         _vkEnumeratePhysicalDeviceGroups = (delegate* unmanaged[Cdecl]<VkInstance, uint*, VkPhysicalDeviceGroupProperties*, VkResult>)loader.GetInstanceProcAddr(instance, "vkEnumeratePhysicalDeviceGroups");
@@ -113,7 +113,7 @@ public unsafe class VkInstanceCommands
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkEnumerateDeviceExtensionProperties(VkPhysicalDevice physicalDevice, char* pLayerName, uint* pPropertyCount, VkExtensionProperties* pProperties)
+    public VkResult VkEnumerateDeviceExtensionProperties(VkPhysicalDevice physicalDevice, byte* pLayerName, uint* pPropertyCount, VkExtensionProperties* pProperties)
     {
         return _vkEnumerateDeviceExtensionProperties(physicalDevice, pLayerName, pPropertyCount, pProperties);
     }

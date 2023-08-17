@@ -10,7 +10,7 @@ public unsafe struct VkInstanceCreateInfo
     public VkInstanceCreateFlags Flags;
     public VkApplicationInfo* PApplicationInfo;
     public uint EnabledLayerCount;
-    public char** PpEnabledLayerNames;
+    public byte** PpEnabledLayerNames;
     public uint EnabledExtensionCount;
-    public char** PpEnabledExtensionNames;
+    public byte** PpEnabledExtensionNames;
 }

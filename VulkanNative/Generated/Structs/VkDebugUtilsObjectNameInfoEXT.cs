@@ -9,5 +9,5 @@ public unsafe struct VkDebugUtilsObjectNameInfoEXT
     public void* PNext;
     public VkObjectType ObjectType;
     public ulong ObjectHandle;
-    public char* PObjectName;
+    public byte* PObjectName;
 }

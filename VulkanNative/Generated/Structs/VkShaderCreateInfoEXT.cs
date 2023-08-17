@@ -13,7 +13,7 @@ public unsafe struct VkShaderCreateInfoEXT
     public VkShaderCodeTypeEXT CodeType;
     public nint CodeSize;
     public void* PCode;
-    public char* PName;
+    public byte* PName;
     public uint SetLayoutCount;
     public VkDescriptorSetLayout* PSetLayouts;
     public uint PushConstantRangeCount;

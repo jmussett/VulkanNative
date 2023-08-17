@@ -7,9 +7,9 @@ public unsafe struct VkApplicationInfo
 {
     public VkStructureType SType;
     public void* PNext;
-    public char* PApplicationName;
+    public byte* PApplicationName;
     public uint ApplicationVersion;
-    public char* PEngineName;
+    public byte* PEngineName;
     public uint EngineVersion;
     public uint ApiVersion;
 }

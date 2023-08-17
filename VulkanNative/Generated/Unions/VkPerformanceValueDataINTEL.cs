@@ -14,5 +14,5 @@ public unsafe struct VkPerformanceValueDataINTEL
     [FieldOffset(0)]
     public VkBool32 ValueBool;
     [FieldOffset(0)]
-    public char* ValueString;
+    public byte* ValueString;
 }

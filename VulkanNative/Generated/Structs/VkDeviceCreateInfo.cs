@@ -11,8 +11,8 @@ public unsafe struct VkDeviceCreateInfo
     public uint QueueCreateInfoCount;
     public VkDeviceQueueCreateInfo* PQueueCreateInfos;
     public uint EnabledLayerCount;
-    public char** PpEnabledLayerNames;
+    public byte** PpEnabledLayerNames;
     public uint EnabledExtensionCount;
-    public char** PpEnabledExtensionNames;
+    public byte** PpEnabledExtensionNames;
     public VkPhysicalDeviceFeatures* PEnabledFeatures;
 }

@@ -8,8 +8,12 @@ internal class TypeRegistry
     public Dictionary<string, TypeSyntax> Types { get; } = new()
     {
         // Initial primitive types
+
+        // the bitwidth of chars in C# (16 bits) do not match the bitwidth of chars in C (8 bits)
+        // so we use bytes instead (8 bits)
+        { "char", CSharpFactory.Type("byte") },
+
         { "void", CSharpFactory.Type("void") },
-        { "char", CSharpFactory.Type("char") },
         { "float", CSharpFactory.Type("float") },
         { "double", CSharpFactory.Type("double") },
         { "int8_t", CSharpFactory.Type("sbyte") },

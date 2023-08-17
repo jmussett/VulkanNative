@@ -6,7 +6,7 @@ namespace VulkanNative;
 public unsafe struct VkDisplayPropertiesKHR
 {
     public VkDisplayKHR Display;
-    public char* DisplayName;
+    public byte* DisplayName;
     public VkExtent2D PhysicalDimensions;
     public VkExtent2D PhysicalResolution;
     public VkSurfaceTransformFlagsKHR SupportedTransforms;

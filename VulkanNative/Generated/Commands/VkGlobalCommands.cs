@@ -6,14 +6,14 @@ namespace VulkanNative;
 public unsafe class VkGlobalCommands
 {
     private delegate* unmanaged[Cdecl]<VkInstanceCreateInfo*, VkAllocationCallbacks*, VkInstance*, VkResult> _vkCreateInstance;
-    private delegate* unmanaged[Cdecl]<char*, uint*, VkExtensionProperties*, VkResult> _vkEnumerateInstanceExtensionProperties;
+    private delegate* unmanaged[Cdecl]<byte*, uint*, VkExtensionProperties*, VkResult> _vkEnumerateInstanceExtensionProperties;
     private delegate* unmanaged[Cdecl]<uint*, VkLayerProperties*, VkResult> _vkEnumerateInstanceLayerProperties;
     private delegate* unmanaged[Cdecl]<uint*, VkResult> _vkEnumerateInstanceVersion;
 
     public VkGlobalCommands(IFunctionLoader loader)
     {
         _vkCreateInstance = (delegate* unmanaged[Cdecl]<VkInstanceCreateInfo*, VkAllocationCallbacks*, VkInstance*, VkResult>)loader.GetProcAddr("vkCreateInstance");
-        _vkEnumerateInstanceExtensionProperties = (delegate* unmanaged[Cdecl]<char*, uint*, VkExtensionProperties*, VkResult>)loader.GetProcAddr("vkEnumerateInstanceExtensionProperties");
+        _vkEnumerateInstanceExtensionProperties = (delegate* unmanaged[Cdecl]<byte*, uint*, VkExtensionProperties*, VkResult>)loader.GetProcAddr("vkEnumerateInstanceExtensionProperties");
         _vkEnumerateInstanceLayerProperties = (delegate* unmanaged[Cdecl]<uint*, VkLayerProperties*, VkResult>)loader.GetProcAddr("vkEnumerateInstanceLayerProperties");
         _vkEnumerateInstanceVersion = (delegate* unmanaged[Cdecl]<uint*, VkResult>)loader.GetProcAddr("vkEnumerateInstanceVersion");
     }
@@ -25,7 +25,7 @@ public unsafe class VkGlobalCommands
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkEnumerateInstanceExtensionProperties(char* pLayerName, uint* pPropertyCount, VkExtensionProperties* pProperties)
+    public VkResult VkEnumerateInstanceExtensionProperties(byte* pLayerName, uint* pPropertyCount, VkExtensionProperties* pProperties)
     {
         return _vkEnumerateInstanceExtensionProperties(pLayerName, pPropertyCount, pProperties);
     }

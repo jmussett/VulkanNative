@@ -7,6 +7,6 @@ public unsafe struct VkDebugMarkerMarkerInfoEXT
 {
     public VkStructureType SType;
     public void* PNext;
-    public char* PMarkerName;
+    public byte* PMarkerName;
     public fixed float Color[4];
 }

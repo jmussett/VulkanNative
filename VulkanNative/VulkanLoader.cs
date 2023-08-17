@@ -12,11 +12,16 @@ public class VulkanLoader
     {
     }
 
-    public VulkanLoader(IFunctionLoader vulkanLoader)
+    public VulkanLoader(IFunctionLoader functionLoader)
     {
-        _functionLoader = vulkanLoader;
-        Extensions = new ExtensionLoader(vulkanLoader);
+        _functionLoader = functionLoader;
+        Extensions = new ExtensionLoader(functionLoader);
     }
+
+    public static VulkanLoader Initialize(IFunctionLoader? functionLoader = null) 
+        => functionLoader == null
+            ? new VulkanLoader()
+            : new VulkanLoader(functionLoader);
 
     public VkGlobalCommands LoadGlobalCommands()
     {

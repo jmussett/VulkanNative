@@ -10,7 +10,7 @@ public unsafe struct VkPhysicalDeviceProperties
     public uint VendorID;
     public uint DeviceID;
     public VkPhysicalDeviceType DeviceType;
-    public fixed char DeviceName[(int)VulkanApiConstants.VK_MAX_PHYSICAL_DEVICE_NAME_SIZE];
+    public fixed byte DeviceName[(int)VulkanApiConstants.VK_MAX_PHYSICAL_DEVICE_NAME_SIZE];
     public fixed byte PipelineCacheUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
     public VkPhysicalDeviceLimits Limits;
     public VkPhysicalDeviceSparseProperties SparseProperties;

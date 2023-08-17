@@ -7,6 +7,6 @@ public unsafe struct VkDebugUtilsLabelEXT
 {
     public VkStructureType SType;
     public void* PNext;
-    public char* PLabelName;
+    public byte* PLabelName;
     public fixed float Color[4];
 }
