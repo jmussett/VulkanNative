@@ -4,14 +4,19 @@ using System.Runtime.InteropServices;
 
 namespace VulkanNative.Examples.HelloTriangle;
 
-public unsafe struct UnmanagedBuffer<T> : IEnumerable<T>, IUnmanaged<T>
-    where T : unmanaged
+public unsafe sealed class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TItem>
+    where TItem : unmanaged
 {
-    private T* _pointer;
+    private TItem* _pointer;
+    private readonly int _length;
 
-    public readonly int Length { get; }
+    public int Length
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => _length;
+    }
 
-    public T this[int i]
+    public TItem this[int i]
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get
@@ -40,20 +45,20 @@ public unsafe struct UnmanagedBuffer<T> : IEnumerable<T>, IUnmanaged<T>
             throw new ArgumentOutOfRangeException(nameof(size));
         }
 
-        Length = size;
-        _pointer = (T*) Marshal.AllocHGlobal(size * sizeof(T));
+        _pointer = (TItem*) Marshal.AllocHGlobal(size * sizeof(TItem));
+        _length = size;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly Span<T> AsSpan()
+    public Span<TItem> AsSpan()
     {
         CheckDisposed();
 
-        return new(_pointer, Length);
+        return new(_pointer, _length);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly T* AsPointer()
+    public TItem* AsPointer()
     {
         CheckDisposed();
 
@@ -61,59 +66,116 @@ public unsafe struct UnmanagedBuffer<T> : IEnumerable<T>, IUnmanaged<T>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void TransferOwnership(ref T* destination)
+    public void TransferOwnership(ref TItem* destination)
     {
         CheckDisposed();
 
         destination = _pointer;
 
-        _pointer = (T*) nint.Zero;
+        _pointer = (TItem*) nint.Zero;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly void Dispose()
+    public void Dispose()
     {
         if ((nint)_pointer != nint.Zero)
         {
             Marshal.FreeHGlobal((nint)_pointer);
         }
+
+        GC.SuppressFinalize(this);
     }
 
-    public IEnumerator<T> GetEnumerator()
+    ~UnmanagedBuffer()
+    {
+        Dispose();
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public UnmanagedBufferEnumerator<TItem> GetEnumerator()
     {
         CheckDisposed();
 
-        for (int i = 0; i < Length; i++)
-        {
-            yield return this[i];
-        }
+        return new UnmanagedBufferEnumerator<TItem>(_pointer, _length);
+    }
+
+    IEnumerator<TItem> IEnumerable<TItem>.GetEnumerator()
+    {
+        CheckDisposed();
+
+        return new UnmanagedBufferEnumerator<TItem>(_pointer, _length);
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return GetEnumerator();
+        CheckDisposed();
+
+        return new UnmanagedBufferEnumerator<TItem>(_pointer, _length);
     }
 
-    public readonly override string ToString()
+    public override string ToString()
     {
         return AsSpan().ToString();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private readonly void CheckDisposed()
+    private void CheckDisposed()
     {
         if ((nint)_pointer == nint.Zero)
         {
-            throw new ObjectDisposedException(nameof(UnmanagedBuffer<T>));
+            throw new ObjectDisposedException(nameof(UnmanagedBuffer<TItem>));
         }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private readonly void CheckRange(int i)
+    private void CheckRange(int i)
     {
-        if (i < 0 || i >= Length)
+        if (i < 0 || i >= _length)
         {
             throw new IndexOutOfRangeException(nameof(i));
         }
+    }
+
+    public struct UnmanagedBufferEnumerator<TItem> : IEnumerator<TItem> where TItem : unmanaged
+    {
+        private readonly TItem* _pointer;
+        private readonly int _length;
+        private int _currentIndex;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public UnmanagedBufferEnumerator(TItem* pointer, int length)
+        {
+            _pointer = pointer;
+            _length = length;
+            _currentIndex = -1;
+        }
+
+        public TItem Current
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get
+            {
+                if (_currentIndex < 0 || _currentIndex >= _length)
+                {
+                    throw new InvalidOperationException("Index does not match size of the array.");
+                }
+                return _pointer[_currentIndex];
+            }
+        }
+
+        object IEnumerator.Current => Current;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool MoveNext()
+        {
+            return ++_currentIndex < _length;
+        }
+
+        public void Reset()
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Dispose() { }
     }
 }

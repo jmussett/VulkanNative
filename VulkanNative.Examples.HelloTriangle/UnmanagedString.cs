@@ -4,7 +4,7 @@ using System.Text;
 
 namespace VulkanNative.Examples.HelloTriangle;
 
-public unsafe struct UnmanagedString : IUnmanaged<char>
+public unsafe sealed class UnmanagedString : IUnmanaged<char>
 {
     private UnmanagedBuffer<char> _characters;
 
@@ -14,7 +14,7 @@ public unsafe struct UnmanagedString : IUnmanaged<char>
         set => _characters[i] = value;
     }
 
-    public readonly int Length
+    public int Length
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get => _characters.Length;
@@ -22,40 +22,46 @@ public unsafe struct UnmanagedString : IUnmanaged<char>
 
     
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public UnmanagedString(byte* value, int maxCount) : this(value, maxCount, Encoding.UTF8)
+    public UnmanagedString(byte* value, int maxCount)
+        : this(value, maxCount, Encoding.UTF8)
     {
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public UnmanagedString(byte* value, int maxCount, Encoding encoding)
+        : this(new ReadOnlySpan<byte>(value, maxCount), encoding)
     {
-        if (value == (byte*)nint.Zero) throw new ArgumentNullException(nameof(value));
-        if (maxCount <= 0) throw new ArgumentOutOfRangeException(nameof(maxCount));
-
-        int nullTermByteCount = FindNullTerminator(value, maxCount, encoding);
-
-        var stringBytes = new ReadOnlySpan<byte>(value, nullTermByteCount);
-
-        var charCount = encoding.GetCharCount(value, nullTermByteCount);
-
-        _characters = new UnmanagedBuffer<char>(charCount);
-
-        encoding.GetChars(stringBytes, _characters.AsSpan());
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly Span<char> AsSpan()
+    public UnmanagedString(ReadOnlySpan<byte> bytes)
+        : this(bytes, Encoding.UTF8)
+    {
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public UnmanagedString(ReadOnlySpan<byte> bytes, Encoding encoding)
+    {
+        var charCount = encoding.GetNullTerminatingCharCount(bytes);
+
+        _characters = new UnmanagedBuffer<char>(charCount);
+
+        encoding.GetChars(bytes[..charCount], _characters.AsSpan());
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public Span<char> AsSpan()
     {
         return _characters.AsSpan();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly char* AsPointer()
+    public char* AsPointer()
     {
         return _characters.AsPointer();
     }
 
-    public override readonly string ToString()
+    public override string ToString()
     {
         return _characters.AsSpan().ToString();
     }
@@ -67,46 +73,9 @@ public unsafe struct UnmanagedString : IUnmanaged<char>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly void Dispose()
+    public void Dispose()
     {
         _characters.Dispose();
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int FindNullTerminator(byte* value, int maxCount, Encoding encoding)
-    {
-        if (encoding == Encoding.UTF32)
-        {
-            for (int i = 0; i < maxCount - 3; i += 4)
-            {
-                if (*(uint*)(value + i) == 0)
-                {
-                    return i;
-                }
-            }
-        }
-        else if (encoding == Encoding.Unicode || encoding == Encoding.BigEndianUnicode)
-        {
-            for (int i = 0; i < maxCount - 1; i += 2)
-            {
-                if (*(ushort*)(value + i) == 0)
-                {
-                    return i;
-                }
-            }
-        }
-        else // For single byte encodings like UTF-8, ASCII
-        {
-            for (int i = 0; i < maxCount; i++)
-            {
-                if (value[i] == 0)
-                {
-                    return i;
-                }
-            }
-        }
-
-        throw new ArgumentException("No null terminator found within the given maxCount.", nameof(value));
     }
 
     public IEnumerator<char> GetEnumerator()

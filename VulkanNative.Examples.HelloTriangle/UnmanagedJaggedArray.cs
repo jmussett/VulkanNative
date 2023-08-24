@@ -1,21 +1,22 @@
 ﻿using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
 
 namespace VulkanNative.Examples.HelloTriangle;
 
-// TODO: make unsealed
-public unsafe sealed class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerable<UnmanagedSegment<TItem>>
+public unsafe class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerable<UnmanagedSegment<TItem>>
     where TItem : unmanaged
 {
-    private TItem** _pointers;
-    private int* _lengths;
-    private int _currentLength;
-    private readonly int _maxLength;
+    protected TItem** _pointers;
+    protected int* _lengths;
+    protected int _currentLength;
+    protected int _capacity;
 
-    public int Length => _currentLength;
-    public int MaxLength => _maxLength;
+    public int Length
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => _currentLength;
+    }
 
     public Span<TItem> this[int i]
     {
@@ -30,19 +31,19 @@ public unsafe sealed class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerabl
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public UnmanagedJaggedArray(int maxLength)
+    public UnmanagedJaggedArray(int initialCapacity = 4)
     {
-        if (maxLength <= 0)
+        if (initialCapacity <= 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(maxLength));
+            throw new ArgumentOutOfRangeException(nameof(initialCapacity));
         }
 
-        _maxLength = maxLength;
+        _capacity = initialCapacity;
 
-        _pointers = (TItem**) Marshal.AllocHGlobal(maxLength * sizeof(TItem*));
-        _lengths = (int*) Marshal.AllocHGlobal(maxLength * sizeof(int));
+        _pointers = (TItem**) Marshal.AllocHGlobal(_capacity * sizeof(TItem*));
+        _lengths = (int*) Marshal.AllocHGlobal(_capacity * sizeof(int));
 
-        for (int i = 0; i < maxLength; i++)
+        for (int i = 0; i < _capacity; i++)
         {
             _pointers[i] = null;
             _lengths[i] = 0;
@@ -51,14 +52,10 @@ public unsafe sealed class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerabl
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Add<TUnmanaged>(in TUnmanaged item)
-        where TUnmanaged : unmanaged, IUnmanaged<TItem>
+        where TUnmanaged : IUnmanaged<TItem>
     {
         CheckDisposed();
-
-        if (_currentLength >= _maxLength)
-        {
-            throw new InvalidOperationException("The jagged array is at its max length.");
-        }
+        EnsureCapacity();
 
         _lengths[_currentLength] =  item.Length;
 
@@ -68,21 +65,21 @@ public unsafe sealed class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerabl
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void Add(TItem* pointer, int length)
+    {
+        Add(new ReadOnlySpan<TItem>(pointer, length));
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Add(ReadOnlySpan<TItem> item)
     {
         CheckDisposed();
-
-        if (_currentLength >= _maxLength)
-        {
-            throw new InvalidOperationException("The jagged array is at its max length.");
-        }
+        EnsureCapacity();
 
         _lengths[_currentLength] = item.Length;
         _pointers[_currentLength] = (TItem*)Marshal.AllocHGlobal(item.Length * sizeof(TItem));
 
-        item.CopyTo(this[_currentLength]);
-
-        _currentLength++;
+        item.CopyTo(this[_currentLength++]);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -93,19 +90,26 @@ public unsafe sealed class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerabl
         return _pointers;
     }
 
-    public IEnumerator<UnmanagedSegment<TItem>> GetEnumerator()
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public UnmanagedJaggedArrayEnumerator<TItem> GetEnumerator()
     {
         CheckDisposed();
 
-        for (int i = 0; i < _currentLength; i++)
-        {
-            yield return CreateSegment(i);
-        }
+        return new UnmanagedJaggedArrayEnumerator<TItem>(_pointers, _lengths, _currentLength);
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return GetEnumerator();
+        CheckDisposed();
+
+        return new UnmanagedJaggedArrayEnumerator<TItem>(_pointers, _lengths, _currentLength);
+    }
+
+    IEnumerator<UnmanagedSegment<TItem>> IEnumerable<UnmanagedSegment<TItem>>.GetEnumerator()
+    {
+        CheckDisposed();
+
+        return new UnmanagedJaggedArrayEnumerator<TItem>(_pointers, _lengths, _currentLength);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -143,13 +147,44 @@ public unsafe sealed class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerabl
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private UnmanagedSegment<TItem> CreateSegment(int i)
+    protected void EnsureCapacity()
+    {
+        if (_currentLength < _capacity) return;
+
+        // Double the capacity.
+        int newCapacity = _capacity * 2;
+
+        TItem** newPointers = (TItem**)Marshal.AllocHGlobal(newCapacity * sizeof(TItem*));
+        int* newLengths = (int*)Marshal.AllocHGlobal(newCapacity * sizeof(int));
+
+        for (int i = 0; i < _currentLength; i++)
+        {
+            newPointers[i] = _pointers[i];
+            newLengths[i] = _lengths[i];
+        }
+
+        for (int i = _currentLength; i < newCapacity; i++)
+        {
+            newPointers[i] = null;
+            newLengths[i] = 0;
+        }
+
+        Marshal.FreeHGlobal((IntPtr)_pointers);
+        Marshal.FreeHGlobal((IntPtr)_lengths);
+
+        _pointers = newPointers;
+        _lengths = newLengths;
+        _capacity = newCapacity;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    protected UnmanagedSegment<TItem> CreateSegment(int i)
     {
         return new UnmanagedSegment<TItem>(_pointers[i], _lengths[i]);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private void CheckDisposed()
+    protected void CheckDisposed()
     {
         if (_pointers == (TItem**)nint.Zero || _lengths == (TItem**)nint.Zero)
         {
@@ -158,11 +193,57 @@ public unsafe sealed class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerabl
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private void CheckRange(int index)
+    protected void CheckRange(int index)
     {
         if (index < 0 || index >= _currentLength)
         {
             throw new IndexOutOfRangeException(nameof(index));
         }
+    }
+
+    public struct UnmanagedJaggedArrayEnumerator<TItem> : IEnumerator<UnmanagedSegment<TItem>> where TItem : unmanaged
+    {
+        private readonly TItem** _pointers;
+        private readonly int* _lengths;
+        private readonly int _currentLength;
+        private int _currentIndex;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public UnmanagedJaggedArrayEnumerator(TItem** pointers, int* lengths, int currentLength)
+        {
+            _pointers = pointers;
+            _lengths = lengths;
+            _currentLength = currentLength;
+            _currentIndex = -1;
+        }
+
+        public UnmanagedSegment<TItem> Current
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get
+            {
+                if (_currentIndex < 0 || _currentIndex >= _currentLength)
+                {
+                    throw new InvalidOperationException("Index does not match size of the array.");
+                }
+
+                return new UnmanagedSegment<TItem>(_pointers[_currentIndex], _lengths[_currentIndex]);
+            }
+        }
+
+        object IEnumerator.Current => Current;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool MoveNext()
+        {
+            return ++_currentIndex < _currentLength;
+        }
+
+        public void Reset()
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Dispose() { }
     }
 }

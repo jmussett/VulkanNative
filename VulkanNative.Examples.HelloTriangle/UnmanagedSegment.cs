@@ -1,19 +1,36 @@
-﻿using System.Diagnostics;
+﻿using System.Runtime.CompilerServices;
 
 namespace VulkanNative.Examples.HelloTriangle;
 
 public unsafe readonly struct UnmanagedSegment<T> where T : unmanaged
 {
-    public readonly T* Pointer { get; }
-    public readonly int Length { get; }
+    private readonly int _length;
+    private readonly unsafe T* _pointer;
 
-    public UnmanagedSegment(T* pointer, int length)
+    public readonly T* Pointer
     {
-        Pointer = pointer;
-        Length = length;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => _pointer;
     }
 
-    public Span<T> AsSpan() => new(Pointer, Length);
+    public readonly int Length
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get => _length;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public UnmanagedSegment(T* pointer, int length)
+    {
+        _pointer = pointer;
+        _length = length;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public Span<T> AsSpan()
+    {
+        return new(Pointer, Length);
+    }
 
     public override string ToString()
     {

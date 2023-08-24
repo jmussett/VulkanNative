@@ -4,25 +4,39 @@ using System.Text;
 
 namespace VulkanNative.Examples.HelloTriangle;
 
-public unsafe struct UnmanagedEncodedString : IUnmanaged<byte>
+public unsafe sealed class UnmanagedEncodedString : IUnmanaged<byte>
 {
-    private UnmanagedBuffer<byte> _bytes;
+    private readonly UnmanagedBuffer<byte> _bytes;
 
     public byte this[int i]
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get => _bytes[i];
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         set => _bytes[i] = value;
     }
 
-    public readonly int Length
+    public int Length
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         get => _bytes.Length;
     }
-        
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public UnmanagedEncodedString(ReadOnlySpan<char> value) : this(value, Encoding.UTF8)
+    public UnmanagedEncodedString(char* chars, int length) 
+        : this(new ReadOnlySpan<char>(chars, length), Encoding.UTF8)
+    {
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public UnmanagedEncodedString(char* chars, int length, Encoding encoding) 
+        : this(new ReadOnlySpan<char>(chars, length), encoding)
+    {
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public UnmanagedEncodedString(ReadOnlySpan<char> value) 
+        : this(value, Encoding.UTF8)
     {
     }
 
@@ -41,13 +55,13 @@ public unsafe struct UnmanagedEncodedString : IUnmanaged<byte>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly Span<byte> AsSpan()
+    public Span<byte> AsSpan()
     {
         return _bytes.AsSpan();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly byte* AsPointer()
+    public byte* AsPointer()
     {
         return _bytes.AsPointer();
     }
@@ -59,7 +73,7 @@ public unsafe struct UnmanagedEncodedString : IUnmanaged<byte>
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public readonly void Dispose()
+    public void Dispose()
     {
         _bytes.Dispose();
     }
