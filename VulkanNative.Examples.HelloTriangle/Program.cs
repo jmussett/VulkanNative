@@ -21,6 +21,12 @@ using UnmanagedUtf8StringArray enabledLayerNames = new(3)
 
 var vkInstance = CreateVulkanInstance(globalCommands, "MyApp", "MyEngine", enabledExtensionNames, enabledLayerNames);
 
+var instanceCommands = vulkanLoader.LoadInstanceCommands(vkInstance);
+
+using var physicalDevices = GetPhysicalDevices(vkInstance, instanceCommands);
+
+var physicalDevice = physicalDevices[0];
+
 static unsafe UnmanagedUtf8StringArray EnumerateInstanceExtensions(VkGlobalCommands globalCommands)
 {
     uint count;
@@ -70,4 +76,16 @@ static unsafe VkInstance CreateVulkanInstance(VkGlobalCommands globalCommands, s
     globalCommands.VkCreateInstance(&vkInstanceCreateInfo, null, &instance).ThrowOnError();
 
     return instance;
+}
+
+static unsafe UnmanagedBuffer<VkPhysicalDevice> GetPhysicalDevices(VkInstance instance, VkInstanceCommands instanceCommands)
+{
+    uint count;
+    instanceCommands.VkEnumeratePhysicalDevices(instance, &count, (VkPhysicalDevice*)null).ThrowOnError();
+
+    UnmanagedBuffer<VkPhysicalDevice> physicalDevices = new((int)count);
+
+    instanceCommands.VkEnumeratePhysicalDevices(instance, &count, physicalDevices.AsPointer()).ThrowOnError();
+
+    return physicalDevices;
 }

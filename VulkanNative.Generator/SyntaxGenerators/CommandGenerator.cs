@@ -164,6 +164,8 @@ internal class CommandGenerator
 
                 x.WithBody(x =>
                 {
+                    // TODO: Do null check against function pointer
+
                     var methodCallExpression = CSharpFactory.Expression(x => x
                         .AsInvocationExpression(
                             x => x.AsIdentifierName($"_{commandName}"),

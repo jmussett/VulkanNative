@@ -1,4 +1,5 @@
 ﻿using System.Runtime.InteropServices;
+using System.Text;
 using VulkanNative.Abstractions;
 
 namespace VulkanNative;
@@ -7,8 +8,8 @@ internal unsafe class DefaultFunctionLoader : IFunctionLoader
 {
     private readonly nint _libraryHandle;
 
-    private readonly delegate* unmanaged[Cdecl]<VkInstance, char*, nint> _vkGetInstanceProcAddr;
-    private readonly delegate* unmanaged[Cdecl]<VkDevice, char*, nint> _vkGetDeviceProcAddr;
+    private readonly delegate* unmanaged[Cdecl]<VkInstance, byte*, nint> _vkGetInstanceProcAddr;
+    private readonly delegate* unmanaged[Cdecl]<VkDevice, byte*, nint> _vkGetDeviceProcAddr;
 
     public DefaultFunctionLoader()
     {
@@ -22,53 +23,51 @@ internal unsafe class DefaultFunctionLoader : IFunctionLoader
             throw new FileNotFoundException($"Failed to load Vulkan library: {libraryName}");
         }
 
-        _vkGetInstanceProcAddr = (delegate* unmanaged[Cdecl]<VkInstance, char*, nint>) GetProcAddr("vkGetInstanceProcAddr");
-        _vkGetDeviceProcAddr = (delegate* unmanaged[Cdecl]<VkDevice, char*, nint>) GetProcAddr("vkGetDeviceProcAddr");
-    }
+        _vkGetInstanceProcAddr = (delegate* unmanaged[Cdecl]<VkInstance, byte*, nint>) GetProcAddr("vkGetInstanceProcAddr");
+        _vkGetDeviceProcAddr = (delegate* unmanaged[Cdecl]<VkDevice, byte*, nint>) GetProcAddr("vkGetDeviceProcAddr");
 
-    public nint GetInstanceProcAddr(VkInstance instance, string name)
-    {
-        fixed (char* namePtr = name)
+        if (_vkGetInstanceProcAddr == null)
         {
-            var addr = _vkGetInstanceProcAddr(instance, namePtr);
+            throw new InvalidOperationException($"Failed to load function pointer: vkGetInstanceProcAddr");
+        }
 
-            // TODO: Consider a soft-fail mechanism in release mode
-            if (addr == nint.Zero)
-            {
-                throw new InvalidOperationException($"Failed to load instance function pointer: {name}");
-            }
-
-            return addr;
+        if (_vkGetDeviceProcAddr == null)
+        {
+            throw new InvalidOperationException($"Failed to load function pointer: vkGetDeviceProcAddr");
         }
     }
 
-    public nint GetDeviceProcAddr(VkDevice device, string name)
+    public nint GetInstanceProcAddr(VkInstance instance, ReadOnlySpan<char> name)
     {
-        fixed (char* namePtr = name)
+        var byteCount = Encoding.UTF8.GetByteCount(name);
+
+        Span<byte> bytes = stackalloc byte[byteCount];
+
+        _ = Encoding.UTF8.GetBytes(name, bytes);
+
+        fixed (byte* namePtr = bytes)
         {
-            var addr = _vkGetDeviceProcAddr(device, namePtr);
+            return _vkGetInstanceProcAddr(instance, namePtr);
+        }
+    }
 
-            // TODO: Consider a soft-fail mechanism in release mode
-            if (addr == nint.Zero)
-            {
-                throw new InvalidOperationException($"Failed to load device function pointer: {name}");
-            }
+    public nint GetDeviceProcAddr(VkDevice device, ReadOnlySpan<char> name)
+    {
+        var byteCount = Encoding.UTF8.GetByteCount(name);
 
-            return addr;
+        Span<byte> bytes = stackalloc byte[byteCount];
+
+        _ = Encoding.UTF8.GetBytes(name, bytes);
+
+        fixed (byte* namePtr = bytes)
+        {
+            return _vkGetDeviceProcAddr(device, namePtr);
         }
     }
 
     public nint GetProcAddr(string name)
     {
-        var addr = NativeLibrary.GetExport(_libraryHandle, name);
-
-        // TODO: Consider a soft-fail mechanism in release mode
-        if (addr == nint.Zero)
-        {
-            throw new InvalidOperationException($"Failed to load function pointer: {name}");
-        }
-
-        return addr;
+        return NativeLibrary.GetExport(_libraryHandle, name);
     }
 
     private static string GetVulkanLibraryName()
