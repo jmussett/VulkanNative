@@ -10,7 +10,6 @@ Glfw.SetErrorCallback((errorCode, message) =>
 Glfw.WindowHint(Hint.ClientApi, 0);
 Glfw.WindowHint(Hint.Resizable, false);
 
-
 var window = Glfw.CreateWindow(800, 600, "Hello Triangle");
 
 
@@ -35,7 +34,7 @@ using UnmanagedUtf8StringArray enabledLayerNames = new()
     "VK_LAYER_KHRONOS_validation"
 };
 
-var instance = api.CreateVulkanInstance("MyApp", "MyEngine", enabledExtensionNames, enabledLayerNames);
+using var instance = api.CreateVulkanInstance("MyApp", "MyEngine", enabledExtensionNames, enabledLayerNames);
 
 var debugUtils = instance.LoadDebugUtils();
 
@@ -58,11 +57,8 @@ while (!Glfw.WindowShouldClose(window))
     Glfw.PollEvents();
 }
 
-// TODO
-//unsafe
-//{
-//    instanceCommands.VkDestroyInstance(vkInstance, (VkAllocationCallbacks*)null);
-//}
+messenger.Dispose();
+instance.Dispose();
 
 Glfw.DestroyWindow(window);
 

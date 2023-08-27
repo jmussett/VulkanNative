@@ -167,7 +167,6 @@ public unsafe class VulkanApi
 
         layerProperties = new LayerProperties[propertyCount];
 
-        // Convert the VkExtensionProperties* to a managed List
         for (int i = 0; i < propertyCount; i++)
         {
             layerProperties[i] = new LayerProperties
