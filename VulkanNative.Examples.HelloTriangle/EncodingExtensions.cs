@@ -52,4 +52,51 @@ internal static class EncodingExtensions
 
         throw new ArgumentException("No null terminator found within the given span.", nameof(value));
     }
+
+
+    public delegate void BytesDelegate<TState>(Span<byte> span, ref TState state);
+
+    public delegate void BytesDelegate(Span<byte> span);
+
+    public static void GetBytes<TState>(this Encoding encoding, ReadOnlySpan<char> source, ref TState state, BytesDelegate<TState> callback)
+    {
+        encoding.GetBytes(source, 512, ref state, callback);
+    }
+
+    public static void GetBytes<TState>(this Encoding encoding, ReadOnlySpan<char> source, BytesDelegate callback)
+    {
+        encoding.GetBytes(source, 512, callback);
+    }
+
+    public static void GetBytes<TState>(this Encoding encoding, ReadOnlySpan<char> source, int maxSize, ref TState state, BytesDelegate<TState> callback)
+    {
+        int byteCount = encoding.GetByteCount(source);
+
+        if (byteCount > maxSize)
+        {
+            throw new ArgumentException($"String '{source}' Exceeds the allowed length of {maxSize}.");
+        }
+
+        Span<byte> buffer = stackalloc byte[byteCount];
+
+        encoding.GetBytes(source, buffer);
+
+        callback(buffer, ref state);
+    }
+
+    public static void GetBytes(this Encoding encoding, ReadOnlySpan<char> source, int maxSize, BytesDelegate callback)
+    {
+        int byteCount = encoding.GetByteCount(source);
+
+        if (byteCount > maxSize)
+        {
+            throw new ArgumentException($"String '{source}' Exceeds the allowed length of {maxSize}.");
+        }
+
+        Span<byte> buffer = stackalloc byte[byteCount];
+
+        encoding.GetBytes(source, buffer);
+
+        callback(buffer);
+    }
 }

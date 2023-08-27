@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -7,6 +8,7 @@ namespace VulkanNative.Examples.HelloTriangle;
 public unsafe sealed class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TItem>
     where TItem : unmanaged
 {
+    private GCHandle _handle;
     private TItem* _pointer;
     private readonly int _length;
 
