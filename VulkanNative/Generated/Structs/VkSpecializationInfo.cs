@@ -7,6 +7,6 @@ public unsafe struct VkSpecializationInfo
 {
     public uint MapEntryCount;
     public VkSpecializationMapEntry* PMapEntries;
-    public nint DataSize;
+    public nuint DataSize;
     public void* PData;
 }

@@ -8,6 +8,6 @@ public unsafe struct VkShaderResourceUsageAMD
     public uint NumUsedVgprs;
     public uint NumUsedSgprs;
     public uint LdsSizePerLocalWorkGroup;
-    public nint LdsUsageSizeInBytes;
-    public nint ScratchMemUsageInBytes;
+    public nuint LdsUsageSizeInBytes;
+    public nuint ScratchMemUsageInBytes;
 }

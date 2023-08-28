@@ -7,6 +7,6 @@ public unsafe struct VkCuModuleCreateInfoNVX
 {
     public VkStructureType SType;
     public void* PNext;
-    public nint DataSize;
+    public nuint DataSize;
     public void* PData;
 }

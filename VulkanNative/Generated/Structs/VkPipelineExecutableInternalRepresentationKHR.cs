@@ -10,6 +10,6 @@ public unsafe struct VkPipelineExecutableInternalRepresentationKHR
     public fixed byte Name[(int)VulkanApiConstants.VK_MAX_DESCRIPTION_SIZE];
     public fixed byte Description[(int)VulkanApiConstants.VK_MAX_DESCRIPTION_SIZE];
     public VkBool32 IsText;
-    public nint DataSize;
+    public nuint DataSize;
     public void* PData;
 }

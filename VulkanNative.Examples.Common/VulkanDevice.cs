@@ -73,6 +73,25 @@ public sealed unsafe class VulkanDevice : IDisposable
         return new ImageView(imageView, _handle, _commands);
     }
 
+    public unsafe ShaderModule CreateShaderModule(byte[] byteCode)
+    {
+        fixed (byte* byteCodePtr = byteCode)
+        {
+            var createInfo = new VkShaderModuleCreateInfo
+            {
+                SType = VkStructureType.VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
+                PCode = (uint*)byteCodePtr,
+                CodeSize = new nuint((uint)byteCode.Length)
+            };
+
+            VkShaderModule shaderModule;
+
+            _commands.VkCreateShaderModule(_handle, &createInfo, null, &shaderModule).ThrowOnError();
+
+            return new ShaderModule(shaderModule, _handle, _commands);
+        }
+    }
+
     public void Dispose()
     {
         if (_handle == nint.Zero)
@@ -87,6 +106,38 @@ public sealed unsafe class VulkanDevice : IDisposable
     }
 
     ~VulkanDevice()
+    {
+        Dispose();
+    }
+}
+
+public sealed unsafe class ShaderModule : IDisposable
+{
+    private VkShaderModule _handle;
+    private readonly VkDevice _deviceHandle;
+    private readonly VkDeviceCommands _commands;
+
+    public ShaderModule(VkShaderModule handle, VkDevice deviceHandle, VkDeviceCommands commands)
+    {
+        _handle = handle;
+        _deviceHandle = deviceHandle;
+        _commands = commands;
+    }
+
+    public void Dispose()
+    {
+        if (_handle == nint.Zero)
+        {
+            return;
+        }
+
+        _commands.VkDestroyShaderModule(_deviceHandle, _handle, null);
+        _handle = nint.Zero;
+
+        GC.SuppressFinalize(this);
+    }
+
+    ~ShaderModule()
     {
         Dispose();
     }

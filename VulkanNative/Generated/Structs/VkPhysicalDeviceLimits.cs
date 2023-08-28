@@ -71,7 +71,7 @@ public unsafe struct VkPhysicalDeviceLimits
     public fixed uint MaxViewportDimensions[2];
     public fixed float ViewportBoundsRange[2];
     public uint ViewportSubPixelBits;
-    public nint MinMemoryMapAlignment;
+    public nuint MinMemoryMapAlignment;
     public VkDeviceSize MinTexelBufferOffsetAlignment;
     public VkDeviceSize MinUniformBufferOffsetAlignment;
     public VkDeviceSize MinStorageBufferOffsetAlignment;

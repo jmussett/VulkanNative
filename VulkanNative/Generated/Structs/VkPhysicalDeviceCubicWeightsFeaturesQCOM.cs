@@ -3,9 +3,9 @@
 namespace VulkanNative;
 
 [StructLayout(LayoutKind.Sequential)]
-public unsafe struct VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT
+public unsafe struct VkPhysicalDeviceCubicWeightsFeaturesQCOM
 {
     public VkStructureType SType;
     public void* PNext;
-    public nuint CombinedImageSamplerDensityMapDescriptorSize;
+    public VkBool32 SelectableCubicWeights;
 }

@@ -11,5 +11,14 @@
     <ProjectReference Include="..\VulkanNative.Examples.Common\VulkanNative.Examples.Common.csproj" />
     <ProjectReference Include="..\VulkanNative\VulkanNative.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="shaders\frag.spv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="shaders\vert.spv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>

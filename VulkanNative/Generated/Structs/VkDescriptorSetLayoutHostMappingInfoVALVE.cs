@@ -7,6 +7,6 @@ public unsafe struct VkDescriptorSetLayoutHostMappingInfoVALVE
 {
     public VkStructureType SType;
     public void* PNext;
-    public nint DescriptorOffset;
+    public nuint DescriptorOffset;
     public uint DescriptorSize;
 }

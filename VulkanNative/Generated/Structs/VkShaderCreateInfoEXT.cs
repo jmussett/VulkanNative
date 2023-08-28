@@ -11,7 +11,7 @@ public unsafe struct VkShaderCreateInfoEXT
     public VkShaderStageFlags Stage;
     public VkShaderStageFlags NextStage;
     public VkShaderCodeTypeEXT CodeType;
-    public nint CodeSize;
+    public nuint CodeSize;
     public void* PCode;
     public byte* PName;
     public uint SetLayoutCount;

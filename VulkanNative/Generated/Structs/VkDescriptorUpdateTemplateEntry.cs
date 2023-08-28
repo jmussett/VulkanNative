@@ -9,6 +9,6 @@ public unsafe struct VkDescriptorUpdateTemplateEntry
     public uint DstArrayElement;
     public uint DescriptorCount;
     public VkDescriptorType DescriptorType;
-    public nint Offset;
-    public nint Stride;
+    public nuint Offset;
+    public nuint Stride;
 }

@@ -10,6 +10,6 @@ public unsafe struct VkDebugUtilsObjectTagInfoEXT
     public VkObjectType ObjectType;
     public ulong ObjectHandle;
     public ulong TagName;
-    public nint TagSize;
+    public nuint TagSize;
     public void* PTag;
 }

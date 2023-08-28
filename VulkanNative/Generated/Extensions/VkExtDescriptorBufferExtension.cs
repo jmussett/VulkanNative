@@ -7,7 +7,7 @@ public unsafe class VkExtDescriptorBufferExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetLayout, VkDeviceSize*, void> _vkGetDescriptorSetLayoutSizeEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetLayout, uint, VkDeviceSize*, void> _vkGetDescriptorSetLayoutBindingOffsetEXT;
-    private delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorGetInfoEXT*, nint, void*, void> _vkGetDescriptorEXT;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorGetInfoEXT*, nuint, void*, void> _vkGetDescriptorEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkDescriptorBufferBindingInfoEXT*, void> _vkCmdBindDescriptorBuffersEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineBindPoint, VkPipelineLayout, uint, uint, uint*, VkDeviceSize*, void> _vkCmdSetDescriptorBufferOffsetsEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineBindPoint, VkPipelineLayout, uint, void> _vkCmdBindDescriptorBufferEmbeddedSamplersEXT;
@@ -21,7 +21,7 @@ public unsafe class VkExtDescriptorBufferExtension
     {
         _vkGetDescriptorSetLayoutSizeEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetLayout, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorSetLayoutSizeEXT");
         _vkGetDescriptorSetLayoutBindingOffsetEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorSetLayout, uint, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorSetLayoutBindingOffsetEXT");
-        _vkGetDescriptorEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorGetInfoEXT*, nint, void*, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorEXT");
+        _vkGetDescriptorEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDescriptorGetInfoEXT*, nuint, void*, void>)loader.GetDeviceProcAddr(device, "vkGetDescriptorEXT");
         _vkCmdBindDescriptorBuffersEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkDescriptorBufferBindingInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdBindDescriptorBuffersEXT");
         _vkCmdSetDescriptorBufferOffsetsEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineBindPoint, VkPipelineLayout, uint, uint, uint*, VkDeviceSize*, void>)loader.GetDeviceProcAddr(device, "vkCmdSetDescriptorBufferOffsetsEXT");
         _vkCmdBindDescriptorBufferEmbeddedSamplersEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkPipelineBindPoint, VkPipelineLayout, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdBindDescriptorBufferEmbeddedSamplersEXT");
@@ -45,7 +45,7 @@ public unsafe class VkExtDescriptorBufferExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetDescriptorEXT(VkDevice device, VkDescriptorGetInfoEXT* pDescriptorInfo, nint dataSize, void* pDescriptor)
+    public void VkGetDescriptorEXT(VkDevice device, VkDescriptorGetInfoEXT* pDescriptorInfo, nuint dataSize, void* pDescriptor)
     {
         _vkGetDescriptorEXT(device, pDescriptorInfo, dataSize, pDescriptor);
     }

@@ -8,6 +8,6 @@ public unsafe struct VkShaderModuleCreateInfo
     public VkStructureType SType;
     public void* PNext;
     public VkShaderModuleCreateFlags Flags;
-    public nint CodeSize;
+    public nuint CodeSize;
     public uint* PCode;
 }

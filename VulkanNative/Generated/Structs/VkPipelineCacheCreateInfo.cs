@@ -8,6 +8,6 @@ public unsafe struct VkPipelineCacheCreateInfo
     public VkStructureType SType;
     public void* PNext;
     public VkPipelineCacheCreateFlags Flags;
-    public nint InitialDataSize;
+    public nuint InitialDataSize;
     public void* PInitialData;
 }

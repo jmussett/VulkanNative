@@ -13,8 +13,8 @@ public unsafe class VkNvRayTracingExtension
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkAccelerationStructureNV, VkAccelerationStructureNV, VkCopyAccelerationStructureModeKHR, void> _vkCmdCopyAccelerationStructureNV;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, VkBuffer, VkDeviceSize, VkDeviceSize, VkBuffer, VkDeviceSize, VkDeviceSize, VkBuffer, VkDeviceSize, VkDeviceSize, uint, uint, uint, void> _vkCmdTraceRaysNV;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, uint, VkRayTracingPipelineCreateInfoNV*, VkAllocationCallbacks*, VkPipeline*, VkResult> _vkCreateRayTracingPipelinesNV;
-    private delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, uint, uint, nint, void*, VkResult> _vkGetRayTracingShaderGroupHandlesKHR;
-    private delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureNV, nint, void*, VkResult> _vkGetAccelerationStructureHandleNV;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, uint, uint, nuint, void*, VkResult> _vkGetRayTracingShaderGroupHandlesKHR;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureNV, nuint, void*, VkResult> _vkGetAccelerationStructureHandleNV;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkAccelerationStructureNV*, VkQueryType, VkQueryPool, uint, void> _vkCmdWriteAccelerationStructuresPropertiesNV;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, uint, VkResult> _vkCompileDeferredNV;
 
@@ -28,8 +28,8 @@ public unsafe class VkNvRayTracingExtension
         _vkCmdCopyAccelerationStructureNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkAccelerationStructureNV, VkAccelerationStructureNV, VkCopyAccelerationStructureModeKHR, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyAccelerationStructureNV");
         _vkCmdTraceRaysNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkBuffer, VkDeviceSize, VkBuffer, VkDeviceSize, VkDeviceSize, VkBuffer, VkDeviceSize, VkDeviceSize, VkBuffer, VkDeviceSize, VkDeviceSize, uint, uint, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdTraceRaysNV");
         _vkCreateRayTracingPipelinesNV = (delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, uint, VkRayTracingPipelineCreateInfoNV*, VkAllocationCallbacks*, VkPipeline*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateRayTracingPipelinesNV");
-        _vkGetRayTracingShaderGroupHandlesKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, uint, uint, nint, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetRayTracingShaderGroupHandlesKHR");
-        _vkGetAccelerationStructureHandleNV = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureNV, nint, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetAccelerationStructureHandleNV");
+        _vkGetRayTracingShaderGroupHandlesKHR = (delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, uint, uint, nuint, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetRayTracingShaderGroupHandlesKHR");
+        _vkGetAccelerationStructureHandleNV = (delegate* unmanaged[Cdecl]<VkDevice, VkAccelerationStructureNV, nuint, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetAccelerationStructureHandleNV");
         _vkCmdWriteAccelerationStructuresPropertiesNV = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkAccelerationStructureNV*, VkQueryType, VkQueryPool, uint, void>)loader.GetDeviceProcAddr(device, "vkCmdWriteAccelerationStructuresPropertiesNV");
         _vkCompileDeferredNV = (delegate* unmanaged[Cdecl]<VkDevice, VkPipeline, uint, VkResult>)loader.GetDeviceProcAddr(device, "vkCompileDeferredNV");
     }
@@ -83,13 +83,13 @@ public unsafe class VkNvRayTracingExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetRayTracingShaderGroupHandlesKHR(VkDevice device, VkPipeline pipeline, uint firstGroup, uint groupCount, nint dataSize, void* pData)
+    public VkResult VkGetRayTracingShaderGroupHandlesKHR(VkDevice device, VkPipeline pipeline, uint firstGroup, uint groupCount, nuint dataSize, void* pData)
     {
         return _vkGetRayTracingShaderGroupHandlesKHR(device, pipeline, firstGroup, groupCount, dataSize, pData);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetAccelerationStructureHandleNV(VkDevice device, VkAccelerationStructureNV accelerationStructure, nint dataSize, void* pData)
+    public VkResult VkGetAccelerationStructureHandleNV(VkDevice device, VkAccelerationStructureNV accelerationStructure, nuint dataSize, void* pData)
     {
         return _vkGetAccelerationStructureHandleNV(device, accelerationStructure, dataSize, pData);
     }

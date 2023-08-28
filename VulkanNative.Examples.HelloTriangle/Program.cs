@@ -191,6 +191,11 @@ for (var i = 0; i < imageViews.Length; i++)
     });
 }
 
+byte[] vertBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "vert.spv"));
+byte[] fragBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "frag.spv"));
+
+var vertShader = device.CreateShaderModule(vertBytes);
+var fragShader = device.CreateShaderModule(fragBytes);
 
 while (!Glfw.WindowShouldClose(window))
 {
@@ -202,6 +207,8 @@ for (var i = 0; i < imageViews.Length; i++)
     imageViews[i].Dispose();
 }
 
+vertShader.Dispose();
+fragShader.Dispose();
 swapchain.Dispose();
 surface.Dispose();
 device.Dispose();

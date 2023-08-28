@@ -12,7 +12,7 @@ public unsafe class VkExtOpacityMicromapExtension
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkCopyMicromapInfoEXT*, VkResult> _vkCopyMicromapEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkCopyMicromapToMemoryInfoEXT*, VkResult> _vkCopyMicromapToMemoryEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkCopyMemoryToMicromapInfoEXT*, VkResult> _vkCopyMemoryToMicromapEXT;
-    private delegate* unmanaged[Cdecl]<VkDevice, uint, VkMicromapEXT*, VkQueryType, nint, void*, nint, VkResult> _vkWriteMicromapsPropertiesEXT;
+    private delegate* unmanaged[Cdecl]<VkDevice, uint, VkMicromapEXT*, VkQueryType, nuint, void*, nuint, VkResult> _vkWriteMicromapsPropertiesEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyMicromapInfoEXT*, void> _vkCmdCopyMicromapEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyMicromapToMemoryInfoEXT*, void> _vkCmdCopyMicromapToMemoryEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyMemoryToMicromapInfoEXT*, void> _vkCmdCopyMemoryToMicromapEXT;
@@ -29,7 +29,7 @@ public unsafe class VkExtOpacityMicromapExtension
         _vkCopyMicromapEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkCopyMicromapInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyMicromapEXT");
         _vkCopyMicromapToMemoryEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkCopyMicromapToMemoryInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyMicromapToMemoryEXT");
         _vkCopyMemoryToMicromapEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkDeferredOperationKHR, VkCopyMemoryToMicromapInfoEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCopyMemoryToMicromapEXT");
-        _vkWriteMicromapsPropertiesEXT = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkMicromapEXT*, VkQueryType, nint, void*, nint, VkResult>)loader.GetDeviceProcAddr(device, "vkWriteMicromapsPropertiesEXT");
+        _vkWriteMicromapsPropertiesEXT = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkMicromapEXT*, VkQueryType, nuint, void*, nuint, VkResult>)loader.GetDeviceProcAddr(device, "vkWriteMicromapsPropertiesEXT");
         _vkCmdCopyMicromapEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyMicromapInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyMicromapEXT");
         _vkCmdCopyMicromapToMemoryEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyMicromapToMemoryInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyMicromapToMemoryEXT");
         _vkCmdCopyMemoryToMicromapEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCopyMemoryToMicromapInfoEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdCopyMemoryToMicromapEXT");
@@ -81,7 +81,7 @@ public unsafe class VkExtOpacityMicromapExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkWriteMicromapsPropertiesEXT(VkDevice device, uint micromapCount, VkMicromapEXT* pMicromaps, VkQueryType queryType, nint dataSize, void* pData, nint stride)
+    public VkResult VkWriteMicromapsPropertiesEXT(VkDevice device, uint micromapCount, VkMicromapEXT* pMicromaps, VkQueryType queryType, nuint dataSize, void* pData, nuint stride)
     {
         return _vkWriteMicromapsPropertiesEXT(device, micromapCount, pMicromaps, queryType, dataSize, pData, stride);
     }

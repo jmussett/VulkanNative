@@ -24,6 +24,6 @@ internal class TypeRegistry
         { "uint32_t", CSharpFactory.Type("uint") },
         { "int64_t", CSharpFactory.Type("long") },
         { "uint64_t", CSharpFactory.Type("ulong") },
-        { "size_t", CSharpFactory.Type("nint") }
+        { "size_t", CSharpFactory.Type("nuint") }
     };
 }

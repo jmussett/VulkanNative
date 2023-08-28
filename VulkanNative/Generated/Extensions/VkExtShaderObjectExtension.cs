@@ -7,7 +7,7 @@ public unsafe class VkExtShaderObjectExtension
 {
     private delegate* unmanaged[Cdecl]<VkDevice, uint, VkShaderCreateInfoEXT*, VkAllocationCallbacks*, VkShaderEXT*, VkResult> _vkCreateShadersEXT;
     private delegate* unmanaged[Cdecl]<VkDevice, VkShaderEXT, VkAllocationCallbacks*, void> _vkDestroyShaderEXT;
-    private delegate* unmanaged[Cdecl]<VkDevice, VkShaderEXT, nint*, void*, VkResult> _vkGetShaderBinaryDataEXT;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkShaderEXT, nuint*, void*, VkResult> _vkGetShaderBinaryDataEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkShaderStageFlags*, VkShaderEXT*, void> _vkCmdBindShadersEXT;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCullModeFlags, void> _vkCmdSetCullMode;
     private delegate* unmanaged[Cdecl]<VkCommandBuffer, VkFrontFace, void> _vkCmdSetFrontFace;
@@ -63,7 +63,7 @@ public unsafe class VkExtShaderObjectExtension
     {
         _vkCreateShadersEXT = (delegate* unmanaged[Cdecl]<VkDevice, uint, VkShaderCreateInfoEXT*, VkAllocationCallbacks*, VkShaderEXT*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateShadersEXT");
         _vkDestroyShaderEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkShaderEXT, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyShaderEXT");
-        _vkGetShaderBinaryDataEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkShaderEXT, nint*, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetShaderBinaryDataEXT");
+        _vkGetShaderBinaryDataEXT = (delegate* unmanaged[Cdecl]<VkDevice, VkShaderEXT, nuint*, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetShaderBinaryDataEXT");
         _vkCmdBindShadersEXT = (delegate* unmanaged[Cdecl]<VkCommandBuffer, uint, VkShaderStageFlags*, VkShaderEXT*, void>)loader.GetDeviceProcAddr(device, "vkCmdBindShadersEXT");
         _vkCmdSetCullMode = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkCullModeFlags, void>)loader.GetDeviceProcAddr(device, "vkCmdSetCullMode");
         _vkCmdSetFrontFace = (delegate* unmanaged[Cdecl]<VkCommandBuffer, VkFrontFace, void>)loader.GetDeviceProcAddr(device, "vkCmdSetFrontFace");
@@ -129,7 +129,7 @@ public unsafe class VkExtShaderObjectExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetShaderBinaryDataEXT(VkDevice device, VkShaderEXT shader, nint* pDataSize, void* pData)
+    public VkResult VkGetShaderBinaryDataEXT(VkDevice device, VkShaderEXT shader, nuint* pDataSize, void* pData)
     {
         return _vkGetShaderBinaryDataEXT(device, shader, pDataSize, pData);
     }

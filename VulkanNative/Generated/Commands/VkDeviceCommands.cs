@@ -37,7 +37,7 @@ public unsafe class VkDeviceCommands
     private delegate* unmanaged[Cdecl]<VkDevice, VkEvent, VkResult> _vkResetEvent;
     private delegate* unmanaged[Cdecl]<VkDevice, VkQueryPoolCreateInfo*, VkAllocationCallbacks*, VkQueryPool*, VkResult> _vkCreateQueryPool;
     private delegate* unmanaged[Cdecl]<VkDevice, VkQueryPool, VkAllocationCallbacks*, void> _vkDestroyQueryPool;
-    private delegate* unmanaged[Cdecl]<VkDevice, VkQueryPool, uint, uint, nint, void*, VkDeviceSize, VkQueryResultFlags, VkResult> _vkGetQueryPoolResults;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkQueryPool, uint, uint, nuint, void*, VkDeviceSize, VkQueryResultFlags, VkResult> _vkGetQueryPoolResults;
     private delegate* unmanaged[Cdecl]<VkDevice, VkBufferCreateInfo*, VkAllocationCallbacks*, VkBuffer*, VkResult> _vkCreateBuffer;
     private delegate* unmanaged[Cdecl]<VkDevice, VkBuffer, VkAllocationCallbacks*, void> _vkDestroyBuffer;
     private delegate* unmanaged[Cdecl]<VkDevice, VkBufferViewCreateInfo*, VkAllocationCallbacks*, VkBufferView*, VkResult> _vkCreateBufferView;
@@ -51,7 +51,7 @@ public unsafe class VkDeviceCommands
     private delegate* unmanaged[Cdecl]<VkDevice, VkShaderModule, VkAllocationCallbacks*, void> _vkDestroyShaderModule;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCacheCreateInfo*, VkAllocationCallbacks*, VkPipelineCache*, VkResult> _vkCreatePipelineCache;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, VkAllocationCallbacks*, void> _vkDestroyPipelineCache;
-    private delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, nint*, void*, VkResult> _vkGetPipelineCacheData;
+    private delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, nuint*, void*, VkResult> _vkGetPipelineCacheData;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, uint, VkPipelineCache*, VkResult> _vkMergePipelineCaches;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, uint, VkGraphicsPipelineCreateInfo*, VkAllocationCallbacks*, VkPipeline*, VkResult> _vkCreateGraphicsPipelines;
     private delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, uint, VkComputePipelineCreateInfo*, VkAllocationCallbacks*, VkPipeline*, VkResult> _vkCreateComputePipelines;
@@ -225,7 +225,7 @@ public unsafe class VkDeviceCommands
         _vkResetEvent = (delegate* unmanaged[Cdecl]<VkDevice, VkEvent, VkResult>)loader.GetDeviceProcAddr(device, "vkResetEvent");
         _vkCreateQueryPool = (delegate* unmanaged[Cdecl]<VkDevice, VkQueryPoolCreateInfo*, VkAllocationCallbacks*, VkQueryPool*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateQueryPool");
         _vkDestroyQueryPool = (delegate* unmanaged[Cdecl]<VkDevice, VkQueryPool, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyQueryPool");
-        _vkGetQueryPoolResults = (delegate* unmanaged[Cdecl]<VkDevice, VkQueryPool, uint, uint, nint, void*, VkDeviceSize, VkQueryResultFlags, VkResult>)loader.GetDeviceProcAddr(device, "vkGetQueryPoolResults");
+        _vkGetQueryPoolResults = (delegate* unmanaged[Cdecl]<VkDevice, VkQueryPool, uint, uint, nuint, void*, VkDeviceSize, VkQueryResultFlags, VkResult>)loader.GetDeviceProcAddr(device, "vkGetQueryPoolResults");
         _vkCreateBuffer = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferCreateInfo*, VkAllocationCallbacks*, VkBuffer*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateBuffer");
         _vkDestroyBuffer = (delegate* unmanaged[Cdecl]<VkDevice, VkBuffer, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyBuffer");
         _vkCreateBufferView = (delegate* unmanaged[Cdecl]<VkDevice, VkBufferViewCreateInfo*, VkAllocationCallbacks*, VkBufferView*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateBufferView");
@@ -239,7 +239,7 @@ public unsafe class VkDeviceCommands
         _vkDestroyShaderModule = (delegate* unmanaged[Cdecl]<VkDevice, VkShaderModule, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyShaderModule");
         _vkCreatePipelineCache = (delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCacheCreateInfo*, VkAllocationCallbacks*, VkPipelineCache*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreatePipelineCache");
         _vkDestroyPipelineCache = (delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, VkAllocationCallbacks*, void>)loader.GetDeviceProcAddr(device, "vkDestroyPipelineCache");
-        _vkGetPipelineCacheData = (delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, nint*, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPipelineCacheData");
+        _vkGetPipelineCacheData = (delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, nuint*, void*, VkResult>)loader.GetDeviceProcAddr(device, "vkGetPipelineCacheData");
         _vkMergePipelineCaches = (delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, uint, VkPipelineCache*, VkResult>)loader.GetDeviceProcAddr(device, "vkMergePipelineCaches");
         _vkCreateGraphicsPipelines = (delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, uint, VkGraphicsPipelineCreateInfo*, VkAllocationCallbacks*, VkPipeline*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateGraphicsPipelines");
         _vkCreateComputePipelines = (delegate* unmanaged[Cdecl]<VkDevice, VkPipelineCache, uint, VkComputePipelineCreateInfo*, VkAllocationCallbacks*, VkPipeline*, VkResult>)loader.GetDeviceProcAddr(device, "vkCreateComputePipelines");
@@ -573,7 +573,7 @@ public unsafe class VkDeviceCommands
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetQueryPoolResults(VkDevice device, VkQueryPool queryPool, uint firstQuery, uint queryCount, nint dataSize, void* pData, VkDeviceSize stride, VkQueryResultFlags flags)
+    public VkResult VkGetQueryPoolResults(VkDevice device, VkQueryPool queryPool, uint firstQuery, uint queryCount, nuint dataSize, void* pData, VkDeviceSize stride, VkQueryResultFlags flags)
     {
         return _vkGetQueryPoolResults(device, queryPool, firstQuery, queryCount, dataSize, pData, stride, flags);
     }
@@ -657,7 +657,7 @@ public unsafe class VkDeviceCommands
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetPipelineCacheData(VkDevice device, VkPipelineCache pipelineCache, nint* pDataSize, void* pData)
+    public VkResult VkGetPipelineCacheData(VkDevice device, VkPipelineCache pipelineCache, nuint* pDataSize, void* pData)
     {
         return _vkGetPipelineCacheData(device, pipelineCache, pDataSize, pData);
     }

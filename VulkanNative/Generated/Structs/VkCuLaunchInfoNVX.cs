@@ -15,8 +15,8 @@ public unsafe struct VkCuLaunchInfoNVX
     public uint BlockDimY;
     public uint BlockDimZ;
     public uint SharedMemBytes;
-    public nint ParamCount;
+    public nuint ParamCount;
     public void** PParams;
-    public nint ExtraCount;
+    public nuint ExtraCount;
     public void** PExtras;
 }
