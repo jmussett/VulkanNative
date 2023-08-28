@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace VulkanNative.Examples.HelloTriangle;
+namespace VulkanNative.Examples.Common.Utility;
 
 public unsafe class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerable<UnmanagedSegment<TItem>>
     where TItem : unmanaged

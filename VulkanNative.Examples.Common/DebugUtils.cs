@@ -1,4 +1,4 @@
-﻿namespace VulkanNative.Examples.HelloTriangle;
+﻿namespace VulkanNative.Examples.Common;
 
 public class DebugUtils
 {

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-namespace VulkanNative.Examples.HelloTriangle;
+namespace VulkanNative.Examples.Common.Utility;
 
 public unsafe readonly struct UnmanagedSegment<T> where T : unmanaged
 {

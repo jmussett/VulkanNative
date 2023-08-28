@@ -1,33 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Text;
+using VulkanNative.Examples.Common.Utility;
 
-namespace VulkanNative.Examples.HelloTriangle;
-
-
-public struct ExtensionProperties
-{
-    public string ExtensionName;
-    public uint SpecVersion;
-
-    public override string ToString()
-    {
-        return ExtensionName;
-    }
-}
-
-public struct LayerProperties
-{
-    public string LayerName;
-    public uint SpecVersion;
-    public uint ImplementationVersion;
-    public string Description;
-
-    public override string ToString()
-    {
-        return LayerName;
-    }
-}
+namespace VulkanNative.Examples.Common;
 
 public unsafe class VulkanApi
 {
@@ -82,7 +57,7 @@ public unsafe class VulkanApi
         return new VulkanInstance(instance, _vulkanLoader);
     }
 
-    public VkResult EnumerateInstanceExtensionProperties(string? layerName, out ExtensionProperties[] properties)
+    public void EnumerateInstanceExtensionProperties(string? layerName, out ExtensionProperties[] properties)
     {
         // Define the state you wish to pass to the callback
         // This can be extended to include other required data, too
@@ -104,8 +79,6 @@ public unsafe class VulkanApi
         }
 
         properties = state.Properties;
-
-        return state.Result;
     }
 
     private static void EnumerateInstanceExtensionProperties(Span<byte> layerName, ref ExtensionPropertiesState state)
@@ -114,21 +87,11 @@ public unsafe class VulkanApi
 
         fixed (byte* layerNamePtr = layerName)
         {
-            state.Result = state.Commands.VkEnumerateInstanceExtensionProperties(layerNamePtr, &propertyCount, null);
-
-            if (state.Result != VkResult.VK_SUCCESS)
-            {
-                return;
-            }
+            state.Commands.VkEnumerateInstanceExtensionProperties(layerNamePtr, &propertyCount, null).ThrowOnError();
 
             var propertiesArray = stackalloc VkExtensionProperties[(int)propertyCount];
 
-            state.Result = state.Commands.VkEnumerateInstanceExtensionProperties(layerNamePtr, &propertyCount, propertiesArray);
-
-            if (state.Result != VkResult.VK_SUCCESS)
-            {
-                return;
-            }
+            state.Commands.VkEnumerateInstanceExtensionProperties(layerNamePtr, &propertyCount, propertiesArray).ThrowOnError();
 
             state.Properties = new ExtensionProperties[propertyCount];
 
@@ -144,26 +107,14 @@ public unsafe class VulkanApi
         }
     }
 
-    public VkResult EnumerateInstanceLayerProperties(out LayerProperties[] layerProperties)
+    public void EnumerateInstanceLayerProperties(out LayerProperties[] layerProperties)
     {
         layerProperties = Array.Empty<LayerProperties>();
 
         uint propertyCount;
-        var result = _globalCommands.VkEnumerateInstanceLayerProperties(&propertyCount, null);
-
-        if (result != VkResult.VK_SUCCESS)
-        {
-            return result;
-        }
+        _globalCommands.VkEnumerateInstanceLayerProperties(&propertyCount, null).ThrowOnError();
 
         var propertiesPtr = stackalloc VkLayerProperties[(int)propertyCount];
-
-        result = _globalCommands.VkEnumerateInstanceLayerProperties(&propertyCount, propertiesPtr);
-
-        if (result != VkResult.VK_SUCCESS)
-        {
-            return result;
-        }
 
         layerProperties = new LayerProperties[propertyCount];
 
@@ -177,14 +128,11 @@ public unsafe class VulkanApi
                 ImplementationVersion = propertiesPtr[i].ImplementationVersion
             };
         }
-
-        return result;
     }
 
     private struct ExtensionPropertiesState
     {
         public VkGlobalCommands Commands { get; set; }
         public ExtensionProperties[] Properties { get; set; }
-        public VkResult Result { get; set; }
     }
 }

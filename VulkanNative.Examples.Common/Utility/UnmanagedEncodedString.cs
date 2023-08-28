@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace VulkanNative.Examples.HelloTriangle;
+namespace VulkanNative.Examples.Common.Utility;
 
 public unsafe sealed class UnmanagedEncodedString : IUnmanaged<byte>
 {

@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 
-namespace VulkanNative.Examples.HelloTriangle;
+namespace VulkanNative.Examples.Common.Utility;
 
 internal static class EncodingExtensions
 {

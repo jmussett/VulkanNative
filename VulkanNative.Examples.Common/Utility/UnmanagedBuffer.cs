@@ -3,7 +3,7 @@ using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace VulkanNative.Examples.HelloTriangle;
+namespace VulkanNative.Examples.Common.Utility;
 
 public unsafe sealed class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TItem>
     where TItem : unmanaged

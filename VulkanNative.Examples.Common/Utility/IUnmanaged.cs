@@ -1,4 +1,4 @@
-﻿namespace VulkanNative.Examples.HelloTriangle;
+﻿namespace VulkanNative.Examples.Common.Utility;
 
 public unsafe interface IUnmanaged<TItem> : IEnumerable<TItem>, IDisposable
     where TItem : unmanaged

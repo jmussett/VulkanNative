@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices;
+using VulkanNative.Examples.Common.Utility;
 
-namespace VulkanNative.Examples.HelloTriangle;
+namespace VulkanNative.Examples.Common;
 
 public sealed unsafe class DebugMessenger : IDisposable
 {

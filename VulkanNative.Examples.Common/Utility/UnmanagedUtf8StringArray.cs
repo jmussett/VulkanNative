@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Runtime.CompilerServices;
 
-namespace VulkanNative.Examples.HelloTriangle;
+namespace VulkanNative.Examples.Common.Utility;
 
 public unsafe sealed class UnmanagedUtf8StringArray : UnmanagedJaggedArray<byte>, IEnumerable<UnmanagedUtf8StringSegment>
 {
