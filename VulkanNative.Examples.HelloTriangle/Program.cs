@@ -36,7 +36,7 @@ using UnmanagedUtf8StringArray enabledLayerNames = new()
     "VK_LAYER_KHRONOS_validation"
 };
 
-using var instance = api.CreateVulkanInstance("MyApp", "MyEngine", enabledExtensionNames, enabledLayerNames);
+var instance = api.CreateVulkanInstance("MyApp", "MyEngine", enabledExtensionNames, enabledLayerNames);
 
 var debugUtils = instance.LoadDebugUtilsExtension();
 
@@ -164,9 +164,42 @@ var swapchain = device.CreateSwapchain(new SwapchainCreateInfo
 // TODO: maybe use vector instead of array?
 var images = swapchain.GetImages();
 
+var imageViews = new ImageView[images.Length];
+
+for (var i = 0; i < imageViews.Length; i++)
+{
+    imageViews[i] = device.CreateImageView(new ImageViewCreateInfo
+    {
+        Image = images[i],
+        Format = surfaceFormat.Format,
+        ViewType = VkImageViewType.VK_IMAGE_VIEW_TYPE_2D,
+        Components = new VkComponentMapping
+        {
+            R = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
+            G = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
+            B = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
+            A = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY
+        },
+        SubresourceRange = new VkImageSubresourceRange
+        {
+            AspectMask = VkImageAspectFlags.VK_IMAGE_ASPECT_COLOR_BIT,
+            BaseMipLevel = 0,
+            LevelCount = 1,
+            BaseArrayLayer = 0,
+            LayerCount = 1
+        }
+    });
+}
+
+
 while (!Glfw.WindowShouldClose(window))
 {
     Glfw.PollEvents();
+}
+
+for (var i = 0; i < imageViews.Length; i++)
+{
+    imageViews[i].Dispose();
 }
 
 swapchain.Dispose();

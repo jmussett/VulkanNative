@@ -4,7 +4,7 @@ namespace VulkanNative.Examples.Common;
 
 public sealed unsafe class VulkanDevice : IDisposable
 {
-    private readonly VkDevice _handle;
+    private VkDevice _handle;
     private readonly VulkanLoader _loader;
     private readonly VkDeviceCommands _commands;
     private readonly VkKhrSwapchainExtension _swapchainExtension;
@@ -54,8 +54,40 @@ public sealed unsafe class VulkanDevice : IDisposable
         }
     }
 
+    public ImageView CreateImageView(ImageViewCreateInfo createInfo)
+    {
+        VkImageViewCreateInfo vkCreateInfo = new()
+        {
+            SType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            Image = createInfo.Image,
+            ViewType =createInfo.ViewType,
+            Format = createInfo.Format,
+            Components = createInfo.Components,
+            SubresourceRange = createInfo.SubresourceRange
+        };
+
+        VkImageView imageView;
+
+        _commands.VkCreateImageView(_handle, &vkCreateInfo, null, &imageView).ThrowOnError();
+
+        return new ImageView(imageView, _handle, _commands);
+    }
+
     public void Dispose()
     {
-        _commands.VkDestroyDevice(Handle, null);
+        if (_handle == nint.Zero)
+        {
+            return;
+        }
+
+        _commands.VkDestroyDevice(_handle, null);
+        _handle = nint.Zero;
+
+        GC.SuppressFinalize(this);
+    }
+
+    ~VulkanDevice()
+    {
+        Dispose();
     }
 }

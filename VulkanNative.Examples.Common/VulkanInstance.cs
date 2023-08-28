@@ -4,7 +4,8 @@ namespace VulkanNative.Examples.Common;
 
 public sealed unsafe class VulkanInstance : IDisposable
 {
-    private readonly VkInstance _handle;
+    private VkInstance _handle;
+
     private readonly VulkanLoader _loader;
     private readonly VkInstanceCommands _commands;
 
@@ -55,6 +56,19 @@ public sealed unsafe class VulkanInstance : IDisposable
 
     public void Dispose()
     {
+        if (_handle == nint.Zero)
+        {
+            return;
+        }
+
         _commands.VkDestroyInstance(_handle, null);
+        _handle = nint.Zero;
+
+        GC.SuppressFinalize(this);
+    }
+
+    ~VulkanInstance()
+    {
+        Dispose();
     }
 }

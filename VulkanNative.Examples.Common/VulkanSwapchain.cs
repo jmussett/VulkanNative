@@ -3,7 +3,7 @@
 public sealed unsafe class VulkanSwapchain : IDisposable
 {
     private VkSwapchainKHR _handle;
-    private VkDevice _deviceHandle;
+    private readonly VkDevice _deviceHandle;
     private readonly VkKhrSwapchainExtension _swapchainExtension;
 
     public VulkanSwapchain(VkSwapchainKHR handle, VkDevice deviceHandle, VkKhrSwapchainExtension swapchainExtension)
@@ -32,8 +32,22 @@ public sealed unsafe class VulkanSwapchain : IDisposable
         return images;
     }
 
+
     public void Dispose()
     {
+        if (_handle == nint.Zero)
+        {
+            return;
+        }
+
         _swapchainExtension.VkDestroySwapchainKHR(_deviceHandle, _handle, null);
+        _handle = nint.Zero;
+
+        GC.SuppressFinalize(this);
+    }
+
+    ~VulkanSwapchain()
+    {
+        Dispose();
     }
 }

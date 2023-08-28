@@ -5,8 +5,8 @@ namespace VulkanNative.Examples.Common;
 
 public sealed unsafe class DebugMessenger : IDisposable
 {
+    private VkDebugUtilsMessengerEXT _handle;
     private readonly VkInstance _instanceHandle;
-    private readonly VkDebugUtilsMessengerEXT _messengerHandle;
     private readonly VkExtDebugUtilsExtension _extension;
     private readonly GCHandle _gcHandle;
 
@@ -29,7 +29,7 @@ public sealed unsafe class DebugMessenger : IDisposable
 
         _extension.VkCreateDebugUtilsMessengerEXT(_instanceHandle, &createInfo, null, &messengerHandle).ThrowOnError();
 
-        _messengerHandle = messengerHandle;
+        _handle = messengerHandle;
 
         _gcHandle = GCHandle.Alloc(callbackHandle);
     }
@@ -51,8 +51,28 @@ public sealed unsafe class DebugMessenger : IDisposable
 
     public void Dispose()
     {
-        _extension.VkDestroyDebugUtilsMessengerEXT(_instanceHandle, _messengerHandle, null);
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-        _gcHandle.Free();
+    public void Dispose(bool disposing)
+    {
+        if (_handle == nint.Zero)
+        {
+            return;
+        }
+
+        _extension.VkDestroyDebugUtilsMessengerEXT(_instanceHandle, _handle, null);
+        _handle = nint.Zero;
+
+        if (disposing)
+        {
+            _gcHandle.Free();
+        }
+    }
+
+    ~DebugMessenger()
+    {
+        Dispose(false);
     }
 }

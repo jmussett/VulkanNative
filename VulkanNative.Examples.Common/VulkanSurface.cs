@@ -4,7 +4,7 @@ namespace VulkanNative.Examples.Common;
 
 public sealed unsafe class VulkanSurface : IDisposable
 {
-    private readonly VkSurfaceKHR _handle;
+    private VkSurfaceKHR _handle;
     private readonly VkInstance _instanceHandle;
     private readonly VkKhrSurfaceExtension _surfaceExtension;
 
@@ -72,7 +72,20 @@ public sealed unsafe class VulkanSurface : IDisposable
 
     public void Dispose()
     {
+        if (_handle == nint.Zero)
+        {
+            return;
+        }
+
         _surfaceExtension.VkDestroySurfaceKHR(_instanceHandle, _handle, null);
+        _handle = nint.Zero;
+
+        GC.SuppressFinalize(this);
+    }
+
+    ~VulkanSurface()
+    {
+        Dispose();
     }
 }
 
