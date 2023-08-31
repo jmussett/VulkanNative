@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVideoReferenceSlotInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public int SlotIndex;
-    public VkVideoPictureResourceInfoKHR* PPictureResource;
+    public VkStructureType sType;
+    public void* pNext;
+    public int slotIndex;
+    public VkVideoPictureResourceInfoKHR* pPictureResource;
 }

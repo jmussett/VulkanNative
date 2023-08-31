@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDebugMarkerObjectNameInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDebugReportObjectTypeEXT ObjectType;
-    public ulong Object;
-    public byte* PObjectName;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDebugReportObjectTypeEXT objectType;
+    public ulong @object;
+    public byte* pObjectName;
 }

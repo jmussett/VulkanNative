@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 TexelBufferAlignment;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 texelBufferAlignment;
 }

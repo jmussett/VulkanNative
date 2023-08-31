@@ -5,18 +5,18 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 ShaderBufferFloat16Atomics;
-    public VkBool32 ShaderBufferFloat16AtomicAdd;
-    public VkBool32 ShaderBufferFloat16AtomicMinMax;
-    public VkBool32 ShaderBufferFloat32AtomicMinMax;
-    public VkBool32 ShaderBufferFloat64AtomicMinMax;
-    public VkBool32 ShaderSharedFloat16Atomics;
-    public VkBool32 ShaderSharedFloat16AtomicAdd;
-    public VkBool32 ShaderSharedFloat16AtomicMinMax;
-    public VkBool32 ShaderSharedFloat32AtomicMinMax;
-    public VkBool32 ShaderSharedFloat64AtomicMinMax;
-    public VkBool32 ShaderImageFloat32AtomicMinMax;
-    public VkBool32 SparseImageFloat32AtomicMinMax;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 shaderBufferFloat16Atomics;
+    public VkBool32 shaderBufferFloat16AtomicAdd;
+    public VkBool32 shaderBufferFloat16AtomicMinMax;
+    public VkBool32 shaderBufferFloat32AtomicMinMax;
+    public VkBool32 shaderBufferFloat64AtomicMinMax;
+    public VkBool32 shaderSharedFloat16Atomics;
+    public VkBool32 shaderSharedFloat16AtomicAdd;
+    public VkBool32 shaderSharedFloat16AtomicMinMax;
+    public VkBool32 shaderSharedFloat32AtomicMinMax;
+    public VkBool32 shaderSharedFloat64AtomicMinMax;
+    public VkBool32 shaderImageFloat32AtomicMinMax;
+    public VkBool32 sparseImageFloat32AtomicMinMax;
 }

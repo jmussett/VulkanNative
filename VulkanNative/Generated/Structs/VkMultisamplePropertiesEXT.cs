@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMultisamplePropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkExtent2D MaxSampleLocationGridSize;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkExtent2D maxSampleLocationGridSize;
 }

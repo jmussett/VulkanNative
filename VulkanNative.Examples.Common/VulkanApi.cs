@@ -32,22 +32,22 @@ public unsafe class VulkanApi
 
         var pApplicationInfo = new VkApplicationInfo
         {
-            SType = VkStructureType.VK_STRUCTURE_TYPE_APPLICATION_INFO,
-            PApplicationName = appNameEncoded.AsPointer(),
-            PEngineName = engineNameEncoded.AsPointer(),
-            ApplicationVersion = new VkVersion(1, 0, 0),
-            EngineVersion = new VkVersion(1, 0, 0),
-            ApiVersion = new VkVersion(1, 0, 0),
+            sType = VkStructureType.VK_STRUCTURE_TYPE_APPLICATION_INFO,
+            pApplicationName = appNameEncoded.AsPointer(),
+            pEngineName = engineNameEncoded.AsPointer(),
+            applicationVersion = new VkVersion(1, 0, 0),
+            engineVersion = new VkVersion(1, 0, 0),
+            apiVersion = new VkVersion(1, 0, 0),
         };
 
         var vkInstanceCreateInfo = new VkInstanceCreateInfo
         {
-            SType = VkStructureType.VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
-            PApplicationInfo = &pApplicationInfo,
-            EnabledLayerCount = (uint)enabledLayerNames.Length,
-            PpEnabledLayerNames = enabledLayerNames.AsPointer(),
-            EnabledExtensionCount = (uint)enabledExtensionNames.Length,
-            PpEnabledExtensionNames = enabledExtensionNames.AsPointer(),
+            sType = VkStructureType.VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
+            pApplicationInfo = &pApplicationInfo,
+            enabledLayerCount = (uint)enabledLayerNames.Length,
+            ppEnabledLayerNames = enabledLayerNames.AsPointer(),
+            enabledExtensionCount = (uint)enabledExtensionNames.Length,
+            ppEnabledExtensionNames = enabledExtensionNames.AsPointer(),
         };
 
         _globalCommands.VkCreateInstance(&vkInstanceCreateInfo, null, &instance).ThrowOnError();
@@ -100,8 +100,8 @@ public unsafe class VulkanApi
             {
                 state.Properties[i] = new ExtensionProperties
                 {
-                    ExtensionName = Marshal.PtrToStringUTF8((nint)propertiesArray[i].ExtensionName)!,
-                    SpecVersion = propertiesArray[i].SpecVersion
+                    ExtensionName = Marshal.PtrToStringUTF8((nint)propertiesArray[i].extensionName)!,
+                    SpecVersion = propertiesArray[i].specVersion
                 };
             }
         }
@@ -122,10 +122,10 @@ public unsafe class VulkanApi
         {
             layerProperties[i] = new LayerProperties
             {
-                LayerName = Marshal.PtrToStringUTF8((nint)propertiesPtr[i].LayerName)!,
-                Description = Marshal.PtrToStringUTF8((nint)propertiesPtr[i].Description)!,
-                SpecVersion = propertiesPtr[i].SpecVersion,
-                ImplementationVersion = propertiesPtr[i].ImplementationVersion
+                LayerName = Marshal.PtrToStringUTF8((nint)propertiesPtr[i].layerName)!,
+                Description = Marshal.PtrToStringUTF8((nint)propertiesPtr[i].description)!,
+                SpecVersion = propertiesPtr[i].specVersion,
+                ImplementationVersion = propertiesPtr[i].implementationVersion
             };
         }
     }

@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCommandBufferBeginInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkCommandBufferUsageFlags Flags;
-    public VkCommandBufferInheritanceInfo* PInheritanceInfo;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkCommandBufferUsageFlags flags;
+    public VkCommandBufferInheritanceInfo* pInheritanceInfo;
 }

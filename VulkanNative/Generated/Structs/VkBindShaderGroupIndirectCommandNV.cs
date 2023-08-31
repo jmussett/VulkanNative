@@ -5,5 +5,5 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBindShaderGroupIndirectCommandNV
 {
-    public uint GroupIndex;
+    public uint groupIndex;
 }

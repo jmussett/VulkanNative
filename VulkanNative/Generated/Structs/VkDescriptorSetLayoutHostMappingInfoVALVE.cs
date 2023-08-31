@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDescriptorSetLayoutHostMappingInfoVALVE
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public nuint DescriptorOffset;
-    public uint DescriptorSize;
+    public VkStructureType sType;
+    public void* pNext;
+    public nuint descriptorOffset;
+    public uint descriptorSize;
 }

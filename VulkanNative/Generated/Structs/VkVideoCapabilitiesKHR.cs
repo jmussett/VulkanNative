@@ -5,15 +5,15 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVideoCapabilitiesKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkVideoCapabilityFlagsKHR Flags;
-    public VkDeviceSize MinBitstreamBufferOffsetAlignment;
-    public VkDeviceSize MinBitstreamBufferSizeAlignment;
-    public VkExtent2D PictureAccessGranularity;
-    public VkExtent2D MinCodedExtent;
-    public VkExtent2D MaxCodedExtent;
-    public uint MaxDpbSlots;
-    public uint MaxActiveReferencePictures;
-    public VkExtensionProperties StdHeaderVersion;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkVideoCapabilityFlagsKHR flags;
+    public VkDeviceSize minBitstreamBufferOffsetAlignment;
+    public VkDeviceSize minBitstreamBufferSizeAlignment;
+    public VkExtent2D pictureAccessGranularity;
+    public VkExtent2D minCodedExtent;
+    public VkExtent2D maxCodedExtent;
+    public uint maxDpbSlots;
+    public uint maxActiveReferencePictures;
+    public VkExtensionProperties stdHeaderVersion;
 }

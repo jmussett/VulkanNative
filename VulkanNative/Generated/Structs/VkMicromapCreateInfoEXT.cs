@@ -5,12 +5,12 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMicromapCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkMicromapCreateFlagsEXT CreateFlags;
-    public VkBuffer Buffer;
-    public VkDeviceSize Offset;
-    public VkDeviceSize Size;
-    public VkMicromapTypeEXT Type;
-    public VkDeviceAddress DeviceAddress;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkMicromapCreateFlagsEXT createFlags;
+    public VkBuffer buffer;
+    public VkDeviceSize offset;
+    public VkDeviceSize size;
+    public VkMicromapTypeEXT type;
+    public VkDeviceAddress deviceAddress;
 }

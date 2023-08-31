@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMemoryPriorityAllocateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public float Priority;
+    public VkStructureType sType;
+    public void* pNext;
+    public float priority;
 }

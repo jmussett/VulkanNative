@@ -5,14 +5,14 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVideoDecodeInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkVideoDecodeFlagsKHR Flags;
-    public VkBuffer SrcBuffer;
-    public VkDeviceSize SrcBufferOffset;
-    public VkDeviceSize SrcBufferRange;
-    public VkVideoPictureResourceInfoKHR DstPictureResource;
-    public VkVideoReferenceSlotInfoKHR* PSetupReferenceSlot;
-    public uint ReferenceSlotCount;
-    public VkVideoReferenceSlotInfoKHR* PReferenceSlots;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkVideoDecodeFlagsKHR flags;
+    public VkBuffer srcBuffer;
+    public VkDeviceSize srcBufferOffset;
+    public VkDeviceSize srcBufferRange;
+    public VkVideoPictureResourceInfoKHR dstPictureResource;
+    public VkVideoReferenceSlotInfoKHR* pSetupReferenceSlot;
+    public uint referenceSlotCount;
+    public VkVideoReferenceSlotInfoKHR* pReferenceSlots;
 }

@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkValidationCacheCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkValidationCacheCreateFlagsEXT Flags;
-    public nuint InitialDataSize;
-    public void* PInitialData;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkValidationCacheCreateFlagsEXT flags;
+    public nuint initialDataSize;
+    public void* pInitialData;
 }

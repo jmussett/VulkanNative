@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMemoryBarrier2
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineStageFlags2 SrcStageMask;
-    public VkAccessFlags2 SrcAccessMask;
-    public VkPipelineStageFlags2 DstStageMask;
-    public VkAccessFlags2 DstAccessMask;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineStageFlags2 srcStageMask;
+    public VkAccessFlags2 srcAccessMask;
+    public VkPipelineStageFlags2 dstStageMask;
+    public VkAccessFlags2 dstAccessMask;
 }

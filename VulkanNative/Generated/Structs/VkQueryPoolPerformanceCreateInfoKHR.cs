@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkQueryPoolPerformanceCreateInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint QueueFamilyIndex;
-    public uint CounterIndexCount;
-    public uint* PCounterIndices;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint queueFamilyIndex;
+    public uint counterIndexCount;
+    public uint* pCounterIndices;
 }

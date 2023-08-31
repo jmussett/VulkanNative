@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkGeneratedCommandsMemoryRequirementsInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineBindPoint PipelineBindPoint;
-    public VkPipeline Pipeline;
-    public VkIndirectCommandsLayoutNV IndirectCommandsLayout;
-    public uint MaxSequencesCount;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineBindPoint pipelineBindPoint;
+    public VkPipeline pipeline;
+    public VkIndirectCommandsLayoutNV indirectCommandsLayout;
+    public uint maxSequencesCount;
 }

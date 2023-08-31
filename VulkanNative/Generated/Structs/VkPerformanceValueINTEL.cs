@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPerformanceValueINTEL
 {
-    public VkPerformanceValueTypeINTEL Type;
-    public VkPerformanceValueDataINTEL Data;
+    public VkPerformanceValueTypeINTEL type;
+    public VkPerformanceValueDataINTEL data;
 }

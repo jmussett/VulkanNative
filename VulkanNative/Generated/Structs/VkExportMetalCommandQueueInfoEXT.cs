@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkExportMetalCommandQueueInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkQueue Queue;
-    public MTLCommandQueue_id MtlCommandQueue;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkQueue queue;
+    public MTLCommandQueue_id mtlCommandQueue;
 }

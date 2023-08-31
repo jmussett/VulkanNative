@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImagePlaneMemoryRequirementsInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkImageAspectFlags PlaneAspect;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkImageAspectFlags planeAspect;
 }

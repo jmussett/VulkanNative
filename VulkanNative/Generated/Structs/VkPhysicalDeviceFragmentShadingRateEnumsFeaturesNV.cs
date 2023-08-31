@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 FragmentShadingRateEnums;
-    public VkBool32 SupersampleFragmentShadingRates;
-    public VkBool32 NoInvocationFragmentShadingRates;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 fragmentShadingRateEnums;
+    public VkBool32 supersampleFragmentShadingRates;
+    public VkBool32 noInvocationFragmentShadingRates;
 }

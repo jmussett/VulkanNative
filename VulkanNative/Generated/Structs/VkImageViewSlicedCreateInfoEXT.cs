@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageViewSlicedCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint SliceOffset;
-    public uint SliceCount;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint sliceOffset;
+    public uint sliceCount;
 }

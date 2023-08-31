@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPresentIdKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint SwapchainCount;
-    public ulong* PPresentIds;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint swapchainCount;
+    public ulong* pPresentIds;
 }

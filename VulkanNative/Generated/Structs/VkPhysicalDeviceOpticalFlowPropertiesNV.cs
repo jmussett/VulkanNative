@@ -5,17 +5,17 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceOpticalFlowPropertiesNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkOpticalFlowGridSizeFlagsNV SupportedOutputGridSizes;
-    public VkOpticalFlowGridSizeFlagsNV SupportedHintGridSizes;
-    public VkBool32 HintSupported;
-    public VkBool32 CostSupported;
-    public VkBool32 BidirectionalFlowSupported;
-    public VkBool32 GlobalFlowSupported;
-    public uint MinWidth;
-    public uint MinHeight;
-    public uint MaxWidth;
-    public uint MaxHeight;
-    public uint MaxNumRegionsOfInterest;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkOpticalFlowGridSizeFlagsNV supportedOutputGridSizes;
+    public VkOpticalFlowGridSizeFlagsNV supportedHintGridSizes;
+    public VkBool32 hintSupported;
+    public VkBool32 costSupported;
+    public VkBool32 bidirectionalFlowSupported;
+    public VkBool32 globalFlowSupported;
+    public uint minWidth;
+    public uint minHeight;
+    public uint maxWidth;
+    public uint maxHeight;
+    public uint maxNumRegionsOfInterest;
 }

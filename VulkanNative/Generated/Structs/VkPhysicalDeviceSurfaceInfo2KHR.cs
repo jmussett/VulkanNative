@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceSurfaceInfo2KHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSurfaceKHR Surface;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSurfaceKHR surface;
 }

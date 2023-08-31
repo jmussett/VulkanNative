@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDispatchIndirectCommand
 {
-    public uint X;
-    public uint Y;
-    public uint Z;
+    public uint x;
+    public uint y;
+    public uint z;
 }

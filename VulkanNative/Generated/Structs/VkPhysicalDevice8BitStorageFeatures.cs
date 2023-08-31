@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDevice8BitStorageFeatures
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 StorageBuffer8BitAccess;
-    public VkBool32 UniformAndStorageBuffer8BitAccess;
-    public VkBool32 StoragePushConstant8;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 storageBuffer8BitAccess;
+    public VkBool32 uniformAndStorageBuffer8BitAccess;
+    public VkBool32 storagePushConstant8;
 }

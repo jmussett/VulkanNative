@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkClearDepthStencilValue
 {
-    public float Depth;
-    public uint Stencil;
+    public float depth;
+    public uint stencil;
 }

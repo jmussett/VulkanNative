@@ -5,20 +5,20 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSRTDataNV
 {
-    public float Sx;
-    public float A;
-    public float B;
-    public float Pvx;
-    public float Sy;
-    public float C;
-    public float Pvy;
-    public float Sz;
-    public float Pvz;
-    public float Qx;
-    public float Qy;
-    public float Qz;
-    public float Qw;
-    public float Tx;
-    public float Ty;
-    public float Tz;
+    public float sx;
+    public float a;
+    public float b;
+    public float pvx;
+    public float sy;
+    public float c;
+    public float pvy;
+    public float sz;
+    public float pvz;
+    public float qx;
+    public float qy;
+    public float qz;
+    public float qw;
+    public float tx;
+    public float ty;
+    public float tz;
 }

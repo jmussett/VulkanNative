@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MaxVertexAttribDivisor;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint maxVertexAttribDivisor;
 }

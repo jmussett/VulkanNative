@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVertexInputBindingDescription
 {
-    public uint Binding;
-    public uint Stride;
-    public VkVertexInputRate InputRate;
+    public uint binding;
+    public uint stride;
+    public VkVertexInputRate inputRate;
 }

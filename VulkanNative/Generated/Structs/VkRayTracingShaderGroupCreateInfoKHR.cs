@@ -5,12 +5,12 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRayTracingShaderGroupCreateInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkRayTracingShaderGroupTypeKHR Type;
-    public uint GeneralShader;
-    public uint ClosestHitShader;
-    public uint AnyHitShader;
-    public uint IntersectionShader;
-    public void* PShaderGroupCaptureReplayHandle;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkRayTracingShaderGroupTypeKHR type;
+    public uint generalShader;
+    public uint closestHitShader;
+    public uint anyHitShader;
+    public uint intersectionShader;
+    public void* pShaderGroupCaptureReplayHandle;
 }

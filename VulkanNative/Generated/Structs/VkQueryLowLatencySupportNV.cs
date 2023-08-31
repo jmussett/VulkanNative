@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkQueryLowLatencySupportNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public void* PQueriedLowLatencyData;
+    public VkStructureType sType;
+    public void* pNext;
+    public void* pQueriedLowLatencyData;
 }

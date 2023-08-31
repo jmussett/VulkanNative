@@ -5,14 +5,14 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSubpassDependency2
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint SrcSubpass;
-    public uint DstSubpass;
-    public VkPipelineStageFlags SrcStageMask;
-    public VkPipelineStageFlags DstStageMask;
-    public VkAccessFlags SrcAccessMask;
-    public VkAccessFlags DstAccessMask;
-    public VkDependencyFlags DependencyFlags;
-    public int ViewOffset;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint srcSubpass;
+    public uint dstSubpass;
+    public VkPipelineStageFlags srcStageMask;
+    public VkPipelineStageFlags dstStageMask;
+    public VkAccessFlags srcAccessMask;
+    public VkAccessFlags dstAccessMask;
+    public VkDependencyFlags dependencyFlags;
+    public int viewOffset;
 }

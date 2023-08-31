@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureDeviceAddressInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkAccelerationStructureKHR AccelerationStructure;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkAccelerationStructureKHR accelerationStructure;
 }

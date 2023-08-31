@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceDiagnosticsConfigCreateInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceDiagnosticsConfigFlagsNV Flags;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceDiagnosticsConfigFlagsNV flags;
 }

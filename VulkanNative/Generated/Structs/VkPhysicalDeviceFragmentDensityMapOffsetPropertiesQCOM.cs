@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkExtent2D FragmentDensityOffsetGranularity;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkExtent2D fragmentDensityOffsetGranularity;
 }

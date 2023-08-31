@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBindAccelerationStructureMemoryInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkAccelerationStructureNV AccelerationStructure;
-    public VkDeviceMemory Memory;
-    public VkDeviceSize MemoryOffset;
-    public uint DeviceIndexCount;
-    public uint* PDeviceIndices;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkAccelerationStructureNV accelerationStructure;
+    public VkDeviceMemory memory;
+    public VkDeviceSize memoryOffset;
+    public uint deviceIndexCount;
+    public uint* pDeviceIndices;
 }

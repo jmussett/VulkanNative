@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVideoSessionMemoryRequirementsKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MemoryBindIndex;
-    public VkMemoryRequirements MemoryRequirements;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint memoryBindIndex;
+    public VkMemoryRequirements memoryRequirements;
 }

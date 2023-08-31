@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBindImageMemorySwapchainInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSwapchainKHR Swapchain;
-    public uint ImageIndex;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSwapchainKHR swapchain;
+    public uint imageIndex;
 }

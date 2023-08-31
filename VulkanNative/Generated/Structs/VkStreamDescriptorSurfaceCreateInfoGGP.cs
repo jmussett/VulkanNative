@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkStreamDescriptorSurfaceCreateInfoGGP
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkStreamDescriptorSurfaceCreateFlagsGGP Flags;
-    public nint StreamDescriptor;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkStreamDescriptorSurfaceCreateFlagsGGP flags;
+    public nint streamDescriptor;
 }

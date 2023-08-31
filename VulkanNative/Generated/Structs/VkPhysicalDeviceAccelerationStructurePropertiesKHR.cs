@@ -5,14 +5,14 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceAccelerationStructurePropertiesKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public ulong MaxGeometryCount;
-    public ulong MaxInstanceCount;
-    public ulong MaxPrimitiveCount;
-    public uint MaxPerStageDescriptorAccelerationStructures;
-    public uint MaxPerStageDescriptorUpdateAfterBindAccelerationStructures;
-    public uint MaxDescriptorSetAccelerationStructures;
-    public uint MaxDescriptorSetUpdateAfterBindAccelerationStructures;
-    public uint MinAccelerationStructureScratchOffsetAlignment;
+    public VkStructureType sType;
+    public void* pNext;
+    public ulong maxGeometryCount;
+    public ulong maxInstanceCount;
+    public ulong maxPrimitiveCount;
+    public uint maxPerStageDescriptorAccelerationStructures;
+    public uint maxPerStageDescriptorUpdateAfterBindAccelerationStructures;
+    public uint maxDescriptorSetAccelerationStructures;
+    public uint maxDescriptorSetUpdateAfterBindAccelerationStructures;
+    public uint minAccelerationStructureScratchOffsetAlignment;
 }

@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceImageProcessingFeaturesQCOM
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 TextureSampleWeighted;
-    public VkBool32 TextureBoxFilter;
-    public VkBool32 TextureBlockMatch;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 textureSampleWeighted;
+    public VkBool32 textureBoxFilter;
+    public VkBool32 textureBlockMatch;
 }

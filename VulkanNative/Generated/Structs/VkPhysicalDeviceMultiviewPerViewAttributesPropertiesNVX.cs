@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 PerViewPositionAllComponents;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 perViewPositionAllComponents;
 }

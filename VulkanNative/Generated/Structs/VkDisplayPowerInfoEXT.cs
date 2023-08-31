@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDisplayPowerInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDisplayPowerStateEXT PowerState;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDisplayPowerStateEXT powerState;
 }

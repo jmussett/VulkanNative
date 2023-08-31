@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDevicePCIBusInfoPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint PciDomain;
-    public uint PciBus;
-    public uint PciDevice;
-    public uint PciFunction;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint pciDomain;
+    public uint pciBus;
+    public uint pciDevice;
+    public uint pciFunction;
 }

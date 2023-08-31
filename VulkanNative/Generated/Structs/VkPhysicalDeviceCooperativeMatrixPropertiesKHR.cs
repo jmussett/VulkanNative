@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceCooperativeMatrixPropertiesKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkShaderStageFlags CooperativeMatrixSupportedStages;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkShaderStageFlags cooperativeMatrixSupportedStages;
 }

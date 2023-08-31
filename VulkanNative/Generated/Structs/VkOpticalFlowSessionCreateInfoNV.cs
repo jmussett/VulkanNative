@@ -5,15 +5,15 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkOpticalFlowSessionCreateInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint Width;
-    public uint Height;
-    public VkFormat ImageFormat;
-    public VkFormat FlowVectorFormat;
-    public VkFormat CostFormat;
-    public VkOpticalFlowGridSizeFlagsNV OutputGridSize;
-    public VkOpticalFlowGridSizeFlagsNV HintGridSize;
-    public VkOpticalFlowPerformanceLevelNV PerformanceLevel;
-    public VkOpticalFlowSessionCreateFlagsNV Flags;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint width;
+    public uint height;
+    public VkFormat imageFormat;
+    public VkFormat flowVectorFormat;
+    public VkFormat costFormat;
+    public VkOpticalFlowGridSizeFlagsNV outputGridSize;
+    public VkOpticalFlowGridSizeFlagsNV hintGridSize;
+    public VkOpticalFlowPerformanceLevelNV performanceLevel;
+    public VkOpticalFlowSessionCreateFlagsNV flags;
 }

@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkApplicationInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public byte* PApplicationName;
-    public uint ApplicationVersion;
-    public byte* PEngineName;
-    public uint EngineVersion;
-    public uint ApiVersion;
+    public VkStructureType sType;
+    public void* pNext;
+    public byte* pApplicationName;
+    public uint applicationVersion;
+    public byte* pEngineName;
+    public uint engineVersion;
+    public uint apiVersion;
 }

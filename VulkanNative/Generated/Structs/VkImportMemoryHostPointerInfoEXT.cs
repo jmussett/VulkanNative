@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImportMemoryHostPointerInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkExternalMemoryHandleTypeFlags HandleType;
-    public void* PHostPointer;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkExternalMemoryHandleTypeFlags handleType;
+    public void* pHostPointer;
 }

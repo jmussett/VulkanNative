@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDebugUtilsObjectTagInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkObjectType ObjectType;
-    public ulong ObjectHandle;
-    public ulong TagName;
-    public nuint TagSize;
-    public void* PTag;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkObjectType objectType;
+    public ulong objectHandle;
+    public ulong tagName;
+    public nuint tagSize;
+    public void* pTag;
 }

@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceDiscardRectanglePropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MaxDiscardRectangles;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint maxDiscardRectangles;
 }

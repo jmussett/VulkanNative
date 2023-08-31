@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageConstraintsInfoFUCHSIA
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint FormatConstraintsCount;
-    public VkImageFormatConstraintsInfoFUCHSIA* PFormatConstraints;
-    public VkBufferCollectionConstraintsInfoFUCHSIA BufferCollectionConstraints;
-    public VkImageConstraintsInfoFlagsFUCHSIA Flags;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint formatConstraintsCount;
+    public VkImageFormatConstraintsInfoFUCHSIA* pFormatConstraints;
+    public VkBufferCollectionConstraintsInfoFUCHSIA bufferCollectionConstraints;
+    public VkImageConstraintsInfoFlagsFUCHSIA flags;
 }

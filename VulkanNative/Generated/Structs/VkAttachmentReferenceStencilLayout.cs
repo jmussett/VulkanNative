@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAttachmentReferenceStencilLayout
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkImageLayout StencilLayout;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkImageLayout stencilLayout;
 }

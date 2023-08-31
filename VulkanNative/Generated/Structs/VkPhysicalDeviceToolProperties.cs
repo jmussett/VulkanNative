@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceToolProperties
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public fixed byte Name[(int)VulkanApiConstants.VK_MAX_EXTENSION_NAME_SIZE];
-    public fixed byte Version[(int)VulkanApiConstants.VK_MAX_EXTENSION_NAME_SIZE];
-    public VkToolPurposeFlags Purposes;
-    public fixed byte Description[(int)VulkanApiConstants.VK_MAX_DESCRIPTION_SIZE];
-    public fixed byte Layer[(int)VulkanApiConstants.VK_MAX_EXTENSION_NAME_SIZE];
+    public VkStructureType sType;
+    public void* pNext;
+    public fixed byte name[(int)VulkanApiConstants.VK_MAX_EXTENSION_NAME_SIZE];
+    public fixed byte version[(int)VulkanApiConstants.VK_MAX_EXTENSION_NAME_SIZE];
+    public VkToolPurposeFlags purposes;
+    public fixed byte description[(int)VulkanApiConstants.VK_MAX_DESCRIPTION_SIZE];
+    public fixed byte layer[(int)VulkanApiConstants.VK_MAX_EXTENSION_NAME_SIZE];
 }

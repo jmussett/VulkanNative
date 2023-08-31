@@ -19,10 +19,10 @@ public sealed unsafe class DebugMessenger : IDisposable
 
         var createInfo = new VkDebugUtilsMessengerCreateInfoEXT
         {
-            SType = (VkStructureType)1000128004, //FIX: VkStructureType.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
-            MessageSeverity = severity,
-            MessageType = messageType,
-            PfnUserCallback = (delegate* unmanaged[Cdecl]<VkDebugUtilsMessageSeverityFlagsEXT, VkDebugUtilsMessageTypeFlagsEXT, VkDebugUtilsMessengerCallbackDataEXT*, void*, void>) callbackHandle
+            sType = (VkStructureType)1000128004, // TODO: VkStructureType.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
+            messageSeverity = severity,
+            messageType = messageType,
+            pfnUserCallback = (delegate* unmanaged[Cdecl]<VkDebugUtilsMessageSeverityFlagsEXT, VkDebugUtilsMessageTypeFlagsEXT, VkDebugUtilsMessengerCallbackDataEXT*, void*, void>) callbackHandle
         };
 
         VkDebugUtilsMessengerEXT messengerHandle;
@@ -44,7 +44,7 @@ public sealed unsafe class DebugMessenger : IDisposable
         void* pUserData
     )
     {
-        OnMessage?.Invoke(Marshal.PtrToStringAnsi((nint)pCallbackData->PMessage)!);
+        OnMessage?.Invoke(Marshal.PtrToStringAnsi((nint)pCallbackData->pMessage)!);
 
         return 0;
     }

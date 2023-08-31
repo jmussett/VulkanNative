@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceConditionalRenderingFeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 ConditionalRendering;
-    public VkBool32 InheritedConditionalRendering;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 conditionalRendering;
+    public VkBool32 inheritedConditionalRendering;
 }

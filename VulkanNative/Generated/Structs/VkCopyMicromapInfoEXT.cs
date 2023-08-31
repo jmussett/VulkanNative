@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCopyMicromapInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkMicromapEXT Src;
-    public VkMicromapEXT Dst;
-    public VkCopyMicromapModeEXT Mode;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkMicromapEXT src;
+    public VkMicromapEXT dst;
+    public VkCopyMicromapModeEXT mode;
 }

@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkQueueFamilyCheckpointPropertiesNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineStageFlags CheckpointExecutionStageMask;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineStageFlags checkpointExecutionStageMask;
 }

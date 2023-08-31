@@ -5,13 +5,13 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceMemoryReportCallbackDataEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceMemoryReportFlagsEXT Flags;
-    public VkDeviceMemoryReportEventTypeEXT Type;
-    public ulong MemoryObjectId;
-    public VkDeviceSize Size;
-    public VkObjectType ObjectType;
-    public ulong ObjectHandle;
-    public uint HeapIndex;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceMemoryReportFlagsEXT flags;
+    public VkDeviceMemoryReportEventTypeEXT type;
+    public ulong memoryObjectId;
+    public VkDeviceSize size;
+    public VkObjectType objectType;
+    public ulong objectHandle;
+    public uint heapIndex;
 }

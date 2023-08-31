@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 VertexAttributeInstanceRateDivisor;
-    public VkBool32 VertexAttributeInstanceRateZeroDivisor;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 vertexAttributeInstanceRateDivisor;
+    public VkBool32 vertexAttributeInstanceRateZeroDivisor;
 }

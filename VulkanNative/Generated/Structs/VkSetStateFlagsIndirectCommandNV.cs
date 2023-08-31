@@ -5,5 +5,5 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSetStateFlagsIndirectCommandNV
 {
-    public uint Data;
+    public uint data;
 }

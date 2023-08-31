@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBindBufferMemoryDeviceGroupInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint DeviceIndexCount;
-    public uint* PDeviceIndices;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint deviceIndexCount;
+    public uint* pDeviceIndices;
 }

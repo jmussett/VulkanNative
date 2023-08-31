@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceCopyMemoryIndirectPropertiesNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkQueueFlags SupportedQueues;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkQueueFlags supportedQueues;
 }

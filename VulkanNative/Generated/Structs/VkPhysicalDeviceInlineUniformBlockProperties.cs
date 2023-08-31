@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceInlineUniformBlockProperties
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MaxInlineUniformBlockSize;
-    public uint MaxPerStageDescriptorInlineUniformBlocks;
-    public uint MaxPerStageDescriptorUpdateAfterBindInlineUniformBlocks;
-    public uint MaxDescriptorSetInlineUniformBlocks;
-    public uint MaxDescriptorSetUpdateAfterBindInlineUniformBlocks;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint maxInlineUniformBlockSize;
+    public uint maxPerStageDescriptorInlineUniformBlocks;
+    public uint maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks;
+    public uint maxDescriptorSetInlineUniformBlocks;
+    public uint maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
 }

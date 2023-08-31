@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceDepthStencilResolveProperties
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkResolveModeFlags SupportedDepthResolveModes;
-    public VkResolveModeFlags SupportedStencilResolveModes;
-    public VkBool32 IndependentResolveNone;
-    public VkBool32 IndependentResolve;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkResolveModeFlags supportedDepthResolveModes;
+    public VkResolveModeFlags supportedStencilResolveModes;
+    public VkBool32 independentResolveNone;
+    public VkBool32 independentResolve;
 }

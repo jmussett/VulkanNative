@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDebugMarkerMarkerInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public byte* PMarkerName;
-    public fixed float Color[4];
+    public VkStructureType sType;
+    public void* pNext;
+    public byte* pMarkerName;
+    public fixed float color[4];
 }

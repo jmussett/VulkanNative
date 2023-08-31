@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMemoryBarrier
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkAccessFlags SrcAccessMask;
-    public VkAccessFlags DstAccessMask;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkAccessFlags srcAccessMask;
+    public VkAccessFlags dstAccessMask;
 }

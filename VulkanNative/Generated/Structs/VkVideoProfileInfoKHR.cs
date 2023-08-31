@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVideoProfileInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkVideoCodecOperationFlagsKHR VideoCodecOperation;
-    public VkVideoChromaSubsamplingFlagsKHR ChromaSubsampling;
-    public VkVideoComponentBitDepthFlagsKHR LumaBitDepth;
-    public VkVideoComponentBitDepthFlagsKHR ChromaBitDepth;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkVideoCodecOperationFlagsKHR videoCodecOperation;
+    public VkVideoChromaSubsamplingFlagsKHR chromaSubsampling;
+    public VkVideoComponentBitDepthFlagsKHR lumaBitDepth;
+    public VkVideoComponentBitDepthFlagsKHR chromaBitDepth;
 }

@@ -5,12 +5,12 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceDrmPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 HasPrimary;
-    public VkBool32 HasRender;
-    public long PrimaryMajor;
-    public long PrimaryMinor;
-    public long RenderMajor;
-    public long RenderMinor;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 hasPrimary;
+    public VkBool32 hasRender;
+    public long primaryMajor;
+    public long primaryMinor;
+    public long renderMajor;
+    public long renderMinor;
 }

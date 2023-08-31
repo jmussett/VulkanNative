@@ -70,8 +70,8 @@ public unsafe class PhysicalDevice
         {
             extensionProperties[i] = new()
             {
-                ExtensionName = Marshal.PtrToStringAnsi((nint)extensionPropertiesPtr[i].ExtensionName) ?? string.Empty,
-                SpecVersion = extensionPropertiesPtr[i].SpecVersion
+                ExtensionName = Marshal.PtrToStringAnsi((nint)extensionPropertiesPtr[i].extensionName) ?? string.Empty,
+                SpecVersion = extensionPropertiesPtr[i].specVersion
             };
         }
 
@@ -94,10 +94,10 @@ public unsafe class PhysicalDevice
         {
             availableLayers[i] = new()
             {
-                LayerName = Marshal.PtrToStringAnsi((nint)availableVkLayers[i].LayerName) ?? string.Empty,
-                Description = Marshal.PtrToStringAnsi((nint)availableVkLayers[i].Description) ?? string.Empty,
-                SpecVersion = availableVkLayers[i].SpecVersion,
-                ImplementationVersion = availableVkLayers[i].ImplementationVersion
+                LayerName = Marshal.PtrToStringAnsi((nint)availableVkLayers[i].layerName) ?? string.Empty,
+                Description = Marshal.PtrToStringAnsi((nint)availableVkLayers[i].description) ?? string.Empty,
+                SpecVersion = availableVkLayers[i].specVersion,
+                ImplementationVersion = availableVkLayers[i].implementationVersion
             };
         }
 
@@ -116,21 +116,21 @@ public unsafe class PhysicalDevice
             {
                 queueCreateInfos[i] = new VkDeviceQueueCreateInfo
                 {
-                    SType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
-                    QueueFamilyIndex = queues[i].QueueFamilyIndex,
-                    QueueCount = (uint)queues[i].QueuePriorites.Length,
-                    PQueuePriorities = queuePriorityPtr
+                    sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
+                    queueFamilyIndex = queues[i].QueueFamilyIndex,
+                    queueCount = (uint)queues[i].QueuePriorites.Length,
+                    pQueuePriorities = queuePriorityPtr
                 };
             }
         }
 
         VkDeviceCreateInfo deviceCreateInfo = new()
         {
-            SType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
-            QueueCreateInfoCount = (uint)queues.Length,
-            PQueueCreateInfos = queueCreateInfos,
-            EnabledExtensionCount = (uint)extensions.Length,
-            PpEnabledExtensionNames = extensions.AsPointer()
+            sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
+            queueCreateInfoCount = (uint)queues.Length,
+            pQueueCreateInfos = queueCreateInfos,
+            enabledExtensionCount = (uint)extensions.Length,
+            ppEnabledExtensionNames = extensions.AsPointer()
         };
 
         _commands.VkCreateDevice(_handle, &deviceCreateInfo, null, &device).ThrowOnError();

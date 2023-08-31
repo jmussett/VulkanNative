@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDescriptorSetBindingReferenceVALVE
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDescriptorSetLayout DescriptorSetLayout;
-    public uint Binding;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDescriptorSetLayout descriptorSetLayout;
+    public uint binding;
 }

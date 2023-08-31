@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceExternalMemoryHostPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceSize MinImportedHostPointerAlignment;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceSize minImportedHostPointerAlignment;
 }

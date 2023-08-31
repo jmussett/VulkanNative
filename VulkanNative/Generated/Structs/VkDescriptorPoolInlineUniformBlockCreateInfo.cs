@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDescriptorPoolInlineUniformBlockCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MaxInlineUniformBlockBindings;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint maxInlineUniformBlockBindings;
 }

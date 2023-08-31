@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceShaderTileImagePropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 ShaderTileImageCoherentReadAccelerated;
-    public VkBool32 ShaderTileImageReadSampleFromPixelRateInvocation;
-    public VkBool32 ShaderTileImageReadFromHelperInvocation;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 shaderTileImageCoherentReadAccelerated;
+    public VkBool32 shaderTileImageReadSampleFromPixelRateInvocation;
+    public VkBool32 shaderTileImageReadFromHelperInvocation;
 }

@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceMeshShaderFeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 TaskShader;
-    public VkBool32 MeshShader;
-    public VkBool32 MultiviewMeshShader;
-    public VkBool32 PrimitiveFragmentShadingRateMeshShader;
-    public VkBool32 MeshShaderQueries;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 taskShader;
+    public VkBool32 meshShader;
+    public VkBool32 multiviewMeshShader;
+    public VkBool32 primitiveFragmentShadingRateMeshShader;
+    public VkBool32 meshShaderQueries;
 }

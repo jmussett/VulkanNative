@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint PerViewRenderAreaCount;
-    public VkRect2D* PPerViewRenderAreas;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint perViewRenderAreaCount;
+    public VkRect2D* pPerViewRenderAreas;
 }

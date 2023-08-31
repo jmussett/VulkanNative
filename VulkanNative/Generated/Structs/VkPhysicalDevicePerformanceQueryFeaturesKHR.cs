@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDevicePerformanceQueryFeaturesKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 PerformanceCounterQueryPools;
-    public VkBool32 PerformanceCounterMultipleQueryPools;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 performanceCounterQueryPools;
+    public VkBool32 performanceCounterMultipleQueryPools;
 }

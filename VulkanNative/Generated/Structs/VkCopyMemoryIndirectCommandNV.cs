@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCopyMemoryIndirectCommandNV
 {
-    public VkDeviceAddress SrcAddress;
-    public VkDeviceAddress DstAddress;
-    public VkDeviceSize Size;
+    public VkDeviceAddress srcAddress;
+    public VkDeviceAddress dstAddress;
+    public VkDeviceSize size;
 }

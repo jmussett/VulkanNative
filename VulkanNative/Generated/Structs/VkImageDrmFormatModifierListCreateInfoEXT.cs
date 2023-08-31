@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageDrmFormatModifierListCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint DrmFormatModifierCount;
-    public ulong* PDrmFormatModifiers;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint drmFormatModifierCount;
+    public ulong* pDrmFormatModifiers;
 }

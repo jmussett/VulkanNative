@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMemoryType
 {
-    public VkMemoryPropertyFlags PropertyFlags;
-    public uint HeapIndex;
+    public VkMemoryPropertyFlags propertyFlags;
+    public uint heapIndex;
 }

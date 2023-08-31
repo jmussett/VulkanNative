@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDirectFBSurfaceCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDirectFBSurfaceCreateFlagsEXT Flags;
-    public nint* Dfb;
-    public nint* Surface;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDirectFBSurfaceCreateFlagsEXT flags;
+    public nint* dfb;
+    public nint* surface;
 }

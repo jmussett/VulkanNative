@@ -61,9 +61,11 @@ internal class StructTypeGenerator : ITypeGenerator
                             typeDef = _typeLocator.LookupType(fieldDefinition.Type, fieldDefinition.PostTypeText);
                         }
 
+                        var fieldName = VariableNameSanitizer.Sanitize(fieldDefinition.Name!);
+
                         x.AddFieldDeclaration(
                             x => x.FromSyntax(typeDef.Syntax),
-                            x => x.AddVariableDeclarator(fieldDefinition.Name.Pascalize(), x =>
+                            x => x.AddVariableDeclarator(fieldName, x =>
                             {
                                 foreach(var argument in typeDef.Arguments)
                                 {

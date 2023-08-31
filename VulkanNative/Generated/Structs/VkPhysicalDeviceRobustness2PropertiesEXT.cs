@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceRobustness2PropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceSize RobustStorageBufferAccessSizeAlignment;
-    public VkDeviceSize RobustUniformBufferAccessSizeAlignment;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceSize robustStorageBufferAccessSizeAlignment;
+    public VkDeviceSize robustUniformBufferAccessSizeAlignment;
 }

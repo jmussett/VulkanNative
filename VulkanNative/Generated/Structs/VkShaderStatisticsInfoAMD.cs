@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkShaderStatisticsInfoAMD
 {
-    public VkShaderStageFlags ShaderStageMask;
-    public VkShaderResourceUsageAMD ResourceUsage;
-    public uint NumPhysicalVgprs;
-    public uint NumPhysicalSgprs;
-    public uint NumAvailableVgprs;
-    public uint NumAvailableSgprs;
-    public fixed uint ComputeWorkGroupSize[3];
+    public VkShaderStageFlags shaderStageMask;
+    public VkShaderResourceUsageAMD resourceUsage;
+    public uint numPhysicalVgprs;
+    public uint numPhysicalSgprs;
+    public uint numAvailableVgprs;
+    public uint numAvailableSgprs;
+    public fixed uint computeWorkGroupSize[3];
 }

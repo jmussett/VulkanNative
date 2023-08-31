@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 ShaderImageInt64Atomics;
-    public VkBool32 SparseImageInt64Atomics;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 shaderImageInt64Atomics;
+    public VkBool32 sparseImageInt64Atomics;
 }

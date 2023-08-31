@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSamplerBorderColorComponentMappingCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkComponentMapping Components;
-    public VkBool32 Srgb;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkComponentMapping components;
+    public VkBool32 srgb;
 }

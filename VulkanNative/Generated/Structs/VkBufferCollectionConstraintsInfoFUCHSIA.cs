@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBufferCollectionConstraintsInfoFUCHSIA
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MinBufferCount;
-    public uint MaxBufferCount;
-    public uint MinBufferCountForCamping;
-    public uint MinBufferCountForDedicatedSlack;
-    public uint MinBufferCountForSharedSlack;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint minBufferCount;
+    public uint maxBufferCount;
+    public uint minBufferCountForCamping;
+    public uint minBufferCountForDedicatedSlack;
+    public uint minBufferCountForSharedSlack;
 }

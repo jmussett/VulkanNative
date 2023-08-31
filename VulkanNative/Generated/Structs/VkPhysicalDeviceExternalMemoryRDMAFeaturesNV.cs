@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceExternalMemoryRDMAFeaturesNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 ExternalMemoryRDMA;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 externalMemoryRDMA;
 }

@@ -5,18 +5,18 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkShaderCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkShaderCreateFlagsEXT Flags;
-    public VkShaderStageFlags Stage;
-    public VkShaderStageFlags NextStage;
-    public VkShaderCodeTypeEXT CodeType;
-    public nuint CodeSize;
-    public void* PCode;
-    public byte* PName;
-    public uint SetLayoutCount;
-    public VkDescriptorSetLayout* PSetLayouts;
-    public uint PushConstantRangeCount;
-    public VkPushConstantRange* PPushConstantRanges;
-    public VkSpecializationInfo* PSpecializationInfo;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkShaderCreateFlagsEXT flags;
+    public VkShaderStageFlags stage;
+    public VkShaderStageFlags nextStage;
+    public VkShaderCodeTypeEXT codeType;
+    public nuint codeSize;
+    public void* pCode;
+    public byte* pName;
+    public uint setLayoutCount;
+    public VkDescriptorSetLayout* pSetLayouts;
+    public uint pushConstantRangeCount;
+    public VkPushConstantRange* pPushConstantRanges;
+    public VkSpecializationInfo* pSpecializationInfo;
 }

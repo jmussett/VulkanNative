@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkViSurfaceCreateInfoNN
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkViSurfaceCreateFlagsNN Flags;
-    public void* Window;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkViSurfaceCreateFlagsNN flags;
+    public void* window;
 }

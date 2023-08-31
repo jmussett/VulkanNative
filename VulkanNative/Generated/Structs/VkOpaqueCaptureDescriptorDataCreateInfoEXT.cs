@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkOpaqueCaptureDescriptorDataCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public void* OpaqueCaptureDescriptorData;
+    public VkStructureType sType;
+    public void* pNext;
+    public void* opaqueCaptureDescriptorData;
 }

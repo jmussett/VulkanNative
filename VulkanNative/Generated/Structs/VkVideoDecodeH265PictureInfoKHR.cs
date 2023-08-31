@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVideoDecodeH265PictureInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public nint* PStdPictureInfo;
-    public uint SliceSegmentCount;
-    public uint* PSliceSegmentOffsets;
+    public VkStructureType sType;
+    public void* pNext;
+    public nint* pStdPictureInfo;
+    public uint sliceSegmentCount;
+    public uint* pSliceSegmentOffsets;
 }

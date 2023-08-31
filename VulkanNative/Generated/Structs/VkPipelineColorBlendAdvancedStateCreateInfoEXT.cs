@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineColorBlendAdvancedStateCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 SrcPremultiplied;
-    public VkBool32 DstPremultiplied;
-    public VkBlendOverlapEXT BlendOverlap;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 srcPremultiplied;
+    public VkBool32 dstPremultiplied;
+    public VkBlendOverlapEXT blendOverlap;
 }

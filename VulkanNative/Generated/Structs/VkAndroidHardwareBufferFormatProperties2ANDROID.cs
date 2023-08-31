@@ -5,14 +5,14 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAndroidHardwareBufferFormatProperties2ANDROID
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkFormat Format;
-    public ulong ExternalFormat;
-    public VkFormatFeatureFlags2 FormatFeatures;
-    public VkComponentMapping SamplerYcbcrConversionComponents;
-    public VkSamplerYcbcrModelConversion SuggestedYcbcrModel;
-    public VkSamplerYcbcrRange SuggestedYcbcrRange;
-    public VkChromaLocation SuggestedXChromaOffset;
-    public VkChromaLocation SuggestedYChromaOffset;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkFormat format;
+    public ulong externalFormat;
+    public VkFormatFeatureFlags2 formatFeatures;
+    public VkComponentMapping samplerYcbcrConversionComponents;
+    public VkSamplerYcbcrModelConversion suggestedYcbcrModel;
+    public VkSamplerYcbcrRange suggestedYcbcrRange;
+    public VkChromaLocation suggestedXChromaOffset;
+    public VkChromaLocation suggestedYChromaOffset;
 }

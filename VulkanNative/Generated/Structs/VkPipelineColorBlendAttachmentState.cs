@@ -5,12 +5,12 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineColorBlendAttachmentState
 {
-    public VkBool32 BlendEnable;
-    public VkBlendFactor SrcColorBlendFactor;
-    public VkBlendFactor DstColorBlendFactor;
-    public VkBlendOp ColorBlendOp;
-    public VkBlendFactor SrcAlphaBlendFactor;
-    public VkBlendFactor DstAlphaBlendFactor;
-    public VkBlendOp AlphaBlendOp;
-    public VkColorComponentFlags ColorWriteMask;
+    public VkBool32 blendEnable;
+    public VkBlendFactor srcColorBlendFactor;
+    public VkBlendFactor dstColorBlendFactor;
+    public VkBlendOp colorBlendOp;
+    public VkBlendFactor srcAlphaBlendFactor;
+    public VkBlendFactor dstAlphaBlendFactor;
+    public VkBlendOp alphaBlendOp;
+    public VkColorComponentFlags colorWriteMask;
 }

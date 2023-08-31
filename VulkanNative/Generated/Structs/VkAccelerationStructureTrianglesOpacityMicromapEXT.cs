@@ -5,14 +5,14 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureTrianglesOpacityMicromapEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkIndexType IndexType;
-    public VkDeviceOrHostAddressConstKHR IndexBuffer;
-    public VkDeviceSize IndexStride;
-    public uint BaseTriangle;
-    public uint UsageCountsCount;
-    public VkMicromapUsageEXT* PUsageCounts;
-    public VkMicromapUsageEXT** PpUsageCounts;
-    public VkMicromapEXT Micromap;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkIndexType indexType;
+    public VkDeviceOrHostAddressConstKHR indexBuffer;
+    public VkDeviceSize indexStride;
+    public uint baseTriangle;
+    public uint usageCountsCount;
+    public VkMicromapUsageEXT* pUsageCounts;
+    public VkMicromapUsageEXT** ppUsageCounts;
+    public VkMicromapEXT micromap;
 }

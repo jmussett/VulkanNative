@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureBuildSizesInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceSize AccelerationStructureSize;
-    public VkDeviceSize UpdateScratchSize;
-    public VkDeviceSize BuildScratchSize;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceSize accelerationStructureSize;
+    public VkDeviceSize updateScratchSize;
+    public VkDeviceSize buildScratchSize;
 }

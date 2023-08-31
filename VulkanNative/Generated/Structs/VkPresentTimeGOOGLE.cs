@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPresentTimeGOOGLE
 {
-    public uint PresentID;
-    public ulong DesiredPresentTime;
+    public uint presentID;
+    public ulong desiredPresentTime;
 }

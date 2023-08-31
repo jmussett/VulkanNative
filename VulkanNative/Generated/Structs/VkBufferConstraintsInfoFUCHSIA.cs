@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBufferConstraintsInfoFUCHSIA
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBufferCreateInfo CreateInfo;
-    public VkFormatFeatureFlags RequiredFormatFeatures;
-    public VkBufferCollectionConstraintsInfoFUCHSIA BufferCollectionConstraints;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBufferCreateInfo createInfo;
+    public VkFormatFeatureFlags requiredFormatFeatures;
+    public VkBufferCollectionConstraintsInfoFUCHSIA bufferCollectionConstraints;
 }

@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineColorWriteCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint AttachmentCount;
-    public VkBool32* PColorWriteEnables;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint attachmentCount;
+    public VkBool32* pColorWriteEnables;
 }

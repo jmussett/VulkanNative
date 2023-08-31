@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDescriptorGetInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDescriptorType Type;
-    public VkDescriptorDataEXT Data;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDescriptorType type;
+    public VkDescriptorDataEXT data;
 }

@@ -5,17 +5,17 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkGeometryTrianglesNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBuffer VertexData;
-    public VkDeviceSize VertexOffset;
-    public uint VertexCount;
-    public VkDeviceSize VertexStride;
-    public VkFormat VertexFormat;
-    public VkBuffer IndexData;
-    public VkDeviceSize IndexOffset;
-    public uint IndexCount;
-    public VkIndexType IndexType;
-    public VkBuffer TransformData;
-    public VkDeviceSize TransformOffset;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBuffer vertexData;
+    public VkDeviceSize vertexOffset;
+    public uint vertexCount;
+    public VkDeviceSize vertexStride;
+    public VkFormat vertexFormat;
+    public VkBuffer indexData;
+    public VkDeviceSize indexOffset;
+    public uint indexCount;
+    public VkIndexType indexType;
+    public VkBuffer transformData;
+    public VkDeviceSize transformOffset;
 }

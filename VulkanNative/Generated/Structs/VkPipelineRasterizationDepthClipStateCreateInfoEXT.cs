@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineRasterizationDepthClipStateCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineRasterizationDepthClipStateCreateFlagsEXT Flags;
-    public VkBool32 DepthClipEnable;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineRasterizationDepthClipStateCreateFlagsEXT flags;
+    public VkBool32 depthClipEnable;
 }

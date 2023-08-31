@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSubresourceLayout2KHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSubresourceLayout SubresourceLayout;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSubresourceLayout subresourceLayout;
 }

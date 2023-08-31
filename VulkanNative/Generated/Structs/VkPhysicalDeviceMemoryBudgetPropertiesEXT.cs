@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceMemoryBudgetPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceSize* HeapBudget;
-    public VkDeviceSize* HeapUsage;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceSize* heapBudget;
+    public VkDeviceSize* heapUsage;
 }

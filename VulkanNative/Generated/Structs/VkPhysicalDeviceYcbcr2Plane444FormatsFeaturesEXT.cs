@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 Ycbcr2plane444Formats;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 ycbcr2plane444Formats;
 }

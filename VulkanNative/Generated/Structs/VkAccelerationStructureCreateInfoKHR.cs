@@ -5,12 +5,12 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureCreateInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkAccelerationStructureCreateFlagsKHR CreateFlags;
-    public VkBuffer Buffer;
-    public VkDeviceSize Offset;
-    public VkDeviceSize Size;
-    public VkAccelerationStructureTypeKHR Type;
-    public VkDeviceAddress DeviceAddress;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkAccelerationStructureCreateFlagsKHR createFlags;
+    public VkBuffer buffer;
+    public VkDeviceSize offset;
+    public VkDeviceSize size;
+    public VkAccelerationStructureTypeKHR type;
+    public VkDeviceAddress deviceAddress;
 }

@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceImageProcessing2PropertiesQCOM
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkExtent2D MaxBlockMatchWindow;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkExtent2D maxBlockMatchWindow;
 }

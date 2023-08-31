@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceGroupSwapchainCreateInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceGroupPresentModeFlagsKHR Modes;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceGroupPresentModeFlagsKHR modes;
 }

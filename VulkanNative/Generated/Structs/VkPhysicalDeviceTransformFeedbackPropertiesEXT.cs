@@ -5,16 +5,16 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceTransformFeedbackPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MaxTransformFeedbackStreams;
-    public uint MaxTransformFeedbackBuffers;
-    public VkDeviceSize MaxTransformFeedbackBufferSize;
-    public uint MaxTransformFeedbackStreamDataSize;
-    public uint MaxTransformFeedbackBufferDataSize;
-    public uint MaxTransformFeedbackBufferDataStride;
-    public VkBool32 TransformFeedbackQueries;
-    public VkBool32 TransformFeedbackStreamsLinesTriangles;
-    public VkBool32 TransformFeedbackRasterizationStreamSelect;
-    public VkBool32 TransformFeedbackDraw;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint maxTransformFeedbackStreams;
+    public uint maxTransformFeedbackBuffers;
+    public VkDeviceSize maxTransformFeedbackBufferSize;
+    public uint maxTransformFeedbackStreamDataSize;
+    public uint maxTransformFeedbackBufferDataSize;
+    public uint maxTransformFeedbackBufferDataStride;
+    public VkBool32 transformFeedbackQueries;
+    public VkBool32 transformFeedbackStreamsLinesTriangles;
+    public VkBool32 transformFeedbackRasterizationStreamSelect;
+    public VkBool32 transformFeedbackDraw;
 }

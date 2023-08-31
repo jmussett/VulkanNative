@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBufferUsageFlags2CreateInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBufferUsageFlags2KHR Usage;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBufferUsageFlags2KHR usage;
 }

@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkConformanceVersion
 {
-    public byte Major;
-    public byte Minor;
-    public byte Subminor;
-    public byte Patch;
+    public byte major;
+    public byte minor;
+    public byte subminor;
+    public byte patch;
 }

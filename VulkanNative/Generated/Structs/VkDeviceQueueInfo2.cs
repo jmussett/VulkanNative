@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceQueueInfo2
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceQueueCreateFlags Flags;
-    public uint QueueFamilyIndex;
-    public uint QueueIndex;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceQueueCreateFlags flags;
+    public uint queueFamilyIndex;
+    public uint queueIndex;
 }

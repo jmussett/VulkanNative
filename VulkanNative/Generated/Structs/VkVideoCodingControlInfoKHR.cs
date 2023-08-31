@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVideoCodingControlInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkVideoCodingControlFlagsKHR Flags;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkVideoCodingControlFlagsKHR flags;
 }

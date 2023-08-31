@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDebugUtilsMessengerCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDebugUtilsMessengerCreateFlagsEXT Flags;
-    public VkDebugUtilsMessageSeverityFlagsEXT MessageSeverity;
-    public VkDebugUtilsMessageTypeFlagsEXT MessageType;
-    public delegate* unmanaged[Cdecl]<VkDebugUtilsMessageSeverityFlagsEXT, VkDebugUtilsMessageTypeFlagsEXT, VkDebugUtilsMessengerCallbackDataEXT*, void*, void> PfnUserCallback;
-    public void* PUserData;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDebugUtilsMessengerCreateFlagsEXT flags;
+    public VkDebugUtilsMessageSeverityFlagsEXT messageSeverity;
+    public VkDebugUtilsMessageTypeFlagsEXT messageType;
+    public delegate* unmanaged[Cdecl]<VkDebugUtilsMessageSeverityFlagsEXT, VkDebugUtilsMessageTypeFlagsEXT, VkDebugUtilsMessengerCallbackDataEXT*, void*, void> pfnUserCallback;
+    public void* pUserData;
 }

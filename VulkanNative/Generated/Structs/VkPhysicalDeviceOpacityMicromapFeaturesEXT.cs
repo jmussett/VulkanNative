@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceOpacityMicromapFeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 Micromap;
-    public VkBool32 MicromapCaptureReplay;
-    public VkBool32 MicromapHostCommands;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 micromap;
+    public VkBool32 micromapCaptureReplay;
+    public VkBool32 micromapHostCommands;
 }

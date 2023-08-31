@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceSampleLocationsPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSampleCountFlags SampleLocationSampleCounts;
-    public VkExtent2D MaxSampleLocationGridSize;
-    public fixed float SampleLocationCoordinateRange[2];
-    public uint SampleLocationSubPixelBits;
-    public VkBool32 VariableSampleLocations;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSampleCountFlags sampleLocationSampleCounts;
+    public VkExtent2D maxSampleLocationGridSize;
+    public fixed float sampleLocationCoordinateRange[2];
+    public uint sampleLocationSubPixelBits;
+    public VkBool32 variableSampleLocations;
 }

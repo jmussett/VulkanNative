@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSamplerCubicWeightsCreateInfoQCOM
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkCubicFilterWeightsQCOM CubicWeights;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkCubicFilterWeightsQCOM cubicWeights;
 }

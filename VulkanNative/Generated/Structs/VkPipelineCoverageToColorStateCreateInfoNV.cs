@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineCoverageToColorStateCreateInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineCoverageToColorStateCreateFlagsNV Flags;
-    public VkBool32 CoverageToColorEnable;
-    public uint CoverageToColorLocation;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineCoverageToColorStateCreateFlagsNV flags;
+    public VkBool32 coverageToColorEnable;
+    public uint coverageToColorLocation;
 }

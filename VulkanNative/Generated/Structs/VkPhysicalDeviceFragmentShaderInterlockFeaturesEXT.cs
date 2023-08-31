@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 FragmentShaderSampleInterlock;
-    public VkBool32 FragmentShaderPixelInterlock;
-    public VkBool32 FragmentShaderShadingRateInterlock;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 fragmentShaderSampleInterlock;
+    public VkBool32 fragmentShaderPixelInterlock;
+    public VkBool32 fragmentShaderShadingRateInterlock;
 }

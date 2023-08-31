@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceImageViewMinLodFeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 MinLod;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 minLod;
 }

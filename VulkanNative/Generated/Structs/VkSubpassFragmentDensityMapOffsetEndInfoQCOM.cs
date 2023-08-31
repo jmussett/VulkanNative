@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSubpassFragmentDensityMapOffsetEndInfoQCOM
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint FragmentDensityOffsetCount;
-    public VkOffset2D* PFragmentDensityOffsets;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint fragmentDensityOffsetCount;
+    public VkOffset2D* pFragmentDensityOffsets;
 }

@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDisplayPlaneInfo2KHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDisplayModeKHR Mode;
-    public uint PlaneIndex;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDisplayModeKHR mode;
+    public uint planeIndex;
 }

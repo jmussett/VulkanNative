@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceImageRobustnessFeatures
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 RobustImageAccess;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 robustImageAccess;
 }

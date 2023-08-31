@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImportMetalIOSurfaceInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public IOSurfaceRef IoSurface;
+    public VkStructureType sType;
+    public void* pNext;
+    public IOSurfaceRef ioSurface;
 }

@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceExternalBufferInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBufferCreateFlags Flags;
-    public VkBufferUsageFlags Usage;
-    public VkExternalMemoryHandleTypeFlags HandleType;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBufferCreateFlags flags;
+    public VkBufferUsageFlags usage;
+    public VkExternalMemoryHandleTypeFlags handleType;
 }

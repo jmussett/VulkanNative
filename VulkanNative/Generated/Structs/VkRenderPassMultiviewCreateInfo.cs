@@ -5,12 +5,12 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRenderPassMultiviewCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint SubpassCount;
-    public uint* PViewMasks;
-    public uint DependencyCount;
-    public int* PViewOffsets;
-    public uint CorrelationMaskCount;
-    public uint* PCorrelationMasks;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint subpassCount;
+    public uint* pViewMasks;
+    public uint dependencyCount;
+    public int* pViewOffsets;
+    public uint correlationMaskCount;
+    public uint* pCorrelationMasks;
 }

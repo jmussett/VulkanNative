@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceProvokingVertexFeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 ProvokingVertexLast;
-    public VkBool32 TransformFeedbackPreservesProvokingVertex;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 provokingVertexLast;
+    public VkBool32 transformFeedbackPreservesProvokingVertex;
 }

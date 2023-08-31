@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBindVideoSessionMemoryInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MemoryBindIndex;
-    public VkDeviceMemory Memory;
-    public VkDeviceSize MemoryOffset;
-    public VkDeviceSize MemorySize;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint memoryBindIndex;
+    public VkDeviceMemory memory;
+    public VkDeviceSize memoryOffset;
+    public VkDeviceSize memorySize;
 }

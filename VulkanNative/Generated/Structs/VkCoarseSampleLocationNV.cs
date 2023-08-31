@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCoarseSampleLocationNV
 {
-    public uint PixelX;
-    public uint PixelY;
-    public uint Sample;
+    public uint pixelX;
+    public uint pixelY;
+    public uint sample;
 }

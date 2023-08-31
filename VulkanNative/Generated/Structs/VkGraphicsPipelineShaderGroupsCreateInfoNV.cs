@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkGraphicsPipelineShaderGroupsCreateInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint GroupCount;
-    public VkGraphicsShaderGroupCreateInfoNV* PGroups;
-    public uint PipelineCount;
-    public VkPipeline* PPipelines;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint groupCount;
+    public VkGraphicsShaderGroupCreateInfoNV* pGroups;
+    public uint pipelineCount;
+    public VkPipeline* pPipelines;
 }

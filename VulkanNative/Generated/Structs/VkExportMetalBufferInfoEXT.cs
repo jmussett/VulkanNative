@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkExportMetalBufferInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceMemory Memory;
-    public MTLBuffer_id MtlBuffer;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceMemory memory;
+    public MTLBuffer_id mtlBuffer;
 }

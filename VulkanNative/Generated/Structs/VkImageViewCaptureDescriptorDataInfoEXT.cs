@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageViewCaptureDescriptorDataInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkImageView ImageView;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkImageView imageView;
 }

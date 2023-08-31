@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVideoDecodeH264SessionParametersAddInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint StdSPSCount;
-    public nint* PStdSPSs;
-    public uint StdPPSCount;
-    public nint* PStdPPSs;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint stdSPSCount;
+    public nint* pStdSPSs;
+    public uint stdPPSCount;
+    public nint* pStdPPSs;
 }

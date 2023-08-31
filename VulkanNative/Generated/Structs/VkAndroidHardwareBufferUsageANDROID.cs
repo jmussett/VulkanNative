@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAndroidHardwareBufferUsageANDROID
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public ulong AndroidHardwareBufferUsage;
+    public VkStructureType sType;
+    public void* pNext;
+    public ulong androidHardwareBufferUsage;
 }

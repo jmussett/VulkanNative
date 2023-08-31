@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceCustomBorderColorFeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 CustomBorderColors;
-    public VkBool32 CustomBorderColorWithoutFormat;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 customBorderColors;
+    public VkBool32 customBorderColorWithoutFormat;
 }

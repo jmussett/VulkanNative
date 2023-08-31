@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceQueueGlobalPriorityCreateInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkQueueGlobalPriorityKHR GlobalPriority;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkQueueGlobalPriorityKHR globalPriority;
 }

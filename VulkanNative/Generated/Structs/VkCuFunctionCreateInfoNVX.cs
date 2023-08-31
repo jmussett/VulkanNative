@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCuFunctionCreateInfoNVX
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkCuModuleNVX Module;
-    public byte* PName;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkCuModuleNVX module;
+    public byte* pName;
 }

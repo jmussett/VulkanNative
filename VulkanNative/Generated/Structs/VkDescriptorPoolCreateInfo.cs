@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDescriptorPoolCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDescriptorPoolCreateFlags Flags;
-    public uint MaxSets;
-    public uint PoolSizeCount;
-    public VkDescriptorPoolSize* PPoolSizes;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDescriptorPoolCreateFlags flags;
+    public uint maxSets;
+    public uint poolSizeCount;
+    public VkDescriptorPoolSize* pPoolSizes;
 }

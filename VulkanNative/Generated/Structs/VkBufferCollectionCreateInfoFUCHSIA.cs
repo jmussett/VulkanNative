@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBufferCollectionCreateInfoFUCHSIA
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public nint CollectionToken;
+    public VkStructureType sType;
+    public void* pNext;
+    public nint collectionToken;
 }

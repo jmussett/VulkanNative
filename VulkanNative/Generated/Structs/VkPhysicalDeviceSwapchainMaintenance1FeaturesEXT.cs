@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 SwapchainMaintenance1;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 swapchainMaintenance1;
 }

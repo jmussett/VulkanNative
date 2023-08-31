@@ -5,13 +5,13 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureGeometryTrianglesDataKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkFormat VertexFormat;
-    public VkDeviceOrHostAddressConstKHR VertexData;
-    public VkDeviceSize VertexStride;
-    public uint MaxVertex;
-    public VkIndexType IndexType;
-    public VkDeviceOrHostAddressConstKHR IndexData;
-    public VkDeviceOrHostAddressConstKHR TransformData;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkFormat vertexFormat;
+    public VkDeviceOrHostAddressConstKHR vertexData;
+    public VkDeviceSize vertexStride;
+    public uint maxVertex;
+    public VkIndexType indexType;
+    public VkDeviceOrHostAddressConstKHR indexData;
+    public VkDeviceOrHostAddressConstKHR transformData;
 }

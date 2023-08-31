@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkExportMemoryAllocateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkExternalMemoryHandleTypeFlags HandleTypes;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkExternalMemoryHandleTypeFlags handleTypes;
 }

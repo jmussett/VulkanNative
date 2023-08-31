@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAmigoProfilingSubmitInfoSEC
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public ulong FirstDrawTimestamp;
-    public ulong SwapBufferTimestamp;
+    public VkStructureType sType;
+    public void* pNext;
+    public ulong firstDrawTimestamp;
+    public ulong swapBufferTimestamp;
 }

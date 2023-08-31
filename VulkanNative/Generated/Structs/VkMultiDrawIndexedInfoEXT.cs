@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMultiDrawIndexedInfoEXT
 {
-    public uint FirstIndex;
-    public uint IndexCount;
-    public int VertexOffset;
+    public uint firstIndex;
+    public uint indexCount;
+    public int vertexOffset;
 }

@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMicromapUsageEXT
 {
-    public uint Count;
-    public uint SubdivisionLevel;
-    public uint Format;
+    public uint count;
+    public uint subdivisionLevel;
+    public uint format;
 }

@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMultisampledRenderToSingleSampledInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 MultisampledRenderToSingleSampledEnable;
-    public VkSampleCountFlags RasterizationSamples;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 multisampledRenderToSingleSampledEnable;
+    public VkSampleCountFlags rasterizationSamples;
 }

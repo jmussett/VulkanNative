@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMemoryUnmapInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkMemoryUnmapFlagsKHR Flags;
-    public VkDeviceMemory Memory;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkMemoryUnmapFlagsKHR flags;
+    public VkDeviceMemory memory;
 }

@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPerformanceMarkerInfoINTEL
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public ulong Marker;
+    public VkStructureType sType;
+    public void* pNext;
+    public ulong marker;
 }

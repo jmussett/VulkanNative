@@ -5,12 +5,12 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceGroupSubmitInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint WaitSemaphoreCount;
-    public uint* PWaitSemaphoreDeviceIndices;
-    public uint CommandBufferCount;
-    public uint* PCommandBufferDeviceMasks;
-    public uint SignalSemaphoreCount;
-    public uint* PSignalSemaphoreDeviceIndices;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint waitSemaphoreCount;
+    public uint* pWaitSemaphoreDeviceIndices;
+    public uint commandBufferCount;
+    public uint* pCommandBufferDeviceMasks;
+    public uint signalSemaphoreCount;
+    public uint* pSignalSemaphoreDeviceIndices;
 }

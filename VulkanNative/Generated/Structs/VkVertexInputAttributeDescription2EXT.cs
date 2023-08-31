@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVertexInputAttributeDescription2EXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint Location;
-    public uint Binding;
-    public VkFormat Format;
-    public uint Offset;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint location;
+    public uint binding;
+    public VkFormat format;
+    public uint offset;
 }

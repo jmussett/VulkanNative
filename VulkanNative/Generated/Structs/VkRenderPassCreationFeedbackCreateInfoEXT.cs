@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRenderPassCreationFeedbackCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkRenderPassCreationFeedbackInfoEXT* PRenderPassFeedback;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkRenderPassCreationFeedbackInfoEXT* pRenderPassFeedback;
 }

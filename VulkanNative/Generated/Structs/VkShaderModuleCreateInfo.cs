@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkShaderModuleCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkShaderModuleCreateFlags Flags;
-    public nuint CodeSize;
-    public uint* PCode;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkShaderModuleCreateFlags flags;
+    public nuint codeSize;
+    public uint* pCode;
 }

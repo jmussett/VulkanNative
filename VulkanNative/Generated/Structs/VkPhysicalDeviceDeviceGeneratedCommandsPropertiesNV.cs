@@ -5,15 +5,15 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MaxGraphicsShaderGroupCount;
-    public uint MaxIndirectSequenceCount;
-    public uint MaxIndirectCommandsTokenCount;
-    public uint MaxIndirectCommandsStreamCount;
-    public uint MaxIndirectCommandsTokenOffset;
-    public uint MaxIndirectCommandsStreamStride;
-    public uint MinSequencesCountBufferOffsetAlignment;
-    public uint MinSequencesIndexBufferOffsetAlignment;
-    public uint MinIndirectCommandsBufferOffsetAlignment;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint maxGraphicsShaderGroupCount;
+    public uint maxIndirectSequenceCount;
+    public uint maxIndirectCommandsTokenCount;
+    public uint maxIndirectCommandsStreamCount;
+    public uint maxIndirectCommandsTokenOffset;
+    public uint maxIndirectCommandsStreamStride;
+    public uint minSequencesCountBufferOffsetAlignment;
+    public uint minSequencesIndexBufferOffsetAlignment;
+    public uint minIndirectCommandsBufferOffsetAlignment;
 }

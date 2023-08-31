@@ -5,12 +5,12 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPresentInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint WaitSemaphoreCount;
-    public VkSemaphore* PWaitSemaphores;
-    public uint SwapchainCount;
-    public VkSwapchainKHR* PSwapchains;
-    public uint* PImageIndices;
-    public VkResult* PResults;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint waitSemaphoreCount;
+    public VkSemaphore* pWaitSemaphores;
+    public uint swapchainCount;
+    public VkSwapchainKHR* pSwapchains;
+    public uint* pImageIndices;
+    public VkResult* pResults;
 }

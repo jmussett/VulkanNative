@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureGeometryMotionTrianglesDataNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceOrHostAddressConstKHR VertexData;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceOrHostAddressConstKHR vertexData;
 }

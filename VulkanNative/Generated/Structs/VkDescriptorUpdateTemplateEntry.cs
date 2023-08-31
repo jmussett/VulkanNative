@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDescriptorUpdateTemplateEntry
 {
-    public uint DstBinding;
-    public uint DstArrayElement;
-    public uint DescriptorCount;
-    public VkDescriptorType DescriptorType;
-    public nuint Offset;
-    public nuint Stride;
+    public uint dstBinding;
+    public uint dstArrayElement;
+    public uint descriptorCount;
+    public VkDescriptorType descriptorType;
+    public nuint offset;
+    public nuint stride;
 }

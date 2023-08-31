@@ -5,17 +5,17 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMicromapBuildInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkMicromapTypeEXT Type;
-    public VkBuildMicromapFlagsEXT Flags;
-    public VkBuildMicromapModeEXT Mode;
-    public VkMicromapEXT DstMicromap;
-    public uint UsageCountsCount;
-    public VkMicromapUsageEXT* PUsageCounts;
-    public VkMicromapUsageEXT** PpUsageCounts;
-    public VkDeviceOrHostAddressConstKHR Data;
-    public VkDeviceOrHostAddressKHR ScratchData;
-    public VkDeviceOrHostAddressConstKHR TriangleArray;
-    public VkDeviceSize TriangleArrayStride;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkMicromapTypeEXT type;
+    public VkBuildMicromapFlagsEXT flags;
+    public VkBuildMicromapModeEXT mode;
+    public VkMicromapEXT dstMicromap;
+    public uint usageCountsCount;
+    public VkMicromapUsageEXT* pUsageCounts;
+    public VkMicromapUsageEXT** ppUsageCounts;
+    public VkDeviceOrHostAddressConstKHR data;
+    public VkDeviceOrHostAddressKHR scratchData;
+    public VkDeviceOrHostAddressConstKHR triangleArray;
+    public VkDeviceSize triangleArrayStride;
 }

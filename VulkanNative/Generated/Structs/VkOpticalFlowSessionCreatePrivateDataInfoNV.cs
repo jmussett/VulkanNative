@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkOpticalFlowSessionCreatePrivateDataInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint Id;
-    public uint Size;
-    public void* PPrivateData;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint id;
+    public uint size;
+    public void* pPrivateData;
 }

@@ -5,19 +5,19 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkGeneratedCommandsInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineBindPoint PipelineBindPoint;
-    public VkPipeline Pipeline;
-    public VkIndirectCommandsLayoutNV IndirectCommandsLayout;
-    public uint StreamCount;
-    public VkIndirectCommandsStreamNV* PStreams;
-    public uint SequencesCount;
-    public VkBuffer PreprocessBuffer;
-    public VkDeviceSize PreprocessOffset;
-    public VkDeviceSize PreprocessSize;
-    public VkBuffer SequencesCountBuffer;
-    public VkDeviceSize SequencesCountOffset;
-    public VkBuffer SequencesIndexBuffer;
-    public VkDeviceSize SequencesIndexOffset;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineBindPoint pipelineBindPoint;
+    public VkPipeline pipeline;
+    public VkIndirectCommandsLayoutNV indirectCommandsLayout;
+    public uint streamCount;
+    public VkIndirectCommandsStreamNV* pStreams;
+    public uint sequencesCount;
+    public VkBuffer preprocessBuffer;
+    public VkDeviceSize preprocessOffset;
+    public VkDeviceSize preprocessSize;
+    public VkBuffer sequencesCountBuffer;
+    public VkDeviceSize sequencesCountOffset;
+    public VkBuffer sequencesIndexBuffer;
+    public VkDeviceSize sequencesIndexOffset;
 }

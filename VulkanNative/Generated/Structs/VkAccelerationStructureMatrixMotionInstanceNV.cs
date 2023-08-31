@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureMatrixMotionInstanceNV
 {
-    public VkTransformMatrixKHR TransformT0;
-    public VkTransformMatrixKHR TransformT1;
-    public uint InstanceCustomIndex;
-    public uint Mask;
-    public uint InstanceShaderBindingTableRecordOffset;
-    public VkGeometryInstanceFlagsKHR Flags;
-    public ulong AccelerationStructureReference;
+    public VkTransformMatrixKHR transformT0;
+    public VkTransformMatrixKHR transformT1;
+    public uint instanceCustomIndex;
+    public uint mask;
+    public uint instanceShaderBindingTableRecordOffset;
+    public VkGeometryInstanceFlagsKHR flags;
+    public ulong accelerationStructureReference;
 }

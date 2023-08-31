@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSampleLocationEXT
 {
-    public float X;
-    public float Y;
+    public float x;
+    public float y;
 }

@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkExportSemaphoreWin32HandleInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public nint* PAttributes;
-    public nint DwAccess;
-    public nint Name;
+    public VkStructureType sType;
+    public void* pNext;
+    public nint* pAttributes;
+    public nint dwAccess;
+    public nint name;
 }

@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipeline Pipeline;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipeline pipeline;
 }

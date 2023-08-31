@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCommandPoolCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkCommandPoolCreateFlags Flags;
-    public uint QueueFamilyIndex;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkCommandPoolCreateFlags flags;
+    public uint queueFamilyIndex;
 }

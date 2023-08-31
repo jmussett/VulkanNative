@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkComputePipelineIndirectBufferInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceAddress DeviceAddress;
-    public VkDeviceSize Size;
-    public VkDeviceAddress PipelineDeviceAddressCaptureReplay;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceAddress deviceAddress;
+    public VkDeviceSize size;
+    public VkDeviceAddress pipelineDeviceAddressCaptureReplay;
 }

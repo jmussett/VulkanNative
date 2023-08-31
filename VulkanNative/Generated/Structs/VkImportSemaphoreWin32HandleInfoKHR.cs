@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImportSemaphoreWin32HandleInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSemaphore Semaphore;
-    public VkSemaphoreImportFlags Flags;
-    public VkExternalSemaphoreHandleTypeFlags HandleType;
-    public nint Handle;
-    public nint Name;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSemaphore semaphore;
+    public VkSemaphoreImportFlags flags;
+    public VkExternalSemaphoreHandleTypeFlags handleType;
+    public nint handle;
+    public nint name;
 }

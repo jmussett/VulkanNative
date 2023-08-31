@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkScreenBufferPropertiesQNX
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceSize AllocationSize;
-    public uint MemoryTypeBits;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceSize allocationSize;
+    public uint memoryTypeBits;
 }

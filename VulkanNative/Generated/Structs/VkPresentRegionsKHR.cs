@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPresentRegionsKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint SwapchainCount;
-    public VkPresentRegionKHR* PRegions;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint swapchainCount;
+    public VkPresentRegionKHR* pRegions;
 }

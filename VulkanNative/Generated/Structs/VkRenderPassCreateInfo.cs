@@ -5,13 +5,13 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRenderPassCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkRenderPassCreateFlags Flags;
-    public uint AttachmentCount;
-    public VkAttachmentDescription* PAttachments;
-    public uint SubpassCount;
-    public VkSubpassDescription* PSubpasses;
-    public uint DependencyCount;
-    public VkSubpassDependency* PDependencies;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkRenderPassCreateFlags flags;
+    public uint attachmentCount;
+    public VkAttachmentDescription* pAttachments;
+    public uint subpassCount;
+    public VkSubpassDescription* pSubpasses;
+    public uint dependencyCount;
+    public VkSubpassDependency* pDependencies;
 }

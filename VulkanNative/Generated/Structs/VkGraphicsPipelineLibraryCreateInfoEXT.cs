@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkGraphicsPipelineLibraryCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkGraphicsPipelineLibraryFlagsEXT Flags;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkGraphicsPipelineLibraryFlagsEXT flags;
 }

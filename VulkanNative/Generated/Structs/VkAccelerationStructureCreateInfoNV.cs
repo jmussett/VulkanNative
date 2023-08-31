@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureCreateInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceSize CompactedSize;
-    public VkAccelerationStructureInfoNV Info;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceSize compactedSize;
+    public VkAccelerationStructureInfoNV info;
 }

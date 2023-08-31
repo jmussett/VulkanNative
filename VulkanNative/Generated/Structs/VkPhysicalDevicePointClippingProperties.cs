@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDevicePointClippingProperties
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPointClippingBehavior PointClippingBehavior;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPointClippingBehavior pointClippingBehavior;
 }

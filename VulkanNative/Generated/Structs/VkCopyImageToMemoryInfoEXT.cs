@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCopyImageToMemoryInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkHostImageCopyFlagsEXT Flags;
-    public VkImage SrcImage;
-    public VkImageLayout SrcImageLayout;
-    public uint RegionCount;
-    public VkImageToMemoryCopyEXT* PRegions;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkHostImageCopyFlagsEXT flags;
+    public VkImage srcImage;
+    public VkImageLayout srcImageLayout;
+    public uint regionCount;
+    public VkImageToMemoryCopyEXT* pRegions;
 }

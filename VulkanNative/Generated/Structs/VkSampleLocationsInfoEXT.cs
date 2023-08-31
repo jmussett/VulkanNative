@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSampleLocationsInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSampleCountFlags SampleLocationsPerPixel;
-    public VkExtent2D SampleLocationGridSize;
-    public uint SampleLocationsCount;
-    public VkSampleLocationEXT* PSampleLocations;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSampleCountFlags sampleLocationsPerPixel;
+    public VkExtent2D sampleLocationGridSize;
+    public uint sampleLocationsCount;
+    public VkSampleLocationEXT* pSampleLocations;
 }

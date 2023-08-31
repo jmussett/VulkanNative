@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRenderPassSampleLocationsBeginInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint AttachmentInitialSampleLocationsCount;
-    public VkAttachmentSampleLocationsEXT* PAttachmentInitialSampleLocations;
-    public uint PostSubpassSampleLocationsCount;
-    public VkSubpassSampleLocationsEXT* PPostSubpassSampleLocations;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint attachmentInitialSampleLocationsCount;
+    public VkAttachmentSampleLocationsEXT* pAttachmentInitialSampleLocations;
+    public uint postSubpassSampleLocationsCount;
+    public VkSubpassSampleLocationsEXT* pPostSubpassSampleLocations;
 }

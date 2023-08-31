@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageViewMinLodCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public float MinLod;
+    public VkStructureType sType;
+    public void* pNext;
+    public float minLod;
 }

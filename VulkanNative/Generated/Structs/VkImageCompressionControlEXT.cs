@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageCompressionControlEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkImageCompressionFlagsEXT Flags;
-    public uint CompressionControlPlaneCount;
-    public VkImageCompressionFixedRateFlagsEXT* PFixedRateFlags;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkImageCompressionFlagsEXT flags;
+    public uint compressionControlPlaneCount;
+    public VkImageCompressionFixedRateFlagsEXT* pFixedRateFlags;
 }

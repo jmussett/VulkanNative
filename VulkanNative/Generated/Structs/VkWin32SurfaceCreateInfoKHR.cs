@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkWin32SurfaceCreateInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkWin32SurfaceCreateFlagsKHR Flags;
-    public nint Hinstance;
-    public nint Hwnd;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkWin32SurfaceCreateFlagsKHR flags;
+    public nint hinstance;
+    public nint hwnd;
 }

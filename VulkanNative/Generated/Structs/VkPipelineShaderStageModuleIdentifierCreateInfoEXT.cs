@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineShaderStageModuleIdentifierCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint IdentifierSize;
-    public byte* PIdentifier;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint identifierSize;
+    public byte* pIdentifier;
 }

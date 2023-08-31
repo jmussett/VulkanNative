@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImportMemoryFdInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkExternalMemoryHandleTypeFlags HandleType;
-    public nint Fd;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkExternalMemoryHandleTypeFlags handleType;
+    public nint fd;
 }

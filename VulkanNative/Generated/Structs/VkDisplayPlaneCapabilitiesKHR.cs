@@ -5,13 +5,13 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDisplayPlaneCapabilitiesKHR
 {
-    public VkDisplayPlaneAlphaFlagsKHR SupportedAlpha;
-    public VkOffset2D MinSrcPosition;
-    public VkOffset2D MaxSrcPosition;
-    public VkExtent2D MinSrcExtent;
-    public VkExtent2D MaxSrcExtent;
-    public VkOffset2D MinDstPosition;
-    public VkOffset2D MaxDstPosition;
-    public VkExtent2D MinDstExtent;
-    public VkExtent2D MaxDstExtent;
+    public VkDisplayPlaneAlphaFlagsKHR supportedAlpha;
+    public VkOffset2D minSrcPosition;
+    public VkOffset2D maxSrcPosition;
+    public VkExtent2D minSrcExtent;
+    public VkExtent2D maxSrcExtent;
+    public VkOffset2D minDstPosition;
+    public VkOffset2D maxDstPosition;
+    public VkExtent2D minDstExtent;
+    public VkExtent2D maxDstExtent;
 }

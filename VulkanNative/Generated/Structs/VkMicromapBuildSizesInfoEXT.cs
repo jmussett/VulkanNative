@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMicromapBuildSizesInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceSize MicromapSize;
-    public VkDeviceSize BuildScratchSize;
-    public VkBool32 Discardable;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceSize micromapSize;
+    public VkDeviceSize buildScratchSize;
+    public VkBool32 discardable;
 }

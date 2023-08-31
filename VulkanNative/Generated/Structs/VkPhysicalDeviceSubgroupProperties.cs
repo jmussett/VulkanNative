@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceSubgroupProperties
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint SubgroupSize;
-    public VkShaderStageFlags SupportedStages;
-    public VkSubgroupFeatureFlags SupportedOperations;
-    public VkBool32 QuadOperationsInAllStages;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint subgroupSize;
+    public VkShaderStageFlags supportedStages;
+    public VkSubgroupFeatureFlags supportedOperations;
+    public VkBool32 quadOperationsInAllStages;
 }

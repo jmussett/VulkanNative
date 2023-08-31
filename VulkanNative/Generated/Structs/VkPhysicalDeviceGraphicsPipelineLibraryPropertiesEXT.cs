@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 GraphicsPipelineLibraryFastLinking;
-    public VkBool32 GraphicsPipelineLibraryIndependentInterpolationDecoration;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 graphicsPipelineLibraryFastLinking;
+    public VkBool32 graphicsPipelineLibraryIndependentInterpolationDecoration;
 }

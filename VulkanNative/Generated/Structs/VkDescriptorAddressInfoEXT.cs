@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDescriptorAddressInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceAddress Address;
-    public VkDeviceSize Range;
-    public VkFormat Format;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceAddress address;
+    public VkDeviceSize range;
+    public VkFormat format;
 }

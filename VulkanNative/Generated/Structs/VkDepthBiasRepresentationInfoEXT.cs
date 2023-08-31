@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDepthBiasRepresentationInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDepthBiasRepresentationEXT DepthBiasRepresentation;
-    public VkBool32 DepthBiasExact;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDepthBiasRepresentationEXT depthBiasRepresentation;
+    public VkBool32 depthBiasExact;
 }

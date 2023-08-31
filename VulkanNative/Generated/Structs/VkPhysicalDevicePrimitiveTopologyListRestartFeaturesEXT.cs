@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 PrimitiveTopologyListRestart;
-    public VkBool32 PrimitiveTopologyPatchListRestart;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 primitiveTopologyListRestart;
+    public VkBool32 primitiveTopologyPatchListRestart;
 }

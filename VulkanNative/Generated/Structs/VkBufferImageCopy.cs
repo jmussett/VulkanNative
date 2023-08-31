@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBufferImageCopy
 {
-    public VkDeviceSize BufferOffset;
-    public uint BufferRowLength;
-    public uint BufferImageHeight;
-    public VkImageSubresourceLayers ImageSubresource;
-    public VkOffset3D ImageOffset;
-    public VkExtent3D ImageExtent;
+    public VkDeviceSize bufferOffset;
+    public uint bufferRowLength;
+    public uint bufferImageHeight;
+    public VkImageSubresourceLayers imageSubresource;
+    public VkOffset3D imageOffset;
+    public VkExtent3D imageExtent;
 }

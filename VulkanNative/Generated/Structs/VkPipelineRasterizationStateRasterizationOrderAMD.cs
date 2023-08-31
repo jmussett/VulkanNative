@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineRasterizationStateRasterizationOrderAMD
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkRasterizationOrderAMD RasterizationOrder;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkRasterizationOrderAMD rasterizationOrder;
 }

@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAabbPositionsKHR
 {
-    public float MinX;
-    public float MinY;
-    public float MinZ;
-    public float MaxX;
-    public float MaxY;
-    public float MaxZ;
+    public float minX;
+    public float minY;
+    public float minZ;
+    public float maxX;
+    public float maxY;
+    public float maxZ;
 }

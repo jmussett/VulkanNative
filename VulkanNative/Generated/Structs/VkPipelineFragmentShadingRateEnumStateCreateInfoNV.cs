@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineFragmentShadingRateEnumStateCreateInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkFragmentShadingRateTypeNV ShadingRateType;
-    public VkFragmentShadingRateNV ShadingRate;
-    public VkFragmentShadingRateCombinerOpKHR* CombinerOps;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkFragmentShadingRateTypeNV shadingRateType;
+    public VkFragmentShadingRateNV shadingRate;
+    public VkFragmentShadingRateCombinerOpKHR* combinerOps;
 }

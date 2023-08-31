@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSwapchainPresentModeInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint SwapchainCount;
-    public VkPresentModeKHR* PPresentModes;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint swapchainCount;
+    public VkPresentModeKHR* pPresentModes;
 }

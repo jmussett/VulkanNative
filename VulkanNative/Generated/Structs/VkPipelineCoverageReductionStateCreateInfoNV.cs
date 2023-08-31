@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineCoverageReductionStateCreateInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineCoverageReductionStateCreateFlagsNV Flags;
-    public VkCoverageReductionModeNV CoverageReductionMode;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineCoverageReductionStateCreateFlagsNV flags;
+    public VkCoverageReductionModeNV coverageReductionMode;
 }

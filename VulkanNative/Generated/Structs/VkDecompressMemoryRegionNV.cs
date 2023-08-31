@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDecompressMemoryRegionNV
 {
-    public VkDeviceAddress SrcAddress;
-    public VkDeviceAddress DstAddress;
-    public VkDeviceSize CompressedSize;
-    public VkDeviceSize DecompressedSize;
-    public VkMemoryDecompressionMethodFlagsNV DecompressionMethod;
+    public VkDeviceAddress srcAddress;
+    public VkDeviceAddress dstAddress;
+    public VkDeviceSize compressedSize;
+    public VkDeviceSize decompressedSize;
+    public VkMemoryDecompressionMethodFlagsNV decompressionMethod;
 }

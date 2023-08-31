@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineRenderingCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint ViewMask;
-    public uint ColorAttachmentCount;
-    public VkFormat* PColorAttachmentFormats;
-    public VkFormat DepthAttachmentFormat;
-    public VkFormat StencilAttachmentFormat;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint viewMask;
+    public uint colorAttachmentCount;
+    public VkFormat* pColorAttachmentFormats;
+    public VkFormat depthAttachmentFormat;
+    public VkFormat stencilAttachmentFormat;
 }

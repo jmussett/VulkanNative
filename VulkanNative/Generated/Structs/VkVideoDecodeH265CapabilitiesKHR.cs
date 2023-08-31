@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVideoDecodeH265CapabilitiesKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public nint MaxLevelIdc;
+    public VkStructureType sType;
+    public void* pNext;
+    public nint maxLevelIdc;
 }

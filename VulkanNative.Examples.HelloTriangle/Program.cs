@@ -70,7 +70,7 @@ uint? presentationQueueFamilyIndex = null;
 
 for (uint i = 0; i < queueFamilies.Length; i++)
 {
-    if (queueFamilies[i].QueueFlags.HasFlag(VkQueueFlags.VK_QUEUE_GRAPHICS_BIT))
+    if (queueFamilies[i].queueFlags.HasFlag(VkQueueFlags.VK_QUEUE_GRAPHICS_BIT))
     {
         graphicsQueueFamilyIndex = i;
     }
@@ -147,14 +147,14 @@ var swapchain = device.CreateSwapchain(new SwapchainCreateInfo
 {
     Surface = surface,
     // Always include 1 more then the minimum, or max value if it is not zero (infinite).
-    MinImageCount = Math.Min(capabilities.MinImageCount + 1, Math.Max(capabilities.MaxImageCount, uint.MaxValue)),
+    MinImageCount = Math.Min(capabilities.minImageCount + 1, Math.Max(capabilities.maxImageCount, uint.MaxValue)),
     SurfaceFormat = surfaceFormat,
-    ImageExtent = capabilities.CurrentExtent, // TODO: use glfwGetFramebufferSize
+    ImageExtent = capabilities.currentExtent, // TODO: use glfwGetFramebufferSize
     ImageArrayLayers = 1, // 1 unless doing stereoscopic 3D
     ImageUsage = VkImageUsageFlags.VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
     SharingMode = sharingMode,
     QueueFamilyIndeces = queueFamilyIndeces,
-    PreTransform = capabilities.CurrentTransform,
+    PreTransform = capabilities.currentTransform,
     CompositeAlpha = VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
     PresentMode = presentMode,
     Clipped = true,
@@ -171,22 +171,22 @@ for (var i = 0; i < imageViews.Length; i++)
     imageViews[i] = device.CreateImageView(new ImageViewCreateInfo
     {
         Image = images[i],
-        Format = surfaceFormat.Format,
+        Format = surfaceFormat.format,
         ViewType = VkImageViewType.VK_IMAGE_VIEW_TYPE_2D,
         Components = new VkComponentMapping
         {
-            R = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
-            G = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
-            B = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
-            A = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY
+            r = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
+            g = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
+            b = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
+            a = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY
         },
         SubresourceRange = new VkImageSubresourceRange
         {
-            AspectMask = VkImageAspectFlags.VK_IMAGE_ASPECT_COLOR_BIT,
-            BaseMipLevel = 0,
-            LevelCount = 1,
-            BaseArrayLayer = 0,
-            LayerCount = 1
+            aspectMask = VkImageAspectFlags.VK_IMAGE_ASPECT_COLOR_BIT,
+            baseMipLevel = 0,
+            levelCount = 1,
+            baseArrayLayer = 0,
+            layerCount = 1
         }
     });
 }
@@ -196,6 +196,10 @@ byte[] fragBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Sha
 
 var vertShader = device.CreateShaderModule(vertBytes);
 var fragShader = device.CreateShaderModule(fragBytes);
+
+// Dispose after creating graphics pipeline
+vertShader.Dispose();
+fragShader.Dispose();
 
 while (!Glfw.WindowShouldClose(window))
 {
@@ -207,8 +211,7 @@ for (var i = 0; i < imageViews.Length; i++)
     imageViews[i].Dispose();
 }
 
-vertShader.Dispose();
-fragShader.Dispose();
+
 swapchain.Dispose();
 surface.Dispose();
 device.Dispose();
@@ -236,8 +239,8 @@ static VkSurfaceFormatKHR ChooseSurfaceFormat(VkSurfaceFormatKHR[] surfaceFormat
 {
     for (var i = 0; i < surfaceFormats.Length; i++)
     {
-        if (surfaceFormats[i].Format == VkFormat.VK_FORMAT_B8G8R8A8_SRGB &&
-            surfaceFormats[i].ColorSpace == VkColorSpaceKHR.VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
+        if (surfaceFormats[i].format == VkFormat.VK_FORMAT_B8G8R8A8_SRGB &&
+            surfaceFormats[i].colorSpace == VkColorSpaceKHR.VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
         {
             return surfaceFormats[i];
         }

@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRenderingFragmentShadingRateAttachmentInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkImageView ImageView;
-    public VkImageLayout ImageLayout;
-    public VkExtent2D ShadingRateAttachmentTexelSize;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkImageView imageView;
+    public VkImageLayout imageLayout;
+    public VkExtent2D shadingRateAttachmentTexelSize;
 }

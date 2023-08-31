@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkWaylandSurfaceCreateInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkWaylandSurfaceCreateFlagsKHR Flags;
-    public nint* Display;
-    public nint* Surface;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkWaylandSurfaceCreateFlagsKHR flags;
+    public nint* display;
+    public nint* surface;
 }

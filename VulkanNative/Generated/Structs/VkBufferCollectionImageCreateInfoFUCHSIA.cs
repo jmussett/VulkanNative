@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBufferCollectionImageCreateInfoFUCHSIA
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBufferCollectionFUCHSIA Collection;
-    public uint Index;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBufferCollectionFUCHSIA collection;
+    public uint index;
 }

@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceEventInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceEventTypeEXT DeviceEvent;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceEventTypeEXT deviceEvent;
 }

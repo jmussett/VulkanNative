@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkExportMetalTextureInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkImage Image;
-    public VkImageView ImageView;
-    public VkBufferView BufferView;
-    public VkImageAspectFlags Plane;
-    public MTLTexture_id MtlTexture;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkImage image;
+    public VkImageView imageView;
+    public VkBufferView bufferView;
+    public VkImageAspectFlags plane;
+    public MTLTexture_id mtlTexture;
 }

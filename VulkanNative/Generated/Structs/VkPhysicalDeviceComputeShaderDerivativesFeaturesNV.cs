@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceComputeShaderDerivativesFeaturesNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 ComputeDerivativeGroupQuads;
-    public VkBool32 ComputeDerivativeGroupLinear;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 computeDerivativeGroupQuads;
+    public VkBool32 computeDerivativeGroupLinear;
 }

@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkQueryPoolPerformanceQueryCreateInfoINTEL
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkQueryPoolSamplingModeINTEL PerformanceCountersSampling;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkQueryPoolSamplingModeINTEL performanceCountersSampling;
 }

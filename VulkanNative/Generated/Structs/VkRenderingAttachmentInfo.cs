@@ -5,14 +5,14 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRenderingAttachmentInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkImageView ImageView;
-    public VkImageLayout ImageLayout;
-    public VkResolveModeFlags ResolveMode;
-    public VkImageView ResolveImageView;
-    public VkImageLayout ResolveImageLayout;
-    public VkAttachmentLoadOp LoadOp;
-    public VkAttachmentStoreOp StoreOp;
-    public VkClearValue ClearValue;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkImageView imageView;
+    public VkImageLayout imageLayout;
+    public VkResolveModeFlags resolveMode;
+    public VkImageView resolveImageView;
+    public VkImageLayout resolveImageLayout;
+    public VkAttachmentLoadOp loadOp;
+    public VkAttachmentStoreOp storeOp;
+    public VkClearValue clearValue;
 }

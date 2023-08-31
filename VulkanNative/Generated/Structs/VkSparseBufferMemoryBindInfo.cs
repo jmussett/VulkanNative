@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSparseBufferMemoryBindInfo
 {
-    public VkBuffer Buffer;
-    public uint BindCount;
-    public VkSparseMemoryBind* PBinds;
+    public VkBuffer buffer;
+    public uint bindCount;
+    public VkSparseMemoryBind* pBinds;
 }

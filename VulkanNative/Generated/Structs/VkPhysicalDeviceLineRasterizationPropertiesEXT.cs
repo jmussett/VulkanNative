@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceLineRasterizationPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint LineSubPixelPrecisionBits;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint lineSubPixelPrecisionBits;
 }

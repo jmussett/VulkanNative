@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceMultiDrawPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MaxMultiDrawCount;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint maxMultiDrawCount;
 }

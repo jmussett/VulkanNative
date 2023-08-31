@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceExtendedDynamicState3PropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 DynamicPrimitiveTopologyUnrestricted;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 dynamicPrimitiveTopologyUnrestricted;
 }

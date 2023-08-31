@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSamplerCaptureDescriptorDataInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSampler Sampler;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSampler sampler;
 }

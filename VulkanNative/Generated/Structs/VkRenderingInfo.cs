@@ -5,14 +5,14 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRenderingInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkRenderingFlags Flags;
-    public VkRect2D RenderArea;
-    public uint LayerCount;
-    public uint ViewMask;
-    public uint ColorAttachmentCount;
-    public VkRenderingAttachmentInfo* PColorAttachments;
-    public VkRenderingAttachmentInfo* PDepthAttachment;
-    public VkRenderingAttachmentInfo* PStencilAttachment;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkRenderingFlags flags;
+    public VkRect2D renderArea;
+    public uint layerCount;
+    public uint viewMask;
+    public uint colorAttachmentCount;
+    public VkRenderingAttachmentInfo* pColorAttachments;
+    public VkRenderingAttachmentInfo* pDepthAttachment;
+    public VkRenderingAttachmentInfo* pStencilAttachment;
 }

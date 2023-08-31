@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSamplerCustomBorderColorCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkClearColorValue CustomBorderColor;
-    public VkFormat Format;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkClearColorValue customBorderColor;
+    public VkFormat format;
 }

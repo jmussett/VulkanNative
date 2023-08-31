@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSamplerReductionModeCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSamplerReductionMode ReductionMode;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSamplerReductionMode reductionMode;
 }

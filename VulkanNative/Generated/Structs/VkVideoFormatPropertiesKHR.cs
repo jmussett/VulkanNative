@@ -5,12 +5,12 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVideoFormatPropertiesKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkFormat Format;
-    public VkComponentMapping ComponentMapping;
-    public VkImageCreateFlags ImageCreateFlags;
-    public VkImageType ImageType;
-    public VkImageTiling ImageTiling;
-    public VkImageUsageFlags ImageUsageFlags;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkFormat format;
+    public VkComponentMapping componentMapping;
+    public VkImageCreateFlags imageCreateFlags;
+    public VkImageType imageType;
+    public VkImageTiling imageTiling;
+    public VkImageUsageFlags imageUsageFlags;
 }

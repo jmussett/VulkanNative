@@ -5,13 +5,13 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkWin32KeyedMutexAcquireReleaseInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint AcquireCount;
-    public VkDeviceMemory* PAcquireSyncs;
-    public ulong* PAcquireKeys;
-    public uint* PAcquireTimeouts;
-    public uint ReleaseCount;
-    public VkDeviceMemory* PReleaseSyncs;
-    public ulong* PReleaseKeys;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint acquireCount;
+    public VkDeviceMemory* pAcquireSyncs;
+    public ulong* pAcquireKeys;
+    public uint* pAcquireTimeouts;
+    public uint releaseCount;
+    public VkDeviceMemory* pReleaseSyncs;
+    public ulong* pReleaseKeys;
 }

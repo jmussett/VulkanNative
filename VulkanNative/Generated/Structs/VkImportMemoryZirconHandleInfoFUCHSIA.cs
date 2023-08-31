@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImportMemoryZirconHandleInfoFUCHSIA
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkExternalMemoryHandleTypeFlags HandleType;
-    public nint Handle;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkExternalMemoryHandleTypeFlags handleType;
+    public nint handle;
 }

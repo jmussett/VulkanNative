@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCalibratedTimestampInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkTimeDomainEXT TimeDomain;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkTimeDomainEXT timeDomain;
 }

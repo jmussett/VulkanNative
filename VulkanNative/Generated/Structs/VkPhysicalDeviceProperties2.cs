@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceProperties2
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPhysicalDeviceProperties Properties;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPhysicalDeviceProperties properties;
 }

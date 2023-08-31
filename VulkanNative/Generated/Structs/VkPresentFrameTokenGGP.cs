@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPresentFrameTokenGGP
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public nint FrameToken;
+    public VkStructureType sType;
+    public void* pNext;
+    public nint frameToken;
 }

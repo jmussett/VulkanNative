@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSurfacePresentScalingCapabilitiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPresentScalingFlagsEXT SupportedPresentScaling;
-    public VkPresentGravityFlagsEXT SupportedPresentGravityX;
-    public VkPresentGravityFlagsEXT SupportedPresentGravityY;
-    public VkExtent2D MinScaledImageExtent;
-    public VkExtent2D MaxScaledImageExtent;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPresentScalingFlagsEXT supportedPresentScaling;
+    public VkPresentGravityFlagsEXT supportedPresentGravityX;
+    public VkPresentGravityFlagsEXT supportedPresentGravityY;
+    public VkExtent2D minScaledImageExtent;
+    public VkExtent2D maxScaledImageExtent;
 }

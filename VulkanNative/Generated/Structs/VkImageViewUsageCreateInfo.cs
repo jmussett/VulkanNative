@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageViewUsageCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkImageUsageFlags Usage;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkImageUsageFlags usage;
 }

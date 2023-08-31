@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceFragmentShadingRateKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSampleCountFlags SampleCounts;
-    public VkExtent2D FragmentSize;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSampleCountFlags sampleCounts;
+    public VkExtent2D fragmentSize;
 }

@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkHostImageLayoutTransitionInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkImage Image;
-    public VkImageLayout OldLayout;
-    public VkImageLayout NewLayout;
-    public VkImageSubresourceRange SubresourceRange;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkImage image;
+    public VkImageLayout oldLayout;
+    public VkImageLayout newLayout;
+    public VkImageSubresourceRange subresourceRange;
 }

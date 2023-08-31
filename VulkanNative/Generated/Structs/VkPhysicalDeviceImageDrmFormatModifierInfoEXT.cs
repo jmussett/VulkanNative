@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceImageDrmFormatModifierInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public ulong DrmFormatModifier;
-    public VkSharingMode SharingMode;
-    public uint QueueFamilyIndexCount;
-    public uint* PQueueFamilyIndices;
+    public VkStructureType sType;
+    public void* pNext;
+    public ulong drmFormatModifier;
+    public VkSharingMode sharingMode;
+    public uint queueFamilyIndexCount;
+    public uint* pQueueFamilyIndices;
 }

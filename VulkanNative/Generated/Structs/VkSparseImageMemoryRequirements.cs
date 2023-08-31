@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSparseImageMemoryRequirements
 {
-    public VkSparseImageFormatProperties FormatProperties;
-    public uint ImageMipTailFirstLod;
-    public VkDeviceSize ImageMipTailSize;
-    public VkDeviceSize ImageMipTailOffset;
-    public VkDeviceSize ImageMipTailStride;
+    public VkSparseImageFormatProperties formatProperties;
+    public uint imageMipTailFirstLod;
+    public VkDeviceSize imageMipTailSize;
+    public VkDeviceSize imageMipTailOffset;
+    public VkDeviceSize imageMipTailStride;
 }

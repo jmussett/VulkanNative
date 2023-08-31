@@ -5,17 +5,17 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBufferCollectionPropertiesFUCHSIA
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MemoryTypeBits;
-    public uint BufferCount;
-    public uint CreateInfoIndex;
-    public ulong SysmemPixelFormat;
-    public VkFormatFeatureFlags FormatFeatures;
-    public VkSysmemColorSpaceFUCHSIA SysmemColorSpaceIndex;
-    public VkComponentMapping SamplerYcbcrConversionComponents;
-    public VkSamplerYcbcrModelConversion SuggestedYcbcrModel;
-    public VkSamplerYcbcrRange SuggestedYcbcrRange;
-    public VkChromaLocation SuggestedXChromaOffset;
-    public VkChromaLocation SuggestedYChromaOffset;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint memoryTypeBits;
+    public uint bufferCount;
+    public uint createInfoIndex;
+    public ulong sysmemPixelFormat;
+    public VkFormatFeatureFlags formatFeatures;
+    public VkSysmemColorSpaceFUCHSIA sysmemColorSpaceIndex;
+    public VkComponentMapping samplerYcbcrConversionComponents;
+    public VkSamplerYcbcrModelConversion suggestedYcbcrModel;
+    public VkSamplerYcbcrRange suggestedYcbcrRange;
+    public VkChromaLocation suggestedXChromaOffset;
+    public VkChromaLocation suggestedYChromaOffset;
 }

@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkExportMetalObjectsInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
+    public VkStructureType sType;
+    public void* pNext;
 }

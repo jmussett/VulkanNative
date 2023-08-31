@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkOpticalFlowExecuteInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkOpticalFlowExecuteFlagsNV Flags;
-    public uint RegionCount;
-    public VkRect2D* PRegions;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkOpticalFlowExecuteFlagsNV flags;
+    public uint regionCount;
+    public VkRect2D* pRegions;
 }

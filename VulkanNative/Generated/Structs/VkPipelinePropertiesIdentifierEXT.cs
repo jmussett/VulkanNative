@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelinePropertiesIdentifierEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public fixed byte PipelineIdentifier[(int)VulkanApiConstants.VK_UUID_SIZE];
+    public VkStructureType sType;
+    public void* pNext;
+    public fixed byte pipelineIdentifier[(int)VulkanApiConstants.VK_UUID_SIZE];
 }

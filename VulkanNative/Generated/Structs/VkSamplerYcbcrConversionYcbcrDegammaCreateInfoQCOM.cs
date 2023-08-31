@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 EnableYDegamma;
-    public VkBool32 EnableCbCrDegamma;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 enableYDegamma;
+    public VkBool32 enableCbCrDegamma;
 }

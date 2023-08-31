@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSwapchainPresentFenceInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint SwapchainCount;
-    public VkFence* PFences;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint swapchainCount;
+    public VkFence* pFences;
 }

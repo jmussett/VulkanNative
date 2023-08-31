@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMutableDescriptorTypeListEXT
 {
-    public uint DescriptorTypeCount;
-    public VkDescriptorType* PDescriptorTypes;
+    public uint descriptorTypeCount;
+    public VkDescriptorType* pDescriptorTypes;
 }

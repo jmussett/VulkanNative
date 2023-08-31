@@ -5,15 +5,15 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRenderPassCreateInfo2
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkRenderPassCreateFlags Flags;
-    public uint AttachmentCount;
-    public VkAttachmentDescription2* PAttachments;
-    public uint SubpassCount;
-    public VkSubpassDescription2* PSubpasses;
-    public uint DependencyCount;
-    public VkSubpassDependency2* PDependencies;
-    public uint CorrelatedViewMaskCount;
-    public uint* PCorrelatedViewMasks;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkRenderPassCreateFlags flags;
+    public uint attachmentCount;
+    public VkAttachmentDescription2* pAttachments;
+    public uint subpassCount;
+    public VkSubpassDescription2* pSubpasses;
+    public uint dependencyCount;
+    public VkSubpassDependency2* pDependencies;
+    public uint correlatedViewMaskCount;
+    public uint* pCorrelatedViewMasks;
 }

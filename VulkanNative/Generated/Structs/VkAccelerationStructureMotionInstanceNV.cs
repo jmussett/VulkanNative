@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureMotionInstanceNV
 {
-    public VkAccelerationStructureMotionInstanceTypeNV Type;
-    public VkAccelerationStructureMotionInstanceFlagsNV Flags;
-    public VkAccelerationStructureMotionInstanceDataNV Data;
+    public VkAccelerationStructureMotionInstanceTypeNV type;
+    public VkAccelerationStructureMotionInstanceFlagsNV flags;
+    public VkAccelerationStructureMotionInstanceDataNV data;
 }

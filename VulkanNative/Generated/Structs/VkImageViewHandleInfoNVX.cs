@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageViewHandleInfoNVX
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkImageView ImageView;
-    public VkDescriptorType DescriptorType;
-    public VkSampler Sampler;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkImageView imageView;
+    public VkDescriptorType descriptorType;
+    public VkSampler sampler;
 }

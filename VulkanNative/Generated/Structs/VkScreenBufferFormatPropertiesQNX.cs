@@ -5,15 +5,15 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkScreenBufferFormatPropertiesQNX
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkFormat Format;
-    public ulong ExternalFormat;
-    public ulong ScreenUsage;
-    public VkFormatFeatureFlags FormatFeatures;
-    public VkComponentMapping SamplerYcbcrConversionComponents;
-    public VkSamplerYcbcrModelConversion SuggestedYcbcrModel;
-    public VkSamplerYcbcrRange SuggestedYcbcrRange;
-    public VkChromaLocation SuggestedXChromaOffset;
-    public VkChromaLocation SuggestedYChromaOffset;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkFormat format;
+    public ulong externalFormat;
+    public ulong screenUsage;
+    public VkFormatFeatureFlags formatFeatures;
+    public VkComponentMapping samplerYcbcrConversionComponents;
+    public VkSamplerYcbcrModelConversion suggestedYcbcrModel;
+    public VkSamplerYcbcrRange suggestedYcbcrRange;
+    public VkChromaLocation suggestedXChromaOffset;
+    public VkChromaLocation suggestedYChromaOffset;
 }

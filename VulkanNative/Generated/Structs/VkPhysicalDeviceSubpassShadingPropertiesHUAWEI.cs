@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceSubpassShadingPropertiesHUAWEI
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MaxSubpassShadingWorkgroupSizeAspectRatio;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint maxSubpassShadingWorkgroupSizeAspectRatio;
 }

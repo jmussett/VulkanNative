@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSamplerBlockMatchWindowCreateInfoQCOM
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkExtent2D WindowExtent;
-    public VkBlockMatchWindowCompareModeQCOM WindowCompareMode;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkExtent2D windowExtent;
+    public VkBlockMatchWindowCompareModeQCOM windowCompareMode;
 }

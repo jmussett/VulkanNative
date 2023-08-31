@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRenderPassFragmentDensityMapCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkAttachmentReference FragmentDensityMapAttachment;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkAttachmentReference fragmentDensityMapAttachment;
 }

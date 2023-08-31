@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDevicePresentWaitFeaturesKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 PresentWait;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 presentWait;
 }

@@ -5,14 +5,14 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceRayTracingPropertiesNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint ShaderGroupHandleSize;
-    public uint MaxRecursionDepth;
-    public uint MaxShaderGroupStride;
-    public uint ShaderGroupBaseAlignment;
-    public ulong MaxGeometryCount;
-    public ulong MaxInstanceCount;
-    public ulong MaxTriangleCount;
-    public uint MaxDescriptorSetAccelerationStructures;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint shaderGroupHandleSize;
+    public uint maxRecursionDepth;
+    public uint maxShaderGroupStride;
+    public uint shaderGroupBaseAlignment;
+    public ulong maxGeometryCount;
+    public ulong maxInstanceCount;
+    public ulong maxTriangleCount;
+    public uint maxDescriptorSetAccelerationStructures;
 }

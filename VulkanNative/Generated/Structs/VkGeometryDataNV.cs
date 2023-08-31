@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkGeometryDataNV
 {
-    public VkGeometryTrianglesNV Triangles;
-    public VkGeometryAABBNV Aabbs;
+    public VkGeometryTrianglesNV triangles;
+    public VkGeometryAABBNV aabbs;
 }

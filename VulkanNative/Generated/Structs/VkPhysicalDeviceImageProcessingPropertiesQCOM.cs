@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceImageProcessingPropertiesQCOM
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MaxWeightFilterPhases;
-    public VkExtent2D MaxWeightFilterDimension;
-    public VkExtent2D MaxBlockMatchRegion;
-    public VkExtent2D MaxBoxFilterBlockSize;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint maxWeightFilterPhases;
+    public VkExtent2D maxWeightFilterDimension;
+    public VkExtent2D maxBlockMatchRegion;
+    public VkExtent2D maxBoxFilterBlockSize;
 }

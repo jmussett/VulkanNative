@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMemoryZirconHandlePropertiesFUCHSIA
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MemoryTypeBits;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint memoryTypeBits;
 }

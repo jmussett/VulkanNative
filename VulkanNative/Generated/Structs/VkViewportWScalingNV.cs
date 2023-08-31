@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkViewportWScalingNV
 {
-    public float Xcoeff;
-    public float Ycoeff;
+    public float xcoeff;
+    public float ycoeff;
 }

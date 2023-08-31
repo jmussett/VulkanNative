@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 ImageSlicedViewOf3D;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 imageSlicedViewOf3D;
 }

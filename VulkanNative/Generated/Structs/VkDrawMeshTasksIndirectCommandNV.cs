@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDrawMeshTasksIndirectCommandNV
 {
-    public uint TaskCount;
-    public uint FirstTask;
+    public uint taskCount;
+    public uint firstTask;
 }

@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceShadingRateImageFeaturesNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 ShadingRateImage;
-    public VkBool32 ShadingRateCoarseSampleOrder;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 shadingRateImage;
+    public VkBool32 shadingRateCoarseSampleOrder;
 }

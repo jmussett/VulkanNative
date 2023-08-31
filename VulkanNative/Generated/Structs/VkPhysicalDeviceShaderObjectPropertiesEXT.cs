@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceShaderObjectPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public fixed byte ShaderBinaryUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
-    public uint ShaderBinaryVersion;
+    public VkStructureType sType;
+    public void* pNext;
+    public fixed byte shaderBinaryUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
+    public uint shaderBinaryVersion;
 }

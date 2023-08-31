@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAcquireProfilingLockInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkAcquireProfilingLockFlagsKHR Flags;
-    public ulong Timeout;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkAcquireProfilingLockFlagsKHR flags;
+    public ulong timeout;
 }

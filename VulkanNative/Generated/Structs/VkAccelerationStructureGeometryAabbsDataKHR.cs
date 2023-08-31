@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureGeometryAabbsDataKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceOrHostAddressConstKHR Data;
-    public VkDeviceSize Stride;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceOrHostAddressConstKHR data;
+    public VkDeviceSize stride;
 }

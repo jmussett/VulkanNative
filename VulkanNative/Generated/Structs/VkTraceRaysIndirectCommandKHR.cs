@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkTraceRaysIndirectCommandKHR
 {
-    public uint Width;
-    public uint Height;
-    public uint Depth;
+    public uint width;
+    public uint height;
+    public uint depth;
 }

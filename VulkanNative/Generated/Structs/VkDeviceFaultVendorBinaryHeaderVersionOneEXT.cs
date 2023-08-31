@@ -5,15 +5,15 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceFaultVendorBinaryHeaderVersionOneEXT
 {
-    public uint HeaderSize;
-    public VkDeviceFaultVendorBinaryHeaderVersionEXT HeaderVersion;
-    public uint VendorID;
-    public uint DeviceID;
-    public uint DriverVersion;
-    public fixed byte PipelineCacheUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
-    public uint ApplicationNameOffset;
-    public uint ApplicationVersion;
-    public uint EngineNameOffset;
-    public uint EngineVersion;
-    public uint ApiVersion;
+    public uint headerSize;
+    public VkDeviceFaultVendorBinaryHeaderVersionEXT headerVersion;
+    public uint vendorID;
+    public uint deviceID;
+    public uint driverVersion;
+    public fixed byte pipelineCacheUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
+    public uint applicationNameOffset;
+    public uint applicationVersion;
+    public uint engineNameOffset;
+    public uint engineVersion;
+    public uint apiVersion;
 }

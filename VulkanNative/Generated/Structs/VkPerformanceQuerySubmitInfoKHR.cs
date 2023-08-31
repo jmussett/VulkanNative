@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPerformanceQuerySubmitInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint CounterPassIndex;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint counterPassIndex;
 }

@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkIndirectCommandsStreamNV
 {
-    public VkBuffer Buffer;
-    public VkDeviceSize Offset;
+    public VkBuffer buffer;
+    public VkDeviceSize offset;
 }

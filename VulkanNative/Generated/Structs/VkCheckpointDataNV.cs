@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCheckpointDataNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineStageFlags Stage;
-    public void* PCheckpointMarker;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineStageFlags stage;
+    public void* pCheckpointMarker;
 }

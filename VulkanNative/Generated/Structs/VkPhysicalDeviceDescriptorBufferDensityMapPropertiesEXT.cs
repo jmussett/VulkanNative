@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public nuint CombinedImageSamplerDensityMapDescriptorSize;
+    public VkStructureType sType;
+    public void* pNext;
+    public nuint combinedImageSamplerDensityMapDescriptorSize;
 }

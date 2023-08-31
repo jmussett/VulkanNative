@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPushConstantRange
 {
-    public VkShaderStageFlags StageFlags;
-    public uint Offset;
-    public uint Size;
+    public VkShaderStageFlags stageFlags;
+    public uint offset;
+    public uint size;
 }

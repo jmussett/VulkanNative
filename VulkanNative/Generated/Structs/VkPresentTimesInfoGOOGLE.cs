@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPresentTimesInfoGOOGLE
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint SwapchainCount;
-    public VkPresentTimeGOOGLE* PTimes;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint swapchainCount;
+    public VkPresentTimeGOOGLE* pTimes;
 }

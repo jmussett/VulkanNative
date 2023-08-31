@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSwapchainCounterCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSurfaceCounterFlagsEXT SurfaceCounters;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSurfaceCounterFlagsEXT surfaceCounters;
 }

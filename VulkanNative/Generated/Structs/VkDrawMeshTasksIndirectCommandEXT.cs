@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDrawMeshTasksIndirectCommandEXT
 {
-    public uint GroupCountX;
-    public uint GroupCountY;
-    public uint GroupCountZ;
+    public uint groupCountX;
+    public uint groupCountY;
+    public uint groupCountZ;
 }

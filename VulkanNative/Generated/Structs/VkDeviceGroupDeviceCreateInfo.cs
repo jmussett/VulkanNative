@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceGroupDeviceCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint PhysicalDeviceCount;
-    public VkPhysicalDevice* PPhysicalDevices;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint physicalDeviceCount;
+    public VkPhysicalDevice* pPhysicalDevices;
 }

@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPastPresentationTimingGOOGLE
 {
-    public uint PresentID;
-    public ulong DesiredPresentTime;
-    public ulong ActualPresentTime;
-    public ulong EarliestPresentTime;
-    public ulong PresentMargin;
+    public uint presentID;
+    public ulong desiredPresentTime;
+    public ulong actualPresentTime;
+    public ulong earliestPresentTime;
+    public ulong presentMargin;
 }

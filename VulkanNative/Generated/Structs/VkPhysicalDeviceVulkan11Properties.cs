@@ -5,21 +5,21 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceVulkan11Properties
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public fixed byte DeviceUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
-    public fixed byte DriverUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
-    public fixed byte DeviceLUID[(int)VulkanApiConstants.VK_LUID_SIZE];
-    public uint DeviceNodeMask;
-    public VkBool32 DeviceLUIDValid;
-    public uint SubgroupSize;
-    public VkShaderStageFlags SubgroupSupportedStages;
-    public VkSubgroupFeatureFlags SubgroupSupportedOperations;
-    public VkBool32 SubgroupQuadOperationsInAllStages;
-    public VkPointClippingBehavior PointClippingBehavior;
-    public uint MaxMultiviewViewCount;
-    public uint MaxMultiviewInstanceIndex;
-    public VkBool32 ProtectedNoFault;
-    public uint MaxPerSetDescriptors;
-    public VkDeviceSize MaxMemoryAllocationSize;
+    public VkStructureType sType;
+    public void* pNext;
+    public fixed byte deviceUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
+    public fixed byte driverUUID[(int)VulkanApiConstants.VK_UUID_SIZE];
+    public fixed byte deviceLUID[(int)VulkanApiConstants.VK_LUID_SIZE];
+    public uint deviceNodeMask;
+    public VkBool32 deviceLUIDValid;
+    public uint subgroupSize;
+    public VkShaderStageFlags subgroupSupportedStages;
+    public VkSubgroupFeatureFlags subgroupSupportedOperations;
+    public VkBool32 subgroupQuadOperationsInAllStages;
+    public VkPointClippingBehavior pointClippingBehavior;
+    public uint maxMultiviewViewCount;
+    public uint maxMultiviewInstanceIndex;
+    public VkBool32 protectedNoFault;
+    public uint maxPerSetDescriptors;
+    public VkDeviceSize maxMemoryAllocationSize;
 }

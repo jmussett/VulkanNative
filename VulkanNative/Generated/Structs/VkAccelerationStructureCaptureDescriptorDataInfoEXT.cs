@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureCaptureDescriptorDataInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkAccelerationStructureKHR AccelerationStructure;
-    public VkAccelerationStructureNV AccelerationStructureNV;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkAccelerationStructureKHR accelerationStructure;
+    public VkAccelerationStructureNV accelerationStructureNV;
 }

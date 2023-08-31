@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSurfaceFullScreenExclusiveInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkFullScreenExclusiveEXT FullScreenExclusive;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkFullScreenExclusiveEXT fullScreenExclusive;
 }

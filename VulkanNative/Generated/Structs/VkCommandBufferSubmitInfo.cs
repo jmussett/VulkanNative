@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCommandBufferSubmitInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkCommandBuffer CommandBuffer;
-    public uint DeviceMask;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkCommandBuffer commandBuffer;
+    public uint deviceMask;
 }

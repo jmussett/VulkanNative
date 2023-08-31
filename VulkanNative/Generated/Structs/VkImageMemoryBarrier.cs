@@ -5,14 +5,14 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageMemoryBarrier
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkAccessFlags SrcAccessMask;
-    public VkAccessFlags DstAccessMask;
-    public VkImageLayout OldLayout;
-    public VkImageLayout NewLayout;
-    public uint SrcQueueFamilyIndex;
-    public uint DstQueueFamilyIndex;
-    public VkImage Image;
-    public VkImageSubresourceRange SubresourceRange;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkAccessFlags srcAccessMask;
+    public VkAccessFlags dstAccessMask;
+    public VkImageLayout oldLayout;
+    public VkImageLayout newLayout;
+    public uint srcQueueFamilyIndex;
+    public uint dstQueueFamilyIndex;
+    public VkImage image;
+    public VkImageSubresourceRange subresourceRange;
 }

@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDescriptorBufferInfo
 {
-    public VkBuffer Buffer;
-    public VkDeviceSize Offset;
-    public VkDeviceSize Range;
+    public VkBuffer buffer;
+    public VkDeviceSize offset;
+    public VkDeviceSize range;
 }

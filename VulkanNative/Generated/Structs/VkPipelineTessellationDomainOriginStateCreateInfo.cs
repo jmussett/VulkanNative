@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineTessellationDomainOriginStateCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkTessellationDomainOrigin DomainOrigin;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkTessellationDomainOrigin domainOrigin;
 }

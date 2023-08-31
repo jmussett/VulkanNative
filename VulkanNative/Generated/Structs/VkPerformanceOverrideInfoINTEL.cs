@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPerformanceOverrideInfoINTEL
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPerformanceOverrideTypeINTEL Type;
-    public VkBool32 Enable;
-    public ulong Parameter;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPerformanceOverrideTypeINTEL type;
+    public VkBool32 enable;
+    public ulong parameter;
 }

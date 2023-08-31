@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageSubresourceRange
 {
-    public VkImageAspectFlags AspectMask;
-    public uint BaseMipLevel;
-    public uint LevelCount;
-    public uint BaseArrayLayer;
-    public uint LayerCount;
+    public VkImageAspectFlags aspectMask;
+    public uint baseMipLevel;
+    public uint levelCount;
+    public uint baseArrayLayer;
+    public uint layerCount;
 }

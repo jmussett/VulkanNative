@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPerformanceConfigurationAcquireInfoINTEL
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPerformanceConfigurationTypeINTEL Type;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPerformanceConfigurationTypeINTEL type;
 }

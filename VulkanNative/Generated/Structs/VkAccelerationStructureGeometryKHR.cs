@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureGeometryKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkGeometryTypeKHR GeometryType;
-    public VkAccelerationStructureGeometryDataKHR Geometry;
-    public VkGeometryFlagsKHR Flags;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkGeometryTypeKHR geometryType;
+    public VkAccelerationStructureGeometryDataKHR geometry;
+    public VkGeometryFlagsKHR flags;
 }

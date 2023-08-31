@@ -5,21 +5,21 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceVulkan13Features
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 RobustImageAccess;
-    public VkBool32 InlineUniformBlock;
-    public VkBool32 DescriptorBindingInlineUniformBlockUpdateAfterBind;
-    public VkBool32 PipelineCreationCacheControl;
-    public VkBool32 PrivateData;
-    public VkBool32 ShaderDemoteToHelperInvocation;
-    public VkBool32 ShaderTerminateInvocation;
-    public VkBool32 SubgroupSizeControl;
-    public VkBool32 ComputeFullSubgroups;
-    public VkBool32 Synchronization2;
-    public VkBool32 TextureCompressionASTCHDR;
-    public VkBool32 ShaderZeroInitializeWorkgroupMemory;
-    public VkBool32 DynamicRendering;
-    public VkBool32 ShaderIntegerDotProduct;
-    public VkBool32 Maintenance4;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 robustImageAccess;
+    public VkBool32 inlineUniformBlock;
+    public VkBool32 descriptorBindingInlineUniformBlockUpdateAfterBind;
+    public VkBool32 pipelineCreationCacheControl;
+    public VkBool32 privateData;
+    public VkBool32 shaderDemoteToHelperInvocation;
+    public VkBool32 shaderTerminateInvocation;
+    public VkBool32 subgroupSizeControl;
+    public VkBool32 computeFullSubgroups;
+    public VkBool32 synchronization2;
+    public VkBool32 textureCompressionASTC_HDR;
+    public VkBool32 shaderZeroInitializeWorkgroupMemory;
+    public VkBool32 dynamicRendering;
+    public VkBool32 shaderIntegerDotProduct;
+    public VkBool32 maintenance4;
 }

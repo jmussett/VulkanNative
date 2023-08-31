@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineRasterizationLineStateCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkLineRasterizationModeEXT LineRasterizationMode;
-    public VkBool32 StippledLineEnable;
-    public uint LineStippleFactor;
-    public ushort LineStipplePattern;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkLineRasterizationModeEXT lineRasterizationMode;
+    public VkBool32 stippledLineEnable;
+    public uint lineStippleFactor;
+    public ushort lineStipplePattern;
 }

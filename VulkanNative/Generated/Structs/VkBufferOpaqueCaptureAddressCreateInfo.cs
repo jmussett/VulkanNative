@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkBufferOpaqueCaptureAddressCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public ulong OpaqueCaptureAddress;
+    public VkStructureType sType;
+    public void* pNext;
+    public ulong opaqueCaptureAddress;
 }

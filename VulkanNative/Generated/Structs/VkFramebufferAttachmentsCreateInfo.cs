@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkFramebufferAttachmentsCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint AttachmentImageInfoCount;
-    public VkFramebufferAttachmentImageInfo* PAttachmentImageInfos;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint attachmentImageInfoCount;
+    public VkFramebufferAttachmentImageInfo* pAttachmentImageInfos;
 }

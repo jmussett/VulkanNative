@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceFaultInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public fixed byte Description[(int)VulkanApiConstants.VK_MAX_DESCRIPTION_SIZE];
-    public VkDeviceFaultAddressInfoEXT* PAddressInfos;
-    public VkDeviceFaultVendorInfoEXT* PVendorInfos;
-    public void* PVendorBinaryData;
+    public VkStructureType sType;
+    public void* pNext;
+    public fixed byte description[(int)VulkanApiConstants.VK_MAX_DESCRIPTION_SIZE];
+    public VkDeviceFaultAddressInfoEXT* pAddressInfos;
+    public VkDeviceFaultVendorInfoEXT* pVendorInfos;
+    public void* pVendorBinaryData;
 }

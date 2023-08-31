@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVideoDecodeH264DpbSlotInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public nint* PStdReferenceInfo;
+    public VkStructureType sType;
+    public void* pNext;
+    public nint* pStdReferenceInfo;
 }

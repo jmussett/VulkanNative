@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDevicePipelineRobustnessPropertiesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineRobustnessBufferBehaviorEXT DefaultRobustnessStorageBuffers;
-    public VkPipelineRobustnessBufferBehaviorEXT DefaultRobustnessUniformBuffers;
-    public VkPipelineRobustnessBufferBehaviorEXT DefaultRobustnessVertexInputs;
-    public VkPipelineRobustnessImageBehaviorEXT DefaultRobustnessImages;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineRobustnessBufferBehaviorEXT defaultRobustnessStorageBuffers;
+    public VkPipelineRobustnessBufferBehaviorEXT defaultRobustnessUniformBuffers;
+    public VkPipelineRobustnessBufferBehaviorEXT defaultRobustnessVertexInputs;
+    public VkPipelineRobustnessImageBehaviorEXT defaultRobustnessImages;
 }

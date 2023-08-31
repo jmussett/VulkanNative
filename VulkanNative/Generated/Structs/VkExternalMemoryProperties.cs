@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkExternalMemoryProperties
 {
-    public VkExternalMemoryFeatureFlags ExternalMemoryFeatures;
-    public VkExternalMemoryHandleTypeFlags ExportFromImportedHandleTypes;
-    public VkExternalMemoryHandleTypeFlags CompatibleHandleTypes;
+    public VkExternalMemoryFeatureFlags externalMemoryFeatures;
+    public VkExternalMemoryHandleTypeFlags exportFromImportedHandleTypes;
+    public VkExternalMemoryHandleTypeFlags compatibleHandleTypes;
 }

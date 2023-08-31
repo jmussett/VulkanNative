@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceBufferMemoryRequirements
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBufferCreateInfo* PCreateInfo;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBufferCreateInfo* pCreateInfo;
 }

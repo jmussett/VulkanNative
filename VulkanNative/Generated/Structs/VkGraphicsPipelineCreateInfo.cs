@@ -5,23 +5,23 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkGraphicsPipelineCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineCreateFlags Flags;
-    public uint StageCount;
-    public VkPipelineShaderStageCreateInfo* PStages;
-    public VkPipelineVertexInputStateCreateInfo* PVertexInputState;
-    public VkPipelineInputAssemblyStateCreateInfo* PInputAssemblyState;
-    public VkPipelineTessellationStateCreateInfo* PTessellationState;
-    public VkPipelineViewportStateCreateInfo* PViewportState;
-    public VkPipelineRasterizationStateCreateInfo* PRasterizationState;
-    public VkPipelineMultisampleStateCreateInfo* PMultisampleState;
-    public VkPipelineDepthStencilStateCreateInfo* PDepthStencilState;
-    public VkPipelineColorBlendStateCreateInfo* PColorBlendState;
-    public VkPipelineDynamicStateCreateInfo* PDynamicState;
-    public VkPipelineLayout Layout;
-    public VkRenderPass RenderPass;
-    public uint Subpass;
-    public VkPipeline BasePipelineHandle;
-    public int BasePipelineIndex;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineCreateFlags flags;
+    public uint stageCount;
+    public VkPipelineShaderStageCreateInfo* pStages;
+    public VkPipelineVertexInputStateCreateInfo* pVertexInputState;
+    public VkPipelineInputAssemblyStateCreateInfo* pInputAssemblyState;
+    public VkPipelineTessellationStateCreateInfo* pTessellationState;
+    public VkPipelineViewportStateCreateInfo* pViewportState;
+    public VkPipelineRasterizationStateCreateInfo* pRasterizationState;
+    public VkPipelineMultisampleStateCreateInfo* pMultisampleState;
+    public VkPipelineDepthStencilStateCreateInfo* pDepthStencilState;
+    public VkPipelineColorBlendStateCreateInfo* pColorBlendState;
+    public VkPipelineDynamicStateCreateInfo* pDynamicState;
+    public VkPipelineLayout layout;
+    public VkRenderPass renderPass;
+    public uint subpass;
+    public VkPipeline basePipelineHandle;
+    public int basePipelineIndex;
 }

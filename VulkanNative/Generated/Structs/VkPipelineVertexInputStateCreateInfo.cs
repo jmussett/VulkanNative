@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineVertexInputStateCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineVertexInputStateCreateFlags Flags;
-    public uint VertexBindingDescriptionCount;
-    public VkVertexInputBindingDescription* PVertexBindingDescriptions;
-    public uint VertexAttributeDescriptionCount;
-    public VkVertexInputAttributeDescription* PVertexAttributeDescriptions;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineVertexInputStateCreateFlags flags;
+    public uint vertexBindingDescriptionCount;
+    public VkVertexInputBindingDescription* pVertexBindingDescriptions;
+    public uint vertexAttributeDescriptionCount;
+    public VkVertexInputAttributeDescription* pVertexAttributeDescriptions;
 }

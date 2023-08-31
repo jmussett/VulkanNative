@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCooperativeMatrixPropertiesKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
+    public VkStructureType sType;
+    public void* pNext;
     public uint MSize;
     public uint NSize;
     public uint KSize;
@@ -14,6 +14,6 @@ public unsafe struct VkCooperativeMatrixPropertiesKHR
     public VkComponentTypeKHR BType;
     public VkComponentTypeKHR CType;
     public VkComponentTypeKHR ResultType;
-    public VkBool32 SaturatingAccumulation;
-    public VkScopeKHR Scope;
+    public VkBool32 saturatingAccumulation;
+    public VkScopeKHR scope;
 }

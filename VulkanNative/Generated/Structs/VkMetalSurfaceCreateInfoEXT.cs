@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMetalSurfaceCreateInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkMetalSurfaceCreateFlagsEXT Flags;
-    public CAMetalLayer* PLayer;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkMetalSurfaceCreateFlagsEXT flags;
+    public CAMetalLayer* pLayer;
 }

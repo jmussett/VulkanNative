@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImportMetalBufferInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public MTLBuffer_id MtlBuffer;
+    public VkStructureType sType;
+    public void* pNext;
+    public MTLBuffer_id mtlBuffer;
 }

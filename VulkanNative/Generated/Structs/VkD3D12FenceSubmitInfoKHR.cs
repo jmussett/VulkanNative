@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkD3D12FenceSubmitInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint WaitSemaphoreValuesCount;
-    public ulong* PWaitSemaphoreValues;
-    public uint SignalSemaphoreValuesCount;
-    public ulong* PSignalSemaphoreValues;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint waitSemaphoreValuesCount;
+    public ulong* pWaitSemaphoreValues;
+    public uint signalSemaphoreValuesCount;
+    public ulong* pSignalSemaphoreValues;
 }

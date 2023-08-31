@@ -27,22 +27,22 @@ public sealed unsafe class VulkanDevice : IDisposable
         {
             VkSwapchainCreateInfoKHR createInfoKHR = new()
             {
-                SType = (VkStructureType)1000001000, // FIX: VkStructureType.VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR,
-                Surface = createInfo.Surface.Handle,
-                MinImageCount = createInfo.MinImageCount,
-                ImageExtent = createInfo.ImageExtent,
-                ImageFormat = createInfo.SurfaceFormat.Format,
-                ImageColorSpace = createInfo.SurfaceFormat.ColorSpace,
-                ImageArrayLayers = createInfo.ImageArrayLayers,
-                ImageUsage = createInfo.ImageUsage,
-                ImageSharingMode = createInfo.SharingMode,
-                QueueFamilyIndexCount = (uint)createInfo.QueueFamilyIndeces.Length,
-                PQueueFamilyIndices = (uint*)queueFamilyIndecesPtr,
-                PreTransform = createInfo.PreTransform,
-                CompositeAlpha = createInfo.CompositeAlpha,
-                PresentMode = createInfo.PresentMode,
-                Clipped = (uint) (createInfo.Clipped ? 1 : 0),
-                OldSwapchain = createInfo.OldSwapchain
+                sType = (VkStructureType)1000001000, // TODO: VkStructureType.VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR,
+                surface = createInfo.Surface.Handle,
+                minImageCount = createInfo.MinImageCount,
+                imageExtent = createInfo.ImageExtent,
+                imageFormat = createInfo.SurfaceFormat.format,
+                imageColorSpace = createInfo.SurfaceFormat.colorSpace,
+                imageArrayLayers = createInfo.ImageArrayLayers,
+                imageUsage = createInfo.ImageUsage,
+                imageSharingMode = createInfo.SharingMode,
+                queueFamilyIndexCount = (uint)createInfo.QueueFamilyIndeces.Length,
+                pQueueFamilyIndices = (uint*)queueFamilyIndecesPtr,
+                preTransform = createInfo.PreTransform,
+                compositeAlpha = createInfo.CompositeAlpha,
+                presentMode = createInfo.PresentMode,
+                clipped = (uint) (createInfo.Clipped ? 1 : 0),
+                oldSwapchain = createInfo.OldSwapchain
             };
 
             VkSwapchainKHR swapchain;
@@ -58,12 +58,12 @@ public sealed unsafe class VulkanDevice : IDisposable
     {
         VkImageViewCreateInfo vkCreateInfo = new()
         {
-            SType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
-            Image = createInfo.Image,
-            ViewType =createInfo.ViewType,
-            Format = createInfo.Format,
-            Components = createInfo.Components,
-            SubresourceRange = createInfo.SubresourceRange
+            sType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
+            image = createInfo.Image,
+            viewType =createInfo.ViewType,
+            format = createInfo.Format,
+            components = createInfo.Components,
+            subresourceRange = createInfo.SubresourceRange
         };
 
         VkImageView imageView;
@@ -79,9 +79,9 @@ public sealed unsafe class VulkanDevice : IDisposable
         {
             var createInfo = new VkShaderModuleCreateInfo
             {
-                SType = VkStructureType.VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
-                PCode = (uint*)byteCodePtr,
-                CodeSize = new nuint((uint)byteCode.Length)
+                sType = VkStructureType.VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
+                pCode = (uint*)byteCodePtr,
+                codeSize = new nuint((uint)byteCode.Length)
             };
 
             VkShaderModule shaderModule;

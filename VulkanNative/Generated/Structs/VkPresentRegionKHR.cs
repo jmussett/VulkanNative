@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPresentRegionKHR
 {
-    public uint RectangleCount;
-    public VkRectLayerKHR* PRectangles;
+    public uint rectangleCount;
+    public VkRectLayerKHR* pRectangles;
 }

@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceExtendedDynamicState2FeaturesEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 ExtendedDynamicState2;
-    public VkBool32 ExtendedDynamicState2LogicOp;
-    public VkBool32 ExtendedDynamicState2PatchControlPoints;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 extendedDynamicState2;
+    public VkBool32 extendedDynamicState2LogicOp;
+    public VkBool32 extendedDynamicState2PatchControlPoints;
 }

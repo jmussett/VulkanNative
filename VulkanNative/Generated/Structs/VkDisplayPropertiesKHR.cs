@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDisplayPropertiesKHR
 {
-    public VkDisplayKHR Display;
-    public byte* DisplayName;
-    public VkExtent2D PhysicalDimensions;
-    public VkExtent2D PhysicalResolution;
-    public VkSurfaceTransformFlagsKHR SupportedTransforms;
-    public VkBool32 PlaneReorderPossible;
-    public VkBool32 PersistentContent;
+    public VkDisplayKHR display;
+    public byte* displayName;
+    public VkExtent2D physicalDimensions;
+    public VkExtent2D physicalResolution;
+    public VkSurfaceTransformFlagsKHR supportedTransforms;
+    public VkBool32 planeReorderPossible;
+    public VkBool32 persistentContent;
 }

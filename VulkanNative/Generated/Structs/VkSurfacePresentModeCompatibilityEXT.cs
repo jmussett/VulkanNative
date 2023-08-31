@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSurfacePresentModeCompatibilityEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint PresentModeCount;
-    public VkPresentModeKHR* PPresentModes;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint presentModeCount;
+    public VkPresentModeKHR* pPresentModes;
 }

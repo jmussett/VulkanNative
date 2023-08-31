@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkFramebufferMixedSamplesCombinationNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkCoverageReductionModeNV CoverageReductionMode;
-    public VkSampleCountFlags RasterizationSamples;
-    public VkSampleCountFlags DepthStencilSamples;
-    public VkSampleCountFlags ColorSamples;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkCoverageReductionModeNV coverageReductionMode;
+    public VkSampleCountFlags rasterizationSamples;
+    public VkSampleCountFlags depthStencilSamples;
+    public VkSampleCountFlags colorSamples;
 }

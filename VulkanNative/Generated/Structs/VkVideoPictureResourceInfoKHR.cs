@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkVideoPictureResourceInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkOffset2D CodedOffset;
-    public VkExtent2D CodedExtent;
-    public uint BaseArrayLayer;
-    public VkImageView ImageViewBinding;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkOffset2D codedOffset;
+    public VkExtent2D codedExtent;
+    public uint baseArrayLayer;
+    public VkImageView imageViewBinding;
 }

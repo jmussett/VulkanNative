@@ -5,5 +5,5 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkTransformMatrixKHR
 {
-    public fixed float Matrix[3];
+    public fixed float matrix[3];
 }

@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkAccelerationStructureVersionInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public byte* PVersionData;
+    public VkStructureType sType;
+    public void* pNext;
+    public byte* pVersionData;
 }

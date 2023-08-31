@@ -5,12 +5,12 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageFormatConstraintsInfoFUCHSIA
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkImageCreateInfo ImageCreateInfo;
-    public VkFormatFeatureFlags RequiredFormatFeatures;
-    public VkImageFormatConstraintsFlagsFUCHSIA Flags;
-    public ulong SysmemPixelFormat;
-    public uint ColorSpaceCount;
-    public VkSysmemColorSpaceFUCHSIA* PColorSpaces;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkImageCreateInfo imageCreateInfo;
+    public VkFormatFeatureFlags requiredFormatFeatures;
+    public VkImageFormatConstraintsFlagsFUCHSIA flags;
+    public ulong sysmemPixelFormat;
+    public uint colorSpaceCount;
+    public VkSysmemColorSpaceFUCHSIA* pColorSpaces;
 }

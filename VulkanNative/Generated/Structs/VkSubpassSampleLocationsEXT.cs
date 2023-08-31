@@ -5,6 +5,6 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSubpassSampleLocationsEXT
 {
-    public uint SubpassIndex;
-    public VkSampleLocationsInfoEXT SampleLocationsInfo;
+    public uint subpassIndex;
+    public VkSampleLocationsInfoEXT sampleLocationsInfo;
 }

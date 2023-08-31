@@ -5,23 +5,23 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceFragmentShadingRatePropertiesKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkExtent2D MinFragmentShadingRateAttachmentTexelSize;
-    public VkExtent2D MaxFragmentShadingRateAttachmentTexelSize;
-    public uint MaxFragmentShadingRateAttachmentTexelSizeAspectRatio;
-    public VkBool32 PrimitiveFragmentShadingRateWithMultipleViewports;
-    public VkBool32 LayeredShadingRateAttachments;
-    public VkBool32 FragmentShadingRateNonTrivialCombinerOps;
-    public VkExtent2D MaxFragmentSize;
-    public uint MaxFragmentSizeAspectRatio;
-    public uint MaxFragmentShadingRateCoverageSamples;
-    public VkSampleCountFlags MaxFragmentShadingRateRasterizationSamples;
-    public VkBool32 FragmentShadingRateWithShaderDepthStencilWrites;
-    public VkBool32 FragmentShadingRateWithSampleMask;
-    public VkBool32 FragmentShadingRateWithShaderSampleMask;
-    public VkBool32 FragmentShadingRateWithConservativeRasterization;
-    public VkBool32 FragmentShadingRateWithFragmentShaderInterlock;
-    public VkBool32 FragmentShadingRateWithCustomSampleLocations;
-    public VkBool32 FragmentShadingRateStrictMultiplyCombiner;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkExtent2D minFragmentShadingRateAttachmentTexelSize;
+    public VkExtent2D maxFragmentShadingRateAttachmentTexelSize;
+    public uint maxFragmentShadingRateAttachmentTexelSizeAspectRatio;
+    public VkBool32 primitiveFragmentShadingRateWithMultipleViewports;
+    public VkBool32 layeredShadingRateAttachments;
+    public VkBool32 fragmentShadingRateNonTrivialCombinerOps;
+    public VkExtent2D maxFragmentSize;
+    public uint maxFragmentSizeAspectRatio;
+    public uint maxFragmentShadingRateCoverageSamples;
+    public VkSampleCountFlags maxFragmentShadingRateRasterizationSamples;
+    public VkBool32 fragmentShadingRateWithShaderDepthStencilWrites;
+    public VkBool32 fragmentShadingRateWithSampleMask;
+    public VkBool32 fragmentShadingRateWithShaderSampleMask;
+    public VkBool32 fragmentShadingRateWithConservativeRasterization;
+    public VkBool32 fragmentShadingRateWithFragmentShaderInterlock;
+    public VkBool32 fragmentShadingRateWithCustomSampleLocations;
+    public VkBool32 fragmentShadingRateStrictMultiplyCombiner;
 }

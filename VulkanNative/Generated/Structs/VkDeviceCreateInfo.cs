@@ -5,14 +5,14 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDeviceCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceCreateFlags Flags;
-    public uint QueueCreateInfoCount;
-    public VkDeviceQueueCreateInfo* PQueueCreateInfos;
-    public uint EnabledLayerCount;
-    public byte** PpEnabledLayerNames;
-    public uint EnabledExtensionCount;
-    public byte** PpEnabledExtensionNames;
-    public VkPhysicalDeviceFeatures* PEnabledFeatures;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceCreateFlags flags;
+    public uint queueCreateInfoCount;
+    public VkDeviceQueueCreateInfo* pQueueCreateInfos;
+    public uint enabledLayerCount;
+    public byte** ppEnabledLayerNames;
+    public uint enabledExtensionCount;
+    public byte** ppEnabledExtensionNames;
+    public VkPhysicalDeviceFeatures* pEnabledFeatures;
 }

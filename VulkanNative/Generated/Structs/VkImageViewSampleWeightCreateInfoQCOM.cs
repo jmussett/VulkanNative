@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkImageViewSampleWeightCreateInfoQCOM
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkOffset2D FilterCenter;
-    public VkExtent2D FilterSize;
-    public uint NumPhases;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkOffset2D filterCenter;
+    public VkExtent2D filterSize;
+    public uint numPhases;
 }

@@ -5,5 +5,5 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkRenderPassCreationFeedbackInfoEXT
 {
-    public uint PostMergeSubpassCount;
+    public uint postMergeSubpassCount;
 }

@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineViewportStateCreateInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineViewportStateCreateFlags Flags;
-    public uint ViewportCount;
-    public VkViewport* PViewports;
-    public uint ScissorCount;
-    public VkRect2D* PScissors;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineViewportStateCreateFlags flags;
+    public uint viewportCount;
+    public VkViewport* pViewports;
+    public uint scissorCount;
+    public VkRect2D* pScissors;
 }

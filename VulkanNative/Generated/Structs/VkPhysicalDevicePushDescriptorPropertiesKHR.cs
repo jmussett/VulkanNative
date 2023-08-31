@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDevicePushDescriptorPropertiesKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint MaxPushDescriptors;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint maxPushDescriptors;
 }

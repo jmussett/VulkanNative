@@ -5,10 +5,10 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkSemaphoreWaitInfo
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSemaphoreWaitFlags Flags;
-    public uint SemaphoreCount;
-    public VkSemaphore* PSemaphores;
-    public ulong* PValues;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSemaphoreWaitFlags flags;
+    public uint semaphoreCount;
+    public VkSemaphore* pSemaphores;
+    public ulong* pValues;
 }

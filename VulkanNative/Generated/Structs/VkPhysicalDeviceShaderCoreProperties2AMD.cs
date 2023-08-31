@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceShaderCoreProperties2AMD
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkShaderCorePropertiesFlagsAMD ShaderCoreFeatures;
-    public uint ActiveComputeUnitCount;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkShaderCorePropertiesFlagsAMD shaderCoreFeatures;
+    public uint activeComputeUnitCount;
 }

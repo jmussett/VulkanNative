@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkExportMetalSharedEventInfoEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSemaphore Semaphore;
-    public VkEvent Event;
-    public MTLSharedEvent_id MtlSharedEvent;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSemaphore semaphore;
+    public VkEvent @event;
+    public MTLSharedEvent_id mtlSharedEvent;
 }

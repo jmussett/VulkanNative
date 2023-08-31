@@ -5,7 +5,7 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkRayTracingInvocationReorderModeNV RayTracingInvocationReorderReorderingHint;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkRayTracingInvocationReorderModeNV rayTracingInvocationReorderReorderingHint;
 }

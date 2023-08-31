@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkMemoryGetWin32HandleInfoKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDeviceMemory Memory;
-    public VkExternalMemoryHandleTypeFlags HandleType;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDeviceMemory memory;
+    public VkExternalMemoryHandleTypeFlags handleType;
 }

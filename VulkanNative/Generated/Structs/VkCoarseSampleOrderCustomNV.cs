@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCoarseSampleOrderCustomNV
 {
-    public VkShadingRatePaletteEntryNV ShadingRate;
-    public uint SampleCount;
-    public uint SampleLocationCount;
-    public VkCoarseSampleLocationNV* PSampleLocations;
+    public VkShadingRatePaletteEntryNV shadingRate;
+    public uint sampleCount;
+    public uint sampleLocationCount;
+    public VkCoarseSampleLocationNV* pSampleLocations;
 }

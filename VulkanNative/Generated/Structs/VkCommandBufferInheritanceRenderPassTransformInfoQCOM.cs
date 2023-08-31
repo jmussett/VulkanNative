@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkCommandBufferInheritanceRenderPassTransformInfoQCOM
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkSurfaceTransformFlagsKHR Transform;
-    public VkRect2D RenderArea;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkSurfaceTransformFlagsKHR transform;
+    public VkRect2D renderArea;
 }

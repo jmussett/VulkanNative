@@ -5,11 +5,11 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPipelineCoverageModulationStateCreateInfoNV
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkPipelineCoverageModulationStateCreateFlagsNV Flags;
-    public VkCoverageModulationModeNV CoverageModulationMode;
-    public VkBool32 CoverageModulationTableEnable;
-    public uint CoverageModulationTableCount;
-    public float* PCoverageModulationTable;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkPipelineCoverageModulationStateCreateFlagsNV flags;
+    public VkCoverageModulationModeNV coverageModulationMode;
+    public VkBool32 coverageModulationTableEnable;
+    public uint coverageModulationTableCount;
+    public float* pCoverageModulationTable;
 }

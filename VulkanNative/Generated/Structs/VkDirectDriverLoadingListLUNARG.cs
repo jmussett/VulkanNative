@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDirectDriverLoadingListLUNARG
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkDirectDriverLoadingModeLUNARG Mode;
-    public uint DriverCount;
-    public VkDirectDriverLoadingInfoLUNARG* PDrivers;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkDirectDriverLoadingModeLUNARG mode;
+    public uint driverCount;
+    public VkDirectDriverLoadingInfoLUNARG* pDrivers;
 }

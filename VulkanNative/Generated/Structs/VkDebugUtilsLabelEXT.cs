@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkDebugUtilsLabelEXT
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public byte* PLabelName;
-    public fixed float Color[4];
+    public VkStructureType sType;
+    public void* pNext;
+    public byte* pLabelName;
+    public fixed float color[4];
 }

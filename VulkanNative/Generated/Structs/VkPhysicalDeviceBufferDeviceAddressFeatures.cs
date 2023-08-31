@@ -5,9 +5,9 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkPhysicalDeviceBufferDeviceAddressFeatures
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public VkBool32 BufferDeviceAddress;
-    public VkBool32 BufferDeviceAddressCaptureReplay;
-    public VkBool32 BufferDeviceAddressMultiDevice;
+    public VkStructureType sType;
+    public void* pNext;
+    public VkBool32 bufferDeviceAddress;
+    public VkBool32 bufferDeviceAddressCaptureReplay;
+    public VkBool32 bufferDeviceAddressMultiDevice;
 }

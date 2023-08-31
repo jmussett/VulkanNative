@@ -5,8 +5,8 @@ namespace VulkanNative;
 [StructLayout(LayoutKind.Sequential)]
 public unsafe struct VkWriteDescriptorSetAccelerationStructureKHR
 {
-    public VkStructureType SType;
-    public void* PNext;
-    public uint AccelerationStructureCount;
-    public VkAccelerationStructureKHR* PAccelerationStructures;
+    public VkStructureType sType;
+    public void* pNext;
+    public uint accelerationStructureCount;
+    public VkAccelerationStructureKHR* pAccelerationStructures;
 }
