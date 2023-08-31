@@ -16,11 +16,11 @@ public sealed unsafe class VulkanSwapchain : IDisposable
     public VkImage[] GetImages()
     {
         uint count;
-        _swapchainExtension.VkGetSwapchainImagesKHR(_deviceHandle, _handle, &count, null);
+        _swapchainExtension.vkGetSwapchainImagesKHR(_deviceHandle, _handle, &count, null);
 
         var imagesPtr = stackalloc VkImage[(int)count];
 
-        _swapchainExtension.VkGetSwapchainImagesKHR(_deviceHandle, _handle, &count, imagesPtr);
+        _swapchainExtension.vkGetSwapchainImagesKHR(_deviceHandle, _handle, &count, imagesPtr);
 
         var images = new VkImage[(int)count];
 
@@ -40,7 +40,7 @@ public sealed unsafe class VulkanSwapchain : IDisposable
             return;
         }
 
-        _swapchainExtension.VkDestroySwapchainKHR(_deviceHandle, _handle, null);
+        _swapchainExtension.vkDestroySwapchainKHR(_deviceHandle, _handle, null);
         _handle = nint.Zero;
 
         GC.SuppressFinalize(this);

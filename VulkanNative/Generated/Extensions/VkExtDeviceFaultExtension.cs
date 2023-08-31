@@ -13,7 +13,7 @@ public unsafe class VkExtDeviceFaultExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetDeviceFaultInfoEXT(VkDevice device, VkDeviceFaultCountsEXT* pFaultCounts, VkDeviceFaultInfoEXT* pFaultInfo)
+    public VkResult vkGetDeviceFaultInfoEXT(VkDevice device, VkDeviceFaultCountsEXT* pFaultCounts, VkDeviceFaultInfoEXT* pFaultInfo)
     {
         return _vkGetDeviceFaultInfoEXT(device, pFaultCounts, pFaultInfo);
     }

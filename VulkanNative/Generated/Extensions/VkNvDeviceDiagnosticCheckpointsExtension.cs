@@ -15,13 +15,13 @@ public unsafe class VkNvDeviceDiagnosticCheckpointsExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetCheckpointNV(VkCommandBuffer commandBuffer, void* pCheckpointMarker)
+    public void vkCmdSetCheckpointNV(VkCommandBuffer commandBuffer, void* pCheckpointMarker)
     {
         _vkCmdSetCheckpointNV(commandBuffer, pCheckpointMarker);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetQueueCheckpointDataNV(VkQueue queue, uint* pCheckpointDataCount, VkCheckpointDataNV* pCheckpointData)
+    public void vkGetQueueCheckpointDataNV(VkQueue queue, uint* pCheckpointDataCount, VkCheckpointDataNV* pCheckpointData)
     {
         _vkGetQueueCheckpointDataNV(queue, pCheckpointDataCount, pCheckpointData);
     }

@@ -15,13 +15,13 @@ public unsafe class VkKhrXcbSurfaceExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkCreateXcbSurfaceKHR(VkInstance instance, VkXcbSurfaceCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface)
+    public VkResult vkCreateXcbSurfaceKHR(VkInstance instance, VkXcbSurfaceCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface)
     {
         return _vkCreateXcbSurfaceKHR(instance, pCreateInfo, pAllocator, pSurface);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkBool32 VkGetPhysicalDeviceXcbPresentationSupportKHR(VkPhysicalDevice physicalDevice, uint queueFamilyIndex, nint* connection, nint visual_id)
+    public VkBool32 vkGetPhysicalDeviceXcbPresentationSupportKHR(VkPhysicalDevice physicalDevice, uint queueFamilyIndex, nint* connection, nint visual_id)
     {
         return _vkGetPhysicalDeviceXcbPresentationSupportKHR(physicalDevice, queueFamilyIndex, connection, visual_id);
     }

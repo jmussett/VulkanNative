@@ -15,13 +15,13 @@ public unsafe class VkNvCopyMemoryIndirectExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdCopyMemoryIndirectNV(VkCommandBuffer commandBuffer, VkDeviceAddress copyBufferAddress, uint copyCount, uint stride)
+    public void vkCmdCopyMemoryIndirectNV(VkCommandBuffer commandBuffer, VkDeviceAddress copyBufferAddress, uint copyCount, uint stride)
     {
         _vkCmdCopyMemoryIndirectNV(commandBuffer, copyBufferAddress, copyCount, stride);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdCopyMemoryToImageIndirectNV(VkCommandBuffer commandBuffer, VkDeviceAddress copyBufferAddress, uint copyCount, uint stride, VkImage dstImage, VkImageLayout dstImageLayout, VkImageSubresourceLayers* pImageSubresources)
+    public void vkCmdCopyMemoryToImageIndirectNV(VkCommandBuffer commandBuffer, VkDeviceAddress copyBufferAddress, uint copyCount, uint stride, VkImage dstImage, VkImageLayout dstImageLayout, VkImageSubresourceLayers* pImageSubresources)
     {
         _vkCmdCopyMemoryToImageIndirectNV(commandBuffer, copyBufferAddress, copyCount, stride, dstImage, dstImageLayout, pImageSubresources);
     }

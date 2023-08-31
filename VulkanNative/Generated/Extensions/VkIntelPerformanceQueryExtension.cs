@@ -29,55 +29,55 @@ public unsafe class VkIntelPerformanceQueryExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkInitializePerformanceApiINTEL(VkDevice device, VkInitializePerformanceApiInfoINTEL* pInitializeInfo)
+    public VkResult vkInitializePerformanceApiINTEL(VkDevice device, VkInitializePerformanceApiInfoINTEL* pInitializeInfo)
     {
         return _vkInitializePerformanceApiINTEL(device, pInitializeInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkUninitializePerformanceApiINTEL(VkDevice device)
+    public void vkUninitializePerformanceApiINTEL(VkDevice device)
     {
         _vkUninitializePerformanceApiINTEL(device);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkCmdSetPerformanceMarkerINTEL(VkCommandBuffer commandBuffer, VkPerformanceMarkerInfoINTEL* pMarkerInfo)
+    public VkResult vkCmdSetPerformanceMarkerINTEL(VkCommandBuffer commandBuffer, VkPerformanceMarkerInfoINTEL* pMarkerInfo)
     {
         return _vkCmdSetPerformanceMarkerINTEL(commandBuffer, pMarkerInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkCmdSetPerformanceStreamMarkerINTEL(VkCommandBuffer commandBuffer, VkPerformanceStreamMarkerInfoINTEL* pMarkerInfo)
+    public VkResult vkCmdSetPerformanceStreamMarkerINTEL(VkCommandBuffer commandBuffer, VkPerformanceStreamMarkerInfoINTEL* pMarkerInfo)
     {
         return _vkCmdSetPerformanceStreamMarkerINTEL(commandBuffer, pMarkerInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkCmdSetPerformanceOverrideINTEL(VkCommandBuffer commandBuffer, VkPerformanceOverrideInfoINTEL* pOverrideInfo)
+    public VkResult vkCmdSetPerformanceOverrideINTEL(VkCommandBuffer commandBuffer, VkPerformanceOverrideInfoINTEL* pOverrideInfo)
     {
         return _vkCmdSetPerformanceOverrideINTEL(commandBuffer, pOverrideInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkAcquirePerformanceConfigurationINTEL(VkDevice device, VkPerformanceConfigurationAcquireInfoINTEL* pAcquireInfo, VkPerformanceConfigurationINTEL* pConfiguration)
+    public VkResult vkAcquirePerformanceConfigurationINTEL(VkDevice device, VkPerformanceConfigurationAcquireInfoINTEL* pAcquireInfo, VkPerformanceConfigurationINTEL* pConfiguration)
     {
         return _vkAcquirePerformanceConfigurationINTEL(device, pAcquireInfo, pConfiguration);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkReleasePerformanceConfigurationINTEL(VkDevice device, VkPerformanceConfigurationINTEL configuration)
+    public VkResult vkReleasePerformanceConfigurationINTEL(VkDevice device, VkPerformanceConfigurationINTEL configuration)
     {
         return _vkReleasePerformanceConfigurationINTEL(device, configuration);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkQueueSetPerformanceConfigurationINTEL(VkQueue queue, VkPerformanceConfigurationINTEL configuration)
+    public VkResult vkQueueSetPerformanceConfigurationINTEL(VkQueue queue, VkPerformanceConfigurationINTEL configuration)
     {
         return _vkQueueSetPerformanceConfigurationINTEL(queue, configuration);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetPerformanceParameterINTEL(VkDevice device, VkPerformanceParameterTypeINTEL parameter, VkPerformanceValueINTEL* pValue)
+    public VkResult vkGetPerformanceParameterINTEL(VkDevice device, VkPerformanceParameterTypeINTEL parameter, VkPerformanceValueINTEL* pValue)
     {
         return _vkGetPerformanceParameterINTEL(device, parameter, pValue);
     }

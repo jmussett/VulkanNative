@@ -15,13 +15,13 @@ public unsafe class VkNvAcquireWinrtDisplayExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkAcquireWinrtDisplayNV(VkPhysicalDevice physicalDevice, VkDisplayKHR display)
+    public VkResult vkAcquireWinrtDisplayNV(VkPhysicalDevice physicalDevice, VkDisplayKHR display)
     {
         return _vkAcquireWinrtDisplayNV(physicalDevice, display);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetWinrtDisplayNV(VkPhysicalDevice physicalDevice, uint deviceRelativeId, VkDisplayKHR* pDisplay)
+    public VkResult vkGetWinrtDisplayNV(VkPhysicalDevice physicalDevice, uint deviceRelativeId, VkDisplayKHR* pDisplay)
     {
         return _vkGetWinrtDisplayNV(physicalDevice, deviceRelativeId, pDisplay);
     }

@@ -33,67 +33,67 @@ public unsafe class VkExtDebugUtilsExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkSetDebugUtilsObjectNameEXT(VkDevice device, VkDebugUtilsObjectNameInfoEXT* pNameInfo)
+    public VkResult vkSetDebugUtilsObjectNameEXT(VkDevice device, VkDebugUtilsObjectNameInfoEXT* pNameInfo)
     {
         return _vkSetDebugUtilsObjectNameEXT(device, pNameInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkSetDebugUtilsObjectTagEXT(VkDevice device, VkDebugUtilsObjectTagInfoEXT* pTagInfo)
+    public VkResult vkSetDebugUtilsObjectTagEXT(VkDevice device, VkDebugUtilsObjectTagInfoEXT* pTagInfo)
     {
         return _vkSetDebugUtilsObjectTagEXT(device, pTagInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkQueueBeginDebugUtilsLabelEXT(VkQueue queue, VkDebugUtilsLabelEXT* pLabelInfo)
+    public void vkQueueBeginDebugUtilsLabelEXT(VkQueue queue, VkDebugUtilsLabelEXT* pLabelInfo)
     {
         _vkQueueBeginDebugUtilsLabelEXT(queue, pLabelInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkQueueEndDebugUtilsLabelEXT(VkQueue queue)
+    public void vkQueueEndDebugUtilsLabelEXT(VkQueue queue)
     {
         _vkQueueEndDebugUtilsLabelEXT(queue);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkQueueInsertDebugUtilsLabelEXT(VkQueue queue, VkDebugUtilsLabelEXT* pLabelInfo)
+    public void vkQueueInsertDebugUtilsLabelEXT(VkQueue queue, VkDebugUtilsLabelEXT* pLabelInfo)
     {
         _vkQueueInsertDebugUtilsLabelEXT(queue, pLabelInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdBeginDebugUtilsLabelEXT(VkCommandBuffer commandBuffer, VkDebugUtilsLabelEXT* pLabelInfo)
+    public void vkCmdBeginDebugUtilsLabelEXT(VkCommandBuffer commandBuffer, VkDebugUtilsLabelEXT* pLabelInfo)
     {
         _vkCmdBeginDebugUtilsLabelEXT(commandBuffer, pLabelInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdEndDebugUtilsLabelEXT(VkCommandBuffer commandBuffer)
+    public void vkCmdEndDebugUtilsLabelEXT(VkCommandBuffer commandBuffer)
     {
         _vkCmdEndDebugUtilsLabelEXT(commandBuffer);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdInsertDebugUtilsLabelEXT(VkCommandBuffer commandBuffer, VkDebugUtilsLabelEXT* pLabelInfo)
+    public void vkCmdInsertDebugUtilsLabelEXT(VkCommandBuffer commandBuffer, VkDebugUtilsLabelEXT* pLabelInfo)
     {
         _vkCmdInsertDebugUtilsLabelEXT(commandBuffer, pLabelInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkCreateDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pMessenger)
+    public VkResult vkCreateDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pMessenger)
     {
         return _vkCreateDebugUtilsMessengerEXT(instance, pCreateInfo, pAllocator, pMessenger);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkDestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT messenger, VkAllocationCallbacks* pAllocator)
+    public void vkDestroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT messenger, VkAllocationCallbacks* pAllocator)
     {
         _vkDestroyDebugUtilsMessengerEXT(instance, messenger, pAllocator);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkSubmitDebugUtilsMessageEXT(VkInstance instance, VkDebugUtilsMessageSeverityFlagsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageTypes, VkDebugUtilsMessengerCallbackDataEXT* pCallbackData)
+    public void vkSubmitDebugUtilsMessageEXT(VkInstance instance, VkDebugUtilsMessageSeverityFlagsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageTypes, VkDebugUtilsMessengerCallbackDataEXT* pCallbackData)
     {
         _vkSubmitDebugUtilsMessageEXT(instance, messageSeverity, messageTypes, pCallbackData);
     }

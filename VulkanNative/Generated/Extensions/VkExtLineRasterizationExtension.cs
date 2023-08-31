@@ -13,7 +13,7 @@ public unsafe class VkExtLineRasterizationExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetLineStippleEXT(VkCommandBuffer commandBuffer, uint lineStippleFactor, ushort lineStipplePattern)
+    public void vkCmdSetLineStippleEXT(VkCommandBuffer commandBuffer, uint lineStippleFactor, ushort lineStipplePattern)
     {
         _vkCmdSetLineStippleEXT(commandBuffer, lineStippleFactor, lineStipplePattern);
     }

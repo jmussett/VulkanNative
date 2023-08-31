@@ -27,7 +27,7 @@ public sealed unsafe class DebugMessenger : IDisposable
 
         VkDebugUtilsMessengerEXT messengerHandle;
 
-        _extension.VkCreateDebugUtilsMessengerEXT(_instanceHandle, &createInfo, null, &messengerHandle).ThrowOnError();
+        _extension.vkCreateDebugUtilsMessengerEXT(_instanceHandle, &createInfo, null, &messengerHandle).ThrowOnError();
 
         _handle = messengerHandle;
 
@@ -62,7 +62,7 @@ public sealed unsafe class DebugMessenger : IDisposable
             return;
         }
 
-        _extension.VkDestroyDebugUtilsMessengerEXT(_instanceHandle, _handle, null);
+        _extension.vkDestroyDebugUtilsMessengerEXT(_instanceHandle, _handle, null);
         _handle = nint.Zero;
 
         if (disposing)

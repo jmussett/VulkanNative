@@ -17,19 +17,19 @@ public unsafe class VkNvMeshShaderExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdDrawMeshTasksNV(VkCommandBuffer commandBuffer, uint taskCount, uint firstTask)
+    public void vkCmdDrawMeshTasksNV(VkCommandBuffer commandBuffer, uint taskCount, uint firstTask)
     {
         _vkCmdDrawMeshTasksNV(commandBuffer, taskCount, firstTask);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdDrawMeshTasksIndirectNV(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, uint drawCount, uint stride)
+    public void vkCmdDrawMeshTasksIndirectNV(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, uint drawCount, uint stride)
     {
         _vkCmdDrawMeshTasksIndirectNV(commandBuffer, buffer, offset, drawCount, stride);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdDrawMeshTasksIndirectCountNV(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint maxDrawCount, uint stride)
+    public void vkCmdDrawMeshTasksIndirectCountNV(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkBuffer countBuffer, VkDeviceSize countBufferOffset, uint maxDrawCount, uint stride)
     {
         _vkCmdDrawMeshTasksIndirectCountNV(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
     }

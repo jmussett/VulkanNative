@@ -15,13 +15,13 @@ public unsafe class VkExtSampleLocationsExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetSampleLocationsEXT(VkCommandBuffer commandBuffer, VkSampleLocationsInfoEXT* pSampleLocationsInfo)
+    public void vkCmdSetSampleLocationsEXT(VkCommandBuffer commandBuffer, VkSampleLocationsInfoEXT* pSampleLocationsInfo)
     {
         _vkCmdSetSampleLocationsEXT(commandBuffer, pSampleLocationsInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetPhysicalDeviceMultisamplePropertiesEXT(VkPhysicalDevice physicalDevice, VkSampleCountFlags samples, VkMultisamplePropertiesEXT* pMultisampleProperties)
+    public void vkGetPhysicalDeviceMultisamplePropertiesEXT(VkPhysicalDevice physicalDevice, VkSampleCountFlags samples, VkMultisamplePropertiesEXT* pMultisampleProperties)
     {
         _vkGetPhysicalDeviceMultisamplePropertiesEXT(physicalDevice, samples, pMultisampleProperties);
     }

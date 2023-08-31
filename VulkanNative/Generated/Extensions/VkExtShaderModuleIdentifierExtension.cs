@@ -15,13 +15,13 @@ public unsafe class VkExtShaderModuleIdentifierExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetShaderModuleIdentifierEXT(VkDevice device, VkShaderModule shaderModule, VkShaderModuleIdentifierEXT* pIdentifier)
+    public void vkGetShaderModuleIdentifierEXT(VkDevice device, VkShaderModule shaderModule, VkShaderModuleIdentifierEXT* pIdentifier)
     {
         _vkGetShaderModuleIdentifierEXT(device, shaderModule, pIdentifier);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetShaderModuleCreateInfoIdentifierEXT(VkDevice device, VkShaderModuleCreateInfo* pCreateInfo, VkShaderModuleIdentifierEXT* pIdentifier)
+    public void vkGetShaderModuleCreateInfoIdentifierEXT(VkDevice device, VkShaderModuleCreateInfo* pCreateInfo, VkShaderModuleIdentifierEXT* pIdentifier)
     {
         _vkGetShaderModuleCreateInfoIdentifierEXT(device, pCreateInfo, pIdentifier);
     }

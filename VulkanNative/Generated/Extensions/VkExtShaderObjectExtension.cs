@@ -117,319 +117,319 @@ public unsafe class VkExtShaderObjectExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkCreateShadersEXT(VkDevice device, uint createInfoCount, VkShaderCreateInfoEXT* pCreateInfos, VkAllocationCallbacks* pAllocator, VkShaderEXT* pShaders)
+    public VkResult vkCreateShadersEXT(VkDevice device, uint createInfoCount, VkShaderCreateInfoEXT* pCreateInfos, VkAllocationCallbacks* pAllocator, VkShaderEXT* pShaders)
     {
         return _vkCreateShadersEXT(device, createInfoCount, pCreateInfos, pAllocator, pShaders);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkDestroyShaderEXT(VkDevice device, VkShaderEXT shader, VkAllocationCallbacks* pAllocator)
+    public void vkDestroyShaderEXT(VkDevice device, VkShaderEXT shader, VkAllocationCallbacks* pAllocator)
     {
         _vkDestroyShaderEXT(device, shader, pAllocator);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetShaderBinaryDataEXT(VkDevice device, VkShaderEXT shader, nuint* pDataSize, void* pData)
+    public VkResult vkGetShaderBinaryDataEXT(VkDevice device, VkShaderEXT shader, nuint* pDataSize, void* pData)
     {
         return _vkGetShaderBinaryDataEXT(device, shader, pDataSize, pData);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdBindShadersEXT(VkCommandBuffer commandBuffer, uint stageCount, VkShaderStageFlags* pStages, VkShaderEXT* pShaders)
+    public void vkCmdBindShadersEXT(VkCommandBuffer commandBuffer, uint stageCount, VkShaderStageFlags* pStages, VkShaderEXT* pShaders)
     {
         _vkCmdBindShadersEXT(commandBuffer, stageCount, pStages, pShaders);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetCullMode(VkCommandBuffer commandBuffer, VkCullModeFlags cullMode)
+    public void vkCmdSetCullMode(VkCommandBuffer commandBuffer, VkCullModeFlags cullMode)
     {
         _vkCmdSetCullMode(commandBuffer, cullMode);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetFrontFace(VkCommandBuffer commandBuffer, VkFrontFace frontFace)
+    public void vkCmdSetFrontFace(VkCommandBuffer commandBuffer, VkFrontFace frontFace)
     {
         _vkCmdSetFrontFace(commandBuffer, frontFace);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetPrimitiveTopology(VkCommandBuffer commandBuffer, VkPrimitiveTopology primitiveTopology)
+    public void vkCmdSetPrimitiveTopology(VkCommandBuffer commandBuffer, VkPrimitiveTopology primitiveTopology)
     {
         _vkCmdSetPrimitiveTopology(commandBuffer, primitiveTopology);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetViewportWithCount(VkCommandBuffer commandBuffer, uint viewportCount, VkViewport* pViewports)
+    public void vkCmdSetViewportWithCount(VkCommandBuffer commandBuffer, uint viewportCount, VkViewport* pViewports)
     {
         _vkCmdSetViewportWithCount(commandBuffer, viewportCount, pViewports);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetScissorWithCount(VkCommandBuffer commandBuffer, uint scissorCount, VkRect2D* pScissors)
+    public void vkCmdSetScissorWithCount(VkCommandBuffer commandBuffer, uint scissorCount, VkRect2D* pScissors)
     {
         _vkCmdSetScissorWithCount(commandBuffer, scissorCount, pScissors);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdBindVertexBuffers2(VkCommandBuffer commandBuffer, uint firstBinding, uint bindingCount, VkBuffer* pBuffers, VkDeviceSize* pOffsets, VkDeviceSize* pSizes, VkDeviceSize* pStrides)
+    public void vkCmdBindVertexBuffers2(VkCommandBuffer commandBuffer, uint firstBinding, uint bindingCount, VkBuffer* pBuffers, VkDeviceSize* pOffsets, VkDeviceSize* pSizes, VkDeviceSize* pStrides)
     {
         _vkCmdBindVertexBuffers2(commandBuffer, firstBinding, bindingCount, pBuffers, pOffsets, pSizes, pStrides);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetDepthTestEnable(VkCommandBuffer commandBuffer, VkBool32 depthTestEnable)
+    public void vkCmdSetDepthTestEnable(VkCommandBuffer commandBuffer, VkBool32 depthTestEnable)
     {
         _vkCmdSetDepthTestEnable(commandBuffer, depthTestEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetDepthWriteEnable(VkCommandBuffer commandBuffer, VkBool32 depthWriteEnable)
+    public void vkCmdSetDepthWriteEnable(VkCommandBuffer commandBuffer, VkBool32 depthWriteEnable)
     {
         _vkCmdSetDepthWriteEnable(commandBuffer, depthWriteEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetDepthCompareOp(VkCommandBuffer commandBuffer, VkCompareOp depthCompareOp)
+    public void vkCmdSetDepthCompareOp(VkCommandBuffer commandBuffer, VkCompareOp depthCompareOp)
     {
         _vkCmdSetDepthCompareOp(commandBuffer, depthCompareOp);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetDepthBoundsTestEnable(VkCommandBuffer commandBuffer, VkBool32 depthBoundsTestEnable)
+    public void vkCmdSetDepthBoundsTestEnable(VkCommandBuffer commandBuffer, VkBool32 depthBoundsTestEnable)
     {
         _vkCmdSetDepthBoundsTestEnable(commandBuffer, depthBoundsTestEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetStencilTestEnable(VkCommandBuffer commandBuffer, VkBool32 stencilTestEnable)
+    public void vkCmdSetStencilTestEnable(VkCommandBuffer commandBuffer, VkBool32 stencilTestEnable)
     {
         _vkCmdSetStencilTestEnable(commandBuffer, stencilTestEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetStencilOp(VkCommandBuffer commandBuffer, VkStencilFaceFlags faceMask, VkStencilOp failOp, VkStencilOp passOp, VkStencilOp depthFailOp, VkCompareOp compareOp)
+    public void vkCmdSetStencilOp(VkCommandBuffer commandBuffer, VkStencilFaceFlags faceMask, VkStencilOp failOp, VkStencilOp passOp, VkStencilOp depthFailOp, VkCompareOp compareOp)
     {
         _vkCmdSetStencilOp(commandBuffer, faceMask, failOp, passOp, depthFailOp, compareOp);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetVertexInputEXT(VkCommandBuffer commandBuffer, uint vertexBindingDescriptionCount, VkVertexInputBindingDescription2EXT* pVertexBindingDescriptions, uint vertexAttributeDescriptionCount, VkVertexInputAttributeDescription2EXT* pVertexAttributeDescriptions)
+    public void vkCmdSetVertexInputEXT(VkCommandBuffer commandBuffer, uint vertexBindingDescriptionCount, VkVertexInputBindingDescription2EXT* pVertexBindingDescriptions, uint vertexAttributeDescriptionCount, VkVertexInputAttributeDescription2EXT* pVertexAttributeDescriptions)
     {
         _vkCmdSetVertexInputEXT(commandBuffer, vertexBindingDescriptionCount, pVertexBindingDescriptions, vertexAttributeDescriptionCount, pVertexAttributeDescriptions);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetPatchControlPointsEXT(VkCommandBuffer commandBuffer, uint patchControlPoints)
+    public void vkCmdSetPatchControlPointsEXT(VkCommandBuffer commandBuffer, uint patchControlPoints)
     {
         _vkCmdSetPatchControlPointsEXT(commandBuffer, patchControlPoints);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetRasterizerDiscardEnable(VkCommandBuffer commandBuffer, VkBool32 rasterizerDiscardEnable)
+    public void vkCmdSetRasterizerDiscardEnable(VkCommandBuffer commandBuffer, VkBool32 rasterizerDiscardEnable)
     {
         _vkCmdSetRasterizerDiscardEnable(commandBuffer, rasterizerDiscardEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetDepthBiasEnable(VkCommandBuffer commandBuffer, VkBool32 depthBiasEnable)
+    public void vkCmdSetDepthBiasEnable(VkCommandBuffer commandBuffer, VkBool32 depthBiasEnable)
     {
         _vkCmdSetDepthBiasEnable(commandBuffer, depthBiasEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetLogicOpEXT(VkCommandBuffer commandBuffer, VkLogicOp logicOp)
+    public void vkCmdSetLogicOpEXT(VkCommandBuffer commandBuffer, VkLogicOp logicOp)
     {
         _vkCmdSetLogicOpEXT(commandBuffer, logicOp);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetPrimitiveRestartEnable(VkCommandBuffer commandBuffer, VkBool32 primitiveRestartEnable)
+    public void vkCmdSetPrimitiveRestartEnable(VkCommandBuffer commandBuffer, VkBool32 primitiveRestartEnable)
     {
         _vkCmdSetPrimitiveRestartEnable(commandBuffer, primitiveRestartEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetTessellationDomainOriginEXT(VkCommandBuffer commandBuffer, VkTessellationDomainOrigin domainOrigin)
+    public void vkCmdSetTessellationDomainOriginEXT(VkCommandBuffer commandBuffer, VkTessellationDomainOrigin domainOrigin)
     {
         _vkCmdSetTessellationDomainOriginEXT(commandBuffer, domainOrigin);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetDepthClampEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthClampEnable)
+    public void vkCmdSetDepthClampEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthClampEnable)
     {
         _vkCmdSetDepthClampEnableEXT(commandBuffer, depthClampEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetPolygonModeEXT(VkCommandBuffer commandBuffer, VkPolygonMode polygonMode)
+    public void vkCmdSetPolygonModeEXT(VkCommandBuffer commandBuffer, VkPolygonMode polygonMode)
     {
         _vkCmdSetPolygonModeEXT(commandBuffer, polygonMode);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetRasterizationSamplesEXT(VkCommandBuffer commandBuffer, VkSampleCountFlags rasterizationSamples)
+    public void vkCmdSetRasterizationSamplesEXT(VkCommandBuffer commandBuffer, VkSampleCountFlags rasterizationSamples)
     {
         _vkCmdSetRasterizationSamplesEXT(commandBuffer, rasterizationSamples);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, VkSampleCountFlags samples, VkSampleMask* pSampleMask)
+    public void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, VkSampleCountFlags samples, VkSampleMask* pSampleMask)
     {
         _vkCmdSetSampleMaskEXT(commandBuffer, samples, pSampleMask);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetAlphaToCoverageEnableEXT(VkCommandBuffer commandBuffer, VkBool32 alphaToCoverageEnable)
+    public void vkCmdSetAlphaToCoverageEnableEXT(VkCommandBuffer commandBuffer, VkBool32 alphaToCoverageEnable)
     {
         _vkCmdSetAlphaToCoverageEnableEXT(commandBuffer, alphaToCoverageEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetAlphaToOneEnableEXT(VkCommandBuffer commandBuffer, VkBool32 alphaToOneEnable)
+    public void vkCmdSetAlphaToOneEnableEXT(VkCommandBuffer commandBuffer, VkBool32 alphaToOneEnable)
     {
         _vkCmdSetAlphaToOneEnableEXT(commandBuffer, alphaToOneEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetLogicOpEnableEXT(VkCommandBuffer commandBuffer, VkBool32 logicOpEnable)
+    public void vkCmdSetLogicOpEnableEXT(VkCommandBuffer commandBuffer, VkBool32 logicOpEnable)
     {
         _vkCmdSetLogicOpEnableEXT(commandBuffer, logicOpEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetColorBlendEnableEXT(VkCommandBuffer commandBuffer, uint firstAttachment, uint attachmentCount, VkBool32* pColorBlendEnables)
+    public void vkCmdSetColorBlendEnableEXT(VkCommandBuffer commandBuffer, uint firstAttachment, uint attachmentCount, VkBool32* pColorBlendEnables)
     {
         _vkCmdSetColorBlendEnableEXT(commandBuffer, firstAttachment, attachmentCount, pColorBlendEnables);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetColorBlendEquationEXT(VkCommandBuffer commandBuffer, uint firstAttachment, uint attachmentCount, VkColorBlendEquationEXT* pColorBlendEquations)
+    public void vkCmdSetColorBlendEquationEXT(VkCommandBuffer commandBuffer, uint firstAttachment, uint attachmentCount, VkColorBlendEquationEXT* pColorBlendEquations)
     {
         _vkCmdSetColorBlendEquationEXT(commandBuffer, firstAttachment, attachmentCount, pColorBlendEquations);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetColorWriteMaskEXT(VkCommandBuffer commandBuffer, uint firstAttachment, uint attachmentCount, VkColorComponentFlags* pColorWriteMasks)
+    public void vkCmdSetColorWriteMaskEXT(VkCommandBuffer commandBuffer, uint firstAttachment, uint attachmentCount, VkColorComponentFlags* pColorWriteMasks)
     {
         _vkCmdSetColorWriteMaskEXT(commandBuffer, firstAttachment, attachmentCount, pColorWriteMasks);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetRasterizationStreamEXT(VkCommandBuffer commandBuffer, uint rasterizationStream)
+    public void vkCmdSetRasterizationStreamEXT(VkCommandBuffer commandBuffer, uint rasterizationStream)
     {
         _vkCmdSetRasterizationStreamEXT(commandBuffer, rasterizationStream);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetConservativeRasterizationModeEXT(VkCommandBuffer commandBuffer, VkConservativeRasterizationModeEXT conservativeRasterizationMode)
+    public void vkCmdSetConservativeRasterizationModeEXT(VkCommandBuffer commandBuffer, VkConservativeRasterizationModeEXT conservativeRasterizationMode)
     {
         _vkCmdSetConservativeRasterizationModeEXT(commandBuffer, conservativeRasterizationMode);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetExtraPrimitiveOverestimationSizeEXT(VkCommandBuffer commandBuffer, float extraPrimitiveOverestimationSize)
+    public void vkCmdSetExtraPrimitiveOverestimationSizeEXT(VkCommandBuffer commandBuffer, float extraPrimitiveOverestimationSize)
     {
         _vkCmdSetExtraPrimitiveOverestimationSizeEXT(commandBuffer, extraPrimitiveOverestimationSize);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetDepthClipEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthClipEnable)
+    public void vkCmdSetDepthClipEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthClipEnable)
     {
         _vkCmdSetDepthClipEnableEXT(commandBuffer, depthClipEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetSampleLocationsEnableEXT(VkCommandBuffer commandBuffer, VkBool32 sampleLocationsEnable)
+    public void vkCmdSetSampleLocationsEnableEXT(VkCommandBuffer commandBuffer, VkBool32 sampleLocationsEnable)
     {
         _vkCmdSetSampleLocationsEnableEXT(commandBuffer, sampleLocationsEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetColorBlendAdvancedEXT(VkCommandBuffer commandBuffer, uint firstAttachment, uint attachmentCount, VkColorBlendAdvancedEXT* pColorBlendAdvanced)
+    public void vkCmdSetColorBlendAdvancedEXT(VkCommandBuffer commandBuffer, uint firstAttachment, uint attachmentCount, VkColorBlendAdvancedEXT* pColorBlendAdvanced)
     {
         _vkCmdSetColorBlendAdvancedEXT(commandBuffer, firstAttachment, attachmentCount, pColorBlendAdvanced);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetProvokingVertexModeEXT(VkCommandBuffer commandBuffer, VkProvokingVertexModeEXT provokingVertexMode)
+    public void vkCmdSetProvokingVertexModeEXT(VkCommandBuffer commandBuffer, VkProvokingVertexModeEXT provokingVertexMode)
     {
         _vkCmdSetProvokingVertexModeEXT(commandBuffer, provokingVertexMode);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetLineRasterizationModeEXT(VkCommandBuffer commandBuffer, VkLineRasterizationModeEXT lineRasterizationMode)
+    public void vkCmdSetLineRasterizationModeEXT(VkCommandBuffer commandBuffer, VkLineRasterizationModeEXT lineRasterizationMode)
     {
         _vkCmdSetLineRasterizationModeEXT(commandBuffer, lineRasterizationMode);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetLineStippleEnableEXT(VkCommandBuffer commandBuffer, VkBool32 stippledLineEnable)
+    public void vkCmdSetLineStippleEnableEXT(VkCommandBuffer commandBuffer, VkBool32 stippledLineEnable)
     {
         _vkCmdSetLineStippleEnableEXT(commandBuffer, stippledLineEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetDepthClipNegativeOneToOneEXT(VkCommandBuffer commandBuffer, VkBool32 negativeOneToOne)
+    public void vkCmdSetDepthClipNegativeOneToOneEXT(VkCommandBuffer commandBuffer, VkBool32 negativeOneToOne)
     {
         _vkCmdSetDepthClipNegativeOneToOneEXT(commandBuffer, negativeOneToOne);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetViewportWScalingEnableNV(VkCommandBuffer commandBuffer, VkBool32 viewportWScalingEnable)
+    public void vkCmdSetViewportWScalingEnableNV(VkCommandBuffer commandBuffer, VkBool32 viewportWScalingEnable)
     {
         _vkCmdSetViewportWScalingEnableNV(commandBuffer, viewportWScalingEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetViewportSwizzleNV(VkCommandBuffer commandBuffer, uint firstViewport, uint viewportCount, VkViewportSwizzleNV* pViewportSwizzles)
+    public void vkCmdSetViewportSwizzleNV(VkCommandBuffer commandBuffer, uint firstViewport, uint viewportCount, VkViewportSwizzleNV* pViewportSwizzles)
     {
         _vkCmdSetViewportSwizzleNV(commandBuffer, firstViewport, viewportCount, pViewportSwizzles);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetCoverageToColorEnableNV(VkCommandBuffer commandBuffer, VkBool32 coverageToColorEnable)
+    public void vkCmdSetCoverageToColorEnableNV(VkCommandBuffer commandBuffer, VkBool32 coverageToColorEnable)
     {
         _vkCmdSetCoverageToColorEnableNV(commandBuffer, coverageToColorEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetCoverageToColorLocationNV(VkCommandBuffer commandBuffer, uint coverageToColorLocation)
+    public void vkCmdSetCoverageToColorLocationNV(VkCommandBuffer commandBuffer, uint coverageToColorLocation)
     {
         _vkCmdSetCoverageToColorLocationNV(commandBuffer, coverageToColorLocation);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetCoverageModulationModeNV(VkCommandBuffer commandBuffer, VkCoverageModulationModeNV coverageModulationMode)
+    public void vkCmdSetCoverageModulationModeNV(VkCommandBuffer commandBuffer, VkCoverageModulationModeNV coverageModulationMode)
     {
         _vkCmdSetCoverageModulationModeNV(commandBuffer, coverageModulationMode);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetCoverageModulationTableEnableNV(VkCommandBuffer commandBuffer, VkBool32 coverageModulationTableEnable)
+    public void vkCmdSetCoverageModulationTableEnableNV(VkCommandBuffer commandBuffer, VkBool32 coverageModulationTableEnable)
     {
         _vkCmdSetCoverageModulationTableEnableNV(commandBuffer, coverageModulationTableEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetCoverageModulationTableNV(VkCommandBuffer commandBuffer, uint coverageModulationTableCount, float* pCoverageModulationTable)
+    public void vkCmdSetCoverageModulationTableNV(VkCommandBuffer commandBuffer, uint coverageModulationTableCount, float* pCoverageModulationTable)
     {
         _vkCmdSetCoverageModulationTableNV(commandBuffer, coverageModulationTableCount, pCoverageModulationTable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetShadingRateImageEnableNV(VkCommandBuffer commandBuffer, VkBool32 shadingRateImageEnable)
+    public void vkCmdSetShadingRateImageEnableNV(VkCommandBuffer commandBuffer, VkBool32 shadingRateImageEnable)
     {
         _vkCmdSetShadingRateImageEnableNV(commandBuffer, shadingRateImageEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetRepresentativeFragmentTestEnableNV(VkCommandBuffer commandBuffer, VkBool32 representativeFragmentTestEnable)
+    public void vkCmdSetRepresentativeFragmentTestEnableNV(VkCommandBuffer commandBuffer, VkBool32 representativeFragmentTestEnable)
     {
         _vkCmdSetRepresentativeFragmentTestEnableNV(commandBuffer, representativeFragmentTestEnable);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetCoverageReductionModeNV(VkCommandBuffer commandBuffer, VkCoverageReductionModeNV coverageReductionMode)
+    public void vkCmdSetCoverageReductionModeNV(VkCommandBuffer commandBuffer, VkCoverageReductionModeNV coverageReductionMode)
     {
         _vkCmdSetCoverageReductionModeNV(commandBuffer, coverageReductionMode);
     }

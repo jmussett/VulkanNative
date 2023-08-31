@@ -13,7 +13,7 @@ public unsafe class VkExtAttachmentFeedbackLoopDynamicStateExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetAttachmentFeedbackLoopEnableEXT(VkCommandBuffer commandBuffer, VkImageAspectFlags aspectMask)
+    public void vkCmdSetAttachmentFeedbackLoopEnableEXT(VkCommandBuffer commandBuffer, VkImageAspectFlags aspectMask)
     {
         _vkCmdSetAttachmentFeedbackLoopEnableEXT(commandBuffer, aspectMask);
     }

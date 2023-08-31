@@ -13,7 +13,7 @@ public unsafe class VkHuaweiInvocationMaskExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdBindInvocationMaskHUAWEI(VkCommandBuffer commandBuffer, VkImageView imageView, VkImageLayout imageLayout)
+    public void vkCmdBindInvocationMaskHUAWEI(VkCommandBuffer commandBuffer, VkImageView imageView, VkImageLayout imageLayout)
     {
         _vkCmdBindInvocationMaskHUAWEI(commandBuffer, imageView, imageLayout);
     }

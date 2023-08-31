@@ -13,7 +13,7 @@ public unsafe class VkKhrVideoDecodeQueueExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdDecodeVideoKHR(VkCommandBuffer commandBuffer, VkVideoDecodeInfoKHR* pDecodeInfo)
+    public void vkCmdDecodeVideoKHR(VkCommandBuffer commandBuffer, VkVideoDecodeInfoKHR* pDecodeInfo)
     {
         _vkCmdDecodeVideoKHR(commandBuffer, pDecodeInfo);
     }

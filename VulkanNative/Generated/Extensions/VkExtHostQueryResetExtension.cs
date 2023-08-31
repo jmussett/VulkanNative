@@ -13,7 +13,7 @@ public unsafe class VkExtHostQueryResetExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkResetQueryPool(VkDevice device, VkQueryPool queryPool, uint firstQuery, uint queryCount)
+    public void vkResetQueryPool(VkDevice device, VkQueryPool queryPool, uint firstQuery, uint queryCount)
     {
         _vkResetQueryPool(device, queryPool, firstQuery, queryCount);
     }

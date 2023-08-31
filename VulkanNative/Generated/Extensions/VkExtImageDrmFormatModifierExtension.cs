@@ -13,7 +13,7 @@ public unsafe class VkExtImageDrmFormatModifierExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetImageDrmFormatModifierPropertiesEXT(VkDevice device, VkImage image, VkImageDrmFormatModifierPropertiesEXT* pProperties)
+    public VkResult vkGetImageDrmFormatModifierPropertiesEXT(VkDevice device, VkImage image, VkImageDrmFormatModifierPropertiesEXT* pProperties)
     {
         return _vkGetImageDrmFormatModifierPropertiesEXT(device, image, pProperties);
     }

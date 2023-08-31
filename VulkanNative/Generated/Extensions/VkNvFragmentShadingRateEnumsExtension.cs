@@ -13,7 +13,7 @@ public unsafe class VkNvFragmentShadingRateEnumsExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetFragmentShadingRateEnumNV(VkCommandBuffer commandBuffer, VkFragmentShadingRateNV shadingRate, VkFragmentShadingRateCombinerOpKHR* combinerOps)
+    public void vkCmdSetFragmentShadingRateEnumNV(VkCommandBuffer commandBuffer, VkFragmentShadingRateNV shadingRate, VkFragmentShadingRateCombinerOpKHR* combinerOps)
     {
         _vkCmdSetFragmentShadingRateEnumNV(commandBuffer, shadingRate, combinerOps);
     }

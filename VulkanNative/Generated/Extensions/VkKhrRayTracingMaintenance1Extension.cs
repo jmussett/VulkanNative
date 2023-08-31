@@ -13,7 +13,7 @@ public unsafe class VkKhrRayTracingMaintenance1Extension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdTraceRaysIndirect2KHR(VkCommandBuffer commandBuffer, VkDeviceAddress indirectDeviceAddress)
+    public void vkCmdTraceRaysIndirect2KHR(VkCommandBuffer commandBuffer, VkDeviceAddress indirectDeviceAddress)
     {
         _vkCmdTraceRaysIndirect2KHR(commandBuffer, indirectDeviceAddress);
     }

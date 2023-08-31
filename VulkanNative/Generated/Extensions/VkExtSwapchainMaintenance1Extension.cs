@@ -13,7 +13,7 @@ public unsafe class VkExtSwapchainMaintenance1Extension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkReleaseSwapchainImagesEXT(VkDevice device, VkReleaseSwapchainImagesInfoEXT* pReleaseInfo)
+    public VkResult vkReleaseSwapchainImagesEXT(VkDevice device, VkReleaseSwapchainImagesInfoEXT* pReleaseInfo)
     {
         return _vkReleaseSwapchainImagesEXT(device, pReleaseInfo);
     }

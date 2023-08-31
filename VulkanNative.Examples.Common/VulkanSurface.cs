@@ -21,7 +21,7 @@ public sealed unsafe class VulkanSurface : IDisposable
     {
         VkBool32 supported;
 
-        _surfaceExtension.VkGetPhysicalDeviceSurfaceSupportKHR(device.Handle, queueFamilyIndex, _handle, &supported).ThrowOnError();
+        _surfaceExtension.vkGetPhysicalDeviceSurfaceSupportKHR(device.Handle, queueFamilyIndex, _handle, &supported).ThrowOnError();
 
         return supported == 1;
     }
@@ -29,7 +29,7 @@ public sealed unsafe class VulkanSurface : IDisposable
     public VkSurfaceCapabilitiesKHR GetCapabilities(PhysicalDevice device)
     {
         VkSurfaceCapabilitiesKHR capabilities;
-        _surfaceExtension.VkGetPhysicalDeviceSurfaceCapabilitiesKHR(device.Handle, _handle, &capabilities).ThrowOnError();
+        _surfaceExtension.vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device.Handle, _handle, &capabilities).ThrowOnError();
 
         return capabilities;
     }
@@ -37,10 +37,10 @@ public sealed unsafe class VulkanSurface : IDisposable
     public VkPresentModeKHR[] GetPresentModes(PhysicalDevice device)
     {
         uint count;
-        _surfaceExtension.VkGetPhysicalDeviceSurfacePresentModesKHR(device.Handle, _handle, &count, null).ThrowOnError();
+        _surfaceExtension.vkGetPhysicalDeviceSurfacePresentModesKHR(device.Handle, _handle, &count, null).ThrowOnError();
 
         var presentModePtr = stackalloc VkPresentModeKHR[(int)count];
-        _surfaceExtension.VkGetPhysicalDeviceSurfacePresentModesKHR(device.Handle, _handle, &count, presentModePtr).ThrowOnError();
+        _surfaceExtension.vkGetPhysicalDeviceSurfacePresentModesKHR(device.Handle, _handle, &count, presentModePtr).ThrowOnError();
 
         var presentModes = new VkPresentModeKHR[(int)count];
 
@@ -55,10 +55,10 @@ public sealed unsafe class VulkanSurface : IDisposable
     public VkSurfaceFormatKHR[] GetSurfaceFormats(PhysicalDevice device)
     {
         uint count;
-        _surfaceExtension.VkGetPhysicalDeviceSurfaceFormatsKHR(device.Handle, _handle, &count, null).ThrowOnError();
+        _surfaceExtension.vkGetPhysicalDeviceSurfaceFormatsKHR(device.Handle, _handle, &count, null).ThrowOnError();
 
         var sufaceFormatsPtr = stackalloc VkSurfaceFormatKHR[(int)count];
-        _surfaceExtension.VkGetPhysicalDeviceSurfaceFormatsKHR(device.Handle, _handle, &count, sufaceFormatsPtr).ThrowOnError();
+        _surfaceExtension.vkGetPhysicalDeviceSurfaceFormatsKHR(device.Handle, _handle, &count, sufaceFormatsPtr).ThrowOnError();
 
         var sufaceFormats = new VkSurfaceFormatKHR[(int)count];
 
@@ -77,7 +77,7 @@ public sealed unsafe class VulkanSurface : IDisposable
             return;
         }
 
-        _surfaceExtension.VkDestroySurfaceKHR(_instanceHandle, _handle, null);
+        _surfaceExtension.vkDestroySurfaceKHR(_instanceHandle, _handle, null);
         _handle = nint.Zero;
 
         GC.SuppressFinalize(this);

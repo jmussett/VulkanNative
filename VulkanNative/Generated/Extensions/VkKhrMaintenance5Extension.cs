@@ -19,25 +19,25 @@ public unsafe class VkKhrMaintenance5Extension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdBindIndexBuffer2KHR(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkDeviceSize size, VkIndexType indexType)
+    public void vkCmdBindIndexBuffer2KHR(VkCommandBuffer commandBuffer, VkBuffer buffer, VkDeviceSize offset, VkDeviceSize size, VkIndexType indexType)
     {
         _vkCmdBindIndexBuffer2KHR(commandBuffer, buffer, offset, size, indexType);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetRenderingAreaGranularityKHR(VkDevice device, VkRenderingAreaInfoKHR* pRenderingAreaInfo, VkExtent2D* pGranularity)
+    public void vkGetRenderingAreaGranularityKHR(VkDevice device, VkRenderingAreaInfoKHR* pRenderingAreaInfo, VkExtent2D* pGranularity)
     {
         _vkGetRenderingAreaGranularityKHR(device, pRenderingAreaInfo, pGranularity);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetDeviceImageSubresourceLayoutKHR(VkDevice device, VkDeviceImageSubresourceInfoKHR* pInfo, VkSubresourceLayout2KHR* pLayout)
+    public void vkGetDeviceImageSubresourceLayoutKHR(VkDevice device, VkDeviceImageSubresourceInfoKHR* pInfo, VkSubresourceLayout2KHR* pLayout)
     {
         _vkGetDeviceImageSubresourceLayoutKHR(device, pInfo, pLayout);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetImageSubresourceLayout2KHR(VkDevice device, VkImage image, VkImageSubresource2KHR* pSubresource, VkSubresourceLayout2KHR* pLayout)
+    public void vkGetImageSubresourceLayout2KHR(VkDevice device, VkImage image, VkImageSubresource2KHR* pSubresource, VkSubresourceLayout2KHR* pLayout)
     {
         _vkGetImageSubresourceLayout2KHR(device, image, pSubresource, pLayout);
     }

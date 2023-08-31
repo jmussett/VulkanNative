@@ -15,13 +15,13 @@ public unsafe class VkKhrExternalFenceWin32Extension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkImportFenceWin32HandleKHR(VkDevice device, VkImportFenceWin32HandleInfoKHR* pImportFenceWin32HandleInfo)
+    public VkResult vkImportFenceWin32HandleKHR(VkDevice device, VkImportFenceWin32HandleInfoKHR* pImportFenceWin32HandleInfo)
     {
         return _vkImportFenceWin32HandleKHR(device, pImportFenceWin32HandleInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetFenceWin32HandleKHR(VkDevice device, VkFenceGetWin32HandleInfoKHR* pGetWin32HandleInfo, nint* pHandle)
+    public VkResult vkGetFenceWin32HandleKHR(VkDevice device, VkFenceGetWin32HandleInfoKHR* pGetWin32HandleInfo, nint* pHandle)
     {
         return _vkGetFenceWin32HandleKHR(device, pGetWin32HandleInfo, pHandle);
     }

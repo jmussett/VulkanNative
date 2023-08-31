@@ -13,7 +13,7 @@ public unsafe class VkExtDirectModeDisplayExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkReleaseDisplayEXT(VkPhysicalDevice physicalDevice, VkDisplayKHR display)
+    public VkResult vkReleaseDisplayEXT(VkPhysicalDevice physicalDevice, VkDisplayKHR display)
     {
         return _vkReleaseDisplayEXT(physicalDevice, display);
     }

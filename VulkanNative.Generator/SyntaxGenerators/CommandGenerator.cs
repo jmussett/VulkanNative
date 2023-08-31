@@ -137,7 +137,7 @@ internal class CommandGenerator
 
         return CSharpFactory.MethodDeclaration(
             x => x.FromSyntax(returnType),
-            commandName.Pascalize(),
+            commandName,
             x =>
             {
                 x.AddModifierToken(SyntaxKind.PublicKeyword);

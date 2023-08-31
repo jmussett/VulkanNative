@@ -15,13 +15,13 @@ public unsafe class VkExtConditionalRenderingExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdBeginConditionalRenderingEXT(VkCommandBuffer commandBuffer, VkConditionalRenderingBeginInfoEXT* pConditionalRenderingBegin)
+    public void vkCmdBeginConditionalRenderingEXT(VkCommandBuffer commandBuffer, VkConditionalRenderingBeginInfoEXT* pConditionalRenderingBegin)
     {
         _vkCmdBeginConditionalRenderingEXT(commandBuffer, pConditionalRenderingBegin);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdEndConditionalRenderingEXT(VkCommandBuffer commandBuffer)
+    public void vkCmdEndConditionalRenderingEXT(VkCommandBuffer commandBuffer)
     {
         _vkCmdEndConditionalRenderingEXT(commandBuffer);
     }

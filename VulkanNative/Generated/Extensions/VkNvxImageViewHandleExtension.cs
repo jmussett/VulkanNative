@@ -15,13 +15,13 @@ public unsafe class VkNvxImageViewHandleExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public uint VkGetImageViewHandleNVX(VkDevice device, VkImageViewHandleInfoNVX* pInfo)
+    public uint vkGetImageViewHandleNVX(VkDevice device, VkImageViewHandleInfoNVX* pInfo)
     {
         return _vkGetImageViewHandleNVX(device, pInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetImageViewAddressNVX(VkDevice device, VkImageView imageView, VkImageViewAddressPropertiesNVX* pProperties)
+    public VkResult vkGetImageViewAddressNVX(VkDevice device, VkImageView imageView, VkImageViewAddressPropertiesNVX* pProperties)
     {
         return _vkGetImageViewAddressNVX(device, imageView, pProperties);
     }

@@ -15,13 +15,13 @@ public unsafe class VkKhrExternalSemaphoreFdExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkImportSemaphoreFdKHR(VkDevice device, VkImportSemaphoreFdInfoKHR* pImportSemaphoreFdInfo)
+    public VkResult vkImportSemaphoreFdKHR(VkDevice device, VkImportSemaphoreFdInfoKHR* pImportSemaphoreFdInfo)
     {
         return _vkImportSemaphoreFdKHR(device, pImportSemaphoreFdInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetSemaphoreFdKHR(VkDevice device, VkSemaphoreGetFdInfoKHR* pGetFdInfo, nint* pFd)
+    public VkResult vkGetSemaphoreFdKHR(VkDevice device, VkSemaphoreGetFdInfoKHR* pGetFdInfo, nint* pFd)
     {
         return _vkGetSemaphoreFdKHR(device, pGetFdInfo, pFd);
     }

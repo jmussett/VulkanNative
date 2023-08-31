@@ -13,7 +13,7 @@ public unsafe class VkExtToolingInfoExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetPhysicalDeviceToolProperties(VkPhysicalDevice physicalDevice, uint* pToolCount, VkPhysicalDeviceToolProperties* pToolProperties)
+    public VkResult vkGetPhysicalDeviceToolProperties(VkPhysicalDevice physicalDevice, uint* pToolCount, VkPhysicalDeviceToolProperties* pToolProperties)
     {
         return _vkGetPhysicalDeviceToolProperties(physicalDevice, pToolCount, pToolProperties);
     }

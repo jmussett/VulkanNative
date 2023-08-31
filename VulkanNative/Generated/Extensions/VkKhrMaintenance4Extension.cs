@@ -17,19 +17,19 @@ public unsafe class VkKhrMaintenance4Extension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetDeviceBufferMemoryRequirements(VkDevice device, VkDeviceBufferMemoryRequirements* pInfo, VkMemoryRequirements2* pMemoryRequirements)
+    public void vkGetDeviceBufferMemoryRequirements(VkDevice device, VkDeviceBufferMemoryRequirements* pInfo, VkMemoryRequirements2* pMemoryRequirements)
     {
         _vkGetDeviceBufferMemoryRequirements(device, pInfo, pMemoryRequirements);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetDeviceImageMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements* pInfo, VkMemoryRequirements2* pMemoryRequirements)
+    public void vkGetDeviceImageMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements* pInfo, VkMemoryRequirements2* pMemoryRequirements)
     {
         _vkGetDeviceImageMemoryRequirements(device, pInfo, pMemoryRequirements);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetDeviceImageSparseMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements* pInfo, uint* pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2* pSparseMemoryRequirements)
+    public void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements* pInfo, uint* pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2* pSparseMemoryRequirements)
     {
         _vkGetDeviceImageSparseMemoryRequirements(device, pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
     }

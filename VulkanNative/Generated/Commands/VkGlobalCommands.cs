@@ -19,25 +19,25 @@ public unsafe class VkGlobalCommands
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkCreateInstance(VkInstanceCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkInstance* pInstance)
+    public VkResult vkCreateInstance(VkInstanceCreateInfo* pCreateInfo, VkAllocationCallbacks* pAllocator, VkInstance* pInstance)
     {
         return _vkCreateInstance(pCreateInfo, pAllocator, pInstance);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkEnumerateInstanceExtensionProperties(byte* pLayerName, uint* pPropertyCount, VkExtensionProperties* pProperties)
+    public VkResult vkEnumerateInstanceExtensionProperties(byte* pLayerName, uint* pPropertyCount, VkExtensionProperties* pProperties)
     {
         return _vkEnumerateInstanceExtensionProperties(pLayerName, pPropertyCount, pProperties);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkEnumerateInstanceLayerProperties(uint* pPropertyCount, VkLayerProperties* pProperties)
+    public VkResult vkEnumerateInstanceLayerProperties(uint* pPropertyCount, VkLayerProperties* pProperties)
     {
         return _vkEnumerateInstanceLayerProperties(pPropertyCount, pProperties);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkEnumerateInstanceVersion(uint* pApiVersion)
+    public VkResult vkEnumerateInstanceVersion(uint* pApiVersion)
     {
         return _vkEnumerateInstanceVersion(pApiVersion);
     }

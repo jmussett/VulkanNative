@@ -13,7 +13,7 @@ public unsafe class VkExtDepthBiasControlExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSetDepthBias2EXT(VkCommandBuffer commandBuffer, VkDepthBiasInfoEXT* pDepthBiasInfo)
+    public void vkCmdSetDepthBias2EXT(VkCommandBuffer commandBuffer, VkDepthBiasInfoEXT* pDepthBiasInfo)
     {
         _vkCmdSetDepthBias2EXT(commandBuffer, pDepthBiasInfo);
     }

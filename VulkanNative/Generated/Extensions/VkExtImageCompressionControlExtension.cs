@@ -13,7 +13,7 @@ public unsafe class VkExtImageCompressionControlExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetImageSubresourceLayout2KHR(VkDevice device, VkImage image, VkImageSubresource2KHR* pSubresource, VkSubresourceLayout2KHR* pLayout)
+    public void vkGetImageSubresourceLayout2KHR(VkDevice device, VkImage image, VkImageSubresource2KHR* pSubresource, VkSubresourceLayout2KHR* pLayout)
     {
         _vkGetImageSubresourceLayout2KHR(device, image, pSubresource, pLayout);
     }

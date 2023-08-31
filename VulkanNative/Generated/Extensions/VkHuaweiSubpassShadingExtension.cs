@@ -15,13 +15,13 @@ public unsafe class VkHuaweiSubpassShadingExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI(VkDevice device, VkRenderPass renderpass, VkExtent2D* pMaxWorkgroupSize)
+    public VkResult vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI(VkDevice device, VkRenderPass renderpass, VkExtent2D* pMaxWorkgroupSize)
     {
         return _vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI(device, renderpass, pMaxWorkgroupSize);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdSubpassShadingHUAWEI(VkCommandBuffer commandBuffer)
+    public void vkCmdSubpassShadingHUAWEI(VkCommandBuffer commandBuffer)
     {
         _vkCmdSubpassShadingHUAWEI(commandBuffer);
     }

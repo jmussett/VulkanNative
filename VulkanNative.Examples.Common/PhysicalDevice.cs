@@ -22,7 +22,7 @@ public unsafe class PhysicalDevice
     public VkPhysicalDeviceProperties GetProperties()
     {
         VkPhysicalDeviceProperties properties;
-        _commands.VkGetPhysicalDeviceProperties(_handle, &properties);
+        _commands.vkGetPhysicalDeviceProperties(_handle, &properties);
 
         return properties;
     }
@@ -30,7 +30,7 @@ public unsafe class PhysicalDevice
     public VkPhysicalDeviceFeatures GetFeatures()
     {
         VkPhysicalDeviceFeatures features;
-        _commands.VkGetPhysicalDeviceFeatures(_handle, &features);
+        _commands.vkGetPhysicalDeviceFeatures(_handle, &features);
 
         return features;
     }
@@ -38,11 +38,11 @@ public unsafe class PhysicalDevice
     public VkQueueFamilyProperties[] GetQueueFamilies()
     {
         uint count;
-        _commands.VkGetPhysicalDeviceQueueFamilyProperties(_handle, &count, null);
+        _commands.vkGetPhysicalDeviceQueueFamilyProperties(_handle, &count, null);
 
         var queueFamiliesPtr = stackalloc VkQueueFamilyProperties[(int) count];
 
-        _commands.VkGetPhysicalDeviceQueueFamilyProperties(_handle, &count, queueFamiliesPtr);
+        _commands.vkGetPhysicalDeviceQueueFamilyProperties(_handle, &count, queueFamiliesPtr);
 
         var queueFamilies = new VkQueueFamilyProperties[(int)count];
 
@@ -58,11 +58,11 @@ public unsafe class PhysicalDevice
     {
         uint count = 0;
 
-        _commands.VkEnumerateDeviceExtensionProperties(_handle, (byte*)null, &count, null).ThrowOnError();
+        _commands.vkEnumerateDeviceExtensionProperties(_handle, (byte*)null, &count, null).ThrowOnError();
 
         var extensionPropertiesPtr = stackalloc VkExtensionProperties[(int)count];
 
-        _commands.VkEnumerateDeviceExtensionProperties(_handle, (byte*)null, &count, extensionPropertiesPtr).ThrowOnError();
+        _commands.vkEnumerateDeviceExtensionProperties(_handle, (byte*)null, &count, extensionPropertiesPtr).ThrowOnError();
 
         ExtensionProperties[] extensionProperties = new ExtensionProperties[(int)count];
 
@@ -82,11 +82,11 @@ public unsafe class PhysicalDevice
     {
         uint layerCount = 0;
 
-        _commands.VkEnumerateDeviceLayerProperties(_handle, &layerCount, null).ThrowOnError();
+        _commands.vkEnumerateDeviceLayerProperties(_handle, &layerCount, null).ThrowOnError();
 
         var availableVkLayers = stackalloc VkLayerProperties[(int)layerCount];
 
-        _commands.VkEnumerateDeviceLayerProperties(_handle, &layerCount, availableVkLayers).ThrowOnError();
+        _commands.vkEnumerateDeviceLayerProperties(_handle, &layerCount, availableVkLayers).ThrowOnError();
 
         var availableLayers = new LayerProperties[(int)layerCount];
 
@@ -133,7 +133,7 @@ public unsafe class PhysicalDevice
             ppEnabledExtensionNames = extensions.AsPointer()
         };
 
-        _commands.VkCreateDevice(_handle, &deviceCreateInfo, null, &device).ThrowOnError();
+        _commands.vkCreateDevice(_handle, &deviceCreateInfo, null, &device).ThrowOnError();
 
         return new VulkanDevice(device, _loader);
     }

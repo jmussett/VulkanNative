@@ -15,13 +15,13 @@ public unsafe class VkKhrExternalMemoryFdExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetMemoryFdKHR(VkDevice device, VkMemoryGetFdInfoKHR* pGetFdInfo, nint* pFd)
+    public VkResult vkGetMemoryFdKHR(VkDevice device, VkMemoryGetFdInfoKHR* pGetFdInfo, nint* pFd)
     {
         return _vkGetMemoryFdKHR(device, pGetFdInfo, pFd);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetMemoryFdPropertiesKHR(VkDevice device, VkExternalMemoryHandleTypeFlags handleType, nint fd, VkMemoryFdPropertiesKHR* pMemoryFdProperties)
+    public VkResult vkGetMemoryFdPropertiesKHR(VkDevice device, VkExternalMemoryHandleTypeFlags handleType, nint fd, VkMemoryFdPropertiesKHR* pMemoryFdProperties)
     {
         return _vkGetMemoryFdPropertiesKHR(device, handleType, fd, pMemoryFdProperties);
     }

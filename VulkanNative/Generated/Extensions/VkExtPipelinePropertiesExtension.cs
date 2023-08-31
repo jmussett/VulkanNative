@@ -13,7 +13,7 @@ public unsafe class VkExtPipelinePropertiesExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetPipelinePropertiesEXT(VkDevice device, VkPipelineInfoKHR* pPipelineInfo, VkBaseOutStructure* pPipelineProperties)
+    public VkResult vkGetPipelinePropertiesEXT(VkDevice device, VkPipelineInfoKHR* pPipelineInfo, VkBaseOutStructure* pPipelineProperties)
     {
         return _vkGetPipelinePropertiesEXT(device, pPipelineInfo, pPipelineProperties);
     }

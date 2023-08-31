@@ -21,31 +21,31 @@ public unsafe class VkKhrDeferredHostOperationsExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkCreateDeferredOperationKHR(VkDevice device, VkAllocationCallbacks* pAllocator, VkDeferredOperationKHR* pDeferredOperation)
+    public VkResult vkCreateDeferredOperationKHR(VkDevice device, VkAllocationCallbacks* pAllocator, VkDeferredOperationKHR* pDeferredOperation)
     {
         return _vkCreateDeferredOperationKHR(device, pAllocator, pDeferredOperation);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkDestroyDeferredOperationKHR(VkDevice device, VkDeferredOperationKHR operation, VkAllocationCallbacks* pAllocator)
+    public void vkDestroyDeferredOperationKHR(VkDevice device, VkDeferredOperationKHR operation, VkAllocationCallbacks* pAllocator)
     {
         _vkDestroyDeferredOperationKHR(device, operation, pAllocator);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public uint VkGetDeferredOperationMaxConcurrencyKHR(VkDevice device, VkDeferredOperationKHR operation)
+    public uint vkGetDeferredOperationMaxConcurrencyKHR(VkDevice device, VkDeferredOperationKHR operation)
     {
         return _vkGetDeferredOperationMaxConcurrencyKHR(device, operation);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetDeferredOperationResultKHR(VkDevice device, VkDeferredOperationKHR operation)
+    public VkResult vkGetDeferredOperationResultKHR(VkDevice device, VkDeferredOperationKHR operation)
     {
         return _vkGetDeferredOperationResultKHR(device, operation);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkDeferredOperationJoinKHR(VkDevice device, VkDeferredOperationKHR operation)
+    public VkResult vkDeferredOperationJoinKHR(VkDevice device, VkDeferredOperationKHR operation)
     {
         return _vkDeferredOperationJoinKHR(device, operation);
     }

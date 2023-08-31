@@ -13,7 +13,7 @@ public unsafe class VkKhrPresentWaitExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkWaitForPresentKHR(VkDevice device, VkSwapchainKHR swapchain, ulong presentId, ulong timeout)
+    public VkResult vkWaitForPresentKHR(VkDevice device, VkSwapchainKHR swapchain, ulong presentId, ulong timeout)
     {
         return _vkWaitForPresentKHR(device, swapchain, presentId, timeout);
     }

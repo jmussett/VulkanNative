@@ -15,13 +15,13 @@ public unsafe class VkExtAcquireXlibDisplayExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkAcquireXlibDisplayEXT(VkPhysicalDevice physicalDevice, nint* dpy, VkDisplayKHR display)
+    public VkResult vkAcquireXlibDisplayEXT(VkPhysicalDevice physicalDevice, nint* dpy, VkDisplayKHR display)
     {
         return _vkAcquireXlibDisplayEXT(physicalDevice, dpy, display);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetRandROutputDisplayEXT(VkPhysicalDevice physicalDevice, nint* dpy, nint rrOutput, VkDisplayKHR* pDisplay)
+    public VkResult vkGetRandROutputDisplayEXT(VkPhysicalDevice physicalDevice, nint* dpy, nint rrOutput, VkDisplayKHR* pDisplay)
     {
         return _vkGetRandROutputDisplayEXT(physicalDevice, dpy, rrOutput, pDisplay);
     }

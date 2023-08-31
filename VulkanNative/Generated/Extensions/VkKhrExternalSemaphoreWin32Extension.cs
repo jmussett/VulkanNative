@@ -15,13 +15,13 @@ public unsafe class VkKhrExternalSemaphoreWin32Extension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkImportSemaphoreWin32HandleKHR(VkDevice device, VkImportSemaphoreWin32HandleInfoKHR* pImportSemaphoreWin32HandleInfo)
+    public VkResult vkImportSemaphoreWin32HandleKHR(VkDevice device, VkImportSemaphoreWin32HandleInfoKHR* pImportSemaphoreWin32HandleInfo)
     {
         return _vkImportSemaphoreWin32HandleKHR(device, pImportSemaphoreWin32HandleInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetSemaphoreWin32HandleKHR(VkDevice device, VkSemaphoreGetWin32HandleInfoKHR* pGetWin32HandleInfo, nint* pHandle)
+    public VkResult vkGetSemaphoreWin32HandleKHR(VkDevice device, VkSemaphoreGetWin32HandleInfoKHR* pGetWin32HandleInfo, nint* pHandle)
     {
         return _vkGetSemaphoreWin32HandleKHR(device, pGetWin32HandleInfo, pHandle);
     }

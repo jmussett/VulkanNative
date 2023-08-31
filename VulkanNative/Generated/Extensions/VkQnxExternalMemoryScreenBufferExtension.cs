@@ -13,7 +13,7 @@ public unsafe class VkQnxExternalMemoryScreenBufferExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetScreenBufferPropertiesQNX(VkDevice device, nint* buffer, VkScreenBufferPropertiesQNX* pProperties)
+    public VkResult vkGetScreenBufferPropertiesQNX(VkDevice device, nint* buffer, VkScreenBufferPropertiesQNX* pProperties)
     {
         return _vkGetScreenBufferPropertiesQNX(device, buffer, pProperties);
     }

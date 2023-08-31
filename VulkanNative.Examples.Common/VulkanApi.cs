@@ -50,7 +50,7 @@ public unsafe class VulkanApi
             ppEnabledExtensionNames = enabledExtensionNames.AsPointer(),
         };
 
-        _globalCommands.VkCreateInstance(&vkInstanceCreateInfo, null, &instance).ThrowOnError();
+        _globalCommands.vkCreateInstance(&vkInstanceCreateInfo, null, &instance).ThrowOnError();
 
         //VK_ERROR_INCOMPATIBLE_DRIVER https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Instance
 
@@ -87,11 +87,11 @@ public unsafe class VulkanApi
 
         fixed (byte* layerNamePtr = layerName)
         {
-            state.Commands.VkEnumerateInstanceExtensionProperties(layerNamePtr, &propertyCount, null).ThrowOnError();
+            state.Commands.vkEnumerateInstanceExtensionProperties(layerNamePtr, &propertyCount, null).ThrowOnError();
 
             var propertiesArray = stackalloc VkExtensionProperties[(int)propertyCount];
 
-            state.Commands.VkEnumerateInstanceExtensionProperties(layerNamePtr, &propertyCount, propertiesArray).ThrowOnError();
+            state.Commands.vkEnumerateInstanceExtensionProperties(layerNamePtr, &propertyCount, propertiesArray).ThrowOnError();
 
             state.Properties = new ExtensionProperties[propertyCount];
 
@@ -112,7 +112,7 @@ public unsafe class VulkanApi
         layerProperties = Array.Empty<LayerProperties>();
 
         uint propertyCount;
-        _globalCommands.VkEnumerateInstanceLayerProperties(&propertyCount, null).ThrowOnError();
+        _globalCommands.vkEnumerateInstanceLayerProperties(&propertyCount, null).ThrowOnError();
 
         var propertiesPtr = stackalloc VkLayerProperties[(int)propertyCount];
 

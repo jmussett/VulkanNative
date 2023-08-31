@@ -13,7 +13,7 @@ public unsafe class VkExtMetalObjectsExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkExportMetalObjectsEXT(VkDevice device, VkExportMetalObjectsInfoEXT* pMetalObjectsInfo)
+    public void vkExportMetalObjectsEXT(VkDevice device, VkExportMetalObjectsInfoEXT* pMetalObjectsInfo)
     {
         _vkExportMetalObjectsEXT(device, pMetalObjectsInfo);
     }

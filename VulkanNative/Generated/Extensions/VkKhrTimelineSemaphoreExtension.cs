@@ -17,19 +17,19 @@ public unsafe class VkKhrTimelineSemaphoreExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetSemaphoreCounterValue(VkDevice device, VkSemaphore semaphore, ulong* pValue)
+    public VkResult vkGetSemaphoreCounterValue(VkDevice device, VkSemaphore semaphore, ulong* pValue)
     {
         return _vkGetSemaphoreCounterValue(device, semaphore, pValue);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkWaitSemaphores(VkDevice device, VkSemaphoreWaitInfo* pWaitInfo, ulong timeout)
+    public VkResult vkWaitSemaphores(VkDevice device, VkSemaphoreWaitInfo* pWaitInfo, ulong timeout)
     {
         return _vkWaitSemaphores(device, pWaitInfo, timeout);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkSignalSemaphore(VkDevice device, VkSemaphoreSignalInfo* pSignalInfo)
+    public VkResult vkSignalSemaphore(VkDevice device, VkSemaphoreSignalInfo* pSignalInfo)
     {
         return _vkSignalSemaphore(device, pSignalInfo);
     }

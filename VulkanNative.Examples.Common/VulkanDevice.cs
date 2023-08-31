@@ -48,7 +48,7 @@ public sealed unsafe class VulkanDevice : IDisposable
             VkSwapchainKHR swapchain;
 
 
-            _swapchainExtension.VkCreateSwapchainKHR(_handle, &createInfoKHR, null, &swapchain).ThrowOnError();
+            _swapchainExtension.vkCreateSwapchainKHR(_handle, &createInfoKHR, null, &swapchain).ThrowOnError();
 
             return new VulkanSwapchain(swapchain, _handle, _swapchainExtension);
         }
@@ -68,7 +68,7 @@ public sealed unsafe class VulkanDevice : IDisposable
 
         VkImageView imageView;
 
-        _commands.VkCreateImageView(_handle, &vkCreateInfo, null, &imageView).ThrowOnError();
+        _commands.vkCreateImageView(_handle, &vkCreateInfo, null, &imageView).ThrowOnError();
 
         return new ImageView(imageView, _handle, _commands);
     }
@@ -86,7 +86,7 @@ public sealed unsafe class VulkanDevice : IDisposable
 
             VkShaderModule shaderModule;
 
-            _commands.VkCreateShaderModule(_handle, &createInfo, null, &shaderModule).ThrowOnError();
+            _commands.vkCreateShaderModule(_handle, &createInfo, null, &shaderModule).ThrowOnError();
 
             return new ShaderModule(shaderModule, _handle, _commands);
         }
@@ -99,7 +99,7 @@ public sealed unsafe class VulkanDevice : IDisposable
             return;
         }
 
-        _commands.VkDestroyDevice(_handle, null);
+        _commands.vkDestroyDevice(_handle, null);
         _handle = nint.Zero;
 
         GC.SuppressFinalize(this);
@@ -131,7 +131,7 @@ public sealed unsafe class ShaderModule : IDisposable
             return;
         }
 
-        _commands.VkDestroyShaderModule(_deviceHandle, _handle, null);
+        _commands.vkDestroyShaderModule(_deviceHandle, _handle, null);
         _handle = nint.Zero;
 
         GC.SuppressFinalize(this);

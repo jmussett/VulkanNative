@@ -24,11 +24,11 @@ public sealed unsafe class VulkanInstance : IDisposable
     {
         uint count;
 
-        _commands.VkEnumeratePhysicalDevices(_handle, &count, (VkPhysicalDevice*)null).ThrowOnError();
+        _commands.vkEnumeratePhysicalDevices(_handle, &count, (VkPhysicalDevice*)null).ThrowOnError();
 
         var physicalDevicesPtr = stackalloc VkPhysicalDevice[(int)count];
 
-        _commands.VkEnumeratePhysicalDevices(_handle, &count, physicalDevicesPtr).ThrowOnError();
+        _commands.vkEnumeratePhysicalDevices(_handle, &count, physicalDevicesPtr).ThrowOnError();
 
         var physicalDevices = new PhysicalDevice[count];
 
@@ -61,7 +61,7 @@ public sealed unsafe class VulkanInstance : IDisposable
             return;
         }
 
-        _commands.VkDestroyInstance(_handle, null);
+        _commands.vkDestroyInstance(_handle, null);
         _handle = nint.Zero;
 
         GC.SuppressFinalize(this);

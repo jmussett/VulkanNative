@@ -13,7 +13,7 @@ public unsafe class VkKhrMaintenance3Extension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkGetDescriptorSetLayoutSupport(VkDevice device, VkDescriptorSetLayoutCreateInfo* pCreateInfo, VkDescriptorSetLayoutSupport* pSupport)
+    public void vkGetDescriptorSetLayoutSupport(VkDevice device, VkDescriptorSetLayoutCreateInfo* pCreateInfo, VkDescriptorSetLayoutSupport* pSupport)
     {
         _vkGetDescriptorSetLayoutSupport(device, pCreateInfo, pSupport);
     }

@@ -15,13 +15,13 @@ public unsafe class VkKhrExternalFenceFdExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkImportFenceFdKHR(VkDevice device, VkImportFenceFdInfoKHR* pImportFenceFdInfo)
+    public VkResult vkImportFenceFdKHR(VkDevice device, VkImportFenceFdInfoKHR* pImportFenceFdInfo)
     {
         return _vkImportFenceFdKHR(device, pImportFenceFdInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetFenceFdKHR(VkDevice device, VkFenceGetFdInfoKHR* pGetFdInfo, nint* pFd)
+    public VkResult vkGetFenceFdKHR(VkDevice device, VkFenceGetFdInfoKHR* pGetFdInfo, nint* pFd)
     {
         return _vkGetFenceFdKHR(device, pGetFdInfo, pFd);
     }

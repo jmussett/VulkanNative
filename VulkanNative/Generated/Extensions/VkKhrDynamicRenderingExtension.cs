@@ -15,13 +15,13 @@ public unsafe class VkKhrDynamicRenderingExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdBeginRendering(VkCommandBuffer commandBuffer, VkRenderingInfo* pRenderingInfo)
+    public void vkCmdBeginRendering(VkCommandBuffer commandBuffer, VkRenderingInfo* pRenderingInfo)
     {
         _vkCmdBeginRendering(commandBuffer, pRenderingInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkCmdEndRendering(VkCommandBuffer commandBuffer)
+    public void vkCmdEndRendering(VkCommandBuffer commandBuffer)
     {
         _vkCmdEndRendering(commandBuffer);
     }

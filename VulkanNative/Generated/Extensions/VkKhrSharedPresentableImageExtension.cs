@@ -13,7 +13,7 @@ public unsafe class VkKhrSharedPresentableImageExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetSwapchainStatusKHR(VkDevice device, VkSwapchainKHR swapchain)
+    public VkResult vkGetSwapchainStatusKHR(VkDevice device, VkSwapchainKHR swapchain)
     {
         return _vkGetSwapchainStatusKHR(device, swapchain);
     }

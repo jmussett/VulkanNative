@@ -13,7 +13,7 @@ public unsafe class VkAmdDisplayNativeHdrExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkSetLocalDimmingAMD(VkDevice device, VkSwapchainKHR swapChain, VkBool32 localDimmingEnable)
+    public void vkSetLocalDimmingAMD(VkDevice device, VkSwapchainKHR swapChain, VkBool32 localDimmingEnable)
     {
         _vkSetLocalDimmingAMD(device, swapChain, localDimmingEnable);
     }

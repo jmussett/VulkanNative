@@ -13,7 +13,7 @@ public unsafe class VkExtHdrMetadataExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkSetHdrMetadataEXT(VkDevice device, uint swapchainCount, VkSwapchainKHR* pSwapchains, VkHdrMetadataEXT* pMetadata)
+    public void vkSetHdrMetadataEXT(VkDevice device, uint swapchainCount, VkSwapchainKHR* pSwapchains, VkHdrMetadataEXT* pMetadata)
     {
         _vkSetHdrMetadataEXT(device, swapchainCount, pSwapchains, pMetadata);
     }

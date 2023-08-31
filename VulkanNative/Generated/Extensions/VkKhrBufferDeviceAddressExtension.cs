@@ -17,19 +17,19 @@ public unsafe class VkKhrBufferDeviceAddressExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkDeviceAddress VkGetBufferDeviceAddress(VkDevice device, VkBufferDeviceAddressInfo* pInfo)
+    public VkDeviceAddress vkGetBufferDeviceAddress(VkDevice device, VkBufferDeviceAddressInfo* pInfo)
     {
         return _vkGetBufferDeviceAddress(device, pInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public ulong VkGetBufferOpaqueCaptureAddress(VkDevice device, VkBufferDeviceAddressInfo* pInfo)
+    public ulong vkGetBufferOpaqueCaptureAddress(VkDevice device, VkBufferDeviceAddressInfo* pInfo)
     {
         return _vkGetBufferOpaqueCaptureAddress(device, pInfo);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public ulong VkGetDeviceMemoryOpaqueCaptureAddress(VkDevice device, VkDeviceMemoryOpaqueCaptureAddressInfo* pInfo)
+    public ulong vkGetDeviceMemoryOpaqueCaptureAddress(VkDevice device, VkDeviceMemoryOpaqueCaptureAddressInfo* pInfo)
     {
         return _vkGetDeviceMemoryOpaqueCaptureAddress(device, pInfo);
     }

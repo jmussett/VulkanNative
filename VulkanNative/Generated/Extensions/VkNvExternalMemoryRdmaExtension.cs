@@ -13,7 +13,7 @@ public unsafe class VkNvExternalMemoryRdmaExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public VkResult VkGetMemoryRemoteAddressNV(VkDevice device, VkMemoryGetRemoteAddressInfoNV* pMemoryGetRemoteAddressInfo, VkRemoteAddressNV* pAddress)
+    public VkResult vkGetMemoryRemoteAddressNV(VkDevice device, VkMemoryGetRemoteAddressInfoNV* pMemoryGetRemoteAddressInfo, VkRemoteAddressNV* pAddress)
     {
         return _vkGetMemoryRemoteAddressNV(device, pMemoryGetRemoteAddressInfo, pAddress);
     }

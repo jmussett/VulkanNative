@@ -13,7 +13,7 @@ public unsafe class VkExtPageableDeviceLocalMemoryExtension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkSetDeviceMemoryPriorityEXT(VkDevice device, VkDeviceMemory memory, float priority)
+    public void vkSetDeviceMemoryPriorityEXT(VkDevice device, VkDeviceMemory memory, float priority)
     {
         _vkSetDeviceMemoryPriorityEXT(device, memory, priority);
     }

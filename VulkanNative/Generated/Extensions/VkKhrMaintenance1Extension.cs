@@ -13,7 +13,7 @@ public unsafe class VkKhrMaintenance1Extension
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void VkTrimCommandPool(VkDevice device, VkCommandPool commandPool, VkCommandPoolTrimFlags flags)
+    public void vkTrimCommandPool(VkDevice device, VkCommandPool commandPool, VkCommandPoolTrimFlags flags)
     {
         _vkTrimCommandPool(device, commandPool, flags);
     }

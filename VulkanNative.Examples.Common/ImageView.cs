@@ -20,7 +20,7 @@ public sealed unsafe class ImageView : IDisposable
             return;
         }
 
-        _commands.VkDestroyImageView(_deviceHandle, _handle, null);
+        _commands.vkDestroyImageView(_deviceHandle, _handle, null);
         _handle = nint.Zero;
 
         GC.SuppressFinalize(this);
