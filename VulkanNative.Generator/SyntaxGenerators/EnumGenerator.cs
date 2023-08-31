@@ -77,11 +77,7 @@ namespace VulkanNative.Generator.SyntaxGenerators
 
                                         var offset = int.Parse(enumMember.Offset);
 
-                                        var extensionNumber = !string.IsNullOrWhiteSpace(enumMember.Extnumber)
-                                            ? int.Parse(enumMember.Extnumber)
-                                            : enumDefinition.ExtensionNumber;
-
-                                        if (extensionNumber is null)
+                                        if (!int.TryParse(enumMember.Extnumber, out var extensionNumber))
                                         {
                                             throw new InvalidOperationException($"No extension number defined for enum member '{enumMember.Name}'");
                                         }

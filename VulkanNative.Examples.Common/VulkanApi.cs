@@ -32,7 +32,6 @@ public unsafe class VulkanApi
 
         var pApplicationInfo = new VkApplicationInfo
         {
-            sType = VkStructureType.VK_STRUCTURE_TYPE_APPLICATION_INFO,
             pApplicationName = appNameEncoded.AsPointer(),
             pEngineName = engineNameEncoded.AsPointer(),
             applicationVersion = new VkVersion(1, 0, 0),
@@ -42,7 +41,6 @@ public unsafe class VulkanApi
 
         var vkInstanceCreateInfo = new VkInstanceCreateInfo
         {
-            sType = VkStructureType.VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO,
             pApplicationInfo = &pApplicationInfo,
             enabledLayerCount = (uint)enabledLayerNames.Length,
             ppEnabledLayerNames = enabledLayerNames.AsPointer(),

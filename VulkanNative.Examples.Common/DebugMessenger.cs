@@ -19,7 +19,6 @@ public sealed unsafe class DebugMessenger : IDisposable
 
         var createInfo = new VkDebugUtilsMessengerCreateInfoEXT
         {
-            sType = (VkStructureType)1000128004, // TODO: VkStructureType.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
             messageSeverity = severity,
             messageType = messageType,
             pfnUserCallback = (delegate* unmanaged[Cdecl]<VkDebugUtilsMessageSeverityFlagsEXT, VkDebugUtilsMessageTypeFlagsEXT, VkDebugUtilsMessengerCallbackDataEXT*, void*, void>) callbackHandle

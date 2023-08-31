@@ -60,7 +60,8 @@ internal class ExtensionGenerator
 
                     _enumRegistry.Enums.TryAdd(enumMember.Extends, new EnumDefinition());
 
-                    _enumRegistry.Enums[enumMember.Extends].ExtensionNumber = int.Parse(extension.Number!);
+                    enumMember.Extnumber = extension.Number!;
+
                     _enumRegistry.Enums[enumMember.Extends].Members[enumMember.Name] = enumMember;
                 }
 

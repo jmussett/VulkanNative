@@ -116,7 +116,6 @@ public unsafe class PhysicalDevice
             {
                 queueCreateInfos[i] = new VkDeviceQueueCreateInfo
                 {
-                    sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO,
                     queueFamilyIndex = queues[i].QueueFamilyIndex,
                     queueCount = (uint)queues[i].QueuePriorites.Length,
                     pQueuePriorities = queuePriorityPtr
@@ -126,7 +125,6 @@ public unsafe class PhysicalDevice
 
         VkDeviceCreateInfo deviceCreateInfo = new()
         {
-            sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
             queueCreateInfoCount = (uint)queues.Length,
             pQueueCreateInfos = queueCreateInfos,
             enabledExtensionCount = (uint)extensions.Length,

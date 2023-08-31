@@ -27,7 +27,6 @@ public sealed unsafe class VulkanDevice : IDisposable
         {
             VkSwapchainCreateInfoKHR createInfoKHR = new()
             {
-                sType = (VkStructureType)1000001000, // TODO: VkStructureType.VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR,
                 surface = createInfo.Surface.Handle,
                 minImageCount = createInfo.MinImageCount,
                 imageExtent = createInfo.ImageExtent,
@@ -58,7 +57,6 @@ public sealed unsafe class VulkanDevice : IDisposable
     {
         VkImageViewCreateInfo vkCreateInfo = new()
         {
-            sType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO,
             image = createInfo.Image,
             viewType =createInfo.ViewType,
             format = createInfo.Format,
@@ -79,7 +77,6 @@ public sealed unsafe class VulkanDevice : IDisposable
         {
             var createInfo = new VkShaderModuleCreateInfo
             {
-                sType = VkStructureType.VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO,
                 pCode = (uint*)byteCodePtr,
                 codeSize = new nuint((uint)byteCode.Length)
             };
