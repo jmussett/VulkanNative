@@ -15,4 +15,9 @@ public unsafe struct VkAndroidHardwareBufferFormatProperties2ANDROID
     public VkSamplerYcbcrRange suggestedYcbcrRange;
     public VkChromaLocation suggestedXChromaOffset;
     public VkChromaLocation suggestedYChromaOffset;
+
+    public VkAndroidHardwareBufferFormatProperties2ANDROID()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_2_ANDROID;
+    }
 }

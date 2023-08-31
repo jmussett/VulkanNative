@@ -14,4 +14,9 @@ public unsafe struct VkSubmitInfo
     public VkCommandBuffer* pCommandBuffers;
     public uint signalSemaphoreCount;
     public VkSemaphore* pSignalSemaphores;
+
+    public VkSubmitInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SUBMIT_INFO;
+    }
 }

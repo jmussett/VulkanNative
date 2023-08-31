@@ -14,4 +14,9 @@ public unsafe struct VkFramebufferCreateInfo
     public uint width;
     public uint height;
     public uint layers;
+
+    public VkFramebufferCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+    }
 }

@@ -9,4 +9,9 @@ public unsafe struct VkCuModuleCreateInfoNVX
     public void* pNext;
     public nuint dataSize;
     public void* pData;
+
+    public VkCuModuleCreateInfoNVX()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX;
+    }
 }

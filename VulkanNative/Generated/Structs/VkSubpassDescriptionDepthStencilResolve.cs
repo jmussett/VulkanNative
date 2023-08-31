@@ -10,4 +10,9 @@ public unsafe struct VkSubpassDescriptionDepthStencilResolve
     public VkResolveModeFlags depthResolveMode;
     public VkResolveModeFlags stencilResolveMode;
     public VkAttachmentReference2* pDepthStencilResolveAttachment;
+
+    public VkSubpassDescriptionDepthStencilResolve()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE;
+    }
 }

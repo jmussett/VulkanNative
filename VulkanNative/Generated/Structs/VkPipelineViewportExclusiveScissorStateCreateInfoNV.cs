@@ -9,4 +9,9 @@ public unsafe struct VkPipelineViewportExclusiveScissorStateCreateInfoNV
     public void* pNext;
     public uint exclusiveScissorCount;
     public VkRect2D* pExclusiveScissors;
+
+    public VkPipelineViewportExclusiveScissorStateCreateInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV;
+    }
 }

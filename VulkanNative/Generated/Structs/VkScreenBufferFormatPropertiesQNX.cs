@@ -16,4 +16,9 @@ public unsafe struct VkScreenBufferFormatPropertiesQNX
     public VkSamplerYcbcrRange suggestedYcbcrRange;
     public VkChromaLocation suggestedXChromaOffset;
     public VkChromaLocation suggestedYChromaOffset;
+
+    public VkScreenBufferFormatPropertiesQNX()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SCREEN_BUFFER_FORMAT_PROPERTIES_QNX;
+    }
 }

@@ -20,4 +20,9 @@ public unsafe struct VkIndirectCommandsLayoutTokenNV
     public uint indexTypeCount;
     public VkIndexType* pIndexTypes;
     public uint* pIndexTypeValues;
+
+    public VkIndirectCommandsLayoutTokenNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV;
+    }
 }

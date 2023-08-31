@@ -9,4 +9,9 @@ public unsafe struct VkBindBufferMemoryDeviceGroupInfo
     public void* pNext;
     public uint deviceIndexCount;
     public uint* pDeviceIndices;
+
+    public VkBindBufferMemoryDeviceGroupInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO;
+    }
 }

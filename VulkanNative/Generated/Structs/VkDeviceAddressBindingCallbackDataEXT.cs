@@ -11,4 +11,9 @@ public unsafe struct VkDeviceAddressBindingCallbackDataEXT
     public VkDeviceAddress baseAddress;
     public VkDeviceSize size;
     public VkDeviceAddressBindingTypeEXT bindingType;
+
+    public VkDeviceAddressBindingCallbackDataEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT;
+    }
 }

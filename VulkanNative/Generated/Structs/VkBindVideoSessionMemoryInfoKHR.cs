@@ -11,4 +11,9 @@ public unsafe struct VkBindVideoSessionMemoryInfoKHR
     public VkDeviceMemory memory;
     public VkDeviceSize memoryOffset;
     public VkDeviceSize memorySize;
+
+    public VkBindVideoSessionMemoryInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BIND_VIDEO_SESSION_MEMORY_INFO_KHR;
+    }
 }

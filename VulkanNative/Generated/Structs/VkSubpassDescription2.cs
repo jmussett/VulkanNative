@@ -18,4 +18,9 @@ public unsafe struct VkSubpassDescription2
     public VkAttachmentReference2* pDepthStencilAttachment;
     public uint preserveAttachmentCount;
     public uint* pPreserveAttachments;
+
+    public VkSubpassDescription2()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2;
+    }
 }

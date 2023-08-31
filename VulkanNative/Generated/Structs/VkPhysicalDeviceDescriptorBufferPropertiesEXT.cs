@@ -40,4 +40,9 @@ public unsafe struct VkPhysicalDeviceDescriptorBufferPropertiesEXT
     public VkDeviceSize samplerDescriptorBufferAddressSpaceSize;
     public VkDeviceSize resourceDescriptorBufferAddressSpaceSize;
     public VkDeviceSize descriptorBufferAddressSpaceSize;
+
+    public VkPhysicalDeviceDescriptorBufferPropertiesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT;
+    }
 }

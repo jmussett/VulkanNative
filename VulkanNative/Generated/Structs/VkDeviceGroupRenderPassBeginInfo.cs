@@ -10,4 +10,9 @@ public unsafe struct VkDeviceGroupRenderPassBeginInfo
     public uint deviceMask;
     public uint deviceRenderAreaCount;
     public VkRect2D* pDeviceRenderAreas;
+
+    public VkDeviceGroupRenderPassBeginInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO;
+    }
 }

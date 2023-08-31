@@ -12,4 +12,9 @@ public unsafe struct VkPhysicalDeviceAccelerationStructureFeaturesKHR
     public VkBool32 accelerationStructureIndirectBuild;
     public VkBool32 accelerationStructureHostCommands;
     public VkBool32 descriptorBindingAccelerationStructureUpdateAfterBind;
+
+    public VkPhysicalDeviceAccelerationStructureFeaturesKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR;
+    }
 }

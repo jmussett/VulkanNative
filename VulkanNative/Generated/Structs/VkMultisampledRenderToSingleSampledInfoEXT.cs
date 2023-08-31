@@ -9,4 +9,9 @@ public unsafe struct VkMultisampledRenderToSingleSampledInfoEXT
     public void* pNext;
     public VkBool32 multisampledRenderToSingleSampledEnable;
     public VkSampleCountFlags rasterizationSamples;
+
+    public VkMultisampledRenderToSingleSampledInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_INFO_EXT;
+    }
 }

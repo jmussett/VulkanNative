@@ -9,4 +9,9 @@ public unsafe struct VkImageCompressionPropertiesEXT
     public void* pNext;
     public VkImageCompressionFlagsEXT imageCompressionFlags;
     public VkImageCompressionFixedRateFlagsEXT imageCompressionFixedRateFlags;
+
+    public VkImageCompressionPropertiesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT;
+    }
 }

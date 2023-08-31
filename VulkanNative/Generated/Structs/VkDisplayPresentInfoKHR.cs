@@ -10,4 +10,9 @@ public unsafe struct VkDisplayPresentInfoKHR
     public VkRect2D srcRect;
     public VkRect2D dstRect;
     public VkBool32 persistent;
+
+    public VkDisplayPresentInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR;
+    }
 }

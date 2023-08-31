@@ -12,4 +12,9 @@ public unsafe struct VkExportMetalTextureInfoEXT
     public VkBufferView bufferView;
     public VkImageAspectFlags plane;
     public MTLTexture_id mtlTexture;
+
+    public VkExportMetalTextureInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_EXPORT_METAL_TEXTURE_INFO_EXT;
+    }
 }

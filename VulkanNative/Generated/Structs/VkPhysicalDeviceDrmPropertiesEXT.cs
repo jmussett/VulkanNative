@@ -13,4 +13,9 @@ public unsafe struct VkPhysicalDeviceDrmPropertiesEXT
     public long primaryMinor;
     public long renderMajor;
     public long renderMinor;
+
+    public VkPhysicalDeviceDrmPropertiesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRM_PROPERTIES_EXT;
+    }
 }

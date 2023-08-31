@@ -14,4 +14,9 @@ public unsafe struct VkWin32KeyedMutexAcquireReleaseInfoNV
     public uint releaseCount;
     public VkDeviceMemory* pReleaseSyncs;
     public ulong* pReleaseKeys;
+
+    public VkWin32KeyedMutexAcquireReleaseInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV;
+    }
 }

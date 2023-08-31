@@ -9,4 +9,9 @@ public unsafe struct VkMemoryDedicatedRequirements
     public void* pNext;
     public VkBool32 prefersDedicatedAllocation;
     public VkBool32 requiresDedicatedAllocation;
+
+    public VkMemoryDedicatedRequirements()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS;
+    }
 }

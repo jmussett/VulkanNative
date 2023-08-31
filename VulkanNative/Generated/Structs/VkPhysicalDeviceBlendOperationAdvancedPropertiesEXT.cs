@@ -13,4 +13,9 @@ public unsafe struct VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT
     public VkBool32 advancedBlendNonPremultipliedDstColor;
     public VkBool32 advancedBlendCorrelatedOverlap;
     public VkBool32 advancedBlendAllOperations;
+
+    public VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT;
+    }
 }

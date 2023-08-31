@@ -12,4 +12,9 @@ public unsafe struct VkPipelineExecutableInternalRepresentationKHR
     public VkBool32 isText;
     public nuint dataSize;
     public void* pData;
+
+    public VkPipelineExecutableInternalRepresentationKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR;
+    }
 }

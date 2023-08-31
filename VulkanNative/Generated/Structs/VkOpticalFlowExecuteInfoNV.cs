@@ -10,4 +10,9 @@ public unsafe struct VkOpticalFlowExecuteInfoNV
     public VkOpticalFlowExecuteFlagsNV flags;
     public uint regionCount;
     public VkRect2D* pRegions;
+
+    public VkOpticalFlowExecuteInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_OPTICAL_FLOW_EXECUTE_INFO_NV;
+    }
 }

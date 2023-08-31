@@ -9,4 +9,9 @@ public unsafe struct VkPresentIdKHR
     public void* pNext;
     public uint swapchainCount;
     public ulong* pPresentIds;
+
+    public VkPresentIdKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PRESENT_ID_KHR;
+    }
 }

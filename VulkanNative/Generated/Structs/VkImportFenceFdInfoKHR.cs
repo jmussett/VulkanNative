@@ -11,4 +11,9 @@ public unsafe struct VkImportFenceFdInfoKHR
     public VkFenceImportFlags flags;
     public VkExternalFenceHandleTypeFlags handleType;
     public nint fd;
+
+    public VkImportFenceFdInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR;
+    }
 }

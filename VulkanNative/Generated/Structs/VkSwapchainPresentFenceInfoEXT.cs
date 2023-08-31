@@ -9,4 +9,9 @@ public unsafe struct VkSwapchainPresentFenceInfoEXT
     public void* pNext;
     public uint swapchainCount;
     public VkFence* pFences;
+
+    public VkSwapchainPresentFenceInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_FENCE_INFO_EXT;
+    }
 }

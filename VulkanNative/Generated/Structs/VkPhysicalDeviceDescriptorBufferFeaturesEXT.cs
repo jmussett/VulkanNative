@@ -11,4 +11,9 @@ public unsafe struct VkPhysicalDeviceDescriptorBufferFeaturesEXT
     public VkBool32 descriptorBufferCaptureReplay;
     public VkBool32 descriptorBufferImageLayoutIgnored;
     public VkBool32 descriptorBufferPushDescriptors;
+
+    public VkPhysicalDeviceDescriptorBufferFeaturesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT;
+    }
 }

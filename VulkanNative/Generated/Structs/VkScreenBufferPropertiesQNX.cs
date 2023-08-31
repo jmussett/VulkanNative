@@ -9,4 +9,9 @@ public unsafe struct VkScreenBufferPropertiesQNX
     public void* pNext;
     public VkDeviceSize allocationSize;
     public uint memoryTypeBits;
+
+    public VkScreenBufferPropertiesQNX()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SCREEN_BUFFER_PROPERTIES_QNX;
+    }
 }

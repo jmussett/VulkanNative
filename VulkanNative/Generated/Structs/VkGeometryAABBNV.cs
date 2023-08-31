@@ -11,4 +11,9 @@ public unsafe struct VkGeometryAABBNV
     public uint numAABBs;
     public uint stride;
     public VkDeviceSize offset;
+
+    public VkGeometryAABBNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_GEOMETRY_AABB_NV;
+    }
 }

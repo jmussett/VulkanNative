@@ -12,4 +12,9 @@ public unsafe struct VkAccelerationStructureInfoNV
     public uint instanceCount;
     public uint geometryCount;
     public VkGeometryNV* pGeometries;
+
+    public VkAccelerationStructureInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_INFO_NV;
+    }
 }

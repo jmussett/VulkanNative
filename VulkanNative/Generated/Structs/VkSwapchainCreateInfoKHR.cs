@@ -23,4 +23,9 @@ public unsafe struct VkSwapchainCreateInfoKHR
     public VkPresentModeKHR presentMode;
     public VkBool32 clipped;
     public VkSwapchainKHR oldSwapchain;
+
+    public VkSwapchainCreateInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
+    }
 }

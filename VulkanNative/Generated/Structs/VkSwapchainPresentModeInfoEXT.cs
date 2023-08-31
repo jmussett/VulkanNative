@@ -9,4 +9,9 @@ public unsafe struct VkSwapchainPresentModeInfoEXT
     public void* pNext;
     public uint swapchainCount;
     public VkPresentModeKHR* pPresentModes;
+
+    public VkSwapchainPresentModeInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_MODE_INFO_EXT;
+    }
 }

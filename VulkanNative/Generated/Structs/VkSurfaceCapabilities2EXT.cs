@@ -18,4 +18,9 @@ public unsafe struct VkSurfaceCapabilities2EXT
     public VkCompositeAlphaFlagsKHR supportedCompositeAlpha;
     public VkImageUsageFlags supportedUsageFlags;
     public VkSurfaceCounterFlagsEXT supportedSurfaceCounters;
+
+    public VkSurfaceCapabilities2EXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT;
+    }
 }

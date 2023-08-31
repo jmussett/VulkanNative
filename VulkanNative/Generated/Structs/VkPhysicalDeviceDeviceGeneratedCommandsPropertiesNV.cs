@@ -16,4 +16,9 @@ public unsafe struct VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV
     public uint minSequencesCountBufferOffsetAlignment;
     public uint minSequencesIndexBufferOffsetAlignment;
     public uint minIndirectCommandsBufferOffsetAlignment;
+
+    public VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV;
+    }
 }

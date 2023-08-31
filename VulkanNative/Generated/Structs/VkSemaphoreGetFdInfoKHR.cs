@@ -9,4 +9,9 @@ public unsafe struct VkSemaphoreGetFdInfoKHR
     public void* pNext;
     public VkSemaphore semaphore;
     public VkExternalSemaphoreHandleTypeFlags handleType;
+
+    public VkSemaphoreGetFdInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR;
+    }
 }

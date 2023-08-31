@@ -12,4 +12,9 @@ public unsafe struct VkAcquireNextImageInfoKHR
     public VkSemaphore semaphore;
     public VkFence fence;
     public uint deviceMask;
+
+    public VkAcquireNextImageInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR;
+    }
 }

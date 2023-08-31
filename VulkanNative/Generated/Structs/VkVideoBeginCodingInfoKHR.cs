@@ -12,4 +12,9 @@ public unsafe struct VkVideoBeginCodingInfoKHR
     public VkVideoSessionParametersKHR videoSessionParameters;
     public uint referenceSlotCount;
     public VkVideoReferenceSlotInfoKHR* pReferenceSlots;
+
+    public VkVideoBeginCodingInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR;
+    }
 }

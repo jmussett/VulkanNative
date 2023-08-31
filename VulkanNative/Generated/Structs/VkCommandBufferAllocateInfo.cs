@@ -10,4 +10,9 @@ public unsafe struct VkCommandBufferAllocateInfo
     public VkCommandPool commandPool;
     public VkCommandBufferLevel level;
     public uint commandBufferCount;
+
+    public VkCommandBufferAllocateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+    }
 }

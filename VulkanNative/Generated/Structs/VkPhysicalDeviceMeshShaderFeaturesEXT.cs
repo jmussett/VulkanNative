@@ -12,4 +12,9 @@ public unsafe struct VkPhysicalDeviceMeshShaderFeaturesEXT
     public VkBool32 multiviewMeshShader;
     public VkBool32 primitiveFragmentShadingRateMeshShader;
     public VkBool32 meshShaderQueries;
+
+    public VkPhysicalDeviceMeshShaderFeaturesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT;
+    }
 }

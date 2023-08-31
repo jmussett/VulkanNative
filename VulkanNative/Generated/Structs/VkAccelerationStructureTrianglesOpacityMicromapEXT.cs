@@ -15,4 +15,9 @@ public unsafe struct VkAccelerationStructureTrianglesOpacityMicromapEXT
     public VkMicromapUsageEXT* pUsageCounts;
     public VkMicromapUsageEXT** ppUsageCounts;
     public VkMicromapEXT micromap;
+
+    public VkAccelerationStructureTrianglesOpacityMicromapEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT;
+    }
 }

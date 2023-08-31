@@ -10,4 +10,9 @@ public unsafe struct VkMappedMemoryRange
     public VkDeviceMemory memory;
     public VkDeviceSize offset;
     public VkDeviceSize size;
+
+    public VkMappedMemoryRange()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE;
+    }
 }

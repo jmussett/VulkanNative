@@ -11,4 +11,9 @@ public unsafe struct VkGraphicsShaderGroupCreateInfoNV
     public VkPipelineShaderStageCreateInfo* pStages;
     public VkPipelineVertexInputStateCreateInfo* pVertexInputState;
     public VkPipelineTessellationStateCreateInfo* pTessellationState;
+
+    public VkGraphicsShaderGroupCreateInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV;
+    }
 }

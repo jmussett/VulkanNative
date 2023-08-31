@@ -24,4 +24,9 @@ public unsafe struct VkGraphicsPipelineCreateInfo
     public uint subpass;
     public VkPipeline basePipelineHandle;
     public int basePipelineIndex;
+
+    public VkGraphicsPipelineCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
+    }
 }

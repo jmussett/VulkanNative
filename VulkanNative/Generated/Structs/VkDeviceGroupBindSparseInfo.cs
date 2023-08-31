@@ -9,4 +9,9 @@ public unsafe struct VkDeviceGroupBindSparseInfo
     public void* pNext;
     public uint resourceDeviceIndex;
     public uint memoryDeviceIndex;
+
+    public VkDeviceGroupBindSparseInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO;
+    }
 }

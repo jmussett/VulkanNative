@@ -9,4 +9,9 @@ public unsafe struct VkImportMemoryFdInfoKHR
     public void* pNext;
     public VkExternalMemoryHandleTypeFlags handleType;
     public nint fd;
+
+    public VkImportMemoryFdInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR;
+    }
 }

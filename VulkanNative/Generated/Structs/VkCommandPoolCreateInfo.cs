@@ -9,4 +9,9 @@ public unsafe struct VkCommandPoolCreateInfo
     public void* pNext;
     public VkCommandPoolCreateFlags flags;
     public uint queueFamilyIndex;
+
+    public VkCommandPoolCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+    }
 }

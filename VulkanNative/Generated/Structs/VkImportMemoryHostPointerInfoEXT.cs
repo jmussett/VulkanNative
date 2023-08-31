@@ -9,4 +9,9 @@ public unsafe struct VkImportMemoryHostPointerInfoEXT
     public void* pNext;
     public VkExternalMemoryHandleTypeFlags handleType;
     public void* pHostPointer;
+
+    public VkImportMemoryHostPointerInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT;
+    }
 }

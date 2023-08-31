@@ -14,4 +14,9 @@ public unsafe struct VkFramebufferAttachmentImageInfo
     public uint layerCount;
     public uint viewFormatCount;
     public VkFormat* pViewFormats;
+
+    public VkFramebufferAttachmentImageInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO;
+    }
 }

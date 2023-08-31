@@ -9,4 +9,9 @@ public unsafe struct VkPipelineRasterizationStateStreamCreateInfoEXT
     public void* pNext;
     public VkPipelineRasterizationStateStreamCreateFlagsEXT flags;
     public uint rasterizationStream;
+
+    public VkPipelineRasterizationStateStreamCreateInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT;
+    }
 }

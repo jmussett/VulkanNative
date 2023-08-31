@@ -11,4 +11,9 @@ public unsafe struct VkPhysicalDevicePipelineRobustnessPropertiesEXT
     public VkPipelineRobustnessBufferBehaviorEXT defaultRobustnessUniformBuffers;
     public VkPipelineRobustnessBufferBehaviorEXT defaultRobustnessVertexInputs;
     public VkPipelineRobustnessImageBehaviorEXT defaultRobustnessImages;
+
+    public VkPhysicalDevicePipelineRobustnessPropertiesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES_EXT;
+    }
 }

@@ -11,4 +11,9 @@ public unsafe struct VkSampleLocationsInfoEXT
     public VkExtent2D sampleLocationGridSize;
     public uint sampleLocationsCount;
     public VkSampleLocationEXT* pSampleLocations;
+
+    public VkSampleLocationsInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT;
+    }
 }

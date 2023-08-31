@@ -8,4 +8,9 @@ public unsafe struct VkPhysicalDeviceMemoryDecompressionFeaturesNV
     public VkStructureType sType;
     public void* pNext;
     public VkBool32 memoryDecompression;
+
+    public VkPhysicalDeviceMemoryDecompressionFeaturesNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_FEATURES_NV;
+    }
 }

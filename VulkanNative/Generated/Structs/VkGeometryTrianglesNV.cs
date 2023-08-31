@@ -18,4 +18,9 @@ public unsafe struct VkGeometryTrianglesNV
     public VkIndexType indexType;
     public VkBuffer transformData;
     public VkDeviceSize transformOffset;
+
+    public VkGeometryTrianglesNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NV;
+    }
 }

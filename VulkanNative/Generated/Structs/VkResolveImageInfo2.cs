@@ -13,4 +13,9 @@ public unsafe struct VkResolveImageInfo2
     public VkImageLayout dstImageLayout;
     public uint regionCount;
     public VkImageResolve2* pRegions;
+
+    public VkResolveImageInfo2()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2;
+    }
 }

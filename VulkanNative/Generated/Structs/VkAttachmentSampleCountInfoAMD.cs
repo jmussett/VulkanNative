@@ -10,4 +10,9 @@ public unsafe struct VkAttachmentSampleCountInfoAMD
     public uint colorAttachmentCount;
     public VkSampleCountFlags* pColorAttachmentSamples;
     public VkSampleCountFlags depthStencilAttachmentSamples;
+
+    public VkAttachmentSampleCountInfoAMD()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD;
+    }
 }

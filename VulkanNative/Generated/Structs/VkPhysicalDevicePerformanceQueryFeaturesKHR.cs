@@ -9,4 +9,9 @@ public unsafe struct VkPhysicalDevicePerformanceQueryFeaturesKHR
     public void* pNext;
     public VkBool32 performanceCounterQueryPools;
     public VkBool32 performanceCounterMultipleQueryPools;
+
+    public VkPhysicalDevicePerformanceQueryFeaturesKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR;
+    }
 }

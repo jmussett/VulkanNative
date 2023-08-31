@@ -10,4 +10,9 @@ public unsafe struct VkImageViewSampleWeightCreateInfoQCOM
     public VkOffset2D filterCenter;
     public VkExtent2D filterSize;
     public uint numPhases;
+
+    public VkImageViewSampleWeightCreateInfoQCOM()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_VIEW_SAMPLE_WEIGHT_CREATE_INFO_QCOM;
+    }
 }

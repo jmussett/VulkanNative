@@ -13,4 +13,9 @@ public unsafe struct VkImageViewCreateInfo
     public VkFormat format;
     public VkComponentMapping components;
     public VkImageSubresourceRange subresourceRange;
+
+    public VkImageViewCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+    }
 }

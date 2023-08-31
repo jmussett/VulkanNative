@@ -13,4 +13,9 @@ public unsafe struct VkBufferImageCopy2
     public VkImageSubresourceLayers imageSubresource;
     public VkOffset3D imageOffset;
     public VkExtent3D imageExtent;
+
+    public VkBufferImageCopy2()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2;
+    }
 }

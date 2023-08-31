@@ -10,4 +10,9 @@ public unsafe struct VkDebugMarkerObjectNameInfoEXT
     public VkDebugReportObjectTypeEXT objectType;
     public ulong @object;
     public byte* pObjectName;
+
+    public VkDebugMarkerObjectNameInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT;
+    }
 }

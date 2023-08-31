@@ -9,4 +9,9 @@ public unsafe struct VkPipelineColorWriteCreateInfoEXT
     public void* pNext;
     public uint attachmentCount;
     public VkBool32* pColorWriteEnables;
+
+    public VkPipelineColorWriteCreateInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT;
+    }
 }

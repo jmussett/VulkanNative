@@ -12,4 +12,9 @@ public unsafe struct VkPipelineVertexInputStateCreateInfo
     public VkVertexInputBindingDescription* pVertexBindingDescriptions;
     public uint vertexAttributeDescriptionCount;
     public VkVertexInputAttributeDescription* pVertexAttributeDescriptions;
+
+    public VkPipelineVertexInputStateCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO;
+    }
 }

@@ -10,4 +10,9 @@ public unsafe struct VkExportFenceWin32HandleInfoKHR
     public nint* pAttributes;
     public nint dwAccess;
     public nint name;
+
+    public VkExportFenceWin32HandleInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR;
+    }
 }

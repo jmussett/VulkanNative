@@ -11,4 +11,9 @@ public unsafe struct VkValidationFeaturesEXT
     public VkValidationFeatureEnableEXT* pEnabledValidationFeatures;
     public uint disabledValidationFeatureCount;
     public VkValidationFeatureDisableEXT* pDisabledValidationFeatures;
+
+    public VkValidationFeaturesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT;
+    }
 }

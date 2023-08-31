@@ -13,4 +13,9 @@ public unsafe struct VkAccelerationStructureCreateInfoKHR
     public VkDeviceSize size;
     public VkAccelerationStructureTypeKHR type;
     public VkDeviceAddress deviceAddress;
+
+    public VkAccelerationStructureCreateInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR;
+    }
 }

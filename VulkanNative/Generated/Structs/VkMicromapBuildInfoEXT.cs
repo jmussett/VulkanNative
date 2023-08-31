@@ -18,4 +18,9 @@ public unsafe struct VkMicromapBuildInfoEXT
     public VkDeviceOrHostAddressKHR scratchData;
     public VkDeviceOrHostAddressConstKHR triangleArray;
     public VkDeviceSize triangleArrayStride;
+
+    public VkMicromapBuildInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_MICROMAP_BUILD_INFO_EXT;
+    }
 }

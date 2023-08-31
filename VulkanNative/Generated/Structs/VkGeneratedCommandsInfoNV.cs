@@ -20,4 +20,9 @@ public unsafe struct VkGeneratedCommandsInfoNV
     public VkDeviceSize sequencesCountOffset;
     public VkBuffer sequencesIndexBuffer;
     public VkDeviceSize sequencesIndexOffset;
+
+    public VkGeneratedCommandsInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV;
+    }
 }

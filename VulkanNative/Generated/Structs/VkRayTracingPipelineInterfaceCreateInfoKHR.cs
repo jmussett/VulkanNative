@@ -9,4 +9,9 @@ public unsafe struct VkRayTracingPipelineInterfaceCreateInfoKHR
     public void* pNext;
     public uint maxPipelineRayPayloadSize;
     public uint maxPipelineRayHitAttributeSize;
+
+    public VkRayTracingPipelineInterfaceCreateInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR;
+    }
 }

@@ -38,4 +38,9 @@ public unsafe struct VkPhysicalDeviceExtendedDynamicState3FeaturesEXT
     public VkBool32 extendedDynamicState3CoverageReductionMode;
     public VkBool32 extendedDynamicState3RepresentativeFragmentTestEnable;
     public VkBool32 extendedDynamicState3ShadingRateImageEnable;
+
+    public VkPhysicalDeviceExtendedDynamicState3FeaturesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_FEATURES_EXT;
+    }
 }

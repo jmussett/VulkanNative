@@ -9,4 +9,9 @@ public unsafe struct VkPhysicalDeviceMaintenance3Properties
     public void* pNext;
     public uint maxPerSetDescriptors;
     public VkDeviceSize maxMemoryAllocationSize;
+
+    public VkPhysicalDeviceMaintenance3Properties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES;
+    }
 }

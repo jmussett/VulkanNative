@@ -9,4 +9,9 @@ public unsafe struct VkDeviceGroupDeviceCreateInfo
     public void* pNext;
     public uint physicalDeviceCount;
     public VkPhysicalDevice* pPhysicalDevices;
+
+    public VkDeviceGroupDeviceCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO;
+    }
 }

@@ -11,4 +11,9 @@ public unsafe struct VkImageConstraintsInfoFUCHSIA
     public VkImageFormatConstraintsInfoFUCHSIA* pFormatConstraints;
     public VkBufferCollectionConstraintsInfoFUCHSIA bufferCollectionConstraints;
     public VkImageConstraintsInfoFlagsFUCHSIA flags;
+
+    public VkImageConstraintsInfoFUCHSIA()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_CONSTRAINTS_INFO_FUCHSIA;
+    }
 }

@@ -19,4 +19,9 @@ public unsafe struct VkCuLaunchInfoNVX
     public void** pParams;
     public nuint extraCount;
     public void** pExtras;
+
+    public VkCuLaunchInfoNVX()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX;
+    }
 }

@@ -10,4 +10,9 @@ public unsafe struct VkImageViewHandleInfoNVX
     public VkImageView imageView;
     public VkDescriptorType descriptorType;
     public VkSampler sampler;
+
+    public VkImageViewHandleInfoNVX()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX;
+    }
 }

@@ -15,4 +15,9 @@ public unsafe struct VkRenderingInfo
     public VkRenderingAttachmentInfo* pColorAttachments;
     public VkRenderingAttachmentInfo* pDepthAttachment;
     public VkRenderingAttachmentInfo* pStencilAttachment;
+
+    public VkRenderingInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RENDERING_INFO;
+    }
 }

@@ -24,4 +24,9 @@ public unsafe struct VkPhysicalDeviceFloatControlsProperties
     public VkBool32 shaderRoundingModeRTZFloat16;
     public VkBool32 shaderRoundingModeRTZFloat32;
     public VkBool32 shaderRoundingModeRTZFloat64;
+
+    public VkPhysicalDeviceFloatControlsProperties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES;
+    }
 }

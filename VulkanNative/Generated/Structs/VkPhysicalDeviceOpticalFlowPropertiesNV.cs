@@ -18,4 +18,9 @@ public unsafe struct VkPhysicalDeviceOpticalFlowPropertiesNV
     public uint maxWidth;
     public uint maxHeight;
     public uint maxNumRegionsOfInterest;
+
+    public VkPhysicalDeviceOpticalFlowPropertiesNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV;
+    }
 }

@@ -13,4 +13,9 @@ public unsafe struct VkPipelineColorBlendStateCreateInfo
     public uint attachmentCount;
     public VkPipelineColorBlendAttachmentState* pAttachments;
     public fixed float blendConstants[4];
+
+    public VkPipelineColorBlendStateCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
+    }
 }

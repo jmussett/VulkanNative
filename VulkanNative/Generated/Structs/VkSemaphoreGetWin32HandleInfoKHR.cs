@@ -9,4 +9,9 @@ public unsafe struct VkSemaphoreGetWin32HandleInfoKHR
     public void* pNext;
     public VkSemaphore semaphore;
     public VkExternalSemaphoreHandleTypeFlags handleType;
+
+    public VkSemaphoreGetWin32HandleInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR;
+    }
 }

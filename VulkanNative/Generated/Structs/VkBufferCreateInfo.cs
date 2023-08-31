@@ -13,4 +13,9 @@ public unsafe struct VkBufferCreateInfo
     public VkSharingMode sharingMode;
     public uint queueFamilyIndexCount;
     public uint* pQueueFamilyIndices;
+
+    public VkBufferCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
+    }
 }

@@ -10,4 +10,9 @@ public unsafe struct VkPhysicalDeviceShaderCorePropertiesARM
     public uint pixelRate;
     public uint texelRate;
     public uint fmaRate;
+
+    public VkPhysicalDeviceShaderCorePropertiesARM()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_ARM;
+    }
 }

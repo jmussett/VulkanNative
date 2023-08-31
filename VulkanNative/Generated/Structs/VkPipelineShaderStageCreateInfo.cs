@@ -12,4 +12,9 @@ public unsafe struct VkPipelineShaderStageCreateInfo
     public VkShaderModule module;
     public byte* pName;
     public VkSpecializationInfo* pSpecializationInfo;
+
+    public VkPipelineShaderStageCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
+    }
 }

@@ -9,4 +9,9 @@ public unsafe struct VkCommandBufferBeginInfo
     public void* pNext;
     public VkCommandBufferUsageFlags flags;
     public VkCommandBufferInheritanceInfo* pInheritanceInfo;
+
+    public VkCommandBufferBeginInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
+    }
 }

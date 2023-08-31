@@ -19,4 +19,9 @@ public unsafe struct VkPhysicalDeviceVulkan11Features
     public VkBool32 protectedMemory;
     public VkBool32 samplerYcbcrConversion;
     public VkBool32 shaderDrawParameters;
+
+    public VkPhysicalDeviceVulkan11Features()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES;
+    }
 }

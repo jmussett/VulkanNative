@@ -17,4 +17,9 @@ public unsafe struct VkDebugUtilsMessengerCallbackDataEXT
     public VkDebugUtilsLabelEXT* pCmdBufLabels;
     public uint objectCount;
     public VkDebugUtilsObjectNameInfoEXT* pObjects;
+
+    public VkDebugUtilsMessengerCallbackDataEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT;
+    }
 }

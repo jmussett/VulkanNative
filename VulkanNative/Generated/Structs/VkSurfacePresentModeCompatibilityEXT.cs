@@ -9,4 +9,9 @@ public unsafe struct VkSurfacePresentModeCompatibilityEXT
     public void* pNext;
     public uint presentModeCount;
     public VkPresentModeKHR* pPresentModes;
+
+    public VkSurfacePresentModeCompatibilityEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SURFACE_PRESENT_MODE_COMPATIBILITY_EXT;
+    }
 }

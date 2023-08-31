@@ -15,4 +15,9 @@ public unsafe struct VkDisplaySurfaceCreateInfoKHR
     public float globalAlpha;
     public VkDisplayPlaneAlphaFlagsKHR alphaMode;
     public VkExtent2D imageExtent;
+
+    public VkDisplaySurfaceCreateInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR;
+    }
 }

@@ -35,4 +35,9 @@ public unsafe struct VkPhysicalDeviceMeshShaderPropertiesEXT
     public VkBool32 prefersLocalInvocationPrimitiveOutput;
     public VkBool32 prefersCompactVertexOutput;
     public VkBool32 prefersCompactPrimitiveOutput;
+
+    public VkPhysicalDeviceMeshShaderPropertiesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_EXT;
+    }
 }

@@ -11,4 +11,9 @@ public unsafe struct VkPhysicalDevice16BitStorageFeatures
     public VkBool32 uniformAndStorageBuffer16BitAccess;
     public VkBool32 storagePushConstant16;
     public VkBool32 storageInputOutput16;
+
+    public VkPhysicalDevice16BitStorageFeatures()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES;
+    }
 }

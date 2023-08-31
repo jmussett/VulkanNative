@@ -10,4 +10,9 @@ public unsafe struct VkSwapchainPresentScalingCreateInfoEXT
     public VkPresentScalingFlagsEXT scalingBehavior;
     public VkPresentGravityFlagsEXT presentGravityX;
     public VkPresentGravityFlagsEXT presentGravityY;
+
+    public VkSwapchainPresentScalingCreateInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_SCALING_CREATE_INFO_EXT;
+    }
 }

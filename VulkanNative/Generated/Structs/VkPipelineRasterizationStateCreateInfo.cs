@@ -18,4 +18,9 @@ public unsafe struct VkPipelineRasterizationStateCreateInfo
     public float depthBiasClamp;
     public float depthBiasSlopeFactor;
     public float lineWidth;
+
+    public VkPipelineRasterizationStateCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+    }
 }

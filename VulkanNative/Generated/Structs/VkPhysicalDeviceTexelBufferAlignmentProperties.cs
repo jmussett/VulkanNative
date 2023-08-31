@@ -11,4 +11,9 @@ public unsafe struct VkPhysicalDeviceTexelBufferAlignmentProperties
     public VkBool32 storageTexelBufferOffsetSingleTexelAlignment;
     public VkDeviceSize uniformTexelBufferOffsetAlignmentBytes;
     public VkBool32 uniformTexelBufferOffsetSingleTexelAlignment;
+
+    public VkPhysicalDeviceTexelBufferAlignmentProperties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES;
+    }
 }

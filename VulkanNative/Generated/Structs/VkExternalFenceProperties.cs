@@ -10,4 +10,9 @@ public unsafe struct VkExternalFenceProperties
     public VkExternalFenceHandleTypeFlags exportFromImportedHandleTypes;
     public VkExternalFenceHandleTypeFlags compatibleHandleTypes;
     public VkExternalFenceFeatureFlags externalFenceFeatures;
+
+    public VkExternalFenceProperties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES;
+    }
 }

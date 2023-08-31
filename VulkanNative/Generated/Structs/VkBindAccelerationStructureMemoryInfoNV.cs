@@ -12,4 +12,9 @@ public unsafe struct VkBindAccelerationStructureMemoryInfoNV
     public VkDeviceSize memoryOffset;
     public uint deviceIndexCount;
     public uint* pDeviceIndices;
+
+    public VkBindAccelerationStructureMemoryInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV;
+    }
 }

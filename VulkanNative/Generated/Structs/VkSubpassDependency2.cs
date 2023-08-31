@@ -15,4 +15,9 @@ public unsafe struct VkSubpassDependency2
     public VkAccessFlags dstAccessMask;
     public VkDependencyFlags dependencyFlags;
     public int viewOffset;
+
+    public VkSubpassDependency2()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2;
+    }
 }

@@ -10,4 +10,9 @@ public unsafe struct VkConditionalRenderingBeginInfoEXT
     public VkBuffer buffer;
     public VkDeviceSize offset;
     public VkConditionalRenderingFlagsEXT flags;
+
+    public VkConditionalRenderingBeginInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT;
+    }
 }

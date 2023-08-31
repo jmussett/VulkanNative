@@ -9,4 +9,9 @@ public unsafe struct VkMemoryBarrier
     public void* pNext;
     public VkAccessFlags srcAccessMask;
     public VkAccessFlags dstAccessMask;
+
+    public VkMemoryBarrier()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_MEMORY_BARRIER;
+    }
 }

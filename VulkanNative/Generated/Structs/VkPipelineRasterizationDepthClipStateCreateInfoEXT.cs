@@ -9,4 +9,9 @@ public unsafe struct VkPipelineRasterizationDepthClipStateCreateInfoEXT
     public void* pNext;
     public VkPipelineRasterizationDepthClipStateCreateFlagsEXT flags;
     public VkBool32 depthClipEnable;
+
+    public VkPipelineRasterizationDepthClipStateCreateInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT;
+    }
 }

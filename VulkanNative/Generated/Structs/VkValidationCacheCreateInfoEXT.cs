@@ -10,4 +10,9 @@ public unsafe struct VkValidationCacheCreateInfoEXT
     public VkValidationCacheCreateFlagsEXT flags;
     public nuint initialDataSize;
     public void* pInitialData;
+
+    public VkValidationCacheCreateInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT;
+    }
 }

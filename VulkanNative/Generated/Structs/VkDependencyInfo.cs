@@ -14,4 +14,9 @@ public unsafe struct VkDependencyInfo
     public VkBufferMemoryBarrier2* pBufferMemoryBarriers;
     public uint imageMemoryBarrierCount;
     public VkImageMemoryBarrier2* pImageMemoryBarriers;
+
+    public VkDependencyInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEPENDENCY_INFO;
+    }
 }

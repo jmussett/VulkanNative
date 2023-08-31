@@ -23,4 +23,9 @@ public unsafe struct VkSamplerCreateInfo
     public float maxLod;
     public VkBorderColor borderColor;
     public VkBool32 unnormalizedCoordinates;
+
+    public VkSamplerCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
+    }
 }

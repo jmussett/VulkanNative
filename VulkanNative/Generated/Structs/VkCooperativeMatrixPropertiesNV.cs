@@ -15,4 +15,9 @@ public unsafe struct VkCooperativeMatrixPropertiesNV
     public VkComponentTypeKHR CType;
     public VkComponentTypeKHR DType;
     public VkScopeKHR scope;
+
+    public VkCooperativeMatrixPropertiesNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV;
+    }
 }

@@ -15,4 +15,9 @@ public unsafe struct VkRenderingAttachmentInfo
     public VkAttachmentLoadOp loadOp;
     public VkAttachmentStoreOp storeOp;
     public VkClearValue clearValue;
+
+    public VkRenderingAttachmentInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO;
+    }
 }

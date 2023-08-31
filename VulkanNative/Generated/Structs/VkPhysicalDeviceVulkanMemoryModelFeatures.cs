@@ -10,4 +10,9 @@ public unsafe struct VkPhysicalDeviceVulkanMemoryModelFeatures
     public VkBool32 vulkanMemoryModel;
     public VkBool32 vulkanMemoryModelDeviceScope;
     public VkBool32 vulkanMemoryModelAvailabilityVisibilityChains;
+
+    public VkPhysicalDeviceVulkanMemoryModelFeatures()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES;
+    }
 }

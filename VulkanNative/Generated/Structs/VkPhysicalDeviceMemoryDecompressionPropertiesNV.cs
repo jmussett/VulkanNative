@@ -9,4 +9,9 @@ public unsafe struct VkPhysicalDeviceMemoryDecompressionPropertiesNV
     public void* pNext;
     public VkMemoryDecompressionMethodFlagsNV decompressionMethods;
     public ulong maxDecompressionIndirectCount;
+
+    public VkPhysicalDeviceMemoryDecompressionPropertiesNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_DECOMPRESSION_PROPERTIES_NV;
+    }
 }

@@ -15,4 +15,9 @@ public unsafe struct VkImageMemoryBarrier
     public uint dstQueueFamilyIndex;
     public VkImage image;
     public VkImageSubresourceRange subresourceRange;
+
+    public VkImageMemoryBarrier()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+    }
 }

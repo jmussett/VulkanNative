@@ -12,4 +12,9 @@ public unsafe struct VkImportFenceWin32HandleInfoKHR
     public VkExternalFenceHandleTypeFlags handleType;
     public nint handle;
     public nint name;
+
+    public VkImportFenceWin32HandleInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR;
+    }
 }

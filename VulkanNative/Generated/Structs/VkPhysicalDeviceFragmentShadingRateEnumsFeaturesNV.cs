@@ -10,4 +10,9 @@ public unsafe struct VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV
     public VkBool32 fragmentShadingRateEnums;
     public VkBool32 supersampleFragmentShadingRates;
     public VkBool32 noInvocationFragmentShadingRates;
+
+    public VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV;
+    }
 }

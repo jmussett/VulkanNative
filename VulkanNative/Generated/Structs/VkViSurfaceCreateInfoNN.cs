@@ -9,4 +9,9 @@ public unsafe struct VkViSurfaceCreateInfoNN
     public void* pNext;
     public VkViSurfaceCreateFlagsNN flags;
     public void* window;
+
+    public VkViSurfaceCreateInfoNN()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN;
+    }
 }

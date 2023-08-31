@@ -10,4 +10,9 @@ public unsafe struct VkCommandBufferInheritanceViewportScissorInfoNV
     public VkBool32 viewportScissor2D;
     public uint viewportDepthCount;
     public VkViewport* pViewportDepths;
+
+    public VkCommandBufferInheritanceViewportScissorInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV;
+    }
 }

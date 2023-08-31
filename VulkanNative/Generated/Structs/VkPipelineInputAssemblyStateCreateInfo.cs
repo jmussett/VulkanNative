@@ -10,4 +10,9 @@ public unsafe struct VkPipelineInputAssemblyStateCreateInfo
     public VkPipelineInputAssemblyStateCreateFlags flags;
     public VkPrimitiveTopology topology;
     public VkBool32 primitiveRestartEnable;
+
+    public VkPipelineInputAssemblyStateCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+    }
 }

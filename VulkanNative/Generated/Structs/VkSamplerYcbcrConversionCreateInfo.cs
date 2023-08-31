@@ -15,4 +15,9 @@ public unsafe struct VkSamplerYcbcrConversionCreateInfo
     public VkChromaLocation yChromaOffset;
     public VkFilter chromaFilter;
     public VkBool32 forceExplicitReconstruction;
+
+    public VkSamplerYcbcrConversionCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    }
 }

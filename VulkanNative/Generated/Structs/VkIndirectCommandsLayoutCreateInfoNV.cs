@@ -13,4 +13,9 @@ public unsafe struct VkIndirectCommandsLayoutCreateInfoNV
     public VkIndirectCommandsLayoutTokenNV* pTokens;
     public uint streamCount;
     public uint* pStreamStrides;
+
+    public VkIndirectCommandsLayoutCreateInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV;
+    }
 }

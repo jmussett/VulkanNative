@@ -8,4 +8,9 @@ public unsafe struct VkPhysicalDeviceProtectedMemoryFeatures
     public VkStructureType sType;
     public void* pNext;
     public VkBool32 protectedMemory;
+
+    public VkPhysicalDeviceProtectedMemoryFeatures()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES;
+    }
 }

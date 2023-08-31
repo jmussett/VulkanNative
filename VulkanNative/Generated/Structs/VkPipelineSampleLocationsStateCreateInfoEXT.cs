@@ -9,4 +9,9 @@ public unsafe struct VkPipelineSampleLocationsStateCreateInfoEXT
     public void* pNext;
     public VkBool32 sampleLocationsEnable;
     public VkSampleLocationsInfoEXT sampleLocationsInfo;
+
+    public VkPipelineSampleLocationsStateCreateInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT;
+    }
 }

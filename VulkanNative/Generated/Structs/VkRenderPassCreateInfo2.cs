@@ -16,4 +16,9 @@ public unsafe struct VkRenderPassCreateInfo2
     public VkSubpassDependency2* pDependencies;
     public uint correlatedViewMaskCount;
     public uint* pCorrelatedViewMasks;
+
+    public VkRenderPassCreateInfo2()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2;
+    }
 }

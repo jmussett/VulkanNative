@@ -12,4 +12,9 @@ public unsafe struct VkDebugUtilsMessengerCreateInfoEXT
     public VkDebugUtilsMessageTypeFlagsEXT messageType;
     public delegate* unmanaged[Cdecl]<VkDebugUtilsMessageSeverityFlagsEXT, VkDebugUtilsMessageTypeFlagsEXT, VkDebugUtilsMessengerCallbackDataEXT*, void*, void> pfnUserCallback;
     public void* pUserData;
+
+    public VkDebugUtilsMessengerCreateInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+    }
 }

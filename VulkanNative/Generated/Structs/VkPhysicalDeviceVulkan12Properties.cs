@@ -59,4 +59,9 @@ public unsafe struct VkPhysicalDeviceVulkan12Properties
     public VkBool32 filterMinmaxImageComponentMapping;
     public ulong maxTimelineSemaphoreValueDifference;
     public VkSampleCountFlags framebufferIntegerColorSampleCounts;
+
+    public VkPhysicalDeviceVulkan12Properties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES;
+    }
 }

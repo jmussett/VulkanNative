@@ -19,4 +19,9 @@ public unsafe struct VkShaderCreateInfoEXT
     public uint pushConstantRangeCount;
     public VkPushConstantRange* pPushConstantRanges;
     public VkSpecializationInfo* pSpecializationInfo;
+
+    public VkShaderCreateInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT;
+    }
 }

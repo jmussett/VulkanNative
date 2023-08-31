@@ -12,4 +12,9 @@ public unsafe struct VkPhysicalDeviceSampleLocationsPropertiesEXT
     public fixed float sampleLocationCoordinateRange[2];
     public uint sampleLocationSubPixelBits;
     public VkBool32 variableSampleLocations;
+
+    public VkPhysicalDeviceSampleLocationsPropertiesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT;
+    }
 }

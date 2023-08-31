@@ -13,4 +13,9 @@ public unsafe struct VkCopyImageInfo2
     public VkImageLayout dstImageLayout;
     public uint regionCount;
     public VkImageCopy2* pRegions;
+
+    public VkCopyImageInfo2()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2;
+    }
 }

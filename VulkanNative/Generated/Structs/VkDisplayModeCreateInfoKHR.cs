@@ -9,4 +9,9 @@ public unsafe struct VkDisplayModeCreateInfoKHR
     public void* pNext;
     public VkDisplayModeCreateFlagsKHR flags;
     public VkDisplayModeParametersKHR parameters;
+
+    public VkDisplayModeCreateInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR;
+    }
 }

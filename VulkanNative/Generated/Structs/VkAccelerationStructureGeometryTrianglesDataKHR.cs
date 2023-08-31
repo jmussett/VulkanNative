@@ -14,4 +14,9 @@ public unsafe struct VkAccelerationStructureGeometryTrianglesDataKHR
     public VkIndexType indexType;
     public VkDeviceOrHostAddressConstKHR indexData;
     public VkDeviceOrHostAddressConstKHR transformData;
+
+    public VkAccelerationStructureGeometryTrianglesDataKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR;
+    }
 }

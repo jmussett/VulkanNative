@@ -30,4 +30,9 @@ public unsafe struct VkPhysicalDeviceDescriptorIndexingProperties
     public uint maxDescriptorSetUpdateAfterBindSampledImages;
     public uint maxDescriptorSetUpdateAfterBindStorageImages;
     public uint maxDescriptorSetUpdateAfterBindInputAttachments;
+
+    public VkPhysicalDeviceDescriptorIndexingProperties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES;
+    }
 }

@@ -17,4 +17,9 @@ public unsafe struct VkPhysicalDeviceTransformFeedbackPropertiesEXT
     public VkBool32 transformFeedbackStreamsLinesTriangles;
     public VkBool32 transformFeedbackRasterizationStreamSelect;
     public VkBool32 transformFeedbackDraw;
+
+    public VkPhysicalDeviceTransformFeedbackPropertiesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT;
+    }
 }

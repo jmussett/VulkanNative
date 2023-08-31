@@ -11,4 +11,9 @@ public unsafe struct VkPhysicalDeviceDepthBiasControlFeaturesEXT
     public VkBool32 leastRepresentableValueForceUnormRepresentation;
     public VkBool32 floatRepresentation;
     public VkBool32 depthBiasExact;
+
+    public VkPhysicalDeviceDepthBiasControlFeaturesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT;
+    }
 }

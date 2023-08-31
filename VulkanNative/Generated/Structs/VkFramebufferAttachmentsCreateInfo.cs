@@ -9,4 +9,9 @@ public unsafe struct VkFramebufferAttachmentsCreateInfo
     public void* pNext;
     public uint attachmentImageInfoCount;
     public VkFramebufferAttachmentImageInfo* pAttachmentImageInfos;
+
+    public VkFramebufferAttachmentsCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO;
+    }
 }

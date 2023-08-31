@@ -10,4 +10,9 @@ public unsafe struct VkQueryPoolPerformanceCreateInfoKHR
     public uint queueFamilyIndex;
     public uint counterIndexCount;
     public uint* pCounterIndices;
+
+    public VkQueryPoolPerformanceCreateInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR;
+    }
 }

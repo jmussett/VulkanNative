@@ -12,4 +12,9 @@ public unsafe struct VkPhysicalDeviceInlineUniformBlockProperties
     public uint maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks;
     public uint maxDescriptorSetInlineUniformBlocks;
     public uint maxDescriptorSetUpdateAfterBindInlineUniformBlocks;
+
+    public VkPhysicalDeviceInlineUniformBlockProperties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES;
+    }
 }

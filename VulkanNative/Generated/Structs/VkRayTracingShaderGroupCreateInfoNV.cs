@@ -12,4 +12,9 @@ public unsafe struct VkRayTracingShaderGroupCreateInfoNV
     public uint closestHitShader;
     public uint anyHitShader;
     public uint intersectionShader;
+
+    public VkRayTracingShaderGroupCreateInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV;
+    }
 }

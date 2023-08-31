@@ -10,4 +10,9 @@ public unsafe struct VkGeometryNV
     public VkGeometryTypeKHR geometryType;
     public VkGeometryDataNV geometry;
     public VkGeometryFlagsKHR flags;
+
+    public VkGeometryNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_GEOMETRY_NV;
+    }
 }

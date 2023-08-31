@@ -16,4 +16,9 @@ public unsafe struct VkAttachmentDescription2
     public VkAttachmentStoreOp stencilStoreOp;
     public VkImageLayout initialLayout;
     public VkImageLayout finalLayout;
+
+    public VkAttachmentDescription2()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2;
+    }
 }

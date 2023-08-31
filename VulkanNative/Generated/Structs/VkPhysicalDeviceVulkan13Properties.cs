@@ -52,4 +52,9 @@ public unsafe struct VkPhysicalDeviceVulkan13Properties
     public VkDeviceSize uniformTexelBufferOffsetAlignmentBytes;
     public VkBool32 uniformTexelBufferOffsetSingleTexelAlignment;
     public VkDeviceSize maxBufferSize;
+
+    public VkPhysicalDeviceVulkan13Properties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_PROPERTIES;
+    }
 }

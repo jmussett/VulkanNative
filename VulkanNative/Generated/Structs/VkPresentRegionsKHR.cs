@@ -9,4 +9,9 @@ public unsafe struct VkPresentRegionsKHR
     public void* pNext;
     public uint swapchainCount;
     public VkPresentRegionKHR* pRegions;
+
+    public VkPresentRegionsKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR;
+    }
 }

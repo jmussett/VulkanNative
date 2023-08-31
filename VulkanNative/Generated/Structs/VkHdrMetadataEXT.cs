@@ -15,4 +15,9 @@ public unsafe struct VkHdrMetadataEXT
     public float minLuminance;
     public float maxContentLightLevel;
     public float maxFrameAverageLightLevel;
+
+    public VkHdrMetadataEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_HDR_METADATA_EXT;
+    }
 }

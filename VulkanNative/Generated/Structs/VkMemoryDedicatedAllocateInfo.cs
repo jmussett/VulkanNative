@@ -9,4 +9,9 @@ public unsafe struct VkMemoryDedicatedAllocateInfo
     public void* pNext;
     public VkImage image;
     public VkBuffer buffer;
+
+    public VkMemoryDedicatedAllocateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO;
+    }
 }

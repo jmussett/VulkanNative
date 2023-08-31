@@ -11,4 +11,9 @@ public unsafe struct VkGraphicsPipelineShaderGroupsCreateInfoNV
     public VkGraphicsShaderGroupCreateInfoNV* pGroups;
     public uint pipelineCount;
     public VkPipeline* pPipelines;
+
+    public VkGraphicsPipelineShaderGroupsCreateInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV;
+    }
 }

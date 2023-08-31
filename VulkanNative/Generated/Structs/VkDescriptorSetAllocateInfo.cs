@@ -10,4 +10,9 @@ public unsafe struct VkDescriptorSetAllocateInfo
     public VkDescriptorPool descriptorPool;
     public uint descriptorSetCount;
     public VkDescriptorSetLayout* pSetLayouts;
+
+    public VkDescriptorSetAllocateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;
+    }
 }

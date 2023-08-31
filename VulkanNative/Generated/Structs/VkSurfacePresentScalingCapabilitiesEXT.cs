@@ -12,4 +12,9 @@ public unsafe struct VkSurfacePresentScalingCapabilitiesEXT
     public VkPresentGravityFlagsEXT supportedPresentGravityY;
     public VkExtent2D minScaledImageExtent;
     public VkExtent2D maxScaledImageExtent;
+
+    public VkSurfacePresentScalingCapabilitiesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SURFACE_PRESENT_SCALING_CAPABILITIES_EXT;
+    }
 }

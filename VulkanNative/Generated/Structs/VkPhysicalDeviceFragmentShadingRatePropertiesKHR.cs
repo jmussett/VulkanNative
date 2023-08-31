@@ -24,4 +24,9 @@ public unsafe struct VkPhysicalDeviceFragmentShadingRatePropertiesKHR
     public VkBool32 fragmentShadingRateWithFragmentShaderInterlock;
     public VkBool32 fragmentShadingRateWithCustomSampleLocations;
     public VkBool32 fragmentShadingRateStrictMultiplyCombiner;
+
+    public VkPhysicalDeviceFragmentShadingRatePropertiesKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR;
+    }
 }

@@ -16,4 +16,9 @@ public unsafe struct VkAccelerationStructureBuildGeometryInfoKHR
     public VkAccelerationStructureGeometryKHR* pGeometries;
     public VkAccelerationStructureGeometryKHR** ppGeometries;
     public VkDeviceOrHostAddressKHR scratchData;
+
+    public VkAccelerationStructureBuildGeometryInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR;
+    }
 }

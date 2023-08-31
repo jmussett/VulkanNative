@@ -8,4 +8,9 @@ public unsafe struct VkPhysicalDevicePipelineRobustnessFeaturesEXT
     public VkStructureType sType;
     public void* pNext;
     public VkBool32 pipelineRobustness;
+
+    public VkPhysicalDevicePipelineRobustnessFeaturesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT;
+    }
 }

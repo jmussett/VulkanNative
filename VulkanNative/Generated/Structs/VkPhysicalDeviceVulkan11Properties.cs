@@ -22,4 +22,9 @@ public unsafe struct VkPhysicalDeviceVulkan11Properties
     public VkBool32 protectedNoFault;
     public uint maxPerSetDescriptors;
     public VkDeviceSize maxMemoryAllocationSize;
+
+    public VkPhysicalDeviceVulkan11Properties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES;
+    }
 }

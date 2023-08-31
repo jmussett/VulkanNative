@@ -14,4 +14,9 @@ public unsafe struct VkCommandBufferInheritanceRenderingInfo
     public VkFormat depthAttachmentFormat;
     public VkFormat stencilAttachmentFormat;
     public VkSampleCountFlags rasterizationSamples;
+
+    public VkCommandBufferInheritanceRenderingInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO;
+    }
 }

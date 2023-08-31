@@ -18,4 +18,9 @@ public unsafe struct VkBufferCollectionPropertiesFUCHSIA
     public VkSamplerYcbcrRange suggestedYcbcrRange;
     public VkChromaLocation suggestedXChromaOffset;
     public VkChromaLocation suggestedYChromaOffset;
+
+    public VkBufferCollectionPropertiesFUCHSIA()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BUFFER_COLLECTION_PROPERTIES_FUCHSIA;
+    }
 }

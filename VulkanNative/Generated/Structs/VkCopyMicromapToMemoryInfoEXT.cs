@@ -10,4 +10,9 @@ public unsafe struct VkCopyMicromapToMemoryInfoEXT
     public VkMicromapEXT src;
     public VkDeviceOrHostAddressKHR dst;
     public VkCopyMicromapModeEXT mode;
+
+    public VkCopyMicromapToMemoryInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COPY_MICROMAP_TO_MEMORY_INFO_EXT;
+    }
 }

@@ -10,4 +10,9 @@ public unsafe struct VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesE
     public VkBool32 rasterizationOrderColorAttachmentAccess;
     public VkBool32 rasterizationOrderDepthAttachmentAccess;
     public VkBool32 rasterizationOrderStencilAttachmentAccess;
+
+    public VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_EXT;
+    }
 }

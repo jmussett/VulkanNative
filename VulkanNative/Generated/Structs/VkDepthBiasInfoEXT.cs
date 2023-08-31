@@ -10,4 +10,9 @@ public unsafe struct VkDepthBiasInfoEXT
     public float depthBiasConstantFactor;
     public float depthBiasClamp;
     public float depthBiasSlopeFactor;
+
+    public VkDepthBiasInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEPTH_BIAS_INFO_EXT;
+    }
 }

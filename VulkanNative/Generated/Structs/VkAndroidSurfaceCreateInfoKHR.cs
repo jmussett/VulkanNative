@@ -9,4 +9,9 @@ public unsafe struct VkAndroidSurfaceCreateInfoKHR
     public void* pNext;
     public VkAndroidSurfaceCreateFlagsKHR flags;
     public ANativeWindow* window;
+
+    public VkAndroidSurfaceCreateInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR;
+    }
 }

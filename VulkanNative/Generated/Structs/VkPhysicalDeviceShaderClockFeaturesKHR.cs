@@ -9,4 +9,9 @@ public unsafe struct VkPhysicalDeviceShaderClockFeaturesKHR
     public void* pNext;
     public VkBool32 shaderSubgroupClock;
     public VkBool32 shaderDeviceClock;
+
+    public VkPhysicalDeviceShaderClockFeaturesKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR;
+    }
 }

@@ -19,4 +19,9 @@ public unsafe struct VkRayTracingPipelineCreateInfoKHR
     public VkPipelineLayout layout;
     public VkPipeline basePipelineHandle;
     public int basePipelineIndex;
+
+    public VkRayTracingPipelineCreateInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR;
+    }
 }

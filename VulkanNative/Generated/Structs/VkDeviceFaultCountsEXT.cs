@@ -10,4 +10,9 @@ public unsafe struct VkDeviceFaultCountsEXT
     public uint addressInfoCount;
     public uint vendorInfoCount;
     public VkDeviceSize vendorBinarySize;
+
+    public VkDeviceFaultCountsEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_FAULT_COUNTS_EXT;
+    }
 }

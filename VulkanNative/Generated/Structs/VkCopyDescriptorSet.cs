@@ -14,4 +14,9 @@ public unsafe struct VkCopyDescriptorSet
     public uint dstBinding;
     public uint dstArrayElement;
     public uint descriptorCount;
+
+    public VkCopyDescriptorSet()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET;
+    }
 }

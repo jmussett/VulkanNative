@@ -12,4 +12,9 @@ public unsafe struct VkImportSemaphoreWin32HandleInfoKHR
     public VkExternalSemaphoreHandleTypeFlags handleType;
     public nint handle;
     public nint name;
+
+    public VkImportSemaphoreWin32HandleInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR;
+    }
 }

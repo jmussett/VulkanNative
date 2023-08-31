@@ -15,4 +15,9 @@ public unsafe struct VkPhysicalDeviceAccelerationStructurePropertiesKHR
     public uint maxDescriptorSetAccelerationStructures;
     public uint maxDescriptorSetUpdateAfterBindAccelerationStructures;
     public uint minAccelerationStructureScratchOffsetAlignment;
+
+    public VkPhysicalDeviceAccelerationStructurePropertiesKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR;
+    }
 }

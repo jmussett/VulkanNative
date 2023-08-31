@@ -10,4 +10,9 @@ public unsafe struct VkWaylandSurfaceCreateInfoKHR
     public VkWaylandSurfaceCreateFlagsKHR flags;
     public nint* display;
     public nint* surface;
+
+    public VkWaylandSurfaceCreateInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR;
+    }
 }

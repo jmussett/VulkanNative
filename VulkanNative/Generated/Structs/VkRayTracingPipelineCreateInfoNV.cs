@@ -16,4 +16,9 @@ public unsafe struct VkRayTracingPipelineCreateInfoNV
     public VkPipelineLayout layout;
     public VkPipeline basePipelineHandle;
     public int basePipelineIndex;
+
+    public VkRayTracingPipelineCreateInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_NV;
+    }
 }

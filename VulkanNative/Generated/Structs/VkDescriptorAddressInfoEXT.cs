@@ -10,4 +10,9 @@ public unsafe struct VkDescriptorAddressInfoEXT
     public VkDeviceAddress address;
     public VkDeviceSize range;
     public VkFormat format;
+
+    public VkDescriptorAddressInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT;
+    }
 }

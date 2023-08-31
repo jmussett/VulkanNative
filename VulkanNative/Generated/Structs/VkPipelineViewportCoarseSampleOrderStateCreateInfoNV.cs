@@ -10,4 +10,9 @@ public unsafe struct VkPipelineViewportCoarseSampleOrderStateCreateInfoNV
     public VkCoarseSampleOrderTypeNV sampleOrderType;
     public uint customSampleOrderCount;
     public VkCoarseSampleOrderCustomNV* pCustomSampleOrders;
+
+    public VkPipelineViewportCoarseSampleOrderStateCreateInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV;
+    }
 }

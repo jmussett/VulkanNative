@@ -16,4 +16,9 @@ public unsafe struct VkCooperativeMatrixPropertiesKHR
     public VkComponentTypeKHR ResultType;
     public VkBool32 saturatingAccumulation;
     public VkScopeKHR scope;
+
+    public VkCooperativeMatrixPropertiesKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_KHR;
+    }
 }

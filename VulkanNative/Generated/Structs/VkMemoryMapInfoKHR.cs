@@ -11,4 +11,9 @@ public unsafe struct VkMemoryMapInfoKHR
     public VkDeviceMemory memory;
     public VkDeviceSize offset;
     public VkDeviceSize size;
+
+    public VkMemoryMapInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_MEMORY_MAP_INFO_KHR;
+    }
 }

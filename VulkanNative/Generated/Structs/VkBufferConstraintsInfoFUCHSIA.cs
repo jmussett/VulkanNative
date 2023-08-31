@@ -10,4 +10,9 @@ public unsafe struct VkBufferConstraintsInfoFUCHSIA
     public VkBufferCreateInfo createInfo;
     public VkFormatFeatureFlags requiredFormatFeatures;
     public VkBufferCollectionConstraintsInfoFUCHSIA bufferCollectionConstraints;
+
+    public VkBufferConstraintsInfoFUCHSIA()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BUFFER_CONSTRAINTS_INFO_FUCHSIA;
+    }
 }

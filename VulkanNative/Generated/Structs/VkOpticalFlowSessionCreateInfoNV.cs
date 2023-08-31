@@ -16,4 +16,9 @@ public unsafe struct VkOpticalFlowSessionCreateInfoNV
     public VkOpticalFlowGridSizeFlagsNV hintGridSize;
     public VkOpticalFlowPerformanceLevelNV performanceLevel;
     public VkOpticalFlowSessionCreateFlagsNV flags;
+
+    public VkOpticalFlowSessionCreateInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV;
+    }
 }

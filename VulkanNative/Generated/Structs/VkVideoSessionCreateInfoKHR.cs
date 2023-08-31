@@ -16,4 +16,9 @@ public unsafe struct VkVideoSessionCreateInfoKHR
     public uint maxDpbSlots;
     public uint maxActiveReferencePictures;
     public VkExtensionProperties* pStdHeaderVersion;
+
+    public VkVideoSessionCreateInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR;
+    }
 }

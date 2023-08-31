@@ -11,4 +11,9 @@ public unsafe struct VkImportSemaphoreZirconHandleInfoFUCHSIA
     public VkSemaphoreImportFlags flags;
     public VkExternalSemaphoreHandleTypeFlags handleType;
     public nint zirconHandle;
+
+    public VkImportSemaphoreZirconHandleInfoFUCHSIA()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA;
+    }
 }

@@ -10,4 +10,9 @@ public unsafe struct VkDirectDriverLoadingListLUNARG
     public VkDirectDriverLoadingModeLUNARG mode;
     public uint driverCount;
     public VkDirectDriverLoadingInfoLUNARG* pDrivers;
+
+    public VkDirectDriverLoadingListLUNARG()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_LIST_LUNARG;
+    }
 }

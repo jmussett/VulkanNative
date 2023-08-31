@@ -12,4 +12,9 @@ public unsafe struct VkRenderPassBeginInfo
     public VkRect2D renderArea;
     public uint clearValueCount;
     public VkClearValue* pClearValues;
+
+    public VkRenderPassBeginInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+    }
 }

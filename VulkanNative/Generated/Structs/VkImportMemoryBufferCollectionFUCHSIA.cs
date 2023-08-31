@@ -9,4 +9,9 @@ public unsafe struct VkImportMemoryBufferCollectionFUCHSIA
     public void* pNext;
     public VkBufferCollectionFUCHSIA collection;
     public uint index;
+
+    public VkImportMemoryBufferCollectionFUCHSIA()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMPORT_MEMORY_BUFFER_COLLECTION_FUCHSIA;
+    }
 }

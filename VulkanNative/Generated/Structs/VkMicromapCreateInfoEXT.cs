@@ -13,4 +13,9 @@ public unsafe struct VkMicromapCreateInfoEXT
     public VkDeviceSize size;
     public VkMicromapTypeEXT type;
     public VkDeviceAddress deviceAddress;
+
+    public VkMicromapCreateInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT;
+    }
 }

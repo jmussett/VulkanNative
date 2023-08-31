@@ -10,4 +10,9 @@ public unsafe struct VkPhysicalDeviceShadingRateImagePropertiesNV
     public VkExtent2D shadingRateTexelSize;
     public uint shadingRatePaletteSize;
     public uint shadingRateMaxCoarseSamples;
+
+    public VkPhysicalDeviceShadingRateImagePropertiesNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV;
+    }
 }

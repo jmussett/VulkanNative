@@ -17,4 +17,9 @@ public unsafe struct VkBindSparseInfo
     public VkSparseImageMemoryBindInfo* pImageBinds;
     public uint signalSemaphoreCount;
     public VkSemaphore* pSignalSemaphores;
+
+    public VkBindSparseInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BIND_SPARSE_INFO;
+    }
 }

@@ -13,4 +13,9 @@ public unsafe struct VkDeviceGroupSubmitInfo
     public uint* pCommandBufferDeviceMasks;
     public uint signalSemaphoreCount;
     public uint* pSignalSemaphoreDeviceIndices;
+
+    public VkDeviceGroupSubmitInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO;
+    }
 }

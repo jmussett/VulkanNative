@@ -9,4 +9,9 @@ public unsafe struct VkMemoryGetRemoteAddressInfoNV
     public void* pNext;
     public VkDeviceMemory memory;
     public VkExternalMemoryHandleTypeFlags handleType;
+
+    public VkMemoryGetRemoteAddressInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_MEMORY_GET_REMOTE_ADDRESS_INFO_NV;
+    }
 }

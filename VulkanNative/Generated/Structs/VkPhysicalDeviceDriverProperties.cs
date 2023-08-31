@@ -11,4 +11,9 @@ public unsafe struct VkPhysicalDeviceDriverProperties
     public fixed byte driverName[(int)VulkanApiConstants.VK_MAX_DRIVER_NAME_SIZE];
     public fixed byte driverInfo[(int)VulkanApiConstants.VK_MAX_DRIVER_INFO_SIZE];
     public VkConformanceVersion conformanceVersion;
+
+    public VkPhysicalDeviceDriverProperties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES;
+    }
 }

@@ -12,4 +12,9 @@ public unsafe struct VkPhysicalDeviceIDProperties
     public fixed byte deviceLUID[(int)VulkanApiConstants.VK_LUID_SIZE];
     public uint deviceNodeMask;
     public VkBool32 deviceLUIDValid;
+
+    public VkPhysicalDeviceIDProperties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES;
+    }
 }

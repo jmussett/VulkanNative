@@ -8,4 +8,9 @@ public unsafe struct VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT
     public VkStructureType sType;
     public void* pNext;
     public VkBool32 shaderModuleIdentifier;
+
+    public VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT;
+    }
 }

@@ -13,4 +13,9 @@ public unsafe struct VkRayTracingShaderGroupCreateInfoKHR
     public uint anyHitShader;
     public uint intersectionShader;
     public void* pShaderGroupCaptureReplayHandle;
+
+    public VkRayTracingShaderGroupCreateInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR;
+    }
 }

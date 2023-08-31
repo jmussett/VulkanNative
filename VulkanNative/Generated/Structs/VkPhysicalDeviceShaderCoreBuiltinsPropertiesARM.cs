@@ -10,4 +10,9 @@ public unsafe struct VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM
     public ulong shaderCoreMask;
     public uint shaderCoreCount;
     public uint shaderWarpsPerCore;
+
+    public VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM;
+    }
 }

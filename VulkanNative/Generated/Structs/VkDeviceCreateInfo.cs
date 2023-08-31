@@ -15,4 +15,9 @@ public unsafe struct VkDeviceCreateInfo
     public uint enabledExtensionCount;
     public byte** ppEnabledExtensionNames;
     public VkPhysicalDeviceFeatures* pEnabledFeatures;
+
+    public VkDeviceCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+    }
 }

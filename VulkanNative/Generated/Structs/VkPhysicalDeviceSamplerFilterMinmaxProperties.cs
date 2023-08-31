@@ -9,4 +9,9 @@ public unsafe struct VkPhysicalDeviceSamplerFilterMinmaxProperties
     public void* pNext;
     public VkBool32 filterMinmaxSingleComponentFormats;
     public VkBool32 filterMinmaxImageComponentMapping;
+
+    public VkPhysicalDeviceSamplerFilterMinmaxProperties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES;
+    }
 }

@@ -10,4 +10,9 @@ public unsafe struct VkPhysicalDeviceMultiviewFeatures
     public VkBool32 multiview;
     public VkBool32 multiviewGeometryShader;
     public VkBool32 multiviewTessellationShader;
+
+    public VkPhysicalDeviceMultiviewFeatures()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES;
+    }
 }

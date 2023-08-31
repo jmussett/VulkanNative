@@ -37,4 +37,9 @@ public unsafe struct VkPhysicalDeviceShaderIntegerDotProductProperties
     public VkBool32 integerDotProductAccumulatingSaturating64BitUnsignedAccelerated;
     public VkBool32 integerDotProductAccumulatingSaturating64BitSignedAccelerated;
     public VkBool32 integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated;
+
+    public VkPhysicalDeviceShaderIntegerDotProductProperties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES;
+    }
 }

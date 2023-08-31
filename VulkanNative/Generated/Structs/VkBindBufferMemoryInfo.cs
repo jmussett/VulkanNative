@@ -10,4 +10,9 @@ public unsafe struct VkBindBufferMemoryInfo
     public VkBuffer buffer;
     public VkDeviceMemory memory;
     public VkDeviceSize memoryOffset;
+
+    public VkBindBufferMemoryInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO;
+    }
 }

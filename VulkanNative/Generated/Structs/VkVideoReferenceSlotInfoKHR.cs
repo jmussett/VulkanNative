@@ -9,4 +9,9 @@ public unsafe struct VkVideoReferenceSlotInfoKHR
     public void* pNext;
     public int slotIndex;
     public VkVideoPictureResourceInfoKHR* pPictureResource;
+
+    public VkVideoReferenceSlotInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_INFO_KHR;
+    }
 }

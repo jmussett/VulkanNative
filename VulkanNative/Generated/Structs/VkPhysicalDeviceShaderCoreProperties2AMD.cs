@@ -9,4 +9,9 @@ public unsafe struct VkPhysicalDeviceShaderCoreProperties2AMD
     public void* pNext;
     public VkShaderCorePropertiesFlagsAMD shaderCoreFeatures;
     public uint activeComputeUnitCount;
+
+    public VkPhysicalDeviceShaderCoreProperties2AMD()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD;
+    }
 }

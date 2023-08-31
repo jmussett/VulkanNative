@@ -12,4 +12,9 @@ public unsafe struct VkPhysicalDeviceSparseImageFormatInfo2
     public VkSampleCountFlags samples;
     public VkImageUsageFlags usage;
     public VkImageTiling tiling;
+
+    public VkPhysicalDeviceSparseImageFormatInfo2()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2;
+    }
 }

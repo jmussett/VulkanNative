@@ -13,4 +13,9 @@ public unsafe struct VkInstanceCreateInfo
     public byte** ppEnabledLayerNames;
     public uint enabledExtensionCount;
     public byte** ppEnabledExtensionNames;
+
+    public VkInstanceCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+    }
 }

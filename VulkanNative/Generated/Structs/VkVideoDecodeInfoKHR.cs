@@ -15,4 +15,9 @@ public unsafe struct VkVideoDecodeInfoKHR
     public VkVideoReferenceSlotInfoKHR* pSetupReferenceSlot;
     public uint referenceSlotCount;
     public VkVideoReferenceSlotInfoKHR* pReferenceSlots;
+
+    public VkVideoDecodeInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR;
+    }
 }

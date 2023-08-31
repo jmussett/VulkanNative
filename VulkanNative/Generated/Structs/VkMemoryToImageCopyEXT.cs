@@ -13,4 +13,9 @@ public unsafe struct VkMemoryToImageCopyEXT
     public VkImageSubresourceLayers imageSubresource;
     public VkOffset3D imageOffset;
     public VkExtent3D imageExtent;
+
+    public VkMemoryToImageCopyEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_MEMORY_TO_IMAGE_COPY_EXT;
+    }
 }

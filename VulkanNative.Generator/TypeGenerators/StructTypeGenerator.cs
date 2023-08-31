@@ -29,6 +29,8 @@ internal class StructTypeGenerator : ITypeGenerator
                         .AddModifierToken(SyntaxKind.UnsafeKeyword)
                         .AddAttribute("StructLayout", x => x.AddAttributeArgument("LayoutKind.Sequential"));
 
+                    string? sTypeValue = null;
+
                     // returnedonly ?? -> readonly
                     // structextends ?? indicates that struct extends the "structextends" struct. Maybe not necessary for initial code gen.
 
@@ -61,6 +63,16 @@ internal class StructTypeGenerator : ITypeGenerator
                             typeDef = _typeLocator.LookupType(fieldDefinition.Type, fieldDefinition.PostTypeText);
                         }
 
+                        if (fieldDefinition.Name == "sType" && fieldDefinition.Values != null)
+                        {
+                            var values = fieldDefinition.Values.Split(',');
+
+                            if (values.Length == 1)
+                            {
+                                sTypeValue = values[0];
+                            }
+                        }
+
                         var fieldName = VariableNameSanitizer.Sanitize(fieldDefinition.Name!);
 
                         x.AddFieldDeclaration(
@@ -80,6 +92,22 @@ internal class StructTypeGenerator : ITypeGenerator
                                     x = x.AddModifierToken(modifier);
                                 }
                             }
+                        );
+                    }
+
+                    if (sTypeValue != null)
+                    {
+                        x.AddConstructorDeclaration(typeName, x => x
+                            .AddModifierToken(SyntaxKind.PublicKeyword)
+                            .WithBody(x => x
+                                .AddExpressionStatement(x => x
+                                    .AsAssignmentExpression(
+                                        AssignmentExpressionKind.SimpleAssignmentExpression,
+                                        x => x.AsIdentifierName("sType"),
+                                        x => x.ParseExpression($"VkStructureType.{sTypeValue}")
+                                    )
+                                )
+                            )
                         );
                     }
                 })

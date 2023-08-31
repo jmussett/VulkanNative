@@ -22,4 +22,9 @@ public unsafe struct VkPhysicalDeviceVulkan13Features
     public VkBool32 dynamicRendering;
     public VkBool32 shaderIntegerDotProduct;
     public VkBool32 maintenance4;
+
+    public VkPhysicalDeviceVulkan13Features()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES;
+    }
 }

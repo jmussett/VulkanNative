@@ -10,4 +10,9 @@ public unsafe struct VkExternalSemaphoreProperties
     public VkExternalSemaphoreHandleTypeFlags exportFromImportedHandleTypes;
     public VkExternalSemaphoreHandleTypeFlags compatibleHandleTypes;
     public VkExternalSemaphoreFeatureFlags externalSemaphoreFeatures;
+
+    public VkExternalSemaphoreProperties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES;
+    }
 }

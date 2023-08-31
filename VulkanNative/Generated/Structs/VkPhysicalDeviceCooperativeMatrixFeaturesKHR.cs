@@ -9,4 +9,9 @@ public unsafe struct VkPhysicalDeviceCooperativeMatrixFeaturesKHR
     public void* pNext;
     public VkBool32 cooperativeMatrix;
     public VkBool32 cooperativeMatrixRobustBufferAccess;
+
+    public VkPhysicalDeviceCooperativeMatrixFeaturesKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_KHR;
+    }
 }

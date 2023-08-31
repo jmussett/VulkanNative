@@ -10,4 +10,9 @@ public unsafe struct VkPipelineCoverageToColorStateCreateInfoNV
     public VkPipelineCoverageToColorStateCreateFlagsNV flags;
     public VkBool32 coverageToColorEnable;
     public uint coverageToColorLocation;
+
+    public VkPipelineCoverageToColorStateCreateInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV;
+    }
 }

@@ -8,4 +8,9 @@ public unsafe struct VkPhysicalDeviceCoverageReductionModeFeaturesNV
     public VkStructureType sType;
     public void* pNext;
     public VkBool32 coverageReductionMode;
+
+    public VkPhysicalDeviceCoverageReductionModeFeaturesNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV;
+    }
 }

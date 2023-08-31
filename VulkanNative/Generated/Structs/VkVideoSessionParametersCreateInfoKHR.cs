@@ -10,4 +10,9 @@ public unsafe struct VkVideoSessionParametersCreateInfoKHR
     public VkVideoSessionParametersCreateFlagsKHR flags;
     public VkVideoSessionParametersKHR videoSessionParametersTemplate;
     public VkVideoSessionKHR videoSession;
+
+    public VkVideoSessionParametersCreateInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR;
+    }
 }

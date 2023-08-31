@@ -13,4 +13,9 @@ public unsafe struct VkImageFormatConstraintsInfoFUCHSIA
     public ulong sysmemPixelFormat;
     public uint colorSpaceCount;
     public VkSysmemColorSpaceFUCHSIA* pColorSpaces;
+
+    public VkImageFormatConstraintsInfoFUCHSIA()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_FORMAT_CONSTRAINTS_INFO_FUCHSIA;
+    }
 }

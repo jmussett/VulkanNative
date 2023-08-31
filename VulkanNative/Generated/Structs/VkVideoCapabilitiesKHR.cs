@@ -16,4 +16,9 @@ public unsafe struct VkVideoCapabilitiesKHR
     public uint maxDpbSlots;
     public uint maxActiveReferencePictures;
     public VkExtensionProperties stdHeaderVersion;
+
+    public VkVideoCapabilitiesKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR;
+    }
 }

@@ -11,4 +11,9 @@ public unsafe struct VkDeviceFaultInfoEXT
     public VkDeviceFaultAddressInfoEXT* pAddressInfos;
     public VkDeviceFaultVendorInfoEXT* pVendorInfos;
     public void* pVendorBinaryData;
+
+    public VkDeviceFaultInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT;
+    }
 }

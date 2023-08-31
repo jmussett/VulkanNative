@@ -9,4 +9,9 @@ public unsafe struct VkCommandBufferSubmitInfo
     public void* pNext;
     public VkCommandBuffer commandBuffer;
     public uint deviceMask;
+
+    public VkCommandBufferSubmitInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO;
+    }
 }

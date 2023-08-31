@@ -14,4 +14,9 @@ public unsafe struct VkPipelineMultisampleStateCreateInfo
     public VkSampleMask* pSampleMask;
     public VkBool32 alphaToCoverageEnable;
     public VkBool32 alphaToOneEnable;
+
+    public VkPipelineMultisampleStateCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+    }
 }

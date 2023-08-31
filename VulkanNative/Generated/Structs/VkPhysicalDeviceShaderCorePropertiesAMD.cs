@@ -21,4 +21,9 @@ public unsafe struct VkPhysicalDeviceShaderCorePropertiesAMD
     public uint minVgprAllocation;
     public uint maxVgprAllocation;
     public uint vgprAllocationGranularity;
+
+    public VkPhysicalDeviceShaderCorePropertiesAMD()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD;
+    }
 }

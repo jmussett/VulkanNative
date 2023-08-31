@@ -13,4 +13,9 @@ public unsafe struct VkPresentInfoKHR
     public VkSwapchainKHR* pSwapchains;
     public uint* pImageIndices;
     public VkResult* pResults;
+
+    public VkPresentInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+    }
 }

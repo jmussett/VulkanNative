@@ -20,4 +20,9 @@ public unsafe struct VkPhysicalDeviceMeshShaderPropertiesNV
     public uint maxMeshMultiviewViewCount;
     public uint meshOutputPerVertexGranularity;
     public uint meshOutputPerPrimitiveGranularity;
+
+    public VkPhysicalDeviceMeshShaderPropertiesNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV;
+    }
 }

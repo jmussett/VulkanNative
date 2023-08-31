@@ -11,4 +11,9 @@ public unsafe struct VkTimelineSemaphoreSubmitInfo
     public ulong* pWaitSemaphoreValues;
     public uint signalSemaphoreValueCount;
     public ulong* pSignalSemaphoreValues;
+
+    public VkTimelineSemaphoreSubmitInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO;
+    }
 }

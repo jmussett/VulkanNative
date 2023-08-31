@@ -27,4 +27,9 @@ public unsafe struct VkPhysicalDeviceDescriptorIndexingFeatures
     public VkBool32 descriptorBindingPartiallyBound;
     public VkBool32 descriptorBindingVariableDescriptorCount;
     public VkBool32 runtimeDescriptorArray;
+
+    public VkPhysicalDeviceDescriptorIndexingFeatures()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES;
+    }
 }

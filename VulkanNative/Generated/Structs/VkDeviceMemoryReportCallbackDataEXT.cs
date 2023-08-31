@@ -14,4 +14,9 @@ public unsafe struct VkDeviceMemoryReportCallbackDataEXT
     public VkObjectType objectType;
     public ulong objectHandle;
     public uint heapIndex;
+
+    public VkDeviceMemoryReportCallbackDataEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT;
+    }
 }

@@ -12,4 +12,9 @@ public unsafe struct VkComputePipelineCreateInfo
     public VkPipelineLayout layout;
     public VkPipeline basePipelineHandle;
     public int basePipelineIndex;
+
+    public VkComputePipelineCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO;
+    }
 }

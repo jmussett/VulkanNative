@@ -12,4 +12,9 @@ public unsafe struct VkRenderingAreaInfoKHR
     public VkFormat* pColorAttachmentFormats;
     public VkFormat depthAttachmentFormat;
     public VkFormat stencilAttachmentFormat;
+
+    public VkRenderingAreaInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RENDERING_AREA_INFO_KHR;
+    }
 }

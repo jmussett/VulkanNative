@@ -10,4 +10,9 @@ public unsafe struct VkPipelineRasterizationConservativeStateCreateInfoEXT
     public VkPipelineRasterizationConservativeStateCreateFlagsEXT flags;
     public VkConservativeRasterizationModeEXT conservativeRasterizationMode;
     public float extraPrimitiveOverestimationSize;
+
+    public VkPipelineRasterizationConservativeStateCreateInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT;
+    }
 }

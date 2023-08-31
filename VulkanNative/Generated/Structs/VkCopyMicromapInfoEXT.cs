@@ -10,4 +10,9 @@ public unsafe struct VkCopyMicromapInfoEXT
     public VkMicromapEXT src;
     public VkMicromapEXT dst;
     public VkCopyMicromapModeEXT mode;
+
+    public VkCopyMicromapInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT;
+    }
 }

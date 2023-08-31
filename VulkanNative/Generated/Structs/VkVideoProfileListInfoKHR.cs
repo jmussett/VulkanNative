@@ -9,4 +9,9 @@ public unsafe struct VkVideoProfileListInfoKHR
     public void* pNext;
     public uint profileCount;
     public VkVideoProfileInfoKHR* pProfiles;
+
+    public VkVideoProfileListInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_VIDEO_PROFILE_LIST_INFO_KHR;
+    }
 }

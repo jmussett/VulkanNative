@@ -17,4 +17,9 @@ public unsafe struct VkPipelineDepthStencilStateCreateInfo
     public VkStencilOpState back;
     public float minDepthBounds;
     public float maxDepthBounds;
+
+    public VkPipelineDepthStencilStateCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+    }
 }

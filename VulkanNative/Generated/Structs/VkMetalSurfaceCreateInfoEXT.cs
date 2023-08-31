@@ -9,4 +9,9 @@ public unsafe struct VkMetalSurfaceCreateInfoEXT
     public void* pNext;
     public VkMetalSurfaceCreateFlagsEXT flags;
     public CAMetalLayer* pLayer;
+
+    public VkMetalSurfaceCreateInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT;
+    }
 }

@@ -20,4 +20,9 @@ public unsafe struct VkImageCreateInfo
     public uint queueFamilyIndexCount;
     public uint* pQueueFamilyIndices;
     public VkImageLayout initialLayout;
+
+    public VkImageCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+    }
 }

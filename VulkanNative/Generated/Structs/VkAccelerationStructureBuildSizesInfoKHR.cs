@@ -10,4 +10,9 @@ public unsafe struct VkAccelerationStructureBuildSizesInfoKHR
     public VkDeviceSize accelerationStructureSize;
     public VkDeviceSize updateScratchSize;
     public VkDeviceSize buildScratchSize;
+
+    public VkAccelerationStructureBuildSizesInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR;
+    }
 }

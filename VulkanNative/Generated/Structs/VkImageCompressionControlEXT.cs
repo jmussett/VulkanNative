@@ -10,4 +10,9 @@ public unsafe struct VkImageCompressionControlEXT
     public VkImageCompressionFlagsEXT flags;
     public uint compressionControlPlaneCount;
     public VkImageCompressionFixedRateFlagsEXT* pFixedRateFlags;
+
+    public VkImageCompressionControlEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT;
+    }
 }

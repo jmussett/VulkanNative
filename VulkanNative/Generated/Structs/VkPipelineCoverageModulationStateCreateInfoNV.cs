@@ -12,4 +12,9 @@ public unsafe struct VkPipelineCoverageModulationStateCreateInfoNV
     public VkBool32 coverageModulationTableEnable;
     public uint coverageModulationTableCount;
     public float* pCoverageModulationTable;
+
+    public VkPipelineCoverageModulationStateCreateInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV;
+    }
 }

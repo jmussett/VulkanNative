@@ -10,4 +10,9 @@ public unsafe struct VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT
     public VkBool32 fragmentShaderSampleInterlock;
     public VkBool32 fragmentShaderPixelInterlock;
     public VkBool32 fragmentShaderShadingRateInterlock;
+
+    public VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT;
+    }
 }

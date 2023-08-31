@@ -54,4 +54,9 @@ public unsafe struct VkPhysicalDeviceVulkan12Features
     public VkBool32 shaderOutputViewportIndex;
     public VkBool32 shaderOutputLayer;
     public VkBool32 subgroupBroadcastDynamicId;
+
+    public VkPhysicalDeviceVulkan12Features()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES;
+    }
 }

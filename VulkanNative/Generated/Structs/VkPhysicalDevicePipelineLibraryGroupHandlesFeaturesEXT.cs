@@ -8,4 +8,9 @@ public unsafe struct VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT
     public VkStructureType sType;
     public void* pNext;
     public VkBool32 pipelineLibraryGroupHandles;
+
+    public VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT;
+    }
 }

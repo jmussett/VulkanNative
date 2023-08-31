@@ -10,4 +10,9 @@ public unsafe struct VkPipelineViewportWScalingStateCreateInfoNV
     public VkBool32 viewportWScalingEnable;
     public uint viewportCount;
     public VkViewportWScalingNV* pViewportWScalings;
+
+    public VkPipelineViewportWScalingStateCreateInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV;
+    }
 }

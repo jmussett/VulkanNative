@@ -9,4 +9,9 @@ public unsafe struct VkDescriptorGetInfoEXT
     public void* pNext;
     public VkDescriptorType type;
     public VkDescriptorDataEXT data;
+
+    public VkDescriptorGetInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT;
+    }
 }

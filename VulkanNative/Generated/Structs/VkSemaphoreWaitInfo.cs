@@ -11,4 +11,9 @@ public unsafe struct VkSemaphoreWaitInfo
     public uint semaphoreCount;
     public VkSemaphore* pSemaphores;
     public ulong* pValues;
+
+    public VkSemaphoreWaitInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO;
+    }
 }

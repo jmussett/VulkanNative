@@ -11,4 +11,9 @@ public unsafe struct VkDeviceQueueCreateInfo
     public uint queueFamilyIndex;
     public uint queueCount;
     public float* pQueuePriorities;
+
+    public VkDeviceQueueCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+    }
 }

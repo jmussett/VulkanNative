@@ -10,4 +10,9 @@ public unsafe struct VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV
     public VkBool32 deviceGeneratedCompute;
     public VkBool32 deviceGeneratedComputePipelines;
     public VkBool32 deviceGeneratedComputeCaptureReplay;
+
+    public VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_COMPUTE_FEATURES_NV;
+    }
 }

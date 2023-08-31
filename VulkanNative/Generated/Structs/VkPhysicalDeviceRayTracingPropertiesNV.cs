@@ -15,4 +15,9 @@ public unsafe struct VkPhysicalDeviceRayTracingPropertiesNV
     public ulong maxInstanceCount;
     public ulong maxTriangleCount;
     public uint maxDescriptorSetAccelerationStructures;
+
+    public VkPhysicalDeviceRayTracingPropertiesNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV;
+    }
 }

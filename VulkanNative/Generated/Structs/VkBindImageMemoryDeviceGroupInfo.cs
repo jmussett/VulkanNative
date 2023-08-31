@@ -11,4 +11,9 @@ public unsafe struct VkBindImageMemoryDeviceGroupInfo
     public uint* pDeviceIndices;
     public uint splitInstanceBindRegionCount;
     public VkRect2D* pSplitInstanceBindRegions;
+
+    public VkBindImageMemoryDeviceGroupInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO;
+    }
 }

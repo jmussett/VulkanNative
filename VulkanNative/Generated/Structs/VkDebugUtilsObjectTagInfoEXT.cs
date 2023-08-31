@@ -12,4 +12,9 @@ public unsafe struct VkDebugUtilsObjectTagInfoEXT
     public ulong tagName;
     public nuint tagSize;
     public void* pTag;
+
+    public VkDebugUtilsObjectTagInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT;
+    }
 }

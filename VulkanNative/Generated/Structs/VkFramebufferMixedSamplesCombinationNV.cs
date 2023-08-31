@@ -11,4 +11,9 @@ public unsafe struct VkFramebufferMixedSamplesCombinationNV
     public VkSampleCountFlags rasterizationSamples;
     public VkSampleCountFlags depthStencilSamples;
     public VkSampleCountFlags colorSamples;
+
+    public VkFramebufferMixedSamplesCombinationNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV;
+    }
 }

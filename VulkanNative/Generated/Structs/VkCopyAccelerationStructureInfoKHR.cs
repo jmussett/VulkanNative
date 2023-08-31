@@ -10,4 +10,9 @@ public unsafe struct VkCopyAccelerationStructureInfoKHR
     public VkAccelerationStructureKHR src;
     public VkAccelerationStructureKHR dst;
     public VkCopyAccelerationStructureModeKHR mode;
+
+    public VkCopyAccelerationStructureInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR;
+    }
 }

@@ -12,4 +12,9 @@ public unsafe struct VkBufferCollectionConstraintsInfoFUCHSIA
     public uint minBufferCountForCamping;
     public uint minBufferCountForDedicatedSlack;
     public uint minBufferCountForSharedSlack;
+
+    public VkBufferCollectionConstraintsInfoFUCHSIA()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CONSTRAINTS_INFO_FUCHSIA;
+    }
 }

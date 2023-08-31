@@ -12,4 +12,9 @@ public unsafe struct VkCopyImageToMemoryInfoEXT
     public VkImageLayout srcImageLayout;
     public uint regionCount;
     public VkImageToMemoryCopyEXT* pRegions;
+
+    public VkCopyImageToMemoryInfoEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COPY_IMAGE_TO_MEMORY_INFO_EXT;
+    }
 }

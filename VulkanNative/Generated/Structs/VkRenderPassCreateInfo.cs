@@ -14,4 +14,9 @@ public unsafe struct VkRenderPassCreateInfo
     public VkSubpassDescription* pSubpasses;
     public uint dependencyCount;
     public VkSubpassDependency* pDependencies;
+
+    public VkRenderPassCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
+    }
 }

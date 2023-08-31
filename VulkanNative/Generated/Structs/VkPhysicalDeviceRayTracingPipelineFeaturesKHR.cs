@@ -12,4 +12,9 @@ public unsafe struct VkPhysicalDeviceRayTracingPipelineFeaturesKHR
     public VkBool32 rayTracingPipelineShaderGroupHandleCaptureReplayMixed;
     public VkBool32 rayTracingPipelineTraceRaysIndirect;
     public VkBool32 rayTraversalPrimitiveCulling;
+
+    public VkPhysicalDeviceRayTracingPipelineFeaturesKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR;
+    }
 }

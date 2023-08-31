@@ -12,4 +12,9 @@ public unsafe struct VkCopyImageToBufferInfo2
     public VkBuffer dstBuffer;
     public uint regionCount;
     public VkBufferImageCopy2* pRegions;
+
+    public VkCopyImageToBufferInfo2()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2;
+    }
 }

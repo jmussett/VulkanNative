@@ -15,4 +15,9 @@ public unsafe struct VkPhysicalDeviceRayTracingPipelinePropertiesKHR
     public uint maxRayDispatchInvocationCount;
     public uint shaderGroupHandleAlignment;
     public uint maxRayHitAttributeSize;
+
+    public VkPhysicalDeviceRayTracingPipelinePropertiesKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR;
+    }
 }

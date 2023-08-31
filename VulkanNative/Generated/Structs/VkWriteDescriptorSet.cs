@@ -15,4 +15,9 @@ public unsafe struct VkWriteDescriptorSet
     public VkDescriptorImageInfo* pImageInfo;
     public VkDescriptorBufferInfo* pBufferInfo;
     public VkBufferView* pTexelBufferView;
+
+    public VkWriteDescriptorSet()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
+    }
 }

@@ -9,4 +9,9 @@ public unsafe struct VkRenderPassAttachmentBeginInfo
     public void* pNext;
     public uint attachmentCount;
     public VkImageView* pAttachments;
+
+    public VkRenderPassAttachmentBeginInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO;
+    }
 }

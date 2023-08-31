@@ -12,4 +12,9 @@ public unsafe struct VkImageResolve2
     public VkImageSubresourceLayers dstSubresource;
     public VkOffset3D dstOffset;
     public VkExtent3D extent;
+
+    public VkImageResolve2()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2;
+    }
 }

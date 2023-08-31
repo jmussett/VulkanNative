@@ -10,4 +10,9 @@ public unsafe struct VkScreenSurfaceCreateInfoQNX
     public VkScreenSurfaceCreateFlagsQNX flags;
     public nint* context;
     public nint* window;
+
+    public VkScreenSurfaceCreateInfoQNX()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX;
+    }
 }

@@ -19,4 +19,9 @@ public unsafe struct VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT
     public VkBool32 shaderSharedFloat64AtomicMinMax;
     public VkBool32 shaderImageFloat32AtomicMinMax;
     public VkBool32 sparseImageFloat32AtomicMinMax;
+
+    public VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT;
+    }
 }

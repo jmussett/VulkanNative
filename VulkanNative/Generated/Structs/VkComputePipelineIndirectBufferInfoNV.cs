@@ -10,4 +10,9 @@ public unsafe struct VkComputePipelineIndirectBufferInfoNV
     public VkDeviceAddress deviceAddress;
     public VkDeviceSize size;
     public VkDeviceAddress pipelineDeviceAddressCaptureReplay;
+
+    public VkComputePipelineIndirectBufferInfoNV()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_INDIRECT_BUFFER_INFO_NV;
+    }
 }

@@ -14,4 +14,9 @@ public unsafe struct VkBufferMemoryBarrier
     public VkBuffer buffer;
     public VkDeviceSize offset;
     public VkDeviceSize size;
+
+    public VkBufferMemoryBarrier()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER;
+    }
 }

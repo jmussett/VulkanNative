@@ -9,4 +9,9 @@ public unsafe struct VkSemaphoreSignalInfo
     public void* pNext;
     public VkSemaphore semaphore;
     public ulong value;
+
+    public VkSemaphoreSignalInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO;
+    }
 }

@@ -12,4 +12,9 @@ public unsafe struct VkApplicationInfo
     public byte* pEngineName;
     public uint engineVersion;
     public uint apiVersion;
+
+    public VkApplicationInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_APPLICATION_INFO;
+    }
 }

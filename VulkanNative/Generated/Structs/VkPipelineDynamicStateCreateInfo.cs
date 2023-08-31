@@ -10,4 +10,9 @@ public unsafe struct VkPipelineDynamicStateCreateInfo
     public VkPipelineDynamicStateCreateFlags flags;
     public uint dynamicStateCount;
     public VkDynamicState* pDynamicStates;
+
+    public VkPipelineDynamicStateCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
+    }
 }

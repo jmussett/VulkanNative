@@ -8,4 +8,9 @@ public unsafe struct VkPhysicalDevicePointClippingProperties
     public VkStructureType sType;
     public void* pNext;
     public VkPointClippingBehavior pointClippingBehavior;
+
+    public VkPhysicalDevicePointClippingProperties()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES;
+    }
 }

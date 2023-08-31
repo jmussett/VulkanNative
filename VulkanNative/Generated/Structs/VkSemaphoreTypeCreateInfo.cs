@@ -9,4 +9,9 @@ public unsafe struct VkSemaphoreTypeCreateInfo
     public void* pNext;
     public VkSemaphoreType semaphoreType;
     public ulong initialValue;
+
+    public VkSemaphoreTypeCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO;
+    }
 }

@@ -9,4 +9,9 @@ public unsafe struct VkVideoSessionMemoryRequirementsKHR
     public void* pNext;
     public uint memoryBindIndex;
     public VkMemoryRequirements memoryRequirements;
+
+    public VkVideoSessionMemoryRequirementsKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_VIDEO_SESSION_MEMORY_REQUIREMENTS_KHR;
+    }
 }

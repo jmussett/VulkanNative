@@ -10,4 +10,9 @@ public unsafe struct VkCopyAccelerationStructureToMemoryInfoKHR
     public VkAccelerationStructureKHR src;
     public VkDeviceOrHostAddressKHR dst;
     public VkCopyAccelerationStructureModeKHR mode;
+
+    public VkCopyAccelerationStructureToMemoryInfoKHR()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR;
+    }
 }

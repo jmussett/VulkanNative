@@ -10,4 +10,9 @@ public unsafe struct VkShaderModuleCreateInfo
     public VkShaderModuleCreateFlags flags;
     public nuint codeSize;
     public uint* pCode;
+
+    public VkShaderModuleCreateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
+    }
 }

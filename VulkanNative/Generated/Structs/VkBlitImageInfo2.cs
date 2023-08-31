@@ -14,4 +14,9 @@ public unsafe struct VkBlitImageInfo2
     public uint regionCount;
     public VkImageBlit2* pRegions;
     public VkFilter filter;
+
+    public VkBlitImageInfo2()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2;
+    }
 }

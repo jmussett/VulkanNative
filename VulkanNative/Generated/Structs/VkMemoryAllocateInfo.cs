@@ -9,4 +9,9 @@ public unsafe struct VkMemoryAllocateInfo
     public void* pNext;
     public VkDeviceSize allocationSize;
     public uint memoryTypeIndex;
+
+    public VkMemoryAllocateInfo()
+    {
+        sType = VkStructureType.VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+    }
 }
