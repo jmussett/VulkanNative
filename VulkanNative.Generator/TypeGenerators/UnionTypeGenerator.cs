@@ -33,10 +33,12 @@ internal class UnionTypeGenerator : ITypeGenerator
                     {
                         var fieldTypeDef = _typeLocator.LookupType(member.Type, member.PostTypeText);
 
+                        var fieldName = VariableNameSanitizer.Sanitize(member.Name!);
+
                         // TODO: CSharpComposer: optional field builder?
                         x.AddFieldDeclaration(
                             x => x.FromSyntax(fieldTypeDef.Syntax),
-                            x => x.AddVariableDeclarator(member.Name.Pascalize(),x =>
+                            x => x.AddVariableDeclarator(fieldName,x =>
                             {
                                 foreach(var argument in fieldTypeDef.Arguments)
                                 {

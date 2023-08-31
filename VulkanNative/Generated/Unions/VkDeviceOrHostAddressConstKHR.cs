@@ -6,7 +6,7 @@ namespace VulkanNative;
 public unsafe struct VkDeviceOrHostAddressConstKHR
 {
     [FieldOffset(0)]
-    public VkDeviceAddress DeviceAddress;
+    public VkDeviceAddress deviceAddress;
     [FieldOffset(0)]
-    public void* HostAddress;
+    public void* hostAddress;
 }

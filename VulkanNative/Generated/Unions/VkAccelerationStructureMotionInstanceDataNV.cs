@@ -6,9 +6,9 @@ namespace VulkanNative;
 public unsafe struct VkAccelerationStructureMotionInstanceDataNV
 {
     [FieldOffset(0)]
-    public VkAccelerationStructureInstanceKHR StaticInstance;
+    public VkAccelerationStructureInstanceKHR staticInstance;
     [FieldOffset(0)]
-    public VkAccelerationStructureMatrixMotionInstanceNV MatrixMotionInstance;
+    public VkAccelerationStructureMatrixMotionInstanceNV matrixMotionInstance;
     [FieldOffset(0)]
-    public VkAccelerationStructureSRTMotionInstanceNV SrtMotionInstance;
+    public VkAccelerationStructureSRTMotionInstanceNV srtMotionInstance;
 }

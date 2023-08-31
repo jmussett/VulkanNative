@@ -6,7 +6,7 @@ namespace VulkanNative;
 public unsafe struct VkClearValue
 {
     [FieldOffset(0)]
-    public VkClearColorValue Color;
+    public VkClearColorValue color;
     [FieldOffset(0)]
-    public VkClearDepthStencilValue DepthStencil;
+    public VkClearDepthStencilValue depthStencil;
 }

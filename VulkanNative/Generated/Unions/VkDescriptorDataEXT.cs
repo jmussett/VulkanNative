@@ -6,23 +6,23 @@ namespace VulkanNative;
 public unsafe struct VkDescriptorDataEXT
 {
     [FieldOffset(0)]
-    public VkSampler* PSampler;
+    public VkSampler* pSampler;
     [FieldOffset(0)]
-    public VkDescriptorImageInfo* PCombinedImageSampler;
+    public VkDescriptorImageInfo* pCombinedImageSampler;
     [FieldOffset(0)]
-    public VkDescriptorImageInfo* PInputAttachmentImage;
+    public VkDescriptorImageInfo* pInputAttachmentImage;
     [FieldOffset(0)]
-    public VkDescriptorImageInfo* PSampledImage;
+    public VkDescriptorImageInfo* pSampledImage;
     [FieldOffset(0)]
-    public VkDescriptorImageInfo* PStorageImage;
+    public VkDescriptorImageInfo* pStorageImage;
     [FieldOffset(0)]
-    public VkDescriptorAddressInfoEXT* PUniformTexelBuffer;
+    public VkDescriptorAddressInfoEXT* pUniformTexelBuffer;
     [FieldOffset(0)]
-    public VkDescriptorAddressInfoEXT* PStorageTexelBuffer;
+    public VkDescriptorAddressInfoEXT* pStorageTexelBuffer;
     [FieldOffset(0)]
-    public VkDescriptorAddressInfoEXT* PUniformBuffer;
+    public VkDescriptorAddressInfoEXT* pUniformBuffer;
     [FieldOffset(0)]
-    public VkDescriptorAddressInfoEXT* PStorageBuffer;
+    public VkDescriptorAddressInfoEXT* pStorageBuffer;
     [FieldOffset(0)]
-    public VkDeviceAddress AccelerationStructure;
+    public VkDeviceAddress accelerationStructure;
 }

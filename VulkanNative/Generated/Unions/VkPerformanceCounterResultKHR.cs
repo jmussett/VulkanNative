@@ -6,15 +6,15 @@ namespace VulkanNative;
 public unsafe struct VkPerformanceCounterResultKHR
 {
     [FieldOffset(0)]
-    public int Int32;
+    public int int32;
     [FieldOffset(0)]
-    public long Int64;
+    public long int64;
     [FieldOffset(0)]
-    public uint Uint32;
+    public uint uint32;
     [FieldOffset(0)]
-    public ulong Uint64;
+    public ulong uint64;
     [FieldOffset(0)]
-    public float Float32;
+    public float float32;
     [FieldOffset(0)]
-    public double Float64;
+    public double float64;
 }

@@ -6,9 +6,9 @@ namespace VulkanNative;
 public unsafe struct VkAccelerationStructureGeometryDataKHR
 {
     [FieldOffset(0)]
-    public VkAccelerationStructureGeometryTrianglesDataKHR Triangles;
+    public VkAccelerationStructureGeometryTrianglesDataKHR triangles;
     [FieldOffset(0)]
-    public VkAccelerationStructureGeometryAabbsDataKHR Aabbs;
+    public VkAccelerationStructureGeometryAabbsDataKHR aabbs;
     [FieldOffset(0)]
-    public VkAccelerationStructureGeometryInstancesDataKHR Instances;
+    public VkAccelerationStructureGeometryInstancesDataKHR instances;
 }

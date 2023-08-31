@@ -6,11 +6,11 @@ namespace VulkanNative;
 public unsafe struct VkPipelineExecutableStatisticValueKHR
 {
     [FieldOffset(0)]
-    public VkBool32 B32;
+    public VkBool32 b32;
     [FieldOffset(0)]
-    public long I64;
+    public long i64;
     [FieldOffset(0)]
-    public ulong U64;
+    public ulong u64;
     [FieldOffset(0)]
-    public double F64;
+    public double f64;
 }

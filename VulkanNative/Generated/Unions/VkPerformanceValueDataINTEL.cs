@@ -6,13 +6,13 @@ namespace VulkanNative;
 public unsafe struct VkPerformanceValueDataINTEL
 {
     [FieldOffset(0)]
-    public uint Value32;
+    public uint value32;
     [FieldOffset(0)]
-    public ulong Value64;
+    public ulong value64;
     [FieldOffset(0)]
-    public float ValueFloat;
+    public float valueFloat;
     [FieldOffset(0)]
-    public VkBool32 ValueBool;
+    public VkBool32 valueBool;
     [FieldOffset(0)]
-    public byte* ValueString;
+    public byte* valueString;
 }
