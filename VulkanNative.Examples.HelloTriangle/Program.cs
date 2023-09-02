@@ -197,6 +197,8 @@ byte[] fragBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Sha
 var vertShader = device.CreateShaderModule(vertBytes);
 var fragShader = device.CreateShaderModule(fragBytes);
 
+var pipelineLayout = device.CreatePipelineLayout();
+
 // Dispose after creating graphics pipeline
 vertShader.Dispose();
 fragShader.Dispose();
@@ -211,7 +213,7 @@ for (var i = 0; i < imageViews.Length; i++)
     imageViews[i].Dispose();
 }
 
-
+pipelineLayout.Dispose();
 swapchain.Dispose();
 surface.Dispose();
 device.Dispose();

@@ -75,7 +75,7 @@ public sealed unsafe class VulkanDevice : IDisposable
     {
         fixed (byte* byteCodePtr = byteCode)
         {
-            var createInfo = new VkShaderModuleCreateInfo
+            VkShaderModuleCreateInfo createInfo = new()
             {
                 pCode = (uint*)byteCodePtr,
                 codeSize = new nuint((uint)byteCode.Length)
@@ -86,6 +86,28 @@ public sealed unsafe class VulkanDevice : IDisposable
             _commands.vkCreateShaderModule(_handle, &createInfo, null, &shaderModule).ThrowOnError();
 
             return new ShaderModule(shaderModule, _handle, _commands);
+        }
+    }
+
+    public PipelineLayout CreatePipelineLayout(VkDescriptorSetLayout[]? setLayouts = null, VkPushConstantRange[]? pushConstantRanges = null)
+    {
+        fixed (VkDescriptorSetLayout* setLayoutsPtr = setLayouts)
+        fixed (VkPushConstantRange* pushConstantRangesPtr = pushConstantRanges)
+        {
+            VkPipelineLayoutCreateInfo vkCreateInfo = new()
+            {
+                pSetLayouts = setLayouts != null ? setLayoutsPtr : null,
+                setLayoutCount = (uint)(setLayouts?.Length ?? 0),
+
+                pPushConstantRanges = pushConstantRanges != null ? pushConstantRangesPtr : null,
+                pushConstantRangeCount = (uint)(pushConstantRanges?.Length ?? 0),
+            };
+
+            VkPipelineLayout pipelineLayout;
+
+            _commands.vkCreatePipelineLayout(_handle, &vkCreateInfo, null, &pipelineLayout);
+
+            return new PipelineLayout(pipelineLayout, _handle, _commands);
         }
     }
 
@@ -103,38 +125,6 @@ public sealed unsafe class VulkanDevice : IDisposable
     }
 
     ~VulkanDevice()
-    {
-        Dispose();
-    }
-}
-
-public sealed unsafe class ShaderModule : IDisposable
-{
-    private VkShaderModule _handle;
-    private readonly VkDevice _deviceHandle;
-    private readonly VkDeviceCommands _commands;
-
-    public ShaderModule(VkShaderModule handle, VkDevice deviceHandle, VkDeviceCommands commands)
-    {
-        _handle = handle;
-        _deviceHandle = deviceHandle;
-        _commands = commands;
-    }
-
-    public void Dispose()
-    {
-        if (_handle == nint.Zero)
-        {
-            return;
-        }
-
-        _commands.vkDestroyShaderModule(_deviceHandle, _handle, null);
-        _handle = nint.Zero;
-
-        GC.SuppressFinalize(this);
-    }
-
-    ~ShaderModule()
     {
         Dispose();
     }
