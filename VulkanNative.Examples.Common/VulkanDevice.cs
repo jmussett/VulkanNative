@@ -111,6 +111,49 @@ public sealed unsafe class VulkanDevice : IDisposable
         }
     }
 
+    public RenderPass CreateRenderPass(SubpassDescription[] subpassDescriptions, VkAttachmentDescription[] colorAttachments)
+    {
+        fixed (VkAttachmentDescription* colorAttachmentPtr = colorAttachments)
+        {
+            var subpassesPtr = stackalloc VkSubpassDescription[subpassDescriptions.Length];
+
+            for(var i = 0; i < subpassDescriptions.Length; i++)
+            {
+                subpassesPtr[i] = new()
+                {
+                    pipelineBindPoint = subpassDescriptions[i].BindPoint,
+                    inputAttachmentCount = (uint) subpassDescriptions[i].InputAttachments.Length,
+                    pInputAttachments = subpassDescriptions[i].InputAttachments.AsPointer(),
+                    colorAttachmentCount = (uint)subpassDescriptions[i].ColorAttachments.Length,
+                    pColorAttachments = subpassDescriptions[i].ColorAttachments.AsPointer(),
+                    pResolveAttachments = subpassDescriptions[i].ResolveReferences.AsPointer(),
+                    preserveAttachmentCount = (uint) subpassDescriptions[i].PreserveAttachments.Length,
+                    pPreserveAttachments = subpassDescriptions[i].PreserveAttachments.AsPointer(),
+                };
+
+                if (subpassDescriptions[i].DepthStencilAttachment.HasValue)
+                {
+                    var a = subpassDescriptions[i].DepthStencilAttachment!.Value;
+                    subpassesPtr[i].pDepthStencilAttachment = &a;
+                }
+            }
+
+            VkRenderPassCreateInfo renderPassInfo = new()
+            {
+                attachmentCount = (uint) colorAttachments.Length,
+                pAttachments = colorAttachmentPtr,
+                subpassCount = (uint) subpassDescriptions.Length,
+                pSubpasses = subpassesPtr
+            };
+
+            VkRenderPass renderPass;
+
+            _commands.vkCreateRenderPass(_handle, &renderPassInfo, null, &renderPass).ThrowOnError();
+
+            return new RenderPass(renderPass, _handle, _commands);
+        }
+    }
+
     public void Dispose()
     {
         if (_handle == nint.Zero)

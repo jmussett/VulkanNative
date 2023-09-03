@@ -44,7 +44,7 @@ public unsafe sealed class UnmanagedEncodedString : IUnmanaged<byte>
     public UnmanagedEncodedString(ReadOnlySpan<char> value, Encoding encoding)
     {
         var length = encoding.GetByteCount(value);
-        _bytes = new UnmanagedBuffer<byte>(length + 1); // +1 for null-terminator
+        _bytes = new UnmanagedBuffer<byte>(length + 1, true); // +1 for null-terminator
 
         fixed (char* strPtr = value)
         {

@@ -91,25 +91,25 @@ public unsafe class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerable<Unman
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public UnmanagedJaggedArrayEnumerator<TItem> GetEnumerator()
+    public Enumerator GetEnumerator()
     {
         CheckDisposed();
 
-        return new UnmanagedJaggedArrayEnumerator<TItem>(_pointers, _lengths, _currentLength);
+        return new Enumerator(_pointers, _lengths, _currentLength);
     }
 
     IEnumerator IEnumerable.GetEnumerator()
     {
         CheckDisposed();
 
-        return new UnmanagedJaggedArrayEnumerator<TItem>(_pointers, _lengths, _currentLength);
+        return new Enumerator(_pointers, _lengths, _currentLength);
     }
 
     IEnumerator<UnmanagedSegment<TItem>> IEnumerable<UnmanagedSegment<TItem>>.GetEnumerator()
     {
         CheckDisposed();
 
-        return new UnmanagedJaggedArrayEnumerator<TItem>(_pointers, _lengths, _currentLength);
+        return new Enumerator(_pointers, _lengths, _currentLength);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -201,7 +201,7 @@ public unsafe class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerable<Unman
         }
     }
 
-    public struct UnmanagedJaggedArrayEnumerator<TItem> : IEnumerator<UnmanagedSegment<TItem>> where TItem : unmanaged
+    public struct Enumerator : IEnumerator<UnmanagedSegment<TItem>>
     {
         private readonly TItem** _pointers;
         private readonly int* _lengths;
@@ -209,7 +209,7 @@ public unsafe class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerable<Unman
         private int _currentIndex;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public UnmanagedJaggedArrayEnumerator(TItem** pointers, int* lengths, int currentLength)
+        public Enumerator(TItem** pointers, int* lengths, int currentLength)
         {
             _pointers = pointers;
             _lengths = lengths;
