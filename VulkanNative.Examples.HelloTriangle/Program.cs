@@ -344,10 +344,14 @@ for (var i = 0; i < framebuffers.Length; i++)
     );
 }
 
+var commandPool = device.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT, graphicsQueueFamilyIndex.Value);
+
 while (!Glfw.WindowShouldClose(window))
 {
     Glfw.PollEvents();
 }
+
+commandPool.Dispose();
 
 for (var i = 0; i < framebuffers.Length; i++)
 {

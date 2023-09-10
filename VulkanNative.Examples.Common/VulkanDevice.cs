@@ -398,6 +398,21 @@ public sealed unsafe class VulkanDevice : IDisposable
         return new Framebuffer(vkFramebuffer, _handle, _commands);
     }
 
+    public CommandPool CreateCommandPool(VkCommandPoolCreateFlags flags, uint queueFamilyIndex)
+    {
+        VkCommandPoolCreateInfo commandPoolCreateInfo = new()
+        {
+            flags = flags,
+            queueFamilyIndex = queueFamilyIndex
+        };
+
+        VkCommandPool vkCommandPool;
+
+        _commands.vkCreateCommandPool(_handle, &commandPoolCreateInfo, null, &vkCommandPool).ThrowOnError();
+
+        return new CommandPool(vkCommandPool, _handle, _commands);
+    }
+
     public void Dispose()
     {
         if (_handle == nint.Zero)
