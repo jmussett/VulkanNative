@@ -21,6 +21,15 @@ public sealed unsafe class VulkanDevice : IDisposable
         _swapchainExtension = _loader.Extensions.LoadVkKhrSwapchainExtension(_handle);
     }
 
+    public VulkanQueue GetQueue(uint queueFamilyIndex, uint queueIndex)
+    {
+        VkQueue queue;
+
+        _commands.vkGetDeviceQueue(_handle, queueFamilyIndex, queueIndex, &queue);
+
+        return new VulkanQueue(queue, _commands, _swapchainExtension);
+    }
+
     public unsafe VulkanSwapchain CreateSwapchain(SwapchainCreateInfo createInfo)
     {
         fixed (void* queueFamilyIndecesPtr = createInfo.QueueFamilyIndeces)
@@ -111,8 +120,9 @@ public sealed unsafe class VulkanDevice : IDisposable
         }
     }
 
-    public RenderPass CreateRenderPass(SubpassDescription[] subpassDescriptions, VkAttachmentDescription[] colorAttachments)
+    public RenderPass CreateRenderPass(SubpassDescription[] subpassDescriptions, VkAttachmentDescription[] colorAttachments, VkSubpassDependency[] dependancies)
     {
+        fixed(VkSubpassDependency* dependancyPtr = dependancies)
         fixed (VkAttachmentDescription* colorAttachmentPtr = colorAttachments)
         {
             var subpassesPtr = stackalloc VkSubpassDescription[subpassDescriptions.Length];
@@ -138,12 +148,15 @@ public sealed unsafe class VulkanDevice : IDisposable
                 }
             }
 
+
             VkRenderPassCreateInfo renderPassInfo = new()
             {
                 attachmentCount = (uint) colorAttachments.Length,
                 pAttachments = colorAttachmentPtr,
                 subpassCount = (uint) subpassDescriptions.Length,
-                pSubpasses = subpassesPtr
+                pSubpasses = subpassesPtr,
+                dependencyCount = (uint) dependancies.Length,
+                pDependencies = dependancyPtr
             };
 
             VkRenderPass renderPass;
@@ -424,15 +437,48 @@ public sealed unsafe class VulkanDevice : IDisposable
         return new VulkanSemaphore(vkSemaphore, _handle, _commands);
     }
 
-    public VulkanFence CreateFence()
+    public VulkanFence CreateFence(VkFenceCreateFlags flags = 0) // TODO: add None
     {
-        VkFenceCreateInfo createInfo = new();
+        VkFenceCreateInfo createInfo = new()
+        {
+            flags = flags
+        };
 
         VkFence vkFence;
 
         _commands.vkCreateFence(_handle, &createInfo, null, &vkFence);
 
         return new VulkanFence(vkFence, _handle, _commands);
+    }
+
+    public void WaitForFences(VulkanFence[] fences, bool waitAll, uint timeout = uint.MaxValue)
+    {
+        VkFence* fencesPtr = stackalloc VkFence[fences.Length];
+
+        for (int i = 0; i < fences.Length; i++)
+        {
+            fencesPtr[i] = fences[i].Handle;
+        }
+
+        _commands.vkWaitForFences(_handle, (uint)fences.Length, fencesPtr, (uint)(waitAll ? 1 : 0), timeout).ThrowOnError();
+    }
+
+    public void ResetFences(VulkanFence[] fences)
+    {
+        VkFence* fencesPtr = stackalloc VkFence[fences.Length];
+
+        for (int i = 0; i < fences.Length; i++)
+        {
+            fencesPtr[i] = fences[i].Handle;
+        }
+
+        _commands.vkResetFences(_handle, (uint)fences.Length, fencesPtr).ThrowOnError();
+    }
+
+
+    public void WaitIdle()
+    {
+        _commands.vkDeviceWaitIdle(_handle).ThrowOnError();
     }
 
     public void Dispose()
@@ -449,72 +495,6 @@ public sealed unsafe class VulkanDevice : IDisposable
     }
 
     ~VulkanDevice()
-    {
-        Dispose();
-    }
-}
-
-public unsafe sealed class VulkanSemaphore : IDisposable
-{
-    private VkSemaphore _handle;
-    private VkDevice _deviceHandle;
-    private readonly VkDeviceCommands _commands;
-    public nint Handle => _handle;
-
-    public VulkanSemaphore(VkSemaphore handle, VkDevice deviceHandle, VkDeviceCommands commands)
-    {
-        _handle = handle;
-        _deviceHandle = deviceHandle;
-        _commands = commands;
-    }
-
-    public void Dispose()
-    {
-        if (_deviceHandle == nint.Zero)
-        {
-            return;
-        }
-
-        _commands.vkDestroySemaphore(_deviceHandle, _handle, null);
-        _deviceHandle = nint.Zero;
-
-        GC.SuppressFinalize(this);
-    }
-
-    ~VulkanSemaphore()
-    {
-        Dispose();
-    }
-}
-
-public unsafe sealed class VulkanFence : IDisposable
-{
-    private VkFence _handle;
-    private VkDevice _deviceHandle;
-    private readonly VkDeviceCommands _commands;
-    public nint Handle => _handle;
-
-    public VulkanFence(VkFence handle, VkDevice deviceHandle, VkDeviceCommands commands)
-    {
-        _handle = handle;
-        _deviceHandle = deviceHandle;
-        _commands = commands;
-    }
-
-    public void Dispose()
-    {
-        if (_deviceHandle == nint.Zero)
-        {
-            return;
-        }
-
-        _commands.vkDestroyFence(_deviceHandle, _handle, null);
-        _deviceHandle = nint.Zero;
-
-        GC.SuppressFinalize(this);
-    }
-
-    ~VulkanFence()
     {
         Dispose();
     }

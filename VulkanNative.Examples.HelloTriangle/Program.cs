@@ -122,6 +122,9 @@ using UnmanagedUtf8StringArray deviceExtensions = new()
 
 var device = physicalDevice.CreateLogicalDevice(deviceExtensions, deviceQueues);
 
+var graphicsQueue = device.GetQueue(graphicsQueueFamilyIndex.Value, 0);
+var presentQueue = device.GetQueue(presentationQueueFamilyIndex.Value, 0);
+
 var capabilities = surface.GetCapabilities(physicalDevice);
 var presentModes = surface.GetPresentModes(physicalDevice);
 var surfaceFormats = surface.GetSurfaceFormats(physicalDevice);
@@ -198,35 +201,49 @@ var vertShader = device.CreateShaderModule(vertBytes);
 var fragShader = device.CreateShaderModule(fragBytes);
 
 var pipelineLayout = device.CreatePipelineLayout();
-var renderPass = device.CreateRenderPass(new[]
-{
-    new SubpassDescription
+var renderPass = device.CreateRenderPass(
+    new[]
     {
-        BindPoint = VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS,
-        ColorAttachments = new()
+        new SubpassDescription
         {
-            new VkAttachmentReference
+            BindPoint = VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS,
+            ColorAttachments = new()
             {
-                attachment = 0,
-                layout = VkImageLayout.VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL
+                new VkAttachmentReference
+                {
+                    attachment = 0,
+                    layout = VkImageLayout.VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL
+                }
             }
         }
-    }
-},
-new[]
-{
-    new VkAttachmentDescription
+    },
+    new[]
     {
-        format = surfaceFormat.format,
-        samples  = VkSampleCountFlags.VK_SAMPLE_COUNT_1_BIT,
-        loadOp = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_CLEAR,
-        storeOp = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_STORE,
-        stencilLoadOp  = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_DONT_CARE,
-        stencilStoreOp  = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_DONT_CARE,
-        initialLayout = VkImageLayout.VK_IMAGE_LAYOUT_UNDEFINED,
-        finalLayout = VkImageLayout.VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
+        new VkAttachmentDescription
+        {
+            format = surfaceFormat.format,
+            samples  = VkSampleCountFlags.VK_SAMPLE_COUNT_1_BIT,
+            loadOp = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_CLEAR,
+            storeOp = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_STORE,
+            stencilLoadOp  = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_DONT_CARE,
+            stencilStoreOp  = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_DONT_CARE,
+            initialLayout = VkImageLayout.VK_IMAGE_LAYOUT_UNDEFINED,
+            finalLayout = VkImageLayout.VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
+        }
+    },
+    new[]
+    {
+        new VkSubpassDependency
+        {
+            srcSubpass = VulkanApiConstants.VK_SUBPASS_EXTERNAL,
+            dstSubpass = 0,
+            srcStageMask = VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+            srcAccessMask = 0,
+            dstStageMask = VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+            dstAccessMask = VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT
+        }
     }
-});
+);
 
 var graphicsPipelines = device.CreateGraphicsPipelines(new[]
 {
@@ -348,17 +365,56 @@ var commandPool = device.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_P
 
 var commandBuffers = commandPool.AllocateCommandBuffers(1, VkCommandBufferLevel.VK_COMMAND_BUFFER_LEVEL_PRIMARY);
 
-for(var i = 0; i < framebuffers.Length; i++)
+var imageAvailableSemaphore = device.CreateSemaphore();
+var renderFinishedSemaphore = device.CreateSemaphore();
+var inFlightFence = device.CreateFence(VkFenceCreateFlags.VK_FENCE_CREATE_SIGNALED_BIT);
+
+var fences = new[] { inFlightFence };
+
+using VulkanBuffer<VkPipelineStageFlags> waitStages = new()
 {
+    VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT
+};
+
+var waitSemaphores = new[] { imageAvailableSemaphore };
+var signalSemaphores = new[] { renderFinishedSemaphore };
+
+var queueSubmissions = new[]
+{
+    new QueueSubmission
+    {
+        CommandBuffers = commandBuffers,
+        SignalSemaphores = signalSemaphores,
+        WaitSemaphores = waitSemaphores,
+        WaitStages = waitStages
+    }
+};
+
+var swapchains = new[] { swapchain };
+
+while (!Glfw.WindowShouldClose(window))
+{
+    Glfw.PollEvents();
+
+    device.WaitForFences(fences, true);
+
+    device.ResetFences(fences);
+
+    var imageIndex = swapchain.AquireNextImage(imageAvailableSemaphore);
+
+    commandBuffers[0].Reset();
+
     commandBuffers[0].Begin();
 
+    using VulkanBuffer<ClearValue> clearColors = new()
+    {
+        ClearValue.ClearColor(0, 0, 0, 0)
+    };
+
     commandBuffers[0].BeginRenderPass(
-        framebuffers[i], 
-        renderPass, 
-        new()
-        {
-            ClearValue.ClearColor(0, 0, 0, 0)
-        },
+        framebuffers[imageIndex],
+        renderPass,
+        clearColors,
         new VkRect2D
         {
             offset = new() { x = 0, y = 0 },
@@ -369,7 +425,7 @@ for(var i = 0; i < framebuffers.Length; i++)
 
     commandBuffers[0].BindPipeline(VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipelines[0]);
 
-    commandBuffers[0].SetViewport(0, new()
+    using VulkanBuffer<VkViewport> viewports = new()
     {
         new VkViewport
         {
@@ -380,33 +436,35 @@ for(var i = 0; i < framebuffers.Length; i++)
             minDepth = 0,
             maxDepth = 1.0f,
         }
-    });
+    };
 
-    commandBuffers[0].SetScissor(0, new()
+    commandBuffers[0].SetViewport(0, viewports);
+
+    using VulkanBuffer<VkRect2D> scissors = new()
     {
         new VkRect2D
         {
             offset = new() { x = 0, y = 0 },
             extent = capabilities.currentExtent
-        },
-    });
+        }
+    };
+
+    commandBuffers[0].SetScissor(0, scissors);
 
     commandBuffers[0].Draw(3, 1, 0, 0);
 
     commandBuffers[0].EndRenderPass();
 
     commandBuffers[0].End();
+
+    graphicsQueue.Submit(queueSubmissions, inFlightFence);
+
+    using VulkanBuffer<uint> imageIndeces = new() { imageIndex };
+
+    presentQueue.Present(swapchains, signalSemaphores, imageIndeces);
 }
 
-var imageAvailableSemaphore = device.CreateSemaphore();
-var renderFinishedSemaphore = device.CreateSemaphore();
-var inFlightFence = device.CreateFence();
-
-
-while (!Glfw.WindowShouldClose(window))
-{
-    Glfw.PollEvents();
-}
+device.WaitIdle();
 
 imageAvailableSemaphore.Dispose();
 renderFinishedSemaphore.Dispose();

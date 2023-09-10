@@ -1,10 +1,14 @@
-﻿namespace VulkanNative.Examples.Common;
+﻿using VulkanNative.Examples.Common.Utility;
+
+namespace VulkanNative.Examples.Common;
 
 public sealed unsafe class VulkanSwapchain : IDisposable
 {
     private VkSwapchainKHR _handle;
     private readonly VkDevice _deviceHandle;
     private readonly VkKhrSwapchainExtension _swapchainExtension;
+
+    public nint Handle => _handle;
 
     public VulkanSwapchain(VkSwapchainKHR handle, VkDevice deviceHandle, VkKhrSwapchainExtension swapchainExtension)
     {
@@ -30,6 +34,19 @@ public sealed unsafe class VulkanSwapchain : IDisposable
         }
 
         return images;
+    }
+
+    public uint AquireNextImage(VulkanSemaphore? semaphore = null, VulkanFence? fence = null, uint timeout = uint.MaxValue)
+    {
+        uint imageIndex;
+
+        _swapchainExtension.vkAcquireNextImageKHR(
+            _deviceHandle, _handle, timeout, 
+            semaphore?.Handle ?? nint.Zero, fence?.Handle ?? nint.Zero, 
+            &imageIndex
+        ).ThrowOnError();
+
+        return imageIndex;
     }
 
 

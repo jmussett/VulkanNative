@@ -74,5 +74,10 @@ public unsafe sealed class CommandBuffer
         _commands.vkCmdDraw(_handle, vertexCount, instanceCount, firstVertex, firstInstance);
     }
 
+    public void Reset(VkCommandBufferResetFlags flags = 0) // TODO: None
+    {
+        _commands.vkResetCommandBuffer(_handle, flags).ThrowOnError();
+    }
+
     
 }

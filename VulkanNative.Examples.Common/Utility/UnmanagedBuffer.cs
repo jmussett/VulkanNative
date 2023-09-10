@@ -139,6 +139,8 @@ public unsafe class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TIte
         return new Enumerator(_pointer, _currentLength);
     }
 
+    public static implicit operator Span<TItem>(UnmanagedBuffer<TItem> buffer) => buffer.AsSpan();
+
     public override string ToString()
     {
         return AsSpan().ToString();
