@@ -346,6 +346,8 @@ for (var i = 0; i < framebuffers.Length; i++)
 
 var commandPool = device.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT, graphicsQueueFamilyIndex.Value);
 
+var commandBuffers = commandPool.AllocateCommandBuffers(1, VkCommandBufferLevel.VK_COMMAND_BUFFER_LEVEL_PRIMARY);
+
 while (!Glfw.WindowShouldClose(window))
 {
     Glfw.PollEvents();
