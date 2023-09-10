@@ -7,6 +7,8 @@ public sealed unsafe class PipelineLayout : IDisposable
     private readonly VkDevice _deviceHandle;
     private readonly VkDeviceCommands _commands;
 
+    public nint Handle => _handle;
+
     public PipelineLayout(VkPipelineLayout handle, VkDevice deviceHandle, VkDeviceCommands commands)
     {    
         _handle = handle;

@@ -1,14 +1,14 @@
 ﻿namespace VulkanNative.Examples.Common;
 
-public sealed unsafe class RenderPass : IDisposable
+public sealed unsafe class Pipeline : IDisposable
 {
-    private VkRenderPass _handle;
+    private VkPipeline _handle;
     private readonly VkDevice _deviceHandle;
     private readonly VkDeviceCommands _commands;
 
     public nint Handle => _handle;
 
-    public RenderPass(VkRenderPass handle, VkDevice deviceHandle, VkDeviceCommands commands)
+    public Pipeline(VkPipeline handle, VkDevice deviceHandle, VkDeviceCommands commands)
     {
         _handle = handle;
         _deviceHandle = deviceHandle;
@@ -22,13 +22,13 @@ public sealed unsafe class RenderPass : IDisposable
             return;
         }
 
-        _commands.vkDestroyRenderPass(_deviceHandle, _handle, null);
+        _commands.vkDestroyPipeline(_deviceHandle, _handle, null);
         _handle = nint.Zero;
 
         GC.SuppressFinalize(this);
     }
 
-    ~RenderPass()
+    ~Pipeline()
     {
         Dispose();
     }

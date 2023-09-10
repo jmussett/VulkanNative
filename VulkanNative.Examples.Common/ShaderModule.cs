@@ -6,6 +6,8 @@ public sealed unsafe class ShaderModule : IDisposable
     private readonly VkDevice _deviceHandle;
     private readonly VkDeviceCommands _commands;
 
+    public nint Handle => _handle;
+
     public ShaderModule(VkShaderModule handle, VkDevice deviceHandle, VkDeviceCommands commands)
     {
         _handle = handle;

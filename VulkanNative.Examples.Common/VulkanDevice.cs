@@ -154,6 +154,226 @@ public sealed unsafe class VulkanDevice : IDisposable
         }
     }
 
+    public Pipeline[] CreateGraphicsPipelines(GraphicsPipelineDefinition[] pipelineDefitions)
+    {
+        var pipelineCache = new VkPipelineCache(nint.Zero);
+
+        VkGraphicsPipelineCreateInfo* vkCreateInfosPtr = stackalloc VkGraphicsPipelineCreateInfo[pipelineDefitions.Length];
+
+        using UnmanagedJaggedArray<VkPipelineDynamicStateCreateInfo> dynamicStates = new();
+        using UnmanagedJaggedArray<VkPipelineVertexInputStateCreateInfo> vertextInputStates = new();
+        using UnmanagedJaggedArray<VkPipelineInputAssemblyStateCreateInfo> inputAssemblyStates = new();
+        using UnmanagedJaggedArray<VkPipelineShaderStageCreateInfo> stages = new();
+        using UnmanagedJaggedArray<VkPipelineViewportStateCreateInfo> viewportStates = new();
+        using UnmanagedJaggedArray<VkPipelineRasterizationStateCreateInfo> rasterizationStates = new();
+        using UnmanagedJaggedArray<VkPipelineMultisampleStateCreateInfo> multisampleStates = new();
+        using UnmanagedJaggedArray<VkPipelineColorBlendStateCreateInfo> colorBlendStates = new();
+        using UnmanagedJaggedArray<VkPipelineColorBlendAttachmentState> colorBlendAttachmentStates = new();
+
+        // We allocate the nullable types first so they're lifetime is preserved until after vkCreateGraphicsPipelines is called.
+        for (var i = 0; i < pipelineDefitions.Length; i++)
+        {
+            VkPipelineVertexInputStateCreateInfo? vertextInputStateCreateInfo =
+                pipelineDefitions[i].VertexInputState is not null
+                    ? new()
+                    {
+                        vertexAttributeDescriptionCount = (uint)pipelineDefitions[i].VertexInputState!.VertexAttributeDescriptions.Length,
+                        pVertexAttributeDescriptions = pipelineDefitions[i].VertexInputState!.VertexAttributeDescriptions.AsPointer(),
+                        vertexBindingDescriptionCount = (uint)pipelineDefitions[i].VertexInputState!.VertexBindingDescriptions.Length,
+                        pVertexBindingDescriptions = pipelineDefitions[i].VertexInputState!.VertexBindingDescriptions.AsPointer()
+                    }
+                    : null;
+
+            vertextInputStates.Add(vertextInputStateCreateInfo);
+
+            VkPipelineDynamicStateCreateInfo? dynamicStateCreateInfo =
+                pipelineDefitions[i].DynamicStates.Length != 0
+                    ? new()
+                    {
+                        dynamicStateCount = (uint)pipelineDefitions[i].DynamicStates.Length,
+                        pDynamicStates = pipelineDefitions[i].DynamicStates.AsPointer()
+                    }
+                    : null;
+
+            dynamicStates.Add(dynamicStateCreateInfo);
+
+            VkPipelineInputAssemblyStateCreateInfo? inputAssemblyStateCreateInf =
+                pipelineDefitions[i].InputAssemblyState.HasValue
+                    ? new()
+                    {
+                        topology = pipelineDefitions[i].InputAssemblyState!.Value.Topology,
+                        primitiveRestartEnable = (uint)(pipelineDefitions[i].InputAssemblyState!.Value.PrimitiveRestartEnable ? 1 : 0)
+                    }
+                    : null;
+
+            inputAssemblyStates.Add(inputAssemblyStateCreateInf);
+
+            UnmanagedBuffer<VkPipelineShaderStageCreateInfo> stageBuffer = new(pipelineDefitions[i].Stages.Length, true);
+
+            for (var j = 0; j < pipelineDefitions[i].Stages.Length; j++)
+            {
+                VkSpecializationInfo* specializationInfoPtr = null;
+
+                if (pipelineDefitions[i].Stages[j].SpecializationInfo is not null)
+                {
+                    var specialziationInfoHandle = pipelineDefitions[i].Stages[j].SpecializationInfo!.Handle;
+                    specializationInfoPtr = &specialziationInfoHandle;
+                }
+
+                stageBuffer[j] = new()
+                {
+                    // TODO: pNext
+                    flags = pipelineDefitions[i].Stages[j].Flags,
+                    pName = pipelineDefitions[i].Stages[j].Name.AsPointer(),
+                    stage = pipelineDefitions[i].Stages[j].Stage,
+                    module = pipelineDefitions[i].Stages[j].Module.Handle,
+                    pSpecializationInfo = specializationInfoPtr,
+                };
+            }
+
+            stages.Add(stageBuffer);
+
+            VkPipelineViewportStateCreateInfo? viewportStateCreateInfo = pipelineDefitions[i].ViewportState is not null
+                ? new()
+                {
+                    viewportCount = (uint) pipelineDefitions[i].ViewportState!.Viewports.Length,
+                    pViewports = pipelineDefitions[i].ViewportState!.Viewports.AsPointer(),
+                    scissorCount = (uint) pipelineDefitions[i].ViewportState!.Scissors.Length,
+                    pScissors = pipelineDefitions[i].ViewportState!.Scissors.AsPointer(),
+                }
+                : null;
+
+            viewportStates.Add(viewportStateCreateInfo);
+
+            VkPipelineRasterizationStateCreateInfo? rasterizationStateCreateInfo = pipelineDefitions[i].RasterizationState is not null
+                ? new()
+                {
+                    // TODO: pNext
+                    depthClampEnable = (uint) (pipelineDefitions[i].RasterizationState!.Value.DepthClampEnable ? 1 : 0),
+                    rasterizerDiscardEnable = (uint)(pipelineDefitions[i].RasterizationState!.Value.RasterizerDiscardEnable ? 1 : 0),
+                    polygonMode = pipelineDefitions[i].RasterizationState!.Value.PolygonMode,
+                    cullMode = pipelineDefitions[i].RasterizationState!.Value.CullMode,
+                    frontFace = pipelineDefitions[i].RasterizationState!.Value.FrontFace,
+                    depthBiasEnable = (uint)(pipelineDefitions[i].RasterizationState!.Value.DepthBiasEnable ? 1 : 0),
+                    depthBiasConstantFactor = pipelineDefitions[i].RasterizationState!.Value.DepthBiasConstantFactor,
+                    depthBiasClamp = pipelineDefitions[i].RasterizationState!.Value.DepthBiasClamp,
+                    depthBiasSlopeFactor = pipelineDefitions[i].RasterizationState!.Value.DepthBiasSlopeFactor,
+                    lineWidth = pipelineDefitions[i].RasterizationState!.Value.LineWidth
+                }
+                : null;
+
+            rasterizationStates.Add(rasterizationStateCreateInfo);
+
+            VkPipelineMultisampleStateCreateInfo? multisampleStateCreateInfo = pipelineDefitions[i].MultisampleState is not null
+                ? new()
+                {
+                    rasterizationSamples = pipelineDefitions[i].MultisampleState!.Value.RasterizationSamples,
+                    sampleShadingEnable = (uint)(pipelineDefitions[i].MultisampleState!.Value.SampleShadingEnable ? 1 : 0),
+                    minSampleShading = pipelineDefitions[i].MultisampleState!.Value.MinSampleShading,
+                    pSampleMask = null, // TODOs
+                    alphaToCoverageEnable = (uint)(pipelineDefitions[i].MultisampleState!.Value.AlphaToCoverageEnable ? 1 : 0),
+                    alphaToOneEnable = (uint)(pipelineDefitions[i].MultisampleState!.Value.AlphaToOneEnable ? 1 : 0),
+                }
+                : null;
+
+            multisampleStates.Add(multisampleStateCreateInfo);
+
+            if (pipelineDefitions[i].ColorBlendState is not null)
+            {
+                VkPipelineColorBlendStateCreateInfo colorBlendStateCreateInfo = new()
+                {
+                    logicOpEnable = (uint)(pipelineDefitions[i].ColorBlendState!.LogicOpEnable ? 1 : 0),
+                    logicOp = pipelineDefitions[i].ColorBlendState!.LogicOp, 
+                };
+
+                colorBlendStateCreateInfo.blendConstants[0] = pipelineDefitions[i].ColorBlendState!.BlendConstants[0];
+                colorBlendStateCreateInfo.blendConstants[1] = pipelineDefitions[i].ColorBlendState!.BlendConstants[1];
+                colorBlendStateCreateInfo.blendConstants[2] = pipelineDefitions[i].ColorBlendState!.BlendConstants[2];
+                colorBlendStateCreateInfo.blendConstants[3] = pipelineDefitions[i].ColorBlendState!.BlendConstants[3];
+
+                VulkanBuffer<VkPipelineColorBlendAttachmentState> attachmentStateBuffer = new();
+
+                for (int j = 0; j < pipelineDefitions[i].ColorBlendState!.Attachments.Length; j++)
+                {
+                    var attachment = pipelineDefitions[i].ColorBlendState!.Attachments[j];
+
+                    VkPipelineColorBlendAttachmentState attachmentState = new()
+                    {
+                        blendEnable = (uint) (attachment.BlendEnable ? 1 : 0),
+                        srcColorBlendFactor = attachment.SrcColorBlendFactor,
+                        dstColorBlendFactor = attachment.DstColorBlendFactor,
+                        colorBlendOp = attachment.ColorBlendOp,
+                        srcAlphaBlendFactor = attachment.SrcAlphaBlendFactor,
+                        dstAlphaBlendFactor = attachment.DstAlphaBlendFactor,
+                        alphaBlendOp = attachment.AlphaBlendOp,
+                        colorWriteMask = attachment.ColorWriteMask,
+                    };
+
+                    attachmentStateBuffer.Add(attachmentState);
+                }
+
+                colorBlendStateCreateInfo.attachmentCount = (uint) attachmentStateBuffer.Length;
+                colorBlendStateCreateInfo.pAttachments = attachmentStateBuffer.AsPointer();
+
+                colorBlendAttachmentStates.Add(attachmentStateBuffer);
+                colorBlendStates.Add(colorBlendStateCreateInfo);
+            }
+            else
+            {
+                colorBlendStates.Add((VkPipelineColorBlendStateCreateInfo?) null);
+            }
+
+            
+        }
+
+        for (var i = 0; i < pipelineDefitions.Length; i++)
+        {
+            VkPipeline basePipeline = nint.Zero;
+
+            if (pipelineDefitions[i].BasePipeline is not null)
+            {
+                basePipeline = pipelineDefitions[i].BasePipeline!.Handle;
+            }
+
+            vkCreateInfosPtr[i] = new()
+            {
+                pNext = null, // TODO
+                //flags = null, // TODO
+                renderPass = pipelineDefitions[i].RenderPass.Handle,
+                layout = pipelineDefitions[i].PipelineLayout.Handle,
+                pStages = stages.AsPointer()[i],
+                stageCount = (uint)stages[i].Length,
+                pDynamicState = dynamicStates.AsPointer()[i],
+                pVertexInputState = vertextInputStates.AsPointer()[i],
+                pInputAssemblyState = inputAssemblyStates.AsPointer()[i],
+                pViewportState = viewportStates.AsPointer()[i],
+                pRasterizationState = rasterizationStates.AsPointer()[i],
+                pMultisampleState = multisampleStates.AsPointer()[i],
+                pDepthStencilState = null, // TODO
+                pColorBlendState = colorBlendStates.AsPointer()[i],
+                basePipelineHandle = basePipeline,
+                basePipelineIndex = pipelineDefitions[i].BasePipelineIndex,
+                
+                pTessellationState = null, // TODO
+                subpass = pipelineDefitions[i].Subpass
+            };
+        }
+
+        VkPipeline* pipelinesPtr = stackalloc VkPipeline[pipelineDefitions.Length];
+
+        _commands.vkCreateGraphicsPipelines(_handle, pipelineCache, (uint)pipelineDefitions.Length, vkCreateInfosPtr, null, pipelinesPtr)
+            .ThrowOnError();
+
+        var pipelines = new Pipeline[pipelineDefitions.Length];
+
+        for(var i = 0; i < pipelineDefitions.Length; i++)
+        {
+            pipelines[i] = new Pipeline(pipelinesPtr[i], _handle, _commands);
+        }
+
+        return pipelines;
+    }
+
     public void Dispose()
     {
         if (_handle == nint.Zero)

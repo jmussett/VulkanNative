@@ -228,6 +228,106 @@ new[]
     }
 });
 
+var graphicsPipelines = device.CreateGraphicsPipelines(new[]
+{
+    new GraphicsPipelineDefinition
+    {
+        RenderPass = renderPass,
+        PipelineLayout = pipelineLayout,
+        DynamicStates = new()
+        {
+            VkDynamicState.VK_DYNAMIC_STATE_VIEWPORT,
+            VkDynamicState.VK_DYNAMIC_STATE_SCISSOR,
+        },
+        VertexInputState = new(), // no vertex data to load for now
+        InputAssemblyState = new()
+        {
+            Topology = VkPrimitiveTopology.VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST,
+            PrimitiveRestartEnable = false
+        },
+        Stages = new ShaderStage[]
+        {
+            new ShaderStage
+            {
+                Name = "main",
+                Stage = VkShaderStageFlags.VK_SHADER_STAGE_VERTEX_BIT,
+                Module = vertShader
+            },
+            new ShaderStage
+            {
+                Name = "main",
+                Stage = VkShaderStageFlags.VK_SHADER_STAGE_FRAGMENT_BIT,
+                Module = fragShader
+            }
+        },
+        ViewportState = new()
+        {
+            Viewports  =new()
+            {
+                new VkViewport
+                {
+                    x = 0, 
+                    y = 0, 
+                    width = capabilities.currentExtent.width, 
+                    height = capabilities.currentExtent.height,
+                    minDepth = 0,
+                    maxDepth = 1.0f,
+                }
+            },
+            Scissors = new()
+            {
+                new VkRect2D
+                {
+                    offset = new () { x = 0, y = 0 },
+                    extent = capabilities.currentExtent
+                }
+            }
+        },
+        RasterizationState = new()
+        {
+            DepthClampEnable = false,
+            RasterizerDiscardEnable = false,
+            PolygonMode = VkPolygonMode.VK_POLYGON_MODE_FILL,
+            LineWidth = 1,
+            CullMode = VkCullModeFlags.VK_CULL_MODE_BACK_BIT,
+            FrontFace = VkFrontFace.VK_FRONT_FACE_CLOCKWISE,
+            DepthBiasEnable = false,
+            DepthBiasConstantFactor = 0,
+            DepthBiasClamp = 0,
+            DepthBiasSlopeFactor = 0
+        },
+        MultisampleState = new()
+        {
+            SampleShadingEnable = false,
+            RasterizationSamples = VkSampleCountFlags.VK_SAMPLE_COUNT_1_BIT,
+            MinSampleShading = 1,
+            AlphaToCoverageEnable = false,
+            AlphaToOneEnable = false
+        },
+        ColorBlendState = new()
+        {
+            LogicOpEnable = false,
+            LogicOp = VkLogicOp.VK_LOGIC_OP_COPY,
+            Attachments = new()
+            {
+                new ()
+                {
+                    ColorWriteMask = VkColorComponentFlags.VK_COLOR_COMPONENT_R_BIT | VkColorComponentFlags.VK_COLOR_COMPONENT_G_BIT | VkColorComponentFlags.VK_COLOR_COMPONENT_B_BIT | VkColorComponentFlags.VK_COLOR_COMPONENT_A_BIT,
+                    BlendEnable = false,
+                    SrcColorBlendFactor = VkBlendFactor.VK_BLEND_FACTOR_ONE,
+                    DstColorBlendFactor = VkBlendFactor.VK_BLEND_FACTOR_ZERO,
+                    ColorBlendOp = VkBlendOp.VK_BLEND_OP_ADD,
+                    SrcAlphaBlendFactor = VkBlendFactor.VK_BLEND_FACTOR_ONE,
+                    DstAlphaBlendFactor = VkBlendFactor.VK_BLEND_FACTOR_ZERO,
+                    AlphaBlendOp = VkBlendOp.VK_BLEND_OP_ADD
+                }
+            }
+        },
+        BasePipeline = null,
+        BasePipelineIndex = -1
+    }
+});
+
 // Dispose after creating graphics pipeline
 vertShader.Dispose();
 fragShader.Dispose();
@@ -237,9 +337,15 @@ while (!Glfw.WindowShouldClose(window))
     Glfw.PollEvents();
 }
 
+// TODO: move down?
 for (var i = 0; i < imageViews.Length; i++)
 {
     imageViews[i].Dispose();
+}
+
+for(var i = 0; i < graphicsPipelines.Length; i++)
+{
+    graphicsPipelines[i].Dispose();
 }
 
 pipelineLayout.Dispose();
