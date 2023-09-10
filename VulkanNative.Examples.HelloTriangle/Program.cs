@@ -398,11 +398,19 @@ for(var i = 0; i < framebuffers.Length; i++)
     commandBuffers[0].End();
 }
 
+var imageAvailableSemaphore = device.CreateSemaphore();
+var renderFinishedSemaphore = device.CreateSemaphore();
+var inFlightFence = device.CreateFence();
+
 
 while (!Glfw.WindowShouldClose(window))
 {
     Glfw.PollEvents();
 }
+
+imageAvailableSemaphore.Dispose();
+renderFinishedSemaphore.Dispose();
+inFlightFence.Dispose();
 
 commandPool.Dispose();
 
