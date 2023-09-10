@@ -322,8 +322,6 @@ public sealed unsafe class VulkanDevice : IDisposable
             {
                 colorBlendStates.Add((VkPipelineColorBlendStateCreateInfo?) null);
             }
-
-            
         }
 
         for (var i = 0; i < pipelineDefitions.Length; i++)
@@ -372,6 +370,32 @@ public sealed unsafe class VulkanDevice : IDisposable
         }
 
         return pipelines;
+    }
+
+    public Framebuffer CreateFramebuffer(RenderPass renderPass, Span<ImageView> imageViews, uint width, uint height, uint layers)
+    {
+        VkImageView* imageViewsPtr = stackalloc VkImageView[imageViews.Length];
+
+        for(var i = 0; i < imageViews.Length; i++)
+        {
+            imageViewsPtr[i] = imageViews[i].Handle;
+        }
+
+        VkFramebufferCreateInfo createInfo = new()
+        {
+            renderPass = renderPass.Handle,
+            attachmentCount = (uint) imageViews.Length,
+            pAttachments = imageViewsPtr,
+            layers = layers,
+            width = width,
+            height = height,
+        };
+
+        VkFramebuffer vkFramebuffer;
+
+        _commands.vkCreateFramebuffer(Handle, &createInfo, null, &vkFramebuffer).ThrowOnError();
+
+        return new Framebuffer(vkFramebuffer, _handle, _commands);
     }
 
     public void Dispose()

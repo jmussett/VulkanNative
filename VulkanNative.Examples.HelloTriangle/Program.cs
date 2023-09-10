@@ -328,13 +328,30 @@ var graphicsPipelines = device.CreateGraphicsPipelines(new[]
     }
 });
 
-// Dispose after creating graphics pipeline
 vertShader.Dispose();
 fragShader.Dispose();
+
+var framebuffers = new Framebuffer[imageViews.Length];
+
+for (var i = 0; i < framebuffers.Length; i++)
+{
+    framebuffers[i] = device.CreateFramebuffer(
+        renderPass, 
+        imageViews.AsSpan().Slice(i, 1), 
+        capabilities.currentExtent.width, 
+        capabilities.currentExtent.height, 
+        1
+    );
+}
 
 while (!Glfw.WindowShouldClose(window))
 {
     Glfw.PollEvents();
+}
+
+for (var i = 0; i < framebuffers.Length; i++)
+{
+    framebuffers[i].Dispose();
 }
 
 // TODO: move down?

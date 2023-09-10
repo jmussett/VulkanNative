@@ -1,14 +1,12 @@
 ﻿namespace VulkanNative.Examples.Common;
 
-public sealed unsafe class ImageView : IDisposable
+public unsafe class Framebuffer : IDisposable
 {
-    private VkImageView _handle;
+    private VkFramebuffer _handle;
     private readonly VkDevice _deviceHandle;
     private readonly VkDeviceCommands _commands;
 
-    public nint Handle => _handle;
-
-    public ImageView(VkImageView handle, VkDevice deviceHandle, VkDeviceCommands commands)
+    public Framebuffer(VkFramebuffer handle, VkDevice deviceHandle, VkDeviceCommands commands)
     {
         _handle = handle;
         _deviceHandle = deviceHandle;
@@ -22,13 +20,13 @@ public sealed unsafe class ImageView : IDisposable
             return;
         }
 
-        _commands.vkDestroyImageView(_deviceHandle, _handle, null);
+        _commands.vkDestroyFramebuffer(_deviceHandle, _handle, null);
         _handle = nint.Zero;
 
         GC.SuppressFinalize(this);
     }
 
-    ~ImageView()
+    ~Framebuffer()
     {
         Dispose();
     }
