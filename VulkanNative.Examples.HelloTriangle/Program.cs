@@ -348,6 +348,8 @@ var commandPool = device.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_P
 
 var commandBuffers = commandPool.AllocateCommandBuffers(1, VkCommandBufferLevel.VK_COMMAND_BUFFER_LEVEL_PRIMARY);
 
+commandBuffers[0].Begin();
+
 while (!Glfw.WindowShouldClose(window))
 {
     Glfw.PollEvents();
