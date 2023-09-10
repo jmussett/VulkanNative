@@ -41,7 +41,7 @@ internal unsafe class DefaultFunctionLoader : IFunctionLoader
     {
         var byteCount = Encoding.UTF8.GetByteCount(name);
 
-        Span<byte> bytes = stackalloc byte[byteCount];
+        Span<byte> bytes = stackalloc byte[byteCount + 1];
 
         _ = Encoding.UTF8.GetBytes(name, bytes);
 
@@ -55,7 +55,7 @@ internal unsafe class DefaultFunctionLoader : IFunctionLoader
     {
         var byteCount = Encoding.UTF8.GetByteCount(name);
 
-        Span<byte> bytes = stackalloc byte[byteCount];
+        Span<byte> bytes = stackalloc byte[byteCount + 1];
 
         _ = Encoding.UTF8.GetBytes(name, bytes);
 

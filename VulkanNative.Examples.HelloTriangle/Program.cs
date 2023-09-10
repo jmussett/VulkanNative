@@ -348,7 +348,56 @@ var commandPool = device.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_P
 
 var commandBuffers = commandPool.AllocateCommandBuffers(1, VkCommandBufferLevel.VK_COMMAND_BUFFER_LEVEL_PRIMARY);
 
-commandBuffers[0].Begin();
+for(var i = 0; i < framebuffers.Length; i++)
+{
+    commandBuffers[0].Begin();
+
+    commandBuffers[0].BeginRenderPass(
+        framebuffers[i], 
+        renderPass, 
+        new()
+        {
+            ClearValue.ClearColor(0, 0, 0, 0)
+        },
+        new VkRect2D
+        {
+            offset = new() { x = 0, y = 0 },
+            extent = capabilities.currentExtent
+        },
+        VkSubpassContents.VK_SUBPASS_CONTENTS_INLINE
+    );
+
+    commandBuffers[0].BindPipeline(VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipelines[0]);
+
+    commandBuffers[0].SetViewport(0, new()
+    {
+        new VkViewport
+        {
+            x = 0,
+            y = 0,
+            width = capabilities.currentExtent.width,
+            height = capabilities.currentExtent.height,
+            minDepth = 0,
+            maxDepth = 1.0f,
+        }
+    });
+
+    commandBuffers[0].SetScissor(0, new()
+    {
+        new VkRect2D
+        {
+            offset = new() { x = 0, y = 0 },
+            extent = capabilities.currentExtent
+        },
+    });
+
+    commandBuffers[0].Draw(3, 1, 0, 0);
+
+    commandBuffers[0].EndRenderPass();
+
+    commandBuffers[0].End();
+}
+
 
 while (!Glfw.WindowShouldClose(window))
 {

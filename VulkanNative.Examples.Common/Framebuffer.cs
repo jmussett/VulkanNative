@@ -6,6 +6,8 @@ public unsafe class Framebuffer : IDisposable
     private readonly VkDevice _deviceHandle;
     private readonly VkDeviceCommands _commands;
 
+    public nint Handle => _handle;
+
     public Framebuffer(VkFramebuffer handle, VkDevice deviceHandle, VkDeviceCommands commands)
     {
         _handle = handle;
