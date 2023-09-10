@@ -12,7 +12,7 @@ public sealed unsafe class VulkanBuffer<T> : UnmanagedBuffer<T> where T : unmana
     public new T* AsPointer()
     {
         // If buffers do not have a length, then vulkan demands then get
-        // set to "nullptr" as thir would be nothing to point to.
+        // set to "nullptr" as there would be nothing to point to.
 
         return Length == 0 ? null : base.AsPointer();
     }

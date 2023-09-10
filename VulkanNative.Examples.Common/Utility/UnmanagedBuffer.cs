@@ -95,23 +95,26 @@ public unsafe class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TIte
 
         destination = _pointer;
 
-        _pointer = (TItem*) nint.Zero;
+        _pointer = null;
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
     {
         if ((nint)_pointer != nint.Zero)
         {
             Marshal.FreeHGlobal((nint)_pointer);
         }
-
-        GC.SuppressFinalize(this);
     }
 
     ~UnmanagedBuffer()
     {
-        Dispose();
+        Dispose(false);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -149,21 +152,7 @@ public unsafe class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TIte
         // Double the capacity.
         int newCapacity = _capacity * 2;
 
-        TItem* newPointer = (TItem*)Marshal.AllocHGlobal(newCapacity * sizeof(TItem*));
-
-        for (int i = 0; i < _currentLength; i++)
-        {
-            newPointer[i] = _pointer[i];
-        }
-
-        for (int i = _currentLength; i < newCapacity; i++)
-        {
-            newPointer[i] = default;
-        }
-
-        Marshal.FreeHGlobal((IntPtr)_pointer);
-
-        _pointer = newPointer;
+        _pointer = (TItem*) Marshal.ReAllocHGlobal((nint)_pointer, newCapacity * sizeof(TItem));
         _capacity = newCapacity;
     }
 

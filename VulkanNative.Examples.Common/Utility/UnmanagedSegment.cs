@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace VulkanNative.Examples.Common.Utility;
 
@@ -6,12 +7,6 @@ public unsafe readonly struct UnmanagedSegment<T> where T : unmanaged
 {
     private readonly int _length;
     private readonly unsafe T* _pointer;
-
-    public readonly T* Pointer
-    {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        get => _pointer;
-    }
 
     public readonly int Length
     {
@@ -27,9 +22,15 @@ public unsafe readonly struct UnmanagedSegment<T> where T : unmanaged
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public T* AsPointer()
+    {
+        return _pointer;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public Span<T> AsSpan()
     {
-        return new(Pointer, Length);
+        return new(_pointer, Length);
     }
 
     public override string ToString()

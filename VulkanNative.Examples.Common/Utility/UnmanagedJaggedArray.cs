@@ -42,12 +42,6 @@ public unsafe class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerable<Unman
 
         _pointers = (TItem**) Marshal.AllocHGlobal(_capacity * sizeof(TItem*));
         _lengths = (int*) Marshal.AllocHGlobal(_capacity * sizeof(int));
-
-        for (int i = 0; i < _capacity; i++)
-        {
-            _pointers[i] = null;
-            _lengths[i] = 0;
-        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -62,6 +56,12 @@ public unsafe class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerable<Unman
         item.TransferOwnership(ref _pointers[_currentLength]);
 
         _currentLength++;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void Add(TItem? item)
+    {
+        Add(new UnmanagedNullable<TItem>(item));
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -112,8 +112,13 @@ public unsafe class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerable<Unman
         return new Enumerator(_pointers, _lengths, _currentLength);
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    protected virtual void Dispose(bool disposing)
     {
         if (_pointers == (TItem**) nint.Zero)
         {
@@ -137,13 +142,11 @@ public unsafe class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerable<Unman
 
         Marshal.FreeHGlobal((IntPtr)_lengths);
         _lengths = null;
-
-        GC.SuppressFinalize(this);
     }
 
     ~UnmanagedJaggedArray()
     {
-        Dispose();
+        Dispose(false);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -154,26 +157,10 @@ public unsafe class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerable<Unman
         // Double the capacity.
         int newCapacity = _capacity * 2;
 
-        TItem** newPointers = (TItem**)Marshal.AllocHGlobal(newCapacity * sizeof(TItem*));
-        int* newLengths = (int*)Marshal.AllocHGlobal(newCapacity * sizeof(int));
+        // Resize the memory blocksl.
+        _pointers = (TItem**) Marshal.ReAllocHGlobal((nint)_pointers, newCapacity * sizeof(TItem*));
+        _lengths = (int*) Marshal.ReAllocHGlobal((nint)_lengths, newCapacity * sizeof(int));
 
-        for (int i = 0; i < _currentLength; i++)
-        {
-            newPointers[i] = _pointers[i];
-            newLengths[i] = _lengths[i];
-        }
-
-        for (int i = _currentLength; i < newCapacity; i++)
-        {
-            newPointers[i] = null;
-            newLengths[i] = 0;
-        }
-
-        Marshal.FreeHGlobal((IntPtr)_pointers);
-        Marshal.FreeHGlobal((IntPtr)_lengths);
-
-        _pointers = newPointers;
-        _lengths = newLengths;
         _capacity = newCapacity;
     }
 
