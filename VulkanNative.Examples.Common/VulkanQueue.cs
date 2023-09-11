@@ -65,7 +65,7 @@ public unsafe class VulkanQueue
             .ThrowOnError();
     }
 
-    public void Present(Span<VulkanSwapchain> swapchains, Span<VulkanSemaphore> waitSemaphores, Span<uint> imageIndexes)
+    public QueuePresentResult Present(Span<VulkanSwapchain> swapchains, Span<VulkanSemaphore> waitSemaphores, Span<uint> imageIndexes)
     {
         VkSwapchainKHR* vkSwapchains = stackalloc VkSwapchainKHR[swapchains.Length];
 
@@ -93,7 +93,15 @@ public unsafe class VulkanQueue
                 pResults = null // todo
             };
 
-            _swapchainExtension.vkQueuePresentKHR(_handle, &vkPresentInfo).ThrowOnError();
+            var result = _swapchainExtension.vkQueuePresentKHR(_handle, &vkPresentInfo);
+
+            return result switch
+            {
+                VkResult.VK_SUCCESS => QueuePresentResult.Success,
+                VkResult.VK_SUBOPTIMAL_KHR => QueuePresentResult.Suboptimal,
+                VkResult.VK_ERROR_OUT_OF_DATE_KHR => QueuePresentResult.OutOfDate,
+                _ => throw new InvalidOperationException($"Vulkan Error: {result}")
+            };
         }
     }
 }
