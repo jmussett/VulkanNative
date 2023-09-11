@@ -11,68 +11,36 @@ internal class HelloTriangle
 
     private GlfwWindow _window;
 
-    private VulkanInstance _instance;
-    private DebugMessenger _debugMessenger;
+    private VulkanInstance? _instance;
+    private DebugMessenger? _debugMessenger;
 
-    private VulkanSurface _surface;
+    private VulkanSurface? _surface;
 
-    private PhysicalDevice _physicalDevice;
-    private VulkanDevice _device;
+    private PhysicalDevice? _physicalDevice;
+    private VulkanDevice? _device;
 
     private uint _graphicsQueueFamilyIndex;
-    private VulkanQueue _queue;
+    private VulkanQueue? _queue;
 
-    private VulkanSwapchain[] _swapchains;
-    private VulkanSwapchain _swapchain => _swapchains[0];
+    private VulkanSwapchain[]? _swapchains;
+    private VulkanSwapchain _swapchain => _swapchains![0];
 
-    private ImageView[] _imageViews;
+    private ImageView[]? _imageViews;
 
-    private RenderPass _renderPass;
+    private RenderPass? _renderPass;
 
-    private PipelineLayout _pipelineLayout;
-    private Pipeline _pipeline;
+    private PipelineLayout? _pipelineLayout;
+    private Pipeline? _pipeline;
 
-    private Framebuffer[] _frameBuffers;
+    private Framebuffer[]? _frameBuffers;
+
+    private bool _framebufferResized;
     
     public void Run()
     {
-        var api = VulkanApi.Initialize();
+        Prepare();
 
-        Glfw.SetErrorCallback((errorCode, message) =>
-        {
-            throw new Exception($"GLFW error {errorCode}: {message}");
-        });
-
-        Glfw.WindowHint(Hint.ClientApi, 0);
-
-        _window = Glfw.CreateWindow(800, 600, "Hello Triangle");
-
-        bool frameBufferResized = false;
-
-        Glfw.SetWindowSizeCallback(_window, (window, width, height) =>
-        {
-            frameBufferResized = true;
-        });
-
-        var requiredExtensions = Glfw.Vulkan.GetRequiredInstanceExtensions();
-
-        InitializeInstance(api, requiredExtensions);
-
-        Glfw.Vulkan.CreateWindowSurface(_instance.Handle, _window, null, out nint surfaceHandle);
-
-        _surface = _instance.LoadSurface(surfaceHandle);
-
-        var requiredDeviceExtensions = new[] { "VK_KHR_swapchain" };
-
-        InitializeDevice(requiredDeviceExtensions);
-        InitializeSwapchain();
-        InitializeImageViews();
-        InitializeRenderPass();
-        InitializePipeline();
-
-        CreateFramebuffers();
-
-        var commandPool = _device.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT, _graphicsQueueFamilyIndex);
+        var commandPool = _device!.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT, _graphicsQueueFamilyIndex);
 
         Span<CommandBuffer> commandBuffers = commandPool.AllocateCommandBuffers(MaxFramesInFlight, VkCommandBufferLevel.VK_COMMAND_BUFFER_LEVEL_PRIMARY);
 
@@ -143,8 +111,8 @@ internal class HelloTriangle
             };
 
             commandBuffers[currentFrame].BeginRenderPass(
-                _frameBuffers[imageIndex],
-                _renderPass,
+                _frameBuffers![imageIndex],
+                _renderPass!,
                 clearColors,
                 new VkRect2D
                 {
@@ -154,7 +122,7 @@ internal class HelloTriangle
                 VkSubpassContents.VK_SUBPASS_CONTENTS_INLINE
             );
 
-            commandBuffers[currentFrame].BindPipeline(VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS, _pipeline);
+            commandBuffers[currentFrame].BindPipeline(VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS, _pipeline!);
 
             using VulkanBuffer<VkViewport> viewports = new()
             {
@@ -188,15 +156,15 @@ internal class HelloTriangle
 
             commandBuffers[currentFrame].End();
 
-            _queue.Submit(queueSubmissions.Slice(currentFrame, 1), inFlightFences[currentFrame]);
+            _queue!.Submit(queueSubmissions.Slice(currentFrame, 1), inFlightFences[currentFrame]);
 
             using VulkanBuffer<uint> imageIndeces = new() { imageIndex };
 
             var presentResult = _queue.Present(_swapchains, renderFinishedSemaphores.Slice(currentFrame, 1), imageIndeces);
 
-            if (presentResult == QueuePresentResult.OutOfDate || presentResult == QueuePresentResult.Suboptimal || frameBufferResized)
+            if (presentResult == QueuePresentResult.OutOfDate || presentResult == QueuePresentResult.Suboptimal || _framebufferResized)
             {
-                frameBufferResized = false;
+                _framebufferResized = false;
 
                 RecreateSwapChain();
             }
@@ -215,34 +183,72 @@ internal class HelloTriangle
 
         commandPool.Dispose();
 
-        for (var i = 0; i < _frameBuffers.Length; i++)
+        for (var i = 0; i < _frameBuffers!.Length; i++)
         {
             _frameBuffers[i].Dispose();
         }
 
         // TODO: move down?
-        for (var i = 0; i < _imageViews.Length; i++)
+        for (var i = 0; i < _imageViews!.Length; i++)
         {
             _imageViews[i].Dispose();
         }
 
-        _pipeline.Dispose();
+        _pipeline!.Dispose();
 
-        _pipelineLayout.Dispose();
-        _renderPass.Dispose();
+        _pipelineLayout!.Dispose();
+        _renderPass!.Dispose();
         _swapchain.Dispose();
-        _surface.Dispose();
+        _surface!.Dispose();
         _device.Dispose();
 
 #if DEBUG
-        _debugMessenger.Dispose();
+        _debugMessenger!.Dispose();
 #endif
 
-        _instance.Dispose();
+        _instance!.Dispose();
 
         Glfw.DestroyWindow(_window);
 
         Glfw.Terminate();
+    }
+
+    private void Prepare()
+    {
+        var api = VulkanApi.Initialize();
+
+        Glfw.SetErrorCallback((errorCode, message) =>
+        {
+            throw new Exception($"GLFW error {errorCode}: {message}");
+        });
+
+        Glfw.WindowHint(Hint.ClientApi, 0);
+
+        _window = Glfw.CreateWindow(800, 600, "Hello Triangle");
+
+        _framebufferResized = false;
+
+        Glfw.SetWindowSizeCallback(_window, (window, width, height) =>
+        {
+            _framebufferResized = true;
+        });
+
+        var requiredExtensions = Glfw.Vulkan.GetRequiredInstanceExtensions();
+
+        InitializeInstance(api, requiredExtensions);
+
+        Glfw.Vulkan.CreateWindowSurface(_instance!.Handle, _window, null, out nint surfaceHandle);
+
+        _surface = _instance.LoadSurface(surfaceHandle);
+
+        var requiredDeviceExtensions = new[] { "VK_KHR_swapchain" };
+
+        InitializeDevice(requiredDeviceExtensions);
+        InitializeSwapchain();
+        InitializeImageViews();
+        InitializeRenderPass();
+        InitializePipeline();
+        InitializeFramebuffers();
     }
 
     private void InitializeInstance(VulkanApi api, string[] requiredExtensions)
@@ -308,7 +314,7 @@ internal class HelloTriangle
 
     private void InitializeDevice(string[] requiredDeviceExtensions)
     {
-        var physicalDevices = _instance.GetPhysicalDevices();
+        var physicalDevices = _instance!.GetPhysicalDevices();
 
         int graphicsQueueFamilyIndex = -1;
 
@@ -325,7 +331,7 @@ internal class HelloTriangle
 
             for (var j = 0; j < queueFamilies.Length; j++)
             {
-                var supportsPresent = _surface.SupportsDeviceQueueFamily(_physicalDevice, (uint)j);
+                var supportsPresent = _surface!.SupportsDeviceQueueFamily(_physicalDevice, (uint)j);
 
                 // Find a queue family which supports graphics and presentation.
                 if (queueFamilies[j].queueFlags.HasFlag(VkQueueFlags.VK_QUEUE_GRAPHICS_BIT) && supportsPresent)
@@ -343,7 +349,7 @@ internal class HelloTriangle
 
         _graphicsQueueFamilyIndex = (uint)graphicsQueueFamilyIndex;
 
-        var availableDeviceExtensions = _physicalDevice.GetExtensions();
+        var availableDeviceExtensions = _physicalDevice!.GetExtensions();
 
 
 
@@ -368,7 +374,7 @@ internal class HelloTriangle
 
     private void InitializeSwapchain()
     {
-        var capabilities = _surface.GetCapabilities(_physicalDevice);
+        var capabilities = _surface!.GetCapabilities(_physicalDevice!);
 
         var surfaceFormat = ChooseSurfaceFormat();
         var swapExtent = ChooseSwapExtent(ref capabilities);
@@ -382,7 +388,7 @@ internal class HelloTriangle
 
         _swapchains ??= new VulkanSwapchain[1];
 
-        _swapchains[0] = _device.CreateSwapchain(new SwapchainDefinition
+        _swapchains[0] = _device!.CreateSwapchain(new SwapchainDefinition
         {
             Surface = _surface,
             // Always include 1 more then the minimum, or max value if it is not zero (infinite).
@@ -409,7 +415,7 @@ internal class HelloTriangle
 
         for (var i = 0; i < _imageViews.Length; i++)
         {
-            _imageViews[i] = _device.CreateImageView(new ImageViewCreateInfo
+            _imageViews[i] = _device!.CreateImageView(new ImageViewCreateInfo
             {
                 Image = images[i],
                 Format = _swapchain.SurfaceFormat.format,
@@ -437,7 +443,7 @@ internal class HelloTriangle
 
     private void InitializeRenderPass()
     {
-        _renderPass = _device.CreateRenderPass(
+        _renderPass = _device!.CreateRenderPass(
             new[]
             {
                 new SubpassDescription
@@ -487,7 +493,7 @@ internal class HelloTriangle
         byte[] vertBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "vert.spv"));
         byte[] fragBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "frag.spv"));
 
-        var vertShader = _device.CreateShaderModule(vertBytes);
+        var vertShader = _device!.CreateShaderModule(vertBytes);
         var fragShader = _device.CreateShaderModule(fragBytes);
 
         _pipelineLayout = _device.CreatePipelineLayout();
@@ -496,7 +502,7 @@ internal class HelloTriangle
         {
             new GraphicsPipelineDefinition
             {
-                RenderPass = _renderPass,
+                RenderPass = _renderPass!,
                 PipelineLayout = _pipelineLayout,
                 DynamicStates = new()
                 {
@@ -586,15 +592,15 @@ internal class HelloTriangle
             Glfw.WaitEvents();
         }
 
-        _device.WaitIdle();
+        _device!.WaitIdle();
 
-        for (var i = 0; i < _frameBuffers.Length; i++)
+        for (var i = 0; i < _frameBuffers!.Length; i++)
         {
             _frameBuffers[i].Dispose();
         }
 
         // TODO: move down?
-        for (var i = 0; i < _imageViews.Length; i++)
+        for (var i = 0; i < _imageViews!.Length; i++)
         {
             _imageViews[i].Dispose();
         }
@@ -603,17 +609,17 @@ internal class HelloTriangle
 
         InitializeSwapchain();
         InitializeImageViews();
-        CreateFramebuffers();
+        InitializeFramebuffers();
     }
 
-    private void CreateFramebuffers()
+    private void InitializeFramebuffers()
     {
-        _frameBuffers = new Framebuffer[_imageViews.Length];
+        _frameBuffers = new Framebuffer[_imageViews!.Length];
 
         for (var i = 0; i < _frameBuffers.Length; i++)
         {
-            _frameBuffers[i] = _device.CreateFramebuffer(
-                _renderPass,
+            _frameBuffers[i] = _device!.CreateFramebuffer(
+                _renderPass!,
                 _imageViews.AsSpan().Slice(i, 1),
                 _swapchain.ImageExtent.width,
                 _swapchain.ImageExtent.height,
@@ -624,7 +630,7 @@ internal class HelloTriangle
 
     private VkPresentModeKHR ChoosePresentMode()
     {
-        var presentModes = _surface.GetPresentModes(_physicalDevice);
+        var presentModes = _surface!.GetPresentModes(_physicalDevice!);
 
         for (var i = 0; i < presentModes.Length; i++)
         {
@@ -639,7 +645,7 @@ internal class HelloTriangle
 
     private VkSurfaceFormatKHR ChooseSurfaceFormat()
     {
-        var surfaceFormats = _surface.GetSurfaceFormats(_physicalDevice);
+        var surfaceFormats = _surface!.GetSurfaceFormats(_physicalDevice!);
 
         for (var i = 0; i < surfaceFormats.Length; i++)
         {
