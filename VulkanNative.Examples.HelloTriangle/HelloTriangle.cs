@@ -356,54 +356,6 @@ internal class HelloTriangle
         Glfw.Terminate();
     }
 
-    private void InitializeRenderPass()
-    {
-        _renderPass = _device.CreateRenderPass(
-            new[]
-            {
-                new SubpassDescription
-                {
-                    BindPoint = VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS,
-                    ColorAttachments = new()
-                    {
-                        new VkAttachmentReference
-                        {
-                            attachment = 0,
-                            layout = VkImageLayout.VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL
-                        }
-                    }
-                }
-            },
-            new[]
-            {
-                new VkAttachmentDescription
-                {
-                    format = _swapchain.SurfaceFormat.format,
-                    samples  = VkSampleCountFlags.VK_SAMPLE_COUNT_1_BIT,
-                    loadOp = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_CLEAR,
-                    storeOp = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_STORE,
-                    stencilLoadOp  = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_DONT_CARE,
-                    stencilStoreOp  = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_DONT_CARE,
-                    initialLayout = VkImageLayout.VK_IMAGE_LAYOUT_UNDEFINED,
-                    finalLayout = VkImageLayout.VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
-                }
-            },
-            new[]
-            {
-                new VkSubpassDependency
-                {
-                    srcSubpass = VulkanApiConstants.VK_SUBPASS_EXTERNAL,
-                    dstSubpass = 0,
-                    srcStageMask = VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-                    srcAccessMask = 0,
-                    dstStageMask = VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-                    dstAccessMask = VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_READ_BIT  | VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT
-                }
-            }
-        );
-    }
-
-
     private void InitializeInstance(VulkanApi api, string[] requiredExtensions)
     {
         api.EnumerateInstanceExtensionProperties(null, out var availableExtensions);
@@ -525,35 +477,6 @@ internal class HelloTriangle
         _queue = _device.GetQueue(_graphicsQueueFamilyIndex, 0);
     }
 
-    private void RecreateSwapChain()
-    {
-        Glfw.GetFrameBufferSize(_window, out var width, out var height);
-        while (width == 0 || height == 0)
-        {
-            Glfw.GetFrameBufferSize(_window, out width, out height);
-            Glfw.WaitEvents();
-        }
-
-        _device.WaitIdle();
-
-        for (var i = 0; i < _frameBuffers.Length; i++)
-        {
-            _frameBuffers[i].Dispose();
-        }
-
-        // TODO: move down?
-        for (var i = 0; i < _imageViews.Length; i++)
-        {
-            _imageViews[i].Dispose();
-        }
-
-        _swapchain.Dispose();
-
-        InitializeSwapchain();
-        InitializeImageViews();
-        CreateFramebuffers();
-    }
-
     private void InitializeSwapchain()
     {
         var capabilities = _surface.GetCapabilities(_physicalDevice);
@@ -566,7 +489,7 @@ internal class HelloTriangle
 
         var queueFamilyIndeces = Array.Empty<uint>();
 
-        var oldSwapchain = _swapchains?[0]?.Handle ?? nint.Zero; 
+        var oldSwapchain = _swapchains?[0]?.Handle ?? nint.Zero;
 
         _swapchains ??= new VulkanSwapchain[1];
 
@@ -621,6 +544,82 @@ internal class HelloTriangle
         }
 
         // TODO: create command pool / fence per swapchain image
+    }
+
+    private void InitializeRenderPass()
+    {
+        _renderPass = _device.CreateRenderPass(
+            new[]
+            {
+                new SubpassDescription
+                {
+                    BindPoint = VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS,
+                    ColorAttachments = new()
+                    {
+                        new VkAttachmentReference
+                        {
+                            attachment = 0,
+                            layout = VkImageLayout.VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL
+                        }
+                    }
+                }
+            },
+            new[]
+            {
+                new VkAttachmentDescription
+                {
+                    format = _swapchain.SurfaceFormat.format,
+                    samples  = VkSampleCountFlags.VK_SAMPLE_COUNT_1_BIT,
+                    loadOp = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_CLEAR,
+                    storeOp = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_STORE,
+                    stencilLoadOp  = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_DONT_CARE,
+                    stencilStoreOp  = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_DONT_CARE,
+                    initialLayout = VkImageLayout.VK_IMAGE_LAYOUT_UNDEFINED,
+                    finalLayout = VkImageLayout.VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
+                }
+            },
+            new[]
+            {
+                new VkSubpassDependency
+                {
+                    srcSubpass = VulkanApiConstants.VK_SUBPASS_EXTERNAL,
+                    dstSubpass = 0,
+                    srcStageMask = VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+                    srcAccessMask = 0,
+                    dstStageMask = VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+                    dstAccessMask = VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_READ_BIT  | VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT
+                }
+            }
+        );
+    }
+
+    private void RecreateSwapChain()
+    {
+        Glfw.GetFrameBufferSize(_window, out var width, out var height);
+        while (width == 0 || height == 0)
+        {
+            Glfw.GetFrameBufferSize(_window, out width, out height);
+            Glfw.WaitEvents();
+        }
+
+        _device.WaitIdle();
+
+        for (var i = 0; i < _frameBuffers.Length; i++)
+        {
+            _frameBuffers[i].Dispose();
+        }
+
+        // TODO: move down?
+        for (var i = 0; i < _imageViews.Length; i++)
+        {
+            _imageViews[i].Dispose();
+        }
+
+        _swapchain.Dispose();
+
+        InitializeSwapchain();
+        InitializeImageViews();
+        CreateFramebuffers();
     }
 
     private void CreateFramebuffers()
