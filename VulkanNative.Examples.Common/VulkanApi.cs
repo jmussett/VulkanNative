@@ -23,10 +23,13 @@ public unsafe class VulkanApi
         return new VulkanApi(vulkanLoader);
     }
 
-    public VulkanInstance CreateVulkanInstance(string appName, string engineName, UnmanagedUtf8StringArray enabledExtensionNames, UnmanagedUtf8StringArray enabledLayerNames)
+    public VulkanInstance CreateVulkanInstance(InstanceDefinition definition)
     {
-        using UnmanagedEncodedString appNameEncoded = appName;
-        using UnmanagedEncodedString engineNameEncoded = engineName;
+        using UnmanagedEncodedString appNameEncoded = definition.AppName;
+        using UnmanagedEncodedString engineNameEncoded = definition.EngineName;
+
+        using UnmanagedUtf8StringArray enabledExtensionNamesEncoded = definition.EnabledExtensions;
+        using UnmanagedUtf8StringArray enabledLayerNamesEncoded = definition.EnabledLayers;
 
         VkInstance instance;
 
@@ -34,18 +37,18 @@ public unsafe class VulkanApi
         {
             pApplicationName = appNameEncoded.AsPointer(),
             pEngineName = engineNameEncoded.AsPointer(),
-            applicationVersion = new VkVersion(1, 0, 0),
-            engineVersion = new VkVersion(1, 0, 0),
-            apiVersion = new VkVersion(1, 0, 0),
+            applicationVersion = definition.AppVersion,
+            engineVersion = definition.EngineVersion,
+            apiVersion = definition.ApiVersion
         };
 
         var vkInstanceCreateInfo = new VkInstanceCreateInfo
         {
             pApplicationInfo = &pApplicationInfo,
-            enabledLayerCount = (uint)enabledLayerNames.Length,
-            ppEnabledLayerNames = enabledLayerNames.AsPointer(),
-            enabledExtensionCount = (uint)enabledExtensionNames.Length,
-            ppEnabledExtensionNames = enabledExtensionNames.AsPointer(),
+            enabledLayerCount = (uint)enabledLayerNamesEncoded.Length,
+            ppEnabledLayerNames = enabledLayerNamesEncoded.AsPointer(),
+            enabledExtensionCount = (uint)enabledExtensionNamesEncoded.Length,
+            ppEnabledExtensionNames = enabledExtensionNamesEncoded.AsPointer(),
         };
 
         _globalCommands.vkCreateInstance(&vkInstanceCreateInfo, null, &instance).ThrowOnError();
@@ -113,6 +116,8 @@ public unsafe class VulkanApi
         _globalCommands.vkEnumerateInstanceLayerProperties(&propertyCount, null).ThrowOnError();
 
         var propertiesPtr = stackalloc VkLayerProperties[(int)propertyCount];
+
+        _globalCommands.vkEnumerateInstanceLayerProperties(&propertyCount, propertiesPtr).ThrowOnError();
 
         layerProperties = new LayerProperties[propertyCount];
 

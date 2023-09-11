@@ -12,7 +12,10 @@ internal class HelloTriangle
 
     private Framebuffer[] _frameBuffers;
     private ImageView[] _imageViews;
-    private VulkanSwapchain[] _swapchains; 
+    private VulkanSwapchain[] _swapchains;
+
+    private VulkanInstance _instance;
+    private DebugMessenger _debugMessenger;
 
     public void Run()
     {
@@ -34,45 +37,17 @@ internal class HelloTriangle
             frameBufferResized = true;
         });
 
-        // TODO: Validate
-        api.EnumerateInstanceExtensionProperties(null, out var extensionProperties);
-        api.EnumerateInstanceLayerProperties(out var layerProperties);
+        var requiredExtensions = Glfw.Vulkan.GetRequiredInstanceExtensions();
 
-        var glfwExtensions = Glfw.Vulkan.GetRequiredInstanceExtensions();
+        InitializeInstance(api, requiredExtensions);
 
-        using UnmanagedUtf8StringArray enabledExtensionNames = new()
-        {
-            "VK_EXT_debug_utils"
-        };
+        Glfw.Vulkan.CreateWindowSurface(_instance.Handle, _window, null, out nint surfaceHandle);
 
-        foreach (var extension in glfwExtensions)
-        {
-            enabledExtensionNames.Add(extension);
-        }
-
-        using UnmanagedUtf8StringArray enabledLayerNames = new()
-        {
-            "VK_LAYER_KHRONOS_validation"
-        };
-
-        var instance = api.CreateVulkanInstance("MyApp", "MyEngine", enabledExtensionNames, enabledLayerNames);
-
-        var debugUtils = instance.LoadDebugUtilsExtension();
-
-        var messenger = debugUtils.CreateMessenger();
-
-        messenger.OnMessage += message =>
-        {
-            Console.WriteLine(message);
-        };
-
-        Glfw.Vulkan.CreateWindowSurface(instance.Handle, _window, null, out nint surfaceHandle);
-
-        var surface = instance.LoadSurface(surfaceHandle);
+        var surface = _instance.LoadSurface(surfaceHandle);
 
         // Find physical device
 
-        var physicalDevices = instance.GetPhysicalDevices();
+        var physicalDevices = _instance.GetPhysicalDevices();
 
         // TODO: suitability checks
         // TODO: surface checks
@@ -469,12 +444,77 @@ internal class HelloTriangle
         _swapchains[0].Dispose();
         surface.Dispose();
         device.Dispose();
-        messenger.Dispose();
-        instance.Dispose();
+
+#if DEBUG
+        _debugMessenger.Dispose();
+#endif
+
+        _instance.Dispose();
 
         Glfw.DestroyWindow(_window);
 
         Glfw.Terminate();
+    }
+
+    private void InitializeInstance(VulkanApi api, string[] requiredExtensions)
+    {
+        api.EnumerateInstanceExtensionProperties(null, out var availableExtensions);
+
+        List<string> activeExtension = new();
+
+        foreach (var extension in requiredExtensions)
+        {
+            activeExtension.Add(extension);
+        }
+
+#if DEBUG
+        activeExtension.Add("VK_EXT_debug_utils");
+#endif
+
+        // TODO: Portability
+        // TODO: platform specific
+
+        var activeExtensionNames = activeExtension.ToArray();
+
+        if (!ValidateExtensions(activeExtensionNames, availableExtensions))
+        {
+            throw new InvalidOperationException("Required instance extensions are missing.");
+        }
+
+        api.EnumerateInstanceLayerProperties(out var availableLayers);
+
+        List<string> activeLayers = new();
+
+#if DEBUG
+        activeLayers.Add("VK_LAYER_KHRONOS_validation");
+#endif
+
+        var activeLayerNames = activeLayers.ToArray();
+
+        if (!ValidateLayers(activeLayerNames, availableLayers))
+        {
+            throw new InvalidOperationException("Required validation layers are missing.");
+        }
+
+        _instance = api.CreateVulkanInstance(new InstanceDefinition
+        {
+            AppName = "Hello Triangle",
+            EngineName = "MyEngine",
+            ApiVersion = new VulkanVersion(1, 0, 0),
+            EnabledExtensions = activeExtensionNames,
+            EnabledLayers = activeLayerNames
+        });
+
+#if DEBUG
+        var debugUtils = _instance.LoadDebugUtilsExtension();
+
+        _debugMessenger = debugUtils.CreateMessenger();
+
+        _debugMessenger.OnMessage += message =>
+        {
+            Console.WriteLine(message);
+        };
+#endif
     }
 
     private void RecreateSwapChain(VulkanDevice device, PhysicalDevice physicalDevice, RenderPass renderPass, VulkanSurface surface, uint graphicsQueueFamilyIndex, uint presentationQueueFamilyIndex)
@@ -643,5 +683,53 @@ internal class HelloTriangle
             width = (uint)Math.Clamp(width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width),
             height = (uint)Math.Clamp(height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height)
         };
+    }
+
+    private static bool ValidateExtensions(Span<string> required, Span<ExtensionProperties> available)
+    {
+        foreach(var extension in required)
+        {
+            bool found = false;
+
+            foreach(var availableExtension in available)
+            {
+                if (availableExtension.ExtensionName == extension)
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static bool ValidateLayers(Span<string> required, Span<LayerProperties> available)
+    {
+        foreach (var layer in required)
+        {
+            bool found = false;
+
+            foreach (var availableLayer in available)
+            {
+                if (availableLayer.LayerName == layer)
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

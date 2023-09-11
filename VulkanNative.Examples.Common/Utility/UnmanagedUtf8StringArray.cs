@@ -9,6 +9,14 @@ public unsafe sealed class UnmanagedUtf8StringArray : UnmanagedJaggedArray<byte>
     {
     }
 
+    public UnmanagedUtf8StringArray(string[] items) : base(items.Length)
+    {
+        for(var i = 0; i < items.Length; i++)
+        {
+            Add(items[i]);
+        }
+    }
+
     public new UnmanagedUtf8StringSegment this[int i]
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -48,6 +56,8 @@ public unsafe sealed class UnmanagedUtf8StringArray : UnmanagedJaggedArray<byte>
 
         return new UnmanagedUtf8StringArrayEnumerator(_pointers, _lengths, _currentLength);
     }
+
+    public static implicit operator UnmanagedUtf8StringArray(string[] items) => new(items);
 
     public struct UnmanagedUtf8StringArrayEnumerator : IEnumerator<UnmanagedUtf8StringSegment>
     {
