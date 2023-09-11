@@ -1,4 +1,5 @@
-﻿using VulkanNative;
+﻿using System;
+using VulkanNative;
 using VulkanNative.Examples.Common;
 using VulkanNative.Examples.Common.Glfw;
 using VulkanNative.Examples.Common.Utility;
@@ -13,9 +14,15 @@ Glfw.SetErrorCallback((errorCode, message) =>
 });
 
 Glfw.WindowHint(Hint.ClientApi, 0);
-Glfw.WindowHint(Hint.Resizable, false);
 
 var window = Glfw.CreateWindow(800, 600, "Hello Triangle");
+
+bool frameBufferResized = false;
+
+Glfw.SetWindowSizeCallback(window, (window, width, height) =>
+{
+    frameBufferResized = true;
+});
 
 // TODO: Validate
 api.EnumerateInstanceExtensionProperties(null, out var extensionProperties);
@@ -127,74 +134,9 @@ var device = physicalDevice.CreateLogicalDevice(deviceExtensions, deviceQueues);
 var graphicsQueue = device.GetQueue(graphicsQueueFamilyIndex.Value, 0);
 var presentQueue = device.GetQueue(presentationQueueFamilyIndex.Value, 0);
 
-var capabilities = surface.GetCapabilities(physicalDevice);
-var presentModes = surface.GetPresentModes(physicalDevice);
-var surfaceFormats = surface.GetSurfaceFormats(physicalDevice);
+VulkanSwapchain swapchain = CreateSwapchain(device, physicalDevice, surface, graphicsQueueFamilyIndex.Value, presentationQueueFamilyIndex.Value);
 
-var presentMode = ChoosePresentMode(presentModes);
-var surfaceFormat = ChooseSurfaceFormat(surfaceFormats);
-
-uint[] queueFamilyIndeces;
-VkSharingMode sharingMode;
-
-if (presentationQueueFamilyIndex == graphicsQueueFamilyIndex)
-{
-    queueFamilyIndeces = Array.Empty<uint>();
-    sharingMode = VkSharingMode.VK_SHARING_MODE_EXCLUSIVE;
-}
-else
-{
-    queueFamilyIndeces = new uint[] { (uint)graphicsQueueFamilyIndex, (uint) presentationQueueFamilyIndex };
-    sharingMode = VkSharingMode.VK_SHARING_MODE_CONCURRENT;
-}
-
-var swapchain = device.CreateSwapchain(new SwapchainCreateInfo
-{
-    Surface = surface,
-    // Always include 1 more then the minimum, or max value if it is not zero (infinite).
-    MinImageCount = Math.Min(capabilities.minImageCount + 1, Math.Max(capabilities.maxImageCount, uint.MaxValue)),
-    SurfaceFormat = surfaceFormat,
-    ImageExtent = capabilities.currentExtent, // TODO: use glfwGetFramebufferSize
-    ImageArrayLayers = 1, // 1 unless doing stereoscopic 3D
-    ImageUsage = VkImageUsageFlags.VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
-    SharingMode = sharingMode,
-    QueueFamilyIndeces = queueFamilyIndeces,
-    PreTransform = capabilities.currentTransform,
-    CompositeAlpha = VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
-    PresentMode = presentMode,
-    Clipped = true,
-    OldSwapchain = nint.Zero // TODO: needed for swapchain resize
-});
-
-// TODO: maybe use vector instead of array?
-var images = swapchain.GetImages();
-
-var imageViews = new ImageView[images.Length];
-
-for (var i = 0; i < imageViews.Length; i++)
-{
-    imageViews[i] = device.CreateImageView(new ImageViewCreateInfo
-    {
-        Image = images[i],
-        Format = surfaceFormat.format,
-        ViewType = VkImageViewType.VK_IMAGE_VIEW_TYPE_2D,
-        Components = new VkComponentMapping
-        {
-            r = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
-            g = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
-            b = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
-            a = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY
-        },
-        SubresourceRange = new VkImageSubresourceRange
-        {
-            aspectMask = VkImageAspectFlags.VK_IMAGE_ASPECT_COLOR_BIT,
-            baseMipLevel = 0,
-            levelCount = 1,
-            baseArrayLayer = 0,
-            layerCount = 1
-        }
-    });
-}
+var imageViews = CreateImageViews(device, swapchain);
 
 byte[] vertBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "vert.spv"));
 byte[] fragBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "frag.spv"));
@@ -223,7 +165,7 @@ var renderPass = device.CreateRenderPass(
     {
         new VkAttachmentDescription
         {
-            format = surfaceFormat.format,
+            format = swapchain.SurfaceFormat.format,
             samples  = VkSampleCountFlags.VK_SAMPLE_COUNT_1_BIT,
             loadOp = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_CLEAR,
             storeOp = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_STORE,
@@ -285,10 +227,10 @@ var graphicsPipelines = device.CreateGraphicsPipelines(new[]
             {
                 new VkViewport
                 {
-                    x = 0, 
-                    y = 0, 
-                    width = capabilities.currentExtent.width, 
-                    height = capabilities.currentExtent.height,
+                    x = 0,
+                    y = 0,
+                    width = swapchain.ImageExtent.width,
+                    height = swapchain.ImageExtent.height,
                     minDepth = 0,
                     maxDepth = 1.0f,
                 }
@@ -298,7 +240,7 @@ var graphicsPipelines = device.CreateGraphicsPipelines(new[]
                 new VkRect2D
                 {
                     offset = new () { x = 0, y = 0 },
-                    extent = capabilities.currentExtent
+                    extent = swapchain.ImageExtent
                 }
             }
         },
@@ -350,18 +292,7 @@ var graphicsPipelines = device.CreateGraphicsPipelines(new[]
 vertShader.Dispose();
 fragShader.Dispose();
 
-var framebuffers = new Framebuffer[imageViews.Length];
-
-for (var i = 0; i < framebuffers.Length; i++)
-{
-    framebuffers[i] = device.CreateFramebuffer(
-        renderPass, 
-        imageViews.AsSpan().Slice(i, 1), 
-        capabilities.currentExtent.width, 
-        capabilities.currentExtent.height, 
-        1
-    );
-}
+var framebuffers = CreateFramebuffers(device, swapchain, imageViews, renderPass);
 
 var commandPool = device.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT, graphicsQueueFamilyIndex.Value);
 
@@ -371,7 +302,7 @@ Span<VulkanSemaphore> imageAvailableSemaphores = new VulkanSemaphore[MaxFramesIn
 Span<VulkanSemaphore> renderFinishedSemaphores = new VulkanSemaphore[MaxFramesInFlight];
 Span<VulkanFence> inFlightFences = new VulkanFence[MaxFramesInFlight];
 
-for(var i = 0; i < MaxFramesInFlight; i++)
+for (var i = 0; i < MaxFramesInFlight; i++)
 {
     imageAvailableSemaphores[i] = device.CreateSemaphore();
     renderFinishedSemaphores[i] = device.CreateSemaphore();
@@ -414,7 +345,14 @@ while (!Glfw.WindowShouldClose(window))
 
     device.ResetFences(inFlightFences.Slice(currentFrame, 1));
 
-    var imageIndex = swapchain.AquireNextImage(imageAvailableSemaphores[currentFrame]);
+    var result = swapchain.AquireNextImage(out var imageIndex, imageAvailableSemaphores[currentFrame]);
+
+    if (result == AcquireNextImageResult.OutOfDate || result == AcquireNextImageResult.Suboptimal || frameBufferResized)
+    {
+        frameBufferResized = false;
+
+        // TODO
+    }
 
     commandBuffers[currentFrame].Reset();
 
@@ -432,7 +370,7 @@ while (!Glfw.WindowShouldClose(window))
         new VkRect2D
         {
             offset = new() { x = 0, y = 0 },
-            extent = capabilities.currentExtent
+            extent = swapchain.ImageExtent
         },
         VkSubpassContents.VK_SUBPASS_CONTENTS_INLINE
     );
@@ -445,8 +383,8 @@ while (!Glfw.WindowShouldClose(window))
         {
             x = 0,
             y = 0,
-            width = capabilities.currentExtent.width,
-            height = capabilities.currentExtent.height,
+            width = swapchain.ImageExtent.width,
+            height = swapchain.ImageExtent.height,
             minDepth = 0,
             maxDepth = 1.0f,
         }
@@ -459,7 +397,7 @@ while (!Glfw.WindowShouldClose(window))
         new VkRect2D
         {
             offset = new() { x = 0, y = 0 },
-            extent = capabilities.currentExtent
+            extent = swapchain.ImageExtent
         }
     };
 
@@ -503,7 +441,7 @@ for (var i = 0; i < imageViews.Length; i++)
     imageViews[i].Dispose();
 }
 
-for(var i = 0; i < graphicsPipelines.Length; i++)
+for (var i = 0; i < graphicsPipelines.Length; i++)
 {
     graphicsPipelines[i].Dispose();
 }
@@ -520,8 +458,10 @@ Glfw.DestroyWindow(window);
 
 Glfw.Terminate();
 
-static VkPresentModeKHR ChoosePresentMode(VkPresentModeKHR[] presentModes)
+static VkPresentModeKHR ChoosePresentMode(VulkanSurface surface, PhysicalDevice physicalDevice)
 {
+    var presentModes = surface.GetPresentModes(physicalDevice);
+
     for (var i = 0; i < presentModes.Length; i++)
     {
         if (presentModes[i] == VkPresentModeKHR.VK_PRESENT_MODE_MAILBOX_KHR)
@@ -533,8 +473,10 @@ static VkPresentModeKHR ChoosePresentMode(VkPresentModeKHR[] presentModes)
     return VkPresentModeKHR.VK_PRESENT_MODE_FIFO_KHR;
 }
 
-static VkSurfaceFormatKHR ChooseSurfaceFormat(VkSurfaceFormatKHR[] surfaceFormats)
+static VkSurfaceFormatKHR ChooseSurfaceFormat(VulkanSurface surface, PhysicalDevice physicalDevice)
 {
+    var surfaceFormats = surface.GetSurfaceFormats(physicalDevice);
+
     for (var i = 0; i < surfaceFormats.Length; i++)
     {
         if (surfaceFormats[i].format == VkFormat.VK_FORMAT_B8G8R8A8_SRGB &&
@@ -545,4 +487,115 @@ static VkSurfaceFormatKHR ChooseSurfaceFormat(VkSurfaceFormatKHR[] surfaceFormat
     }
 
     return surfaceFormats[0];
+}
+
+VkExtent2D ChooseSwapExtent(ref VkSurfaceCapabilitiesKHR capabilities)
+{
+    if (capabilities.currentExtent.width != uint.MaxValue)
+    {
+        return capabilities.currentExtent;
+    }
+
+    Glfw.GetFrameBufferSize(window, out var width, out var height);
+
+    return new()
+    {
+        width = (uint)Math.Clamp(width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width),
+        height = (uint)Math.Clamp(height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height)
+    };
+}
+
+VulkanSwapchain CreateSwapchain(VulkanDevice device, PhysicalDevice physicalDevice, VulkanSurface surface, uint graphicsQueueFamilyIndex, uint presentationQueueFamilyIndex)
+{
+    var capabilities = surface.GetCapabilities(physicalDevice);
+
+    var presentMode = ChoosePresentMode(surface, physicalDevice);
+    var surfaceFormat = ChooseSurfaceFormat(surface, physicalDevice);
+    var swapExtent = ChooseSwapExtent(ref capabilities);
+
+    uint[] queueFamilyIndeces;
+    VkSharingMode sharingMode;
+
+    if (presentationQueueFamilyIndex == graphicsQueueFamilyIndex)
+    {
+        queueFamilyIndeces = Array.Empty<uint>();
+        sharingMode = VkSharingMode.VK_SHARING_MODE_EXCLUSIVE;
+    }
+    else
+    {
+        queueFamilyIndeces = new uint[] { graphicsQueueFamilyIndex, presentationQueueFamilyIndex };
+        sharingMode = VkSharingMode.VK_SHARING_MODE_CONCURRENT;
+    }
+
+    var swapchain = device.CreateSwapchain(new SwapchainDefinition
+    {
+        Surface = surface,
+        // Always include 1 more then the minimum, or max value if it is not zero (infinite).
+        MinImageCount = Math.Min(capabilities.minImageCount + 1, Math.Max(capabilities.maxImageCount, uint.MaxValue)),
+        SurfaceFormat = surfaceFormat,
+        ImageExtent = swapExtent, // TODO: use glfwGetFramebufferSize
+        ImageArrayLayers = 1, // 1 unless doing stereoscopic 3D
+        ImageUsage = VkImageUsageFlags.VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
+        SharingMode = sharingMode,
+        QueueFamilyIndeces = queueFamilyIndeces,
+        PreTransform = capabilities.currentTransform,
+        CompositeAlpha = VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
+        PresentMode = presentMode,
+        Clipped = true,
+        OldSwapchain = nint.Zero // TODO: needed for swapchain resize
+    });
+    return swapchain;
+}
+
+static ImageView[] CreateImageViews(VulkanDevice device, VulkanSwapchain swapchain)
+{
+    // TODO: maybe use vector instead of array?
+    var images = swapchain.GetImages();
+
+    var imageViews = new ImageView[images.Length];
+
+    for (var i = 0; i < imageViews.Length; i++)
+    {
+        imageViews[i] = device.CreateImageView(new ImageViewCreateInfo
+        {
+            Image = images[i],
+            Format = swapchain.SurfaceFormat.format,
+            ViewType = VkImageViewType.VK_IMAGE_VIEW_TYPE_2D,
+            Components = new VkComponentMapping
+            {
+                r = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
+                g = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
+                b = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
+                a = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY
+            },
+            SubresourceRange = new VkImageSubresourceRange
+            {
+                aspectMask = VkImageAspectFlags.VK_IMAGE_ASPECT_COLOR_BIT,
+                baseMipLevel = 0,
+                levelCount = 1,
+                baseArrayLayer = 0,
+                layerCount = 1
+            }
+        });
+    }
+
+    return imageViews;
+}
+
+static Framebuffer[] CreateFramebuffers(VulkanDevice device, VulkanSwapchain swapchain, ImageView[] imageViews, RenderPass renderPass)
+{
+    var framebuffers = new Framebuffer[imageViews.Length];
+
+    for (var i = 0; i < framebuffers.Length; i++)
+    {
+        framebuffers[i] = device.CreateFramebuffer(
+            renderPass,
+            imageViews.AsSpan().Slice(i, 1),
+            swapchain.ImageExtent.width,
+            swapchain.ImageExtent.height,
+            1
+        );
+    }
+
+    return framebuffers;
 }

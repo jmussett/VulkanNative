@@ -39,7 +39,7 @@ internal unsafe class GlfwCommands
     public delegate* unmanaged[Cdecl]<GlfwWindow, int, int, void> glfwSetWindowSize;
     public delegate* unmanaged[Cdecl]<GlfwWindow, int*, int*, void> glfwGetFramebufferSize;
     //public delegate* unmanaged[Cdecl]<GlfwWindow, PositionCallback, PositionCallback> glfwSetWindowPosCallback;
-    //public delegate* unmanaged[Cdecl]<GlfwWindow, SizeCallback, SizeCallback> glfwSetWindowSizeCallback;
+    public delegate* unmanaged[Cdecl]<GlfwWindow, SizeCallback, SizeCallback> glfwSetWindowSizeCallback;
     public delegate* unmanaged[Cdecl]<GlfwWindow, byte*, void> glfwSetWindowTitle;
     public delegate* unmanaged[Cdecl]<GlfwWindow, void> glfwFocusWindow;
     //public delegate* unmanaged[Cdecl]<GlfwWindow, FocusCallback, FocusCallback> glfwSetWindowFocusCallback;
@@ -226,8 +226,8 @@ internal unsafe class GlfwCommands
         //glfwSetWindowPosCallback = (delegate* unmanaged[Cdecl]<GlfwWindow, PositionCallback, PositionCallback>)
         //    NativeLibrary.GetExport(libraryHandle, "glfwSetWindowPosCallback");
 
-        //glfwSetWindowSizeCallback = (delegate* unmanaged[Cdecl]<GlfwWindow, SizeCallback, SizeCallback>)
-        //    NativeLibrary.GetExport(libraryHandle, "glfwSetWindowSizeCallback");
+        glfwSetWindowSizeCallback = (delegate* unmanaged[Cdecl]<GlfwWindow, SizeCallback, SizeCallback>)
+            NativeLibrary.GetExport(libraryHandle, "glfwSetWindowSizeCallback");
 
         glfwSetWindowTitle = (delegate* unmanaged[Cdecl]<GlfwWindow, byte*, void>)
             NativeLibrary.GetExport(libraryHandle, "glfwSetWindowTitle");

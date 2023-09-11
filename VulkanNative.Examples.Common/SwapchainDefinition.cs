@@ -1,6 +1,6 @@
 ﻿namespace VulkanNative.Examples.Common;
 
-public struct SwapchainCreateInfo
+public struct SwapchainDefinition
 {
     public VulkanSurface Surface;
     public uint MinImageCount;

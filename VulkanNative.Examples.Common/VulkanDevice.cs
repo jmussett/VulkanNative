@@ -30,35 +30,34 @@ public sealed unsafe class VulkanDevice : IDisposable
         return new VulkanQueue(queue, _commands, _swapchainExtension);
     }
 
-    public unsafe VulkanSwapchain CreateSwapchain(SwapchainCreateInfo createInfo)
+    public unsafe VulkanSwapchain CreateSwapchain(SwapchainDefinition definition)
     {
-        fixed (void* queueFamilyIndecesPtr = createInfo.QueueFamilyIndeces)
+        fixed (void* queueFamilyIndecesPtr = definition.QueueFamilyIndeces)
         {
             VkSwapchainCreateInfoKHR createInfoKHR = new()
             {
-                surface = createInfo.Surface.Handle,
-                minImageCount = createInfo.MinImageCount,
-                imageExtent = createInfo.ImageExtent,
-                imageFormat = createInfo.SurfaceFormat.format,
-                imageColorSpace = createInfo.SurfaceFormat.colorSpace,
-                imageArrayLayers = createInfo.ImageArrayLayers,
-                imageUsage = createInfo.ImageUsage,
-                imageSharingMode = createInfo.SharingMode,
-                queueFamilyIndexCount = (uint)createInfo.QueueFamilyIndeces.Length,
+                surface = definition.Surface.Handle,
+                minImageCount = definition.MinImageCount,
+                imageExtent = definition.ImageExtent,
+                imageFormat = definition.SurfaceFormat.format,
+                imageColorSpace = definition.SurfaceFormat.colorSpace,
+                imageArrayLayers = definition.ImageArrayLayers,
+                imageUsage = definition.ImageUsage,
+                imageSharingMode = definition.SharingMode,
+                queueFamilyIndexCount = (uint)definition.QueueFamilyIndeces.Length,
                 pQueueFamilyIndices = (uint*)queueFamilyIndecesPtr,
-                preTransform = createInfo.PreTransform,
-                compositeAlpha = createInfo.CompositeAlpha,
-                presentMode = createInfo.PresentMode,
-                clipped = (uint) (createInfo.Clipped ? 1 : 0),
-                oldSwapchain = createInfo.OldSwapchain
+                preTransform = definition.PreTransform,
+                compositeAlpha = definition.CompositeAlpha,
+                presentMode = definition.PresentMode,
+                clipped = (uint) (definition.Clipped ? 1 : 0),
+                oldSwapchain = definition.OldSwapchain
             };
 
             VkSwapchainKHR swapchain;
 
-
             _swapchainExtension.vkCreateSwapchainKHR(_handle, &createInfoKHR, null, &swapchain).ThrowOnError();
 
-            return new VulkanSwapchain(swapchain, _handle, _swapchainExtension);
+            return new VulkanSwapchain(swapchain, _handle, definition, _swapchainExtension);
         }
     }
 

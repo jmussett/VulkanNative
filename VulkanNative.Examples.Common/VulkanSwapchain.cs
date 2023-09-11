@@ -7,13 +7,18 @@ public sealed unsafe class VulkanSwapchain : IDisposable
     private VkSwapchainKHR _handle;
     private readonly VkDevice _deviceHandle;
     private readonly VkKhrSwapchainExtension _swapchainExtension;
+    private readonly SwapchainDefinition _swapchainDefinition;
 
     public nint Handle => _handle;
 
-    public VulkanSwapchain(VkSwapchainKHR handle, VkDevice deviceHandle, VkKhrSwapchainExtension swapchainExtension)
+    public VkExtent2D ImageExtent => _swapchainDefinition.ImageExtent;
+    public VkSurfaceFormatKHR SurfaceFormat => _swapchainDefinition.SurfaceFormat;
+
+    public VulkanSwapchain(VkSwapchainKHR handle, VkDevice deviceHandle, SwapchainDefinition definition, VkKhrSwapchainExtension swapchainExtension)
     {
         _handle = handle;
         _deviceHandle = deviceHandle;
+        _swapchainDefinition = definition;
         _swapchainExtension = swapchainExtension;
     }
 
@@ -36,19 +41,30 @@ public sealed unsafe class VulkanSwapchain : IDisposable
         return images;
     }
 
-    public uint AquireNextImage(VulkanSemaphore? semaphore = null, VulkanFence? fence = null, uint timeout = uint.MaxValue)
+    public AcquireNextImageResult AquireNextImage(out uint imageIndex, VulkanSemaphore? semaphore = null, VulkanFence? fence = null, uint timeout = uint.MaxValue)
     {
-        uint imageIndex;
+        fixed(uint* imageIndexPtr = &imageIndex)
+        {
+            imageIndex = 0;
 
-        _swapchainExtension.vkAcquireNextImageKHR(
-            _deviceHandle, _handle, timeout, 
-            semaphore?.Handle ?? nint.Zero, fence?.Handle ?? nint.Zero, 
-            &imageIndex
-        ).ThrowOnError();
+            var result = _swapchainExtension.vkAcquireNextImageKHR(
+                _deviceHandle, _handle, timeout,
+                semaphore?.Handle ?? nint.Zero, fence?.Handle ?? nint.Zero,
+                imageIndexPtr
+            );
 
-        return imageIndex;
+            return result switch
+            {
+                VkResult.VK_SUCCESS => AcquireNextImageResult.Success,
+                VkResult.VK_SUBOPTIMAL_KHR => AcquireNextImageResult.Suboptimal,
+                VkResult.VK_TIMEOUT => AcquireNextImageResult.Timeout,
+                VkResult.VK_NOT_READY => AcquireNextImageResult.NotReady,
+                VkResult.VK_ERROR_OUT_OF_DATE_KHR => AcquireNextImageResult.OutOfDate,
+                _ => throw new InvalidOperationException($"Vulkan Error: {result}")
+            };
+        } 
+        
     }
-
 
     public void Dispose()
     {

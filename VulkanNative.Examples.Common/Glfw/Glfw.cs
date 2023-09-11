@@ -118,7 +118,7 @@ public unsafe class Glfw
         var byteCount = Encoding.UTF8.GetByteCount(title);
         Span<byte> titleBytes = stackalloc byte[byteCount + 1];
 
-        Encoding.UTF8.GetBytes(title, titleBytes.Slice(0, byteCount));
+        Encoding.UTF8.GetBytes(title, titleBytes[..byteCount]);
         titleBytes[byteCount] = 0; // Null-terminate
 
         var monitorValue = monitor ?? GlfwMonitor.None;
@@ -151,6 +151,22 @@ public unsafe class Glfw
         _commands.glfwPollEvents();
     }
 
+    public static void GetFrameBufferSize(GlfwWindow window, out int width, out int height)
+    {
+        CheckDisposed();
+
+        fixed (int* widthPtr = &width)
+        fixed (int* heightPtr = &height)
+            _commands.glfwGetFramebufferSize(window, widthPtr, heightPtr);
+    }
+
+    public static void SetWindowSizeCallback(GlfwWindow window, SizeCallback sizeCallback)
+    {
+        CheckDisposed();
+
+        _commands.glfwSetWindowSizeCallback(window, sizeCallback);
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void CheckDisposed()
     {
@@ -159,6 +175,4 @@ public unsafe class Glfw
             throw new ObjectDisposedException(typeof(Glfw).FullName);
         }
     }
-
-
 }
