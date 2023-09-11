@@ -11,18 +11,23 @@ internal class HelloTriangle
 
     private GlfwWindow _window;
 
-    private Framebuffer[] _frameBuffers;
-    private ImageView[] _imageViews;
-    private VulkanSwapchain[] _swapchains;
-
     private VulkanInstance _instance;
     private DebugMessenger _debugMessenger;
+
+    private VulkanSurface _surface;
 
     private PhysicalDevice _physicalDevice;
     private VulkanDevice _device;
 
     private uint _graphicsQueueFamilyIndex;
     private VulkanQueue _queue;
+
+    private VulkanSwapchain[] _swapchains;
+    private VulkanSwapchain _swapchain => _swapchains[0];
+
+    private ImageView[] _imageViews;
+    private Framebuffer[] _frameBuffers;
+    
 
     public void Run()
     {
@@ -50,13 +55,13 @@ internal class HelloTriangle
 
         Glfw.Vulkan.CreateWindowSurface(_instance.Handle, _window, null, out nint surfaceHandle);
 
-        var surface = _instance.LoadSurface(surfaceHandle);
+        _surface = _instance.LoadSurface(surfaceHandle);
 
         var requiredDeviceExtensions = new[] { "VK_KHR_swapchain" };
 
-        InitializeDevice(surface, requiredDeviceExtensions);
+        InitializeDevice(requiredDeviceExtensions);
 
-        CreateSwapchain(surface);
+        InitializeSwapchain();
 
         CreateImageViews();
 
@@ -87,7 +92,7 @@ internal class HelloTriangle
             {
                 new VkAttachmentDescription
                 {
-                    format = _swapchains[0].SurfaceFormat.format,
+                    format = _swapchain.SurfaceFormat.format,
                     samples  = VkSampleCountFlags.VK_SAMPLE_COUNT_1_BIT,
                     loadOp = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_CLEAR,
                     storeOp = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_STORE,
@@ -151,8 +156,8 @@ internal class HelloTriangle
                         {
                             x = 0,
                             y = 0,
-                            width = _swapchains[0].ImageExtent.width,
-                            height = _swapchains[0].ImageExtent.height,
+                            width = _swapchain.ImageExtent.width,
+                            height = _swapchain.ImageExtent.height,
                             minDepth = 0,
                             maxDepth = 1.0f,
                         }
@@ -162,7 +167,7 @@ internal class HelloTriangle
                         new VkRect2D
                         {
                             offset = new () { x = 0, y = 0 },
-                            extent = _swapchains[0].ImageExtent
+                            extent = _swapchain.ImageExtent
                         }
                     }
                 },
@@ -263,11 +268,11 @@ internal class HelloTriangle
 
             _device.WaitForFences(inFlightFences.Slice(currentFrame, 1), true);
 
-            var result = _swapchains[0].AquireNextImage(out var imageIndex, imageAvailableSemaphores[currentFrame]);
+            var result = _swapchain.AquireNextImage(out var imageIndex, imageAvailableSemaphores[currentFrame]);
 
             if (result == AcquireNextImageResult.OutOfDate)
             {
-                RecreateSwapChain(renderPass, surface);
+                RecreateSwapChain(renderPass);
                 continue;
             }
             else if (result != AcquireNextImageResult.Success && result != AcquireNextImageResult.Suboptimal)
@@ -293,7 +298,7 @@ internal class HelloTriangle
                 new VkRect2D
                 {
                     offset = new() { x = 0, y = 0 },
-                    extent = _swapchains[0].ImageExtent
+                    extent = _swapchain.ImageExtent
                 },
                 VkSubpassContents.VK_SUBPASS_CONTENTS_INLINE
             );
@@ -306,8 +311,8 @@ internal class HelloTriangle
                 {
                     x = 0,
                     y = 0,
-                    width = _swapchains[0].ImageExtent.width,
-                    height = _swapchains[0].ImageExtent.height,
+                    width = _swapchain.ImageExtent.width,
+                    height = _swapchain.ImageExtent.height,
                     minDepth = 0,
                     maxDepth = 1.0f,
                 }
@@ -320,7 +325,7 @@ internal class HelloTriangle
                 new VkRect2D
                 {
                     offset = new() { x = 0, y = 0 },
-                    extent = _swapchains[0].ImageExtent
+                    extent = _swapchain.ImageExtent
                 }
             };
 
@@ -342,7 +347,7 @@ internal class HelloTriangle
             {
                 frameBufferResized = false;
 
-                RecreateSwapChain(renderPass, surface);
+                RecreateSwapChain(renderPass);
             }
 
             currentFrame = (currentFrame + 1) % MaxFramesInFlight;
@@ -377,8 +382,8 @@ internal class HelloTriangle
 
         pipelineLayout.Dispose();
         renderPass.Dispose();
-        _swapchains[0].Dispose();
-        surface.Dispose();
+        _swapchain.Dispose();
+        _surface.Dispose();
         _device.Dispose();
 
 #if DEBUG
@@ -455,7 +460,7 @@ internal class HelloTriangle
 #endif
     }
 
-    private void InitializeDevice(VulkanSurface surface, string[] requiredDeviceExtensions)
+    private void InitializeDevice(string[] requiredDeviceExtensions)
     {
         var physicalDevices = _instance.GetPhysicalDevices();
 
@@ -474,7 +479,7 @@ internal class HelloTriangle
 
             for (var j = 0; j < queueFamilies.Length; j++)
             {
-                var supportsPresent = surface.SupportsDeviceQueueFamily(_physicalDevice, (uint)j);
+                var supportsPresent = _surface.SupportsDeviceQueueFamily(_physicalDevice, (uint)j);
 
                 // Find a queue family which supports graphics and presentation.
                 if (queueFamilies[j].queueFlags.HasFlag(VkQueueFlags.VK_QUEUE_GRAPHICS_BIT) && supportsPresent)
@@ -515,7 +520,7 @@ internal class HelloTriangle
         _queue = _device.GetQueue(_graphicsQueueFamilyIndex, 0);
     }
 
-    private void RecreateSwapChain(RenderPass renderPass, VulkanSurface surface)
+    private void RecreateSwapChain(RenderPass renderPass)
     {
         Glfw.GetFrameBufferSize(_window, out var width, out var height);
         while (width == 0 || height == 0)
@@ -537,49 +542,51 @@ internal class HelloTriangle
             _imageViews[i].Dispose();
         }
 
-        _swapchains[0].Dispose();
+        _swapchain.Dispose();
 
-        CreateSwapchain(surface);
+        InitializeSwapchain();
         CreateImageViews();
         CreateFramebuffers(renderPass);
     }
 
-    private void CreateSwapchain(VulkanSurface surface)
+    private void InitializeSwapchain()
     {
-        var capabilities = surface.GetCapabilities(_physicalDevice);
+        var capabilities = _surface.GetCapabilities(_physicalDevice);
 
-        var presentMode = ChoosePresentMode(surface, _physicalDevice);
-        var surfaceFormat = ChooseSurfaceFormat(surface, _physicalDevice);
+        var surfaceFormat = ChooseSurfaceFormat();
         var swapExtent = ChooseSwapExtent(ref capabilities);
+        var presentMode = ChoosePresentMode();
+        var preTransform = ChooseSurfaceTransform(capabilities);
+        var composite = ChooseCompositType(capabilities);
 
         var queueFamilyIndeces = Array.Empty<uint>();
-        var sharingMode = VkSharingMode.VK_SHARING_MODE_EXCLUSIVE;
 
-        _swapchains ??= new VulkanSwapchain[1]; 
+        var oldSwapchain = _swapchains?[0]?.Handle ?? nint.Zero; 
+
+        _swapchains ??= new VulkanSwapchain[1];
 
         _swapchains[0] = _device.CreateSwapchain(new SwapchainDefinition
         {
-            Surface = surface,
+            Surface = _surface,
             // Always include 1 more then the minimum, or max value if it is not zero (infinite).
             MinImageCount = Math.Min(capabilities.minImageCount + 1, Math.Max(capabilities.maxImageCount, uint.MaxValue)),
             SurfaceFormat = surfaceFormat,
-            ImageExtent = swapExtent, // TODO: use glfwGetFramebufferSize
+            ImageExtent = swapExtent,
             ImageArrayLayers = 1, // 1 unless doing stereoscopic 3D
             ImageUsage = VkImageUsageFlags.VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
-            SharingMode = sharingMode,
+            SharingMode = VkSharingMode.VK_SHARING_MODE_EXCLUSIVE,
             QueueFamilyIndeces = queueFamilyIndeces,
-            PreTransform = capabilities.currentTransform,
-            CompositeAlpha = VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
+            PreTransform = preTransform,
+            CompositeAlpha = composite,
             PresentMode = presentMode,
             Clipped = true,
-            OldSwapchain = nint.Zero // TODO: needed for swapchain resize
+            OldSwapchain = oldSwapchain
         });
     }
 
     private void CreateImageViews()
     {
-        // TODO: maybe use vector instead of array?
-        var images = _swapchains[0].GetImages();
+        var images = _swapchain.GetImages();
 
         _imageViews = new ImageView[images.Length];
 
@@ -588,14 +595,14 @@ internal class HelloTriangle
             _imageViews[i] = _device.CreateImageView(new ImageViewCreateInfo
             {
                 Image = images[i],
-                Format = _swapchains[0].SurfaceFormat.format,
+                Format = _swapchain.SurfaceFormat.format,
                 ViewType = VkImageViewType.VK_IMAGE_VIEW_TYPE_2D,
                 Components = new VkComponentMapping
                 {
-                    r = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
-                    g = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
-                    b = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY,
-                    a = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_IDENTITY
+                    r = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_R,
+                    g = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_G,
+                    b = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_B,
+                    a = VkComponentSwizzle.VK_COMPONENT_SWIZZLE_A
                 },
                 SubresourceRange = new VkImageSubresourceRange
                 {
@@ -618,16 +625,16 @@ internal class HelloTriangle
             _frameBuffers[i] = _device.CreateFramebuffer(
                 renderPass,
                 _imageViews.AsSpan().Slice(i, 1),
-                _swapchains[0].ImageExtent.width,
-                _swapchains[0].ImageExtent.height,
+                _swapchain.ImageExtent.width,
+                _swapchain.ImageExtent.height,
                 1
             );
         }
     }
 
-    private static VkPresentModeKHR ChoosePresentMode(VulkanSurface surface, PhysicalDevice physicalDevice)
+    private VkPresentModeKHR ChoosePresentMode()
     {
-        var presentModes = surface.GetPresentModes(physicalDevice);
+        var presentModes = _surface.GetPresentModes(_physicalDevice);
 
         for (var i = 0; i < presentModes.Length; i++)
         {
@@ -640,9 +647,9 @@ internal class HelloTriangle
         return VkPresentModeKHR.VK_PRESENT_MODE_FIFO_KHR;
     }
 
-    private static VkSurfaceFormatKHR ChooseSurfaceFormat(VulkanSurface surface, PhysicalDevice physicalDevice)
+    private VkSurfaceFormatKHR ChooseSurfaceFormat()
     {
-        var surfaceFormats = surface.GetSurfaceFormats(physicalDevice);
+        var surfaceFormats = _surface.GetSurfaceFormats(_physicalDevice);
 
         for (var i = 0; i < surfaceFormats.Length; i++)
         {
@@ -671,6 +678,41 @@ internal class HelloTriangle
             height = (uint)Math.Clamp(height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height)
         };
     }
+
+    private static VkSurfaceTransformFlagsKHR ChooseSurfaceTransform(VkSurfaceCapabilitiesKHR capabilities)
+    {
+        if (capabilities.supportedTransforms.HasFlag(VkSurfaceTransformFlagsKHR.VK_SURFACE_TRANSFORM_HORIZONTAL_MIRROR_BIT_KHR))
+        {
+            return VkSurfaceTransformFlagsKHR.VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR;
+        }
+        else
+        {
+            return capabilities.currentTransform;
+        }
+    }
+
+    private static VkCompositeAlphaFlagsKHR ChooseCompositType(VkSurfaceCapabilitiesKHR capabilities)
+    {
+        if (capabilities.supportedCompositeAlpha.HasFlag(VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR))
+        {
+            return VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
+        }
+        else if (capabilities.supportedCompositeAlpha.HasFlag(VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR))
+        {
+            return VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR;
+        }
+        else if (capabilities.supportedCompositeAlpha.HasFlag(VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR))
+        {
+            return VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR;
+        }
+        else if (capabilities.supportedCompositeAlpha.HasFlag(VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR))
+        {
+            return VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR;
+        }
+
+        return VkCompositeAlphaFlagsKHR.VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
+    }
+
 
     private static bool ValidateExtensions(Span<string> required, Span<ExtensionProperties> available)
     {
