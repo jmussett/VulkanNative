@@ -15,7 +15,7 @@ public unsafe class VulkanQueue
         _swapchainExtension = swapchainExtension;
     }
 
-    public void Submit(QueueSubmission[] queueSubmissions, VulkanFence? fence = null)
+    public void Submit(Span<QueueSubmission> queueSubmissions, VulkanFence? fence = null)
     {
         var queueSubmitInfoPtr = stackalloc VkSubmitInfo[queueSubmissions.Length];
 
@@ -65,7 +65,7 @@ public unsafe class VulkanQueue
             .ThrowOnError();
     }
 
-    public void Present(VulkanSwapchain[] swapchains, VulkanSemaphore[] waitSemaphores, Span<uint> imageIndexes)
+    public void Present(Span<VulkanSwapchain> swapchains, Span<VulkanSemaphore> waitSemaphores, Span<uint> imageIndexes)
     {
         VkSwapchainKHR* vkSwapchains = stackalloc VkSwapchainKHR[swapchains.Length];
 

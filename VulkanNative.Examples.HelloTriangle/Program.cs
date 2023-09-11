@@ -3,6 +3,8 @@ using VulkanNative.Examples.Common;
 using VulkanNative.Examples.Common.Glfw;
 using VulkanNative.Examples.Common.Utility;
 
+const int MaxFramesInFlight = 2;
+
 var api = VulkanApi.Initialize();
 
 Glfw.SetErrorCallback((errorCode, message) =>
@@ -363,55 +365,67 @@ for (var i = 0; i < framebuffers.Length; i++)
 
 var commandPool = device.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT, graphicsQueueFamilyIndex.Value);
 
-var commandBuffers = commandPool.AllocateCommandBuffers(1, VkCommandBufferLevel.VK_COMMAND_BUFFER_LEVEL_PRIMARY);
+Span<CommandBuffer> commandBuffers = commandPool.AllocateCommandBuffers(MaxFramesInFlight, VkCommandBufferLevel.VK_COMMAND_BUFFER_LEVEL_PRIMARY);
 
-var imageAvailableSemaphore = device.CreateSemaphore();
-var renderFinishedSemaphore = device.CreateSemaphore();
-var inFlightFence = device.CreateFence(VkFenceCreateFlags.VK_FENCE_CREATE_SIGNALED_BIT);
+Span<VulkanSemaphore> imageAvailableSemaphores = new VulkanSemaphore[MaxFramesInFlight];
+Span<VulkanSemaphore> renderFinishedSemaphores = new VulkanSemaphore[MaxFramesInFlight];
+Span<VulkanFence> inFlightFences = new VulkanFence[MaxFramesInFlight];
 
-var fences = new[] { inFlightFence };
+for(var i = 0; i < MaxFramesInFlight; i++)
+{
+    imageAvailableSemaphores[i] = device.CreateSemaphore();
+    renderFinishedSemaphores[i] = device.CreateSemaphore();
+    inFlightFences[i] = device.CreateFence(VkFenceCreateFlags.VK_FENCE_CREATE_SIGNALED_BIT);
+}
 
 using VulkanBuffer<VkPipelineStageFlags> waitStages = new()
 {
     VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT
 };
 
-var waitSemaphores = new[] { imageAvailableSemaphore };
-var signalSemaphores = new[] { renderFinishedSemaphore };
-
-var queueSubmissions = new[]
+// seperate queue submissions for each frame
+Span<QueueSubmission> queueSubmissions = new[]
 {
     new QueueSubmission
     {
-        CommandBuffers = commandBuffers,
-        SignalSemaphores = signalSemaphores,
-        WaitSemaphores = waitSemaphores,
+        CommandBuffers = new[] { commandBuffers[0] },
+        SignalSemaphores = new[] { renderFinishedSemaphores[0] },
+        WaitSemaphores = new[] { imageAvailableSemaphores[0] },
+        WaitStages = waitStages
+    },
+    new QueueSubmission
+    {
+        CommandBuffers = new[] { commandBuffers[1] },
+        SignalSemaphores = new[] { renderFinishedSemaphores[1] },
+        WaitSemaphores = new[] { imageAvailableSemaphores[1] },
         WaitStages = waitStages
     }
 };
 
 var swapchains = new[] { swapchain };
 
+int currentFrame = 0;
+
 while (!Glfw.WindowShouldClose(window))
 {
     Glfw.PollEvents();
 
-    device.WaitForFences(fences, true);
+    device.WaitForFences(inFlightFences.Slice(currentFrame, 1), true);
 
-    device.ResetFences(fences);
+    device.ResetFences(inFlightFences.Slice(currentFrame, 1));
 
-    var imageIndex = swapchain.AquireNextImage(imageAvailableSemaphore);
+    var imageIndex = swapchain.AquireNextImage(imageAvailableSemaphores[currentFrame]);
 
-    commandBuffers[0].Reset();
+    commandBuffers[currentFrame].Reset();
 
-    commandBuffers[0].Begin();
+    commandBuffers[currentFrame].Begin();
 
     using VulkanBuffer<ClearValue> clearColors = new()
     {
         ClearValue.ClearColor(0, 0, 0, 0)
     };
 
-    commandBuffers[0].BeginRenderPass(
+    commandBuffers[currentFrame].BeginRenderPass(
         framebuffers[imageIndex],
         renderPass,
         clearColors,
@@ -423,7 +437,7 @@ while (!Glfw.WindowShouldClose(window))
         VkSubpassContents.VK_SUBPASS_CONTENTS_INLINE
     );
 
-    commandBuffers[0].BindPipeline(VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipelines[0]);
+    commandBuffers[currentFrame].BindPipeline(VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipelines[0]);
 
     using VulkanBuffer<VkViewport> viewports = new()
     {
@@ -438,7 +452,7 @@ while (!Glfw.WindowShouldClose(window))
         }
     };
 
-    commandBuffers[0].SetViewport(0, viewports);
+    commandBuffers[currentFrame].SetViewport(0, viewports);
 
     using VulkanBuffer<VkRect2D> scissors = new()
     {
@@ -449,26 +463,32 @@ while (!Glfw.WindowShouldClose(window))
         }
     };
 
-    commandBuffers[0].SetScissor(0, scissors);
+    commandBuffers[currentFrame].SetScissor(0, scissors);
 
-    commandBuffers[0].Draw(3, 1, 0, 0);
+    commandBuffers[currentFrame].Draw(3, 1, 0, 0);
 
-    commandBuffers[0].EndRenderPass();
+    commandBuffers[currentFrame].EndRenderPass();
 
-    commandBuffers[0].End();
+    commandBuffers[currentFrame].End();
 
-    graphicsQueue.Submit(queueSubmissions, inFlightFence);
+
+    graphicsQueue.Submit(queueSubmissions.Slice(currentFrame, 1), inFlightFences[currentFrame]);
 
     using VulkanBuffer<uint> imageIndeces = new() { imageIndex };
 
-    presentQueue.Present(swapchains, signalSemaphores, imageIndeces);
+    presentQueue.Present(swapchains, renderFinishedSemaphores.Slice(currentFrame, 1), imageIndeces);
+
+    currentFrame = (currentFrame + 1) % MaxFramesInFlight;
 }
 
 device.WaitIdle();
 
-imageAvailableSemaphore.Dispose();
-renderFinishedSemaphore.Dispose();
-inFlightFence.Dispose();
+for (var i = 0; i < MaxFramesInFlight; i++)
+{
+    imageAvailableSemaphores[i].Dispose();
+    renderFinishedSemaphores[i].Dispose();
+    inFlightFences[i].Dispose();
+}
 
 commandPool.Dispose();
 

@@ -451,7 +451,7 @@ public sealed unsafe class VulkanDevice : IDisposable
         return new VulkanFence(vkFence, _handle, _commands);
     }
 
-    public void WaitForFences(VulkanFence[] fences, bool waitAll, uint timeout = uint.MaxValue)
+    public void WaitForFences(Span<VulkanFence> fences, bool waitAll, uint timeout = uint.MaxValue)
     {
         VkFence* fencesPtr = stackalloc VkFence[fences.Length];
 
@@ -463,7 +463,7 @@ public sealed unsafe class VulkanDevice : IDisposable
         _commands.vkWaitForFences(_handle, (uint)fences.Length, fencesPtr, (uint)(waitAll ? 1 : 0), timeout).ThrowOnError();
     }
 
-    public void ResetFences(VulkanFence[] fences)
+    public void ResetFences(Span<VulkanFence> fences)
     {
         VkFence* fencesPtr = stackalloc VkFence[fences.Length];
 
