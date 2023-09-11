@@ -26,6 +26,9 @@ internal class HelloTriangle
     private VulkanSwapchain _swapchain => _swapchains[0];
 
     private ImageView[] _imageViews;
+
+    private RenderPass _renderPass;
+
     private Framebuffer[] _frameBuffers;
     
 
@@ -60,10 +63,9 @@ internal class HelloTriangle
         var requiredDeviceExtensions = new[] { "VK_KHR_swapchain" };
 
         InitializeDevice(requiredDeviceExtensions);
-
         InitializeSwapchain();
-
-        CreateImageViews();
+        InitializeImageViews();
+        InitializeRenderPass();
 
         byte[] vertBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "vert.spv"));
         byte[] fragBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "frag.spv"));
@@ -72,55 +74,12 @@ internal class HelloTriangle
         var fragShader = _device.CreateShaderModule(fragBytes);
 
         var pipelineLayout = _device.CreatePipelineLayout();
-        var renderPass = _device.CreateRenderPass(
-            new[]
-            {
-                new SubpassDescription
-                {
-                    BindPoint = VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS,
-                    ColorAttachments = new()
-                    {
-                        new VkAttachmentReference
-                        {
-                            attachment = 0,
-                            layout = VkImageLayout.VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL
-                        }
-                    }
-                }
-            },
-            new[]
-            {
-                new VkAttachmentDescription
-                {
-                    format = _swapchain.SurfaceFormat.format,
-                    samples  = VkSampleCountFlags.VK_SAMPLE_COUNT_1_BIT,
-                    loadOp = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_CLEAR,
-                    storeOp = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_STORE,
-                    stencilLoadOp  = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_DONT_CARE,
-                    stencilStoreOp  = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_DONT_CARE,
-                    initialLayout = VkImageLayout.VK_IMAGE_LAYOUT_UNDEFINED,
-                    finalLayout = VkImageLayout.VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
-                }
-            },
-            new[]
-            {
-                new VkSubpassDependency
-                {
-                    srcSubpass = VulkanApiConstants.VK_SUBPASS_EXTERNAL,
-                    dstSubpass = 0,
-                    srcStageMask = VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-                    srcAccessMask = 0,
-                    dstStageMask = VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
-                    dstAccessMask = VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT
-                }
-            }
-        );
 
         var graphicsPipelines = _device.CreateGraphicsPipelines(new[]
         {
             new GraphicsPipelineDefinition
             {
-                RenderPass = renderPass,
+                RenderPass = _renderPass,
                 PipelineLayout = pipelineLayout,
                 DynamicStates = new()
                 {
@@ -219,7 +178,7 @@ internal class HelloTriangle
         vertShader.Dispose();
         fragShader.Dispose();
 
-        CreateFramebuffers(renderPass);
+        CreateFramebuffers();
 
         var commandPool = _device.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT, _graphicsQueueFamilyIndex);
 
@@ -272,7 +231,7 @@ internal class HelloTriangle
 
             if (result == AcquireNextImageResult.OutOfDate)
             {
-                RecreateSwapChain(renderPass);
+                RecreateSwapChain();
                 continue;
             }
             else if (result != AcquireNextImageResult.Success && result != AcquireNextImageResult.Suboptimal)
@@ -293,7 +252,7 @@ internal class HelloTriangle
 
             commandBuffers[currentFrame].BeginRenderPass(
                 _frameBuffers[imageIndex],
-                renderPass,
+                _renderPass,
                 clearColors,
                 new VkRect2D
                 {
@@ -347,7 +306,7 @@ internal class HelloTriangle
             {
                 frameBufferResized = false;
 
-                RecreateSwapChain(renderPass);
+                RecreateSwapChain();
             }
 
             currentFrame = (currentFrame + 1) % MaxFramesInFlight;
@@ -381,7 +340,7 @@ internal class HelloTriangle
         }
 
         pipelineLayout.Dispose();
-        renderPass.Dispose();
+        _renderPass.Dispose();
         _swapchain.Dispose();
         _surface.Dispose();
         _device.Dispose();
@@ -397,7 +356,53 @@ internal class HelloTriangle
         Glfw.Terminate();
     }
 
-    
+    private void InitializeRenderPass()
+    {
+        _renderPass = _device.CreateRenderPass(
+            new[]
+            {
+                new SubpassDescription
+                {
+                    BindPoint = VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS,
+                    ColorAttachments = new()
+                    {
+                        new VkAttachmentReference
+                        {
+                            attachment = 0,
+                            layout = VkImageLayout.VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL
+                        }
+                    }
+                }
+            },
+            new[]
+            {
+                new VkAttachmentDescription
+                {
+                    format = _swapchain.SurfaceFormat.format,
+                    samples  = VkSampleCountFlags.VK_SAMPLE_COUNT_1_BIT,
+                    loadOp = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_CLEAR,
+                    storeOp = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_STORE,
+                    stencilLoadOp  = VkAttachmentLoadOp.VK_ATTACHMENT_LOAD_OP_DONT_CARE,
+                    stencilStoreOp  = VkAttachmentStoreOp.VK_ATTACHMENT_STORE_OP_DONT_CARE,
+                    initialLayout = VkImageLayout.VK_IMAGE_LAYOUT_UNDEFINED,
+                    finalLayout = VkImageLayout.VK_IMAGE_LAYOUT_PRESENT_SRC_KHR,
+                }
+            },
+            new[]
+            {
+                new VkSubpassDependency
+                {
+                    srcSubpass = VulkanApiConstants.VK_SUBPASS_EXTERNAL,
+                    dstSubpass = 0,
+                    srcStageMask = VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+                    srcAccessMask = 0,
+                    dstStageMask = VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT,
+                    dstAccessMask = VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_READ_BIT  | VkAccessFlags.VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT
+                }
+            }
+        );
+    }
+
 
     private void InitializeInstance(VulkanApi api, string[] requiredExtensions)
     {
@@ -520,7 +525,7 @@ internal class HelloTriangle
         _queue = _device.GetQueue(_graphicsQueueFamilyIndex, 0);
     }
 
-    private void RecreateSwapChain(RenderPass renderPass)
+    private void RecreateSwapChain()
     {
         Glfw.GetFrameBufferSize(_window, out var width, out var height);
         while (width == 0 || height == 0)
@@ -545,8 +550,8 @@ internal class HelloTriangle
         _swapchain.Dispose();
 
         InitializeSwapchain();
-        CreateImageViews();
-        CreateFramebuffers(renderPass);
+        InitializeImageViews();
+        CreateFramebuffers();
     }
 
     private void InitializeSwapchain()
@@ -584,7 +589,7 @@ internal class HelloTriangle
         });
     }
 
-    private void CreateImageViews()
+    private void InitializeImageViews()
     {
         var images = _swapchain.GetImages();
 
@@ -614,16 +619,18 @@ internal class HelloTriangle
                 }
             });
         }
+
+        // TODO: create command pool / fence per swapchain image
     }
 
-    private void CreateFramebuffers(RenderPass renderPass)
+    private void CreateFramebuffers()
     {
         _frameBuffers = new Framebuffer[_imageViews.Length];
 
         for (var i = 0; i < _frameBuffers.Length; i++)
         {
             _frameBuffers[i] = _device.CreateFramebuffer(
-                renderPass,
+                _renderPass,
                 _imageViews.AsSpan().Slice(i, 1),
                 _swapchain.ImageExtent.width,
                 _swapchain.ImageExtent.height,
