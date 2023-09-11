@@ -29,9 +29,11 @@ internal class HelloTriangle
 
     private RenderPass _renderPass;
 
+    private PipelineLayout _pipelineLayout;
+    private Pipeline _pipeline;
+
     private Framebuffer[] _frameBuffers;
     
-
     public void Run()
     {
         var api = VulkanApi.Initialize();
@@ -66,117 +68,7 @@ internal class HelloTriangle
         InitializeSwapchain();
         InitializeImageViews();
         InitializeRenderPass();
-
-        byte[] vertBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "vert.spv"));
-        byte[] fragBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "frag.spv"));
-
-        var vertShader = _device.CreateShaderModule(vertBytes);
-        var fragShader = _device.CreateShaderModule(fragBytes);
-
-        var pipelineLayout = _device.CreatePipelineLayout();
-
-        var graphicsPipelines = _device.CreateGraphicsPipelines(new[]
-        {
-            new GraphicsPipelineDefinition
-            {
-                RenderPass = _renderPass,
-                PipelineLayout = pipelineLayout,
-                DynamicStates = new()
-                {
-                    VkDynamicState.VK_DYNAMIC_STATE_VIEWPORT,
-                    VkDynamicState.VK_DYNAMIC_STATE_SCISSOR,
-                },
-                VertexInputState = new(), // no vertex data to load for now
-                InputAssemblyState = new()
-                {
-                    Topology = VkPrimitiveTopology.VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST,
-                    PrimitiveRestartEnable = false
-                },
-                Stages = new ShaderStage[]
-                {
-                    new ShaderStage
-                    {
-                        Name = "main",
-                        Stage = VkShaderStageFlags.VK_SHADER_STAGE_VERTEX_BIT,
-                        Module = vertShader
-                    },
-                    new ShaderStage
-                    {
-                        Name = "main",
-                        Stage = VkShaderStageFlags.VK_SHADER_STAGE_FRAGMENT_BIT,
-                        Module = fragShader
-                    }
-                },
-                ViewportState = new()
-                {
-                    Viewports  =new()
-                    {
-                        new VkViewport
-                        {
-                            x = 0,
-                            y = 0,
-                            width = _swapchain.ImageExtent.width,
-                            height = _swapchain.ImageExtent.height,
-                            minDepth = 0,
-                            maxDepth = 1.0f,
-                        }
-                    },
-                    Scissors = new()
-                    {
-                        new VkRect2D
-                        {
-                            offset = new () { x = 0, y = 0 },
-                            extent = _swapchain.ImageExtent
-                        }
-                    }
-                },
-                RasterizationState = new()
-                {
-                    DepthClampEnable = false,
-                    RasterizerDiscardEnable = false,
-                    PolygonMode = VkPolygonMode.VK_POLYGON_MODE_FILL,
-                    LineWidth = 1,
-                    CullMode = VkCullModeFlags.VK_CULL_MODE_BACK_BIT,
-                    FrontFace = VkFrontFace.VK_FRONT_FACE_CLOCKWISE,
-                    DepthBiasEnable = false,
-                    DepthBiasConstantFactor = 0,
-                    DepthBiasClamp = 0,
-                    DepthBiasSlopeFactor = 0
-                },
-                MultisampleState = new()
-                {
-                    SampleShadingEnable = false,
-                    RasterizationSamples = VkSampleCountFlags.VK_SAMPLE_COUNT_1_BIT,
-                    MinSampleShading = 1,
-                    AlphaToCoverageEnable = false,
-                    AlphaToOneEnable = false
-                },
-                ColorBlendState = new()
-                {
-                    LogicOpEnable = false,
-                    LogicOp = VkLogicOp.VK_LOGIC_OP_COPY,
-                    Attachments = new()
-                    {
-                        new ()
-                        {
-                            ColorWriteMask = VkColorComponentFlags.VK_COLOR_COMPONENT_R_BIT | VkColorComponentFlags.VK_COLOR_COMPONENT_G_BIT | VkColorComponentFlags.VK_COLOR_COMPONENT_B_BIT | VkColorComponentFlags.VK_COLOR_COMPONENT_A_BIT,
-                            BlendEnable = false,
-                            SrcColorBlendFactor = VkBlendFactor.VK_BLEND_FACTOR_ONE,
-                            DstColorBlendFactor = VkBlendFactor.VK_BLEND_FACTOR_ZERO,
-                            ColorBlendOp = VkBlendOp.VK_BLEND_OP_ADD,
-                            SrcAlphaBlendFactor = VkBlendFactor.VK_BLEND_FACTOR_ONE,
-                            DstAlphaBlendFactor = VkBlendFactor.VK_BLEND_FACTOR_ZERO,
-                            AlphaBlendOp = VkBlendOp.VK_BLEND_OP_ADD
-                        }
-                    }
-                },
-                BasePipeline = null,
-                BasePipelineIndex = -1
-            }
-        });
-
-        vertShader.Dispose();
-        fragShader.Dispose();
+        InitializePipeline();
 
         CreateFramebuffers();
 
@@ -262,7 +154,7 @@ internal class HelloTriangle
                 VkSubpassContents.VK_SUBPASS_CONTENTS_INLINE
             );
 
-            commandBuffers[currentFrame].BindPipeline(VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipelines[0]);
+            commandBuffers[currentFrame].BindPipeline(VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS, _pipeline);
 
             using VulkanBuffer<VkViewport> viewports = new()
             {
@@ -334,12 +226,9 @@ internal class HelloTriangle
             _imageViews[i].Dispose();
         }
 
-        for (var i = 0; i < graphicsPipelines.Length; i++)
-        {
-            graphicsPipelines[i].Dispose();
-        }
+        _pipeline.Dispose();
 
-        pipelineLayout.Dispose();
+        _pipelineLayout.Dispose();
         _renderPass.Dispose();
         _swapchain.Dispose();
         _surface.Dispose();
@@ -591,6 +480,101 @@ internal class HelloTriangle
                 }
             }
         );
+    }
+
+    private void InitializePipeline()
+    {
+        byte[] vertBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "vert.spv"));
+        byte[] fragBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "frag.spv"));
+
+        var vertShader = _device.CreateShaderModule(vertBytes);
+        var fragShader = _device.CreateShaderModule(fragBytes);
+
+        _pipelineLayout = _device.CreatePipelineLayout();
+
+        var graphicsPipelines = _device.CreateGraphicsPipelines(new[]
+        {
+            new GraphicsPipelineDefinition
+            {
+                RenderPass = _renderPass,
+                PipelineLayout = _pipelineLayout,
+                DynamicStates = new()
+                {
+                    VkDynamicState.VK_DYNAMIC_STATE_VIEWPORT,
+                    VkDynamicState.VK_DYNAMIC_STATE_SCISSOR,
+                },
+                VertexInputState = new(), // no vertex data to load for now
+                InputAssemblyState = new()
+                {
+                    Topology = VkPrimitiveTopology.VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST,
+                    PrimitiveRestartEnable = false
+                },
+                Stages = new ShaderStage[]
+                {
+                    new ShaderStage
+                    {
+                        Name = "main",
+                        Stage = VkShaderStageFlags.VK_SHADER_STAGE_VERTEX_BIT,
+                        Module = vertShader
+                    },
+                    new ShaderStage
+                    {
+                        Name = "main",
+                        Stage = VkShaderStageFlags.VK_SHADER_STAGE_FRAGMENT_BIT,
+                        Module = fragShader
+                    }
+                },
+                ViewportState = new()
+                {
+                    Viewports  =new()
+                    {
+                        new VkViewport
+                        {
+                            x = 0,
+                            y = 0,
+                            width = _swapchain.ImageExtent.width,
+                            height = _swapchain.ImageExtent.height,
+                            minDepth = 0,
+                            maxDepth = 1.0f,
+                        }
+                    },
+                    Scissors = new()
+                    {
+                        new VkRect2D
+                        {
+                            offset = new () { x = 0, y = 0 },
+                            extent = _swapchain.ImageExtent
+                        }
+                    }
+                },
+                RasterizationState = new()
+                {
+                    LineWidth = 1,
+                    CullMode = VkCullModeFlags.VK_CULL_MODE_BACK_BIT,
+                    FrontFace = VkFrontFace.VK_FRONT_FACE_CLOCKWISE,
+                },
+                MultisampleState = new()
+                {
+                    RasterizationSamples = VkSampleCountFlags.VK_SAMPLE_COUNT_1_BIT,
+                    MinSampleShading = 1,
+                },
+                ColorBlendState = new()
+                {
+                    Attachments = new()
+                    {
+                        new ()
+                        {
+                            ColorWriteMask = VkColorComponentFlags.VK_COLOR_COMPONENT_R_BIT | VkColorComponentFlags.VK_COLOR_COMPONENT_G_BIT | VkColorComponentFlags.VK_COLOR_COMPONENT_B_BIT | VkColorComponentFlags.VK_COLOR_COMPONENT_A_BIT,
+                        }
+                    }
+                }
+            }
+        });
+
+        _pipeline = graphicsPipelines[0];
+
+        vertShader.Dispose();
+        fragShader.Dispose();
     }
 
     private void RecreateSwapChain()
