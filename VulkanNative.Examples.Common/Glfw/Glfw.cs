@@ -151,6 +151,13 @@ public unsafe class Glfw
         _commands.glfwPollEvents();
     }
 
+    public static void WaitEvents()
+    {
+        CheckDisposed();
+
+        _commands.glfwWaitEvents();
+    }
+
     public static void GetFrameBufferSize(GlfwWindow window, out int width, out int height)
     {
         CheckDisposed();

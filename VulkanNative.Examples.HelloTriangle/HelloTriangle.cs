@@ -479,6 +479,13 @@ internal class HelloTriangle
 
     private void RecreateSwapChain(VulkanDevice device, PhysicalDevice physicalDevice, RenderPass renderPass, VulkanSurface surface, uint graphicsQueueFamilyIndex, uint presentationQueueFamilyIndex)
     {
+        Glfw.GetFrameBufferSize(_window, out var width, out var height);
+        while (width == 0 || height == 0)
+        {
+            Glfw.GetFrameBufferSize(_window, out width, out height);
+            Glfw.WaitEvents();
+        }
+
         device.WaitIdle();
 
         for (var i = 0; i < _frameBuffers.Length; i++)
