@@ -104,8 +104,10 @@ public unsafe class PhysicalDevice
         return availableLayers;
     }
 
-    public VulkanDevice CreateLogicalDevice(UnmanagedUtf8StringArray extensions, DeviceQueue[] queues)
+    public VulkanDevice CreateLogicalDevice(string[] extensions, DeviceQueue[] queues)
     {
+        UnmanagedUtf8StringArray extensionsEncoded = extensions;
+
         VkDevice device;
 
         VkDeviceQueueCreateInfo* queueCreateInfos = stackalloc VkDeviceQueueCreateInfo[queues.Length];
@@ -127,8 +129,8 @@ public unsafe class PhysicalDevice
         {
             queueCreateInfoCount = (uint)queues.Length,
             pQueueCreateInfos = queueCreateInfos,
-            enabledExtensionCount = (uint)extensions.Length,
-            ppEnabledExtensionNames = extensions.AsPointer()
+            enabledExtensionCount = (uint)extensionsEncoded.Length,
+            ppEnabledExtensionNames = extensionsEncoded.AsPointer()
         };
 
         _commands.vkCreateDevice(_handle, &deviceCreateInfo, null, &device).ThrowOnError();

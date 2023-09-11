@@ -1,6 +1,7 @@
 ﻿using VulkanNative.Examples.Common.Glfw;
 using VulkanNative.Examples.Common;
 using VulkanNative.Examples.Common.Utility;
+using System;
 
 namespace VulkanNative.Examples.HelloTriangle;
 
@@ -16,6 +17,12 @@ internal class HelloTriangle
 
     private VulkanInstance _instance;
     private DebugMessenger _debugMessenger;
+
+    private PhysicalDevice _physicalDevice;
+    private VulkanDevice _device;
+
+    private uint _graphicsQueueFamilyIndex;
+    private VulkanQueue _queue;
 
     public void Run()
     {
@@ -45,93 +52,22 @@ internal class HelloTriangle
 
         var surface = _instance.LoadSurface(surfaceHandle);
 
-        // Find physical device
+        var requiredDeviceExtensions = new[] { "VK_KHR_swapchain" };
 
-        var physicalDevices = _instance.GetPhysicalDevices();
+        InitializeDevice(surface, requiredDeviceExtensions);
 
-        // TODO: suitability checks
-        // TODO: surface checks
-        var physicalDevice = physicalDevices[0];
+        CreateSwapchain(surface);
 
-
-        // Get graphics queues
-
-        var queueFamilies = physicalDevice.GetQueueFamilies();
-
-        uint? graphicsQueueFamilyIndex = null;
-        uint? presentationQueueFamilyIndex = null;
-
-        for (uint i = 0; i < queueFamilies.Length; i++)
-        {
-            if (queueFamilies[i].queueFlags.HasFlag(VkQueueFlags.VK_QUEUE_GRAPHICS_BIT))
-            {
-                graphicsQueueFamilyIndex = i;
-            }
-
-            if (surface.SupportsDeviceQueueFamily(physicalDevice, i))
-            {
-                presentationQueueFamilyIndex = i;
-            }
-        }
-
-        if (!graphicsQueueFamilyIndex.HasValue)
-        {
-            throw new InvalidOperationException("Graphics Queue Family does not exist.");
-        }
-
-        if (!presentationQueueFamilyIndex.HasValue)
-        {
-            throw new InvalidOperationException("Presentation Queue Family does not exist.");
-        }
-
-
-        // TODO: only include 1 if both are the same
-        var deviceQueues = new[]
-        {
-            new DeviceQueue
-            {
-                QueueFamilyIndex = graphicsQueueFamilyIndex.Value,
-                QueuePriorites = new float[] { 1 }
-            },
-            new DeviceQueue
-            {
-                QueueFamilyIndex = presentationQueueFamilyIndex.Value,
-                QueuePriorites = new float[] { 1 }
-            }
-        };
-
-        // Get Device Extensions
-
-        var availableDeviceExtensions = physicalDevice.GetExtensions();
-
-        if (!availableDeviceExtensions.Any(x => x.ExtensionName == "VK_KHR_swapchain"))
-        {
-            throw new NotSupportedException("Device does not support swapchains.");
-        }
-
-
-        using UnmanagedUtf8StringArray deviceExtensions = new()
-        {
-            "VK_KHR_swapchain"
-        };
-
-        var device = physicalDevice.CreateLogicalDevice(deviceExtensions, deviceQueues);
-
-        var graphicsQueue = device.GetQueue(graphicsQueueFamilyIndex.Value, 0);
-        var presentQueue = device.GetQueue(presentationQueueFamilyIndex.Value, 0);
-
-        CreateSwapchain(device, physicalDevice, surface, graphicsQueueFamilyIndex.Value, presentationQueueFamilyIndex.Value);
-
-        CreateImageViews(device);
+        CreateImageViews();
 
         byte[] vertBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "vert.spv"));
         byte[] fragBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "Shaders", "frag.spv"));
 
-        var vertShader = device.CreateShaderModule(vertBytes);
-        var fragShader = device.CreateShaderModule(fragBytes);
+        var vertShader = _device.CreateShaderModule(vertBytes);
+        var fragShader = _device.CreateShaderModule(fragBytes);
 
-        var pipelineLayout = device.CreatePipelineLayout();
-        var renderPass = device.CreateRenderPass(
+        var pipelineLayout = _device.CreatePipelineLayout();
+        var renderPass = _device.CreateRenderPass(
             new[]
             {
                 new SubpassDescription
@@ -175,7 +111,7 @@ internal class HelloTriangle
             }
         );
 
-        var graphicsPipelines = device.CreateGraphicsPipelines(new[]
+        var graphicsPipelines = _device.CreateGraphicsPipelines(new[]
         {
             new GraphicsPipelineDefinition
             {
@@ -278,9 +214,9 @@ internal class HelloTriangle
         vertShader.Dispose();
         fragShader.Dispose();
 
-        CreateFramebuffers(device, renderPass);
+        CreateFramebuffers(renderPass);
 
-        var commandPool = device.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT, graphicsQueueFamilyIndex.Value);
+        var commandPool = _device.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT, _graphicsQueueFamilyIndex);
 
         Span<CommandBuffer> commandBuffers = commandPool.AllocateCommandBuffers(MaxFramesInFlight, VkCommandBufferLevel.VK_COMMAND_BUFFER_LEVEL_PRIMARY);
 
@@ -290,9 +226,9 @@ internal class HelloTriangle
 
         for (var i = 0; i < MaxFramesInFlight; i++)
         {
-            imageAvailableSemaphores[i] = device.CreateSemaphore();
-            renderFinishedSemaphores[i] = device.CreateSemaphore();
-            inFlightFences[i] = device.CreateFence(VkFenceCreateFlags.VK_FENCE_CREATE_SIGNALED_BIT);
+            imageAvailableSemaphores[i] = _device.CreateSemaphore();
+            renderFinishedSemaphores[i] = _device.CreateSemaphore();
+            inFlightFences[i] = _device.CreateFence(VkFenceCreateFlags.VK_FENCE_CREATE_SIGNALED_BIT);
         }
 
         using VulkanBuffer<VkPipelineStageFlags> waitStages = new()
@@ -325,13 +261,13 @@ internal class HelloTriangle
         {
             Glfw.PollEvents();
 
-            device.WaitForFences(inFlightFences.Slice(currentFrame, 1), true);
+            _device.WaitForFences(inFlightFences.Slice(currentFrame, 1), true);
 
             var result = _swapchains[0].AquireNextImage(out var imageIndex, imageAvailableSemaphores[currentFrame]);
 
             if (result == AcquireNextImageResult.OutOfDate)
             {
-                RecreateSwapChain(device, physicalDevice, renderPass, surface, graphicsQueueFamilyIndex.Value, presentationQueueFamilyIndex.Value);
+                RecreateSwapChain(renderPass, surface);
                 continue;
             }
             else if (result != AcquireNextImageResult.Success && result != AcquireNextImageResult.Suboptimal)
@@ -339,7 +275,7 @@ internal class HelloTriangle
                 throw new Exception("Failed to acquire swap chain image!");
             }
 
-            device.ResetFences(inFlightFences.Slice(currentFrame, 1));
+            _device.ResetFences(inFlightFences.Slice(currentFrame, 1));
 
             commandBuffers[currentFrame].Reset();
 
@@ -396,23 +332,23 @@ internal class HelloTriangle
 
             commandBuffers[currentFrame].End();
 
-            graphicsQueue.Submit(queueSubmissions.Slice(currentFrame, 1), inFlightFences[currentFrame]);
+            _queue.Submit(queueSubmissions.Slice(currentFrame, 1), inFlightFences[currentFrame]);
 
             using VulkanBuffer<uint> imageIndeces = new() { imageIndex };
 
-            var presentResult = presentQueue.Present(_swapchains, renderFinishedSemaphores.Slice(currentFrame, 1), imageIndeces);
+            var presentResult = _queue.Present(_swapchains, renderFinishedSemaphores.Slice(currentFrame, 1), imageIndeces);
 
             if (presentResult == QueuePresentResult.OutOfDate || presentResult == QueuePresentResult.Suboptimal || frameBufferResized)
             {
                 frameBufferResized = false;
 
-                RecreateSwapChain(device, physicalDevice, renderPass, surface, graphicsQueueFamilyIndex.Value, presentationQueueFamilyIndex.Value);
+                RecreateSwapChain(renderPass, surface);
             }
 
             currentFrame = (currentFrame + 1) % MaxFramesInFlight;
         }
 
-        device.WaitIdle();
+        _device.WaitIdle();
 
         for (var i = 0; i < MaxFramesInFlight; i++)
         {
@@ -443,7 +379,7 @@ internal class HelloTriangle
         renderPass.Dispose();
         _swapchains[0].Dispose();
         surface.Dispose();
-        device.Dispose();
+        _device.Dispose();
 
 #if DEBUG
         _debugMessenger.Dispose();
@@ -455,6 +391,8 @@ internal class HelloTriangle
 
         Glfw.Terminate();
     }
+
+    
 
     private void InitializeInstance(VulkanApi api, string[] requiredExtensions)
     {
@@ -517,7 +455,67 @@ internal class HelloTriangle
 #endif
     }
 
-    private void RecreateSwapChain(VulkanDevice device, PhysicalDevice physicalDevice, RenderPass renderPass, VulkanSurface surface, uint graphicsQueueFamilyIndex, uint presentationQueueFamilyIndex)
+    private void InitializeDevice(VulkanSurface surface, string[] requiredDeviceExtensions)
+    {
+        var physicalDevices = _instance.GetPhysicalDevices();
+
+        int graphicsQueueFamilyIndex = -1;
+
+        for (var i = 0; i < physicalDevices.Length && (graphicsQueueFamilyIndex < 0); i++)
+        {
+            _physicalDevice = physicalDevices[i];
+
+            var queueFamilies = _physicalDevice.GetQueueFamilies();
+
+            if (queueFamilies.Length < 1)
+            {
+                throw new InvalidOperationException("No queue family found.");
+            }
+
+            for (var j = 0; j < queueFamilies.Length; j++)
+            {
+                var supportsPresent = surface.SupportsDeviceQueueFamily(_physicalDevice, (uint)j);
+
+                // Find a queue family which supports graphics and presentation.
+                if (queueFamilies[j].queueFlags.HasFlag(VkQueueFlags.VK_QUEUE_GRAPHICS_BIT) && supportsPresent)
+                {
+                    graphicsQueueFamilyIndex = j;
+                    break;
+                }
+            }
+        }
+
+        if (graphicsQueueFamilyIndex < 0)
+        {
+            throw new InvalidOperationException("Graphics Queue Family does not exist.");
+        }
+
+        _graphicsQueueFamilyIndex = (uint)graphicsQueueFamilyIndex;
+
+        var availableDeviceExtensions = _physicalDevice.GetExtensions();
+
+
+
+        if (!ValidateExtensions(requiredDeviceExtensions, availableDeviceExtensions))
+        {
+            throw new NotSupportedException("Device does not support swapchains.");
+        }
+
+        var deviceQueues = new[]
+        {
+            new DeviceQueue
+            {
+                QueueFamilyIndex = _graphicsQueueFamilyIndex,
+                QueuePriorites = new float[] { 1 }
+            }
+        };
+
+        _device = _physicalDevice.CreateLogicalDevice(requiredDeviceExtensions, deviceQueues);
+
+        _queue = _device.GetQueue(_graphicsQueueFamilyIndex, 0);
+    }
+
+    private void RecreateSwapChain(RenderPass renderPass, VulkanSurface surface)
     {
         Glfw.GetFrameBufferSize(_window, out var width, out var height);
         while (width == 0 || height == 0)
@@ -526,7 +524,7 @@ internal class HelloTriangle
             Glfw.WaitEvents();
         }
 
-        device.WaitIdle();
+        _device.WaitIdle();
 
         for (var i = 0; i < _frameBuffers.Length; i++)
         {
@@ -541,36 +539,25 @@ internal class HelloTriangle
 
         _swapchains[0].Dispose();
 
-        CreateSwapchain(device, physicalDevice, surface, graphicsQueueFamilyIndex, presentationQueueFamilyIndex);
-        CreateImageViews(device);
-        CreateFramebuffers(device, renderPass);
+        CreateSwapchain(surface);
+        CreateImageViews();
+        CreateFramebuffers(renderPass);
     }
 
-    private void CreateSwapchain(VulkanDevice device, PhysicalDevice physicalDevice, VulkanSurface surface, uint graphicsQueueFamilyIndex, uint presentationQueueFamilyIndex)
+    private void CreateSwapchain(VulkanSurface surface)
     {
-        var capabilities = surface.GetCapabilities(physicalDevice);
+        var capabilities = surface.GetCapabilities(_physicalDevice);
 
-        var presentMode = ChoosePresentMode(surface, physicalDevice);
-        var surfaceFormat = ChooseSurfaceFormat(surface, physicalDevice);
+        var presentMode = ChoosePresentMode(surface, _physicalDevice);
+        var surfaceFormat = ChooseSurfaceFormat(surface, _physicalDevice);
         var swapExtent = ChooseSwapExtent(ref capabilities);
 
-        uint[] queueFamilyIndeces;
-        VkSharingMode sharingMode;
-
-        if (presentationQueueFamilyIndex == graphicsQueueFamilyIndex)
-        {
-            queueFamilyIndeces = Array.Empty<uint>();
-            sharingMode = VkSharingMode.VK_SHARING_MODE_EXCLUSIVE;
-        }
-        else
-        {
-            queueFamilyIndeces = new uint[] { graphicsQueueFamilyIndex, presentationQueueFamilyIndex };
-            sharingMode = VkSharingMode.VK_SHARING_MODE_CONCURRENT;
-        }
+        var queueFamilyIndeces = Array.Empty<uint>();
+        var sharingMode = VkSharingMode.VK_SHARING_MODE_EXCLUSIVE;
 
         _swapchains ??= new VulkanSwapchain[1]; 
 
-        _swapchains[0] = device.CreateSwapchain(new SwapchainDefinition
+        _swapchains[0] = _device.CreateSwapchain(new SwapchainDefinition
         {
             Surface = surface,
             // Always include 1 more then the minimum, or max value if it is not zero (infinite).
@@ -589,7 +576,7 @@ internal class HelloTriangle
         });
     }
 
-    private void CreateImageViews(VulkanDevice device)
+    private void CreateImageViews()
     {
         // TODO: maybe use vector instead of array?
         var images = _swapchains[0].GetImages();
@@ -598,7 +585,7 @@ internal class HelloTriangle
 
         for (var i = 0; i < _imageViews.Length; i++)
         {
-            _imageViews[i] = device.CreateImageView(new ImageViewCreateInfo
+            _imageViews[i] = _device.CreateImageView(new ImageViewCreateInfo
             {
                 Image = images[i],
                 Format = _swapchains[0].SurfaceFormat.format,
@@ -622,13 +609,13 @@ internal class HelloTriangle
         }
     }
 
-    private void CreateFramebuffers(VulkanDevice device, RenderPass renderPass)
+    private void CreateFramebuffers(RenderPass renderPass)
     {
         _frameBuffers = new Framebuffer[_imageViews.Length];
 
         for (var i = 0; i < _frameBuffers.Length; i++)
         {
-            _frameBuffers[i] = device.CreateFramebuffer(
+            _frameBuffers[i] = _device.CreateFramebuffer(
                 renderPass,
                 _imageViews.AsSpan().Slice(i, 1),
                 _swapchains[0].ImageExtent.width,
