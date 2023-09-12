@@ -17,6 +17,11 @@ public unsafe sealed class CommandPool : IDisposable
         _commands = commands;
     }
 
+    public CommandBuffer AllocateCommandBuffer(VkCommandBufferLevel level)
+    {
+        return AllocateCommandBuffers(1, level)[0];
+    }
+
     public CommandBuffer[] AllocateCommandBuffers(uint commandBufferCount, VkCommandBufferLevel level)
     {
         if (commandBufferCount == 0)
@@ -43,6 +48,32 @@ public unsafe sealed class CommandPool : IDisposable
         }
 
         return commandBuffers;
+    }
+
+    public void FreeCommandBuffer(CommandBuffer commandBuffer)
+    {
+        VkCommandBuffer* commandBufferPtr = stackalloc VkCommandBuffer[1];
+
+        commandBufferPtr[0] = commandBuffer.Handle;
+
+        _commands.vkFreeCommandBuffers(_deviceHandle, _handle, 1, commandBufferPtr);
+    }
+
+    public void FreeCommandBuffers(Span<CommandBuffer> commandBuffers)
+    {
+        VkCommandBuffer* commandBufferPtr = stackalloc VkCommandBuffer[commandBuffers.Length];
+
+        for(var i = 0; i < commandBuffers.Length; i++)
+        {
+            commandBufferPtr[i] = commandBuffers[i].Handle;
+        }
+
+        _commands.vkFreeCommandBuffers(_deviceHandle, _handle, (uint) commandBuffers.Length, commandBufferPtr);
+    }
+
+    public void Reset(VkCommandPoolResetFlags flags = 0) // TODO: None
+    {
+        _commands.vkResetCommandPool(_deviceHandle, _handle, flags).ThrowOnError();
     }
 
     public void Dispose()

@@ -39,6 +39,18 @@ public unsafe class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TIte
         }
     }
 
+    public UnmanagedSegment<TItem> this[Range range]
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get
+        {
+            int start = range.Start.IsFromEnd ? Length - range.Start.Value : range.Start.Value;
+            int end = range.End.IsFromEnd ? Length - range.End.Value : range.End.Value;
+
+            return Slice(start, end - start);
+        }
+    }
+
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public UnmanagedBuffer(int initialCapacity = 4, bool fixedLength = false)
     {
@@ -96,6 +108,17 @@ public unsafe class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TIte
         destination = _pointer;
 
         _pointer = null;
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public UnmanagedSegment<TItem> Slice(int start, int length)
+    {
+        if (start < 0 || start + length > _currentLength)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
+
+        return new UnmanagedSegment<TItem>(_pointer + start, length);
     }
 
     public void Dispose()

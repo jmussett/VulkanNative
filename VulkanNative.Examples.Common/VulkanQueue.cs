@@ -15,33 +15,85 @@ public unsafe class VulkanQueue
         _swapchainExtension = swapchainExtension;
     }
 
-    public void Submit(Span<QueueSubmission> queueSubmissions, VulkanFence? fence = null)
+    public void Submit(CommandSubmission submission, VulkanFence? fence = null)
     {
-        var queueSubmitInfoPtr = stackalloc VkSubmitInfo[queueSubmissions.Length];
+        var queueSubmitInfoPtr = stackalloc VkSubmitInfo[1];
+
+        using UnmanagedBuffer<VkSemaphore> waitSemaphoreBuffer = new();
+        using UnmanagedBuffer<VkSemaphore> signalSemaphoreBuffer = new();
+        using UnmanagedBuffer<VkCommandBuffer> commandBuffersBuffer = new();
+        using UnmanagedBuffer<VkPipelineStageFlags> waitStagesBuffer = new();
+
+        for (var j = 0; j < submission.WaitSemaphores.Count; j++)
+        {
+            waitSemaphoreBuffer.Add(submission.WaitSemaphores[j].Handle);
+        }
+
+        for (var j = 0; j < submission.SignalSemaphores.Count; j++)
+        {
+            signalSemaphoreBuffer.Add(submission.SignalSemaphores[j].Handle);
+        }
+
+        for (var j = 0; j < submission.CommandBuffers.Count; j++)
+        {
+            commandBuffersBuffer.Add(submission.CommandBuffers[j].Handle);
+        }
+
+        for (var j = 0; j < submission.WaitStages.Count; j++)
+        {
+            waitStagesBuffer.Add(submission.WaitStages[j]);
+        }
+
+        queueSubmitInfoPtr[0] = new()
+        {
+            waitSemaphoreCount = (uint)waitSemaphoreBuffer.Length,
+            pWaitSemaphores = waitSemaphoreBuffer.AsPointer(),
+            signalSemaphoreCount = (uint)signalSemaphoreBuffer.Length,
+            pSignalSemaphores = signalSemaphoreBuffer.AsPointer(),
+            commandBufferCount = (uint)commandBuffersBuffer.Length,
+            pCommandBuffers = commandBuffersBuffer.AsPointer(),
+            // TODO: assert against wait semaphores
+            pWaitDstStageMask = waitStagesBuffer.AsPointer()
+        };
+
+        _commands.vkQueueSubmit(_handle, 1, queueSubmitInfoPtr, fence?.Handle ?? nint.Zero)
+            .ThrowOnError();
+    }
+
+    public void Submit(Span<CommandSubmission> submission, VulkanFence? fence = null)
+    {
+        var queueSubmitInfoPtr = stackalloc VkSubmitInfo[submission.Length];
 
         using UnmanagedJaggedArray<VkSemaphore> waitSemaphores = new();
         using UnmanagedJaggedArray<VkSemaphore> signalSemaphores = new();
         using UnmanagedJaggedArray<VkCommandBuffer> commandBuffers = new();
+        using UnmanagedJaggedArray<VkPipelineStageFlags> waitStages = new();
 
-        for (var i = 0; i < queueSubmissions.Length; i++)
+        for (var i = 0; i < submission.Length; i++)
         {
             UnmanagedBuffer<VkSemaphore> waitSemaphoreBuffer = new();
             UnmanagedBuffer<VkSemaphore> signalSemaphoreBuffer = new();
             UnmanagedBuffer<VkCommandBuffer> commandBuffersBuffer = new();
+            UnmanagedBuffer<VkPipelineStageFlags> waitStagesBuffer = new();
 
-            for (var j = 0; j < queueSubmissions[i].WaitSemaphores.Length; j++)
+            for (var j = 0; j < submission[i].WaitSemaphores.Count; j++)
             {
-                waitSemaphoreBuffer.Add(queueSubmissions[i].WaitSemaphores[j].Handle);
+                waitSemaphoreBuffer.Add(submission[i].WaitSemaphores[j].Handle);
             }
 
-            for (var j = 0; j < queueSubmissions[i].SignalSemaphores.Length; j++)
+            for (var j = 0; j < submission[i].SignalSemaphores.Count; j++)
             {
-                signalSemaphoreBuffer.Add(queueSubmissions[i].SignalSemaphores[j].Handle);
+                signalSemaphoreBuffer.Add(submission[i].SignalSemaphores[j].Handle);
             }
 
-            for (var j = 0; j < queueSubmissions[i].CommandBuffers.Length; j++)
+            for (var j = 0; j < submission[i].CommandBuffers.Count; j++)
             {
-                commandBuffersBuffer.Add(queueSubmissions[i].CommandBuffers[j].Handle);
+                commandBuffersBuffer.Add(submission[i].CommandBuffers[j].Handle);
+            }
+
+            for (var j = 0; j < submission[i].WaitStages.Count; j++)
+            {
+                waitStagesBuffer.Add(submission[i].WaitStages[j]);
             }
 
             queueSubmitInfoPtr[i] = new()
@@ -53,15 +105,16 @@ public unsafe class VulkanQueue
                 commandBufferCount = (uint) commandBuffersBuffer.Length,
                 pCommandBuffers = commandBuffersBuffer.AsPointer(),
                 // TODO: assert against wait semaphores
-                pWaitDstStageMask = queueSubmissions[i].WaitStages.AsPointer()
+                pWaitDstStageMask = waitStagesBuffer.AsPointer()
             };
 
             waitSemaphores.Add(waitSemaphoreBuffer);
             signalSemaphores.Add(signalSemaphoreBuffer);
             commandBuffers.Add(commandBuffersBuffer);
+            waitStages.Add(waitStagesBuffer);
         }
 
-        _commands.vkQueueSubmit(_handle, (uint)queueSubmissions.Length, queueSubmitInfoPtr, fence?.Handle ?? nint.Zero)
+        _commands.vkQueueSubmit(_handle, (uint)submission.Length, queueSubmitInfoPtr, fence?.Handle ?? nint.Zero)
             .ThrowOnError();
     }
 
@@ -103,5 +156,10 @@ public unsafe class VulkanQueue
                 _ => throw new InvalidOperationException($"Vulkan Error: {result}")
             };
         }
+    }
+
+    public void WaitIdle()
+    {
+        _commands.vkQueueWaitIdle(_handle).ThrowOnError();
     }
 }

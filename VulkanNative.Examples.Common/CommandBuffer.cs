@@ -1,12 +1,10 @@
-﻿using System.Globalization;
-using System.Reflection.Metadata;
-using VulkanNative.Examples.Common.Utility;
+﻿using VulkanNative.Examples.Common.Utility;
 
 namespace VulkanNative.Examples.Common;
 
 public unsafe sealed class CommandBuffer
 {
-    private VkCommandBuffer _handle;
+    private readonly VkCommandBuffer _handle;
     private readonly VkDeviceCommands _commands;
 
     public nint Handle => _handle;
@@ -17,11 +15,11 @@ public unsafe sealed class CommandBuffer
         _commands = commands;
     }
 
-    public void Begin()
+    public void Begin(VkCommandBufferUsageFlags flags = 0)
     {
         VkCommandBufferBeginInfo beginInfo = new()
         {
-            flags = 0, // TODO + Create None enumeration
+            flags = flags, // TODO: None
             pInheritanceInfo = null, // TODO,
             pNext = null // TODO
         };
@@ -34,19 +32,22 @@ public unsafe sealed class CommandBuffer
         _commands.vkEndCommandBuffer(_handle).ThrowOnError();
     }
 
-    public void BeginRenderPass(Framebuffer framebuffer, RenderPass renderPass, VulkanBuffer<ClearValue> clearValues, VkRect2D area, VkSubpassContents contents)
+    public void BeginRenderPass(Framebuffer framebuffer, RenderPass renderPass, ReadOnlySpan<ClearValue> clearValues, VkRect2D area, VkSubpassContents contents)
     {
-        VkRenderPassBeginInfo beginInfo = new()
+        fixed(ClearValue* clearValuePtr = clearValues)
         {
-            clearValueCount = (uint) clearValues.Length,
-            // Both ClearValue and VkClearValue have the same struct layout so they can be cast.
-            pClearValues = (VkClearValue*) clearValues.AsPointer(),
-            framebuffer = framebuffer.Handle,
-            renderPass = renderPass.Handle,
-            renderArea = area
-        };
+            VkRenderPassBeginInfo beginInfo = new()
+            {
+                clearValueCount = (uint)clearValues.Length,
+                // Both ClearValue and VkClearValue have the same struct layout so they can be cast.
+                pClearValues = (VkClearValue*) clearValuePtr,
+                framebuffer = framebuffer.Handle,
+                renderPass = renderPass.Handle,
+                renderArea = area
+            };
 
-        _commands.vkCmdBeginRenderPass(_handle, &beginInfo, contents);
+            _commands.vkCmdBeginRenderPass(_handle, &beginInfo, contents);
+        }
     }
 
     public void EndRenderPass()
@@ -59,14 +60,16 @@ public unsafe sealed class CommandBuffer
         _commands.vkCmdBindPipeline(_handle, bindPoint, pipeline.Handle);
     }
 
-    public void SetViewport(uint firstViewport, VulkanBuffer<VkViewport> viewports)
+    public void SetViewport(uint firstViewport, ReadOnlySpan<VkViewport> viewports)
     {
-        _commands.vkCmdSetViewport(_handle, firstViewport, (uint)viewports.Length, viewports.AsPointer());
+        fixed(VkViewport* viewportPtr = viewports)
+            _commands.vkCmdSetViewport(_handle, firstViewport, (uint)viewports.Length, viewportPtr);
     }
 
-    public void SetScissor(uint firstScissor, VulkanBuffer<VkRect2D> scissors)
+    public void SetScissor(uint firstScissor, ReadOnlySpan<VkRect2D> scissors)
     {
-        _commands.vkCmdSetScissor(_handle, firstScissor, (uint) scissors.Length, scissors.AsPointer());
+        fixed (VkRect2D* scissorsPtr = scissors)
+            _commands.vkCmdSetScissor(_handle, firstScissor, (uint) scissors.Length, scissorsPtr);
     }
 
     public void Draw(uint vertexCount, uint instanceCount, uint firstVertex, uint firstInstance)
@@ -78,6 +81,4 @@ public unsafe sealed class CommandBuffer
     {
         _commands.vkResetCommandBuffer(_handle, flags).ThrowOnError();
     }
-
-    
 }

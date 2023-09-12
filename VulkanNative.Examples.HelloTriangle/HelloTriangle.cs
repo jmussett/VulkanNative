@@ -1,7 +1,6 @@
 ﻿using VulkanNative.Examples.Common.Glfw;
 using VulkanNative.Examples.Common;
 using VulkanNative.Examples.Common.Utility;
-using System;
 
 namespace VulkanNative.Examples.HelloTriangle;
 
@@ -26,7 +25,13 @@ internal class HelloTriangle
     private VulkanSwapchain _swapchain => _swapchains![0];
 
     private ImageView[]? _imageViews;
+    private VulkanFence[]? _submitFences;
+    private CommandPool[]? _commandPools;
+    private CommandBuffer[]? _commandBuffers;
+    private VulkanSemaphore[]? _acquireSemaphores;
+    private VulkanSemaphore[]? _releaseSemaphores;
 
+    private SemaphorePool? _semaphorePool;
     private RenderPass? _renderPass;
 
     private PipelineLayout? _pipelineLayout;
@@ -34,133 +39,39 @@ internal class HelloTriangle
 
     private Framebuffer[]? _frameBuffers;
 
+    VkPipelineStageFlags[]? _waitStages;
+
     private bool _framebufferResized;
     
     public void Run()
     {
         Prepare();
 
-        var commandPool = _device!.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT, _graphicsQueueFamilyIndex);
-
-        Span<CommandBuffer> commandBuffers = commandPool.AllocateCommandBuffers(MaxFramesInFlight, VkCommandBufferLevel.VK_COMMAND_BUFFER_LEVEL_PRIMARY);
-
-        Span<VulkanSemaphore> imageAvailableSemaphores = new VulkanSemaphore[MaxFramesInFlight];
-        Span<VulkanSemaphore> renderFinishedSemaphores = new VulkanSemaphore[MaxFramesInFlight];
-        Span<VulkanFence> inFlightFences = new VulkanFence[MaxFramesInFlight];
-
-        for (var i = 0; i < MaxFramesInFlight; i++)
-        {
-            imageAvailableSemaphores[i] = _device.CreateSemaphore();
-            renderFinishedSemaphores[i] = _device.CreateSemaphore();
-            inFlightFences[i] = _device.CreateFence(VkFenceCreateFlags.VK_FENCE_CREATE_SIGNALED_BIT);
-        }
-
-        using VulkanBuffer<VkPipelineStageFlags> waitStages = new()
-        {
-            VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT
-        };
-
-        // seperate queue submissions for each frame
-        Span<QueueSubmission> queueSubmissions = new[]
-        {
-            new QueueSubmission
-            {
-                CommandBuffers = new[] { commandBuffers[0] },
-                SignalSemaphores = new[] { renderFinishedSemaphores[0] },
-                WaitSemaphores = new[] { imageAvailableSemaphores[0] },
-                WaitStages = waitStages
-            },
-            new QueueSubmission
-            {
-                CommandBuffers = new[] { commandBuffers[1] },
-                SignalSemaphores = new[] { renderFinishedSemaphores[1] },
-                WaitSemaphores = new[] { imageAvailableSemaphores[1] },
-                WaitStages = waitStages
-            }
-        };
-
-        int currentFrame = 0;
-
         while (!Glfw.WindowShouldClose(_window))
         {
             Glfw.PollEvents();
 
-            _device.WaitForFences(inFlightFences.Slice(currentFrame, 1), true);
+            var result = AcquireNextImage(out var imageIndex);
 
-            var result = _swapchain.AquireNextImage(out var imageIndex, imageAvailableSemaphores[currentFrame]);
-
-            if (result == AcquireNextImageResult.OutOfDate)
+            if (result == AcquireNextImageResult.Suboptimal || result == AcquireNextImageResult.OutOfDate)
             {
                 RecreateSwapChain();
+                result = AcquireNextImage(out imageIndex);
+            }
+
+            if (result != AcquireNextImageResult.Success)
+            {
+                _queue!.WaitIdle();
                 continue;
             }
-            else if (result != AcquireNextImageResult.Success && result != AcquireNextImageResult.Suboptimal)
-            {
-                throw new Exception("Failed to acquire swap chain image!");
-            }
 
-            _device.ResetFences(inFlightFences.Slice(currentFrame, 1));
+            RenderTriangle(imageIndex);
 
-            commandBuffers[currentFrame].Reset();
-
-            commandBuffers[currentFrame].Begin();
-
-            using VulkanBuffer<ClearValue> clearColors = new()
-            {
-                ClearValue.ClearColor(0, 0, 0, 0)
-            };
-
-            commandBuffers[currentFrame].BeginRenderPass(
-                _frameBuffers![imageIndex],
-                _renderPass!,
-                clearColors,
-                new VkRect2D
-                {
-                    offset = new() { x = 0, y = 0 },
-                    extent = _swapchain.ImageExtent
-                },
-                VkSubpassContents.VK_SUBPASS_CONTENTS_INLINE
+            var presentResult = _queue!.Present(
+                _swapchains,
+                _releaseSemaphores!.AsSpan().Slice((int) imageIndex, 1),
+                stackalloc[] { imageIndex }
             );
-
-            commandBuffers[currentFrame].BindPipeline(VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS, _pipeline!);
-
-            using VulkanBuffer<VkViewport> viewports = new()
-            {
-                new VkViewport
-                {
-                    x = 0,
-                    y = 0,
-                    width = _swapchain.ImageExtent.width,
-                    height = _swapchain.ImageExtent.height,
-                    minDepth = 0,
-                    maxDepth = 1.0f,
-                }
-            };
-
-            commandBuffers[currentFrame].SetViewport(0, viewports);
-
-            using VulkanBuffer<VkRect2D> scissors = new()
-            {
-                new VkRect2D
-                {
-                    offset = new() { x = 0, y = 0 },
-                    extent = _swapchain.ImageExtent
-                }
-            };
-
-            commandBuffers[currentFrame].SetScissor(0, scissors);
-
-            commandBuffers[currentFrame].Draw(3, 1, 0, 0);
-
-            commandBuffers[currentFrame].EndRenderPass();
-
-            commandBuffers[currentFrame].End();
-
-            _queue!.Submit(queueSubmissions.Slice(currentFrame, 1), inFlightFences[currentFrame]);
-
-            using VulkanBuffer<uint> imageIndeces = new() { imageIndex };
-
-            var presentResult = _queue.Present(_swapchains, renderFinishedSemaphores.Slice(currentFrame, 1), imageIndeces);
 
             if (presentResult == QueuePresentResult.OutOfDate || presentResult == QueuePresentResult.Suboptimal || _framebufferResized)
             {
@@ -168,45 +79,11 @@ internal class HelloTriangle
 
                 RecreateSwapChain();
             }
-
-            currentFrame = (currentFrame + 1) % MaxFramesInFlight;
         }
 
-        _device.WaitIdle();
+        _device!.WaitIdle();
 
-        for (var i = 0; i < MaxFramesInFlight; i++)
-        {
-            imageAvailableSemaphores[i].Dispose();
-            renderFinishedSemaphores[i].Dispose();
-            inFlightFences[i].Dispose();
-        }
-
-        commandPool.Dispose();
-
-        for (var i = 0; i < _frameBuffers!.Length; i++)
-        {
-            _frameBuffers[i].Dispose();
-        }
-
-        // TODO: move down?
-        for (var i = 0; i < _imageViews!.Length; i++)
-        {
-            _imageViews[i].Dispose();
-        }
-
-        _pipeline!.Dispose();
-
-        _pipelineLayout!.Dispose();
-        _renderPass!.Dispose();
-        _swapchain.Dispose();
-        _surface!.Dispose();
-        _device.Dispose();
-
-#if DEBUG
-        _debugMessenger!.Dispose();
-#endif
-
-        _instance!.Dispose();
+        Teardown();
 
         Glfw.DestroyWindow(_window);
 
@@ -249,6 +126,45 @@ internal class HelloTriangle
         InitializeRenderPass();
         InitializePipeline();
         InitializeFramebuffers();
+
+        _semaphorePool = new(_device!);
+    }
+
+    private void Teardown()
+    {
+        for (var i = 0; i < _imageViews!.Length; i++)
+        {
+            _acquireSemaphores![i].Dispose();
+            _releaseSemaphores![i].Dispose();
+            _submitFences![i].Dispose();
+            _commandPools![i].Dispose();
+        }
+
+        _semaphorePool!.Dispose();
+
+        for (var i = 0; i < _frameBuffers!.Length; i++)
+        {
+            _frameBuffers[i].Dispose();
+        }
+
+        for (var i = 0; i < _imageViews!.Length; i++)
+        {
+            _imageViews[i].Dispose();
+        }
+
+        _pipeline!.Dispose();
+
+        _pipelineLayout!.Dispose();
+        _renderPass!.Dispose();
+        _swapchain.Dispose();
+        _surface!.Dispose();
+        _device!.Dispose();
+
+#if DEBUG
+        _debugMessenger!.Dispose();
+#endif
+
+        _instance!.Dispose();
     }
 
     private void InitializeInstance(VulkanApi api, string[] requiredExtensions)
@@ -305,10 +221,7 @@ internal class HelloTriangle
 
         _debugMessenger = debugUtils.CreateMessenger();
 
-        _debugMessenger.OnMessage += message =>
-        {
-            Console.WriteLine(message);
-        };
+        _debugMessenger.OnMessage += Console.WriteLine;
 #endif
     }
 
@@ -412,6 +325,11 @@ internal class HelloTriangle
         var images = _swapchain.GetImages();
 
         _imageViews = new ImageView[images.Length];
+        _submitFences = new VulkanFence[images.Length];
+        _commandPools = new CommandPool[images.Length];
+        _commandBuffers = new CommandBuffer[images.Length];
+        _acquireSemaphores = new VulkanSemaphore[images.Length];
+        _releaseSemaphores = new VulkanSemaphore[images.Length];
 
         for (var i = 0; i < _imageViews.Length; i++)
         {
@@ -436,9 +354,14 @@ internal class HelloTriangle
                     layerCount = 1
                 }
             });
-        }
 
-        // TODO: create command pool / fence per swapchain image
+            _submitFences[i] = _device!.CreateFence(VkFenceCreateFlags.VK_FENCE_CREATE_SIGNALED_BIT);
+
+            _commandPools[i] = _device!.CreateCommandPool(VkCommandPoolCreateFlags.VK_COMMAND_POOL_CREATE_TRANSIENT_BIT, _graphicsQueueFamilyIndex);
+
+            _commandBuffers[i] = _commandPools[i].AllocateCommandBuffer(VkCommandBufferLevel.VK_COMMAND_BUFFER_LEVEL_PRIMARY);
+        }
+        
     }
 
     private void InitializeRenderPass()
@@ -599,10 +522,13 @@ internal class HelloTriangle
             _frameBuffers[i].Dispose();
         }
 
-        // TODO: move down?
         for (var i = 0; i < _imageViews!.Length; i++)
         {
             _imageViews[i].Dispose();
+            _submitFences![i].Dispose();
+            _acquireSemaphores![i].Dispose();
+            _releaseSemaphores![i].Dispose();
+            _commandPools![i].Dispose();
         }
 
         _swapchain.Dispose();
@@ -626,6 +552,99 @@ internal class HelloTriangle
                 1
             );
         }
+    }
+
+    private AcquireNextImageResult AcquireNextImage(out uint imageIndex)
+    {
+        var acquireSemaphore = _semaphorePool!.GetSemaphore();
+
+        var result = _swapchain.AquireNextImage(out imageIndex, acquireSemaphore);
+        if (result != AcquireNextImageResult.Success)
+        {
+            _semaphorePool!.Return(acquireSemaphore);
+            return result;
+        }
+
+        _device!.WaitForFence(_submitFences![imageIndex], true);
+        _device.ResetFence(_submitFences![imageIndex]);
+
+        _commandPools![imageIndex].Reset();
+
+        var oldSemaphore = _acquireSemaphores![imageIndex];
+
+        if (oldSemaphore is not null)
+        {
+            _semaphorePool!.Return(oldSemaphore);
+        }
+
+        _acquireSemaphores[imageIndex] = acquireSemaphore;
+
+        return result;
+    }
+
+    private void RenderTriangle(uint imageIndex)
+    {
+        _commandBuffers![imageIndex].Begin(VkCommandBufferUsageFlags.VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT);
+
+        _commandBuffers[imageIndex].BeginRenderPass(
+            _frameBuffers![imageIndex],
+            _renderPass!,
+            stackalloc[]
+            {
+            ClearValue.ClearColor(0.01f, 0.01f, 0.033f, 1.0f)
+        },
+            new VkRect2D
+            {
+                offset = new() { x = 0, y = 0 },
+                extent = _swapchain.ImageExtent
+            },
+            VkSubpassContents.VK_SUBPASS_CONTENTS_INLINE
+        );
+
+        _commandBuffers[imageIndex].BindPipeline(VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS, _pipeline!);
+
+        _commandBuffers[imageIndex].SetViewport(0, stackalloc[]
+        {
+            new VkViewport
+            {
+                x = 0,
+                y = 0,
+                width = _swapchain.ImageExtent.width,
+                height = _swapchain.ImageExtent.height,
+                minDepth = 0,
+                maxDepth = 1.0f,
+            }
+        });
+
+        _commandBuffers[imageIndex].SetScissor(0, stackalloc[]
+        {
+            new VkRect2D
+            {
+                offset = new() { x = 0, y = 0 },
+                extent = _swapchain.ImageExtent
+            }
+        });
+
+        _commandBuffers[imageIndex].Draw(3, 1, 0, 0);
+
+        _commandBuffers[imageIndex].EndRenderPass();
+
+        _commandBuffers[imageIndex].End();
+
+        _releaseSemaphores![imageIndex] ??= _device!.CreateSemaphore();
+
+        _waitStages ??= new[] { VkPipelineStageFlags.VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT };
+
+        _queue!.Submit(
+            new CommandSubmission
+            {
+                CommandBuffers = new(_commandBuffers, (int)imageIndex, 1),
+                WaitSemaphores = new(_acquireSemaphores!, (int)imageIndex, 1),
+                SignalSemaphores = new(_releaseSemaphores, (int)imageIndex, 1),
+                WaitStages = _waitStages
+            },
+            _submitFences![imageIndex]
+        );
     }
 
     private VkPresentModeKHR ChoosePresentMode()
