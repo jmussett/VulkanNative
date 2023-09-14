@@ -1,4 +1,7 @@
-﻿using VulkanNative.Examples.Common.Glfw;
+﻿using GLFW;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using VulkanNative.Examples.Common;
 using VulkanNative.Examples.Common.Utility;
 
@@ -96,12 +99,12 @@ internal class HelloTriangle
 
         Glfw.SetErrorCallback((errorCode, message) =>
         {
-            throw new Exception($"GLFW error {errorCode}: {message}");
+            throw new InvalidOperationException($"GLFW error {errorCode}: {message}");
         });
 
-        Glfw.WindowHint(Hint.ClientApi, 0);
+        Glfw.WindowHint(GlfwHint.ClientApi, 0);
 
-        _window = Glfw.CreateWindow(800, 600, "Hello Triangle");
+        _window = Glfw.CreateWindow(800, 600, "Hello Triangle", GlfwMonitor.None, GlfwWindow.None);
 
         _framebufferResized = false;
 
@@ -114,7 +117,7 @@ internal class HelloTriangle
 
         InitializeInstance(api, requiredExtensions);
 
-        Glfw.Vulkan.CreateWindowSurface(_instance!.Handle, _window, null, out nint surfaceHandle);
+        Glfw.Vulkan.CreateWindowSurface(_instance!.Handle, _window, nint.Zero, out nint surfaceHandle);
 
         _surface = _instance.LoadSurface(surfaceHandle);
 
@@ -263,8 +266,6 @@ internal class HelloTriangle
         _graphicsQueueFamilyIndex = (uint)graphicsQueueFamilyIndex;
 
         var availableDeviceExtensions = _physicalDevice!.GetExtensions();
-
-
 
         if (!ValidateExtensions(requiredDeviceExtensions, availableDeviceExtensions))
         {
@@ -508,10 +509,10 @@ internal class HelloTriangle
 
     private void RecreateSwapChain()
     {
-        Glfw.GetFrameBufferSize(_window, out var width, out var height);
+        Glfw.GetFramebufferSize(_window, out var width, out var height);
         while (width == 0 || height == 0)
         {
-            Glfw.GetFrameBufferSize(_window, out width, out height);
+            Glfw.GetFramebufferSize(_window, out width, out height);
             Glfw.WaitEvents();
         }
 
@@ -559,6 +560,7 @@ internal class HelloTriangle
         var acquireSemaphore = _semaphorePool!.GetSemaphore();
 
         var result = _swapchain.AquireNextImage(out imageIndex, acquireSemaphore);
+
         if (result != AcquireNextImageResult.Success)
         {
             _semaphorePool!.Return(acquireSemaphore);
@@ -685,7 +687,7 @@ internal class HelloTriangle
             return capabilities.currentExtent;
         }
 
-        Glfw.GetFrameBufferSize(_window, out var width, out var height);
+        Glfw.GetFramebufferSize(_window, out var width, out var height);
 
         return new()
         {

@@ -1,4 +1,6 @@
-﻿namespace VulkanNative.Examples.Common;
+﻿using System;
+
+namespace VulkanNative.Examples.Common;
 
 public unsafe sealed class VulkanSemaphore : IDisposable
 {

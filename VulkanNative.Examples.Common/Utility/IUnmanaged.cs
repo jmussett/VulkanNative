@@ -1,4 +1,7 @@
-﻿namespace VulkanNative.Examples.Common.Utility;
+﻿using System;
+using System.Collections.Generic;
+
+namespace VulkanNative.Examples.Common.Utility;
 
 public unsafe interface IUnmanaged<TItem> : IEnumerable<TItem>, IDisposable
     where TItem : unmanaged

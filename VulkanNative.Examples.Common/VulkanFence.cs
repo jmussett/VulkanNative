@@ -1,9 +1,11 @@
-﻿namespace VulkanNative.Examples.Common;
+﻿using System;
+
+namespace VulkanNative.Examples.Common;
 
 public sealed unsafe class VulkanFence : IDisposable
 {
     private VkFence _handle;
-    private VkDevice _deviceHandle;
+    private readonly VkDevice _deviceHandle;
     private readonly VkDeviceCommands _commands;
     public nint Handle => _handle;
 
@@ -22,7 +24,7 @@ public sealed unsafe class VulkanFence : IDisposable
         }
 
         _commands.vkDestroyFence(_deviceHandle, _handle, null);
-        _deviceHandle = nint.Zero;
+        _handle = nint.Zero;
 
         GC.SuppressFinalize(this);
     }

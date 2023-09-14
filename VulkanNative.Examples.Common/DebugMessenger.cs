@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using VulkanNative.Examples.Common.Utility;
 
 namespace VulkanNative.Examples.Common;

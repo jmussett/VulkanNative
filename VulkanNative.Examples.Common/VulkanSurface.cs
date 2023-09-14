@@ -1,4 +1,5 @@
-﻿using VulkanNative.Examples.Common.Utility;
+﻿using System;
+using VulkanNative.Examples.Common.Utility;
 
 namespace VulkanNative.Examples.Common;
 

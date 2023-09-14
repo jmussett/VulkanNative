@@ -1,4 +1,7 @@
-﻿namespace VulkanNative.Examples.Common;
+﻿using System;
+using System.Collections.Generic;
+
+namespace VulkanNative.Examples.Common;
 
 public sealed class SemaphorePool : IDisposable
 {

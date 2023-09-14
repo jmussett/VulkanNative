@@ -1,4 +1,6 @@
-﻿namespace VulkanNative.Examples.Common;
+﻿using System;
+
+namespace VulkanNative.Examples.Common;
 
 public sealed unsafe class RenderPass : IDisposable
 {

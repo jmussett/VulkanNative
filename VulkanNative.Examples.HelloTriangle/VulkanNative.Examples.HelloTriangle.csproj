@@ -3,13 +3,18 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\VulkanNative.Examples.Common\VulkanNative.Examples.Common.csproj" />
     <ProjectReference Include="..\VulkanNative\VulkanNative.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="GLFW.NET">
+      <HintPath>..\VulkanNative.Examples.Common\GLFW.NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   
   <ItemGroup>

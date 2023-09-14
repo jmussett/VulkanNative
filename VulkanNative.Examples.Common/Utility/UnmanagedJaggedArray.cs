@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -33,7 +35,7 @@ public unsafe class UnmanagedJaggedArray<TItem> : IDisposable, IEnumerable<Unman
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public UnmanagedJaggedArray(int initialCapacity = 4)
     {
-        if (initialCapacity <= 0)
+        if (initialCapacity < 0)
         {
             throw new ArgumentOutOfRangeException(nameof(initialCapacity));
         }

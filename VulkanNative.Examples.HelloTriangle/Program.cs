@@ -1,4 +1,3 @@
-﻿
-using VulkanNative.Examples.HelloTriangle;
+﻿using VulkanNative.Examples.HelloTriangle;
 
 new HelloTriangle().Run();
