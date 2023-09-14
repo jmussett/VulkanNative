@@ -1,13 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using VulkanNative.Examples.Common.Utility;
 
 namespace VulkanNative.Examples.Common;
 
-public sealed class GraphicsPipelineDefinition : IDisposable
+public sealed class GraphicsPipelineDefinition
 {
     public required RenderPass RenderPass { get; set; }
     public required PipelineLayout PipelineLayout { get; set; }
-    public VulkanBuffer<VkDynamicState> DynamicStates { get; set; } = new();
+    public VkDynamicState[] DynamicStates { get; set; } = Array.Empty<VkDynamicState>();
     public VertexInputState? VertexInputState { get; set; } = null;
     public InputAssemblyState? InputAssemblyState { get; set; } = null;
     public ViewportState? ViewportState { get; set; } = null;
@@ -28,18 +27,5 @@ public sealed class GraphicsPipelineDefinition : IDisposable
     {
         RenderPass = renderPass;
         PipelineLayout = pipelineLayout;
-    }
-
-    public void Dispose()
-    {
-        DynamicStates.Dispose();
-        VertexInputState?.Dispose();
-        ViewportState?.Dispose();
-        ColorBlendState?.Dispose(); 
-
-        for (var i = 0; i < Stages.Length; i++)
-        {
-            Stages[i].Dispose();
-        }
     }
 }

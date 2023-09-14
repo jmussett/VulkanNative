@@ -372,7 +372,7 @@ internal class HelloTriangle
                 new SubpassDescription
                 {
                     BindPoint = VkPipelineBindPoint.VK_PIPELINE_BIND_POINT_GRAPHICS,
-                    ColorAttachments = new()
+                    ColorAttachments = new []
                     {
                         new VkAttachmentReference
                         {
@@ -427,7 +427,7 @@ internal class HelloTriangle
             {
                 RenderPass = _renderPass!,
                 PipelineLayout = _pipelineLayout,
-                DynamicStates = new()
+                DynamicStates = new[]
                 {
                     VkDynamicState.VK_DYNAMIC_STATE_VIEWPORT,
                     VkDynamicState.VK_DYNAMIC_STATE_SCISSOR,
@@ -455,7 +455,7 @@ internal class HelloTriangle
                 },
                 ViewportState = new()
                 {
-                    Viewports  =new()
+                    Viewports = new []
                     {
                         new VkViewport
                         {
@@ -467,7 +467,7 @@ internal class HelloTriangle
                             maxDepth = 1.0f,
                         }
                     },
-                    Scissors = new()
+                    Scissors = new[]
                     {
                         new VkRect2D
                         {
@@ -489,9 +489,9 @@ internal class HelloTriangle
                 },
                 ColorBlendState = new()
                 {
-                    Attachments = new()
+                    Attachments = new[]
                     {
-                        new ()
+                        new ColorBlendAttachmentState()
                         {
                             ColorWriteMask = VkColorComponentFlags.VK_COLOR_COMPONENT_R_BIT | VkColorComponentFlags.VK_COLOR_COMPONENT_G_BIT | VkColorComponentFlags.VK_COLOR_COMPONENT_B_BIT | VkColorComponentFlags.VK_COLOR_COMPONENT_A_BIT,
                         }

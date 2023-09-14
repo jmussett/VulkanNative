@@ -1,17 +1,9 @@
-﻿using VulkanNative.Examples.Common.Utility;
+﻿namespace VulkanNative.Examples.Common;
 
-namespace VulkanNative.Examples.Common;
-
-public sealed class ColorBlendState : IDisposable
+public sealed class ColorBlendState
 {
     public bool LogicOpEnable { get; set; }
     public VkLogicOp LogicOp { get; set; }
-    public VulkanBuffer<ColorBlendAttachmentState> Attachments { get; set; } = new();
-    public VulkanBuffer<float> BlendConstants { get; } = new(4, true);
-
-    public void Dispose()
-    {
-        Attachments.Dispose();
-        BlendConstants.Dispose();
-    }
+    public ColorBlendAttachmentState[] Attachments { get; set; } = Array.Empty<ColorBlendAttachmentState>();
+    public float[] BlendConstants { get; } = new[] { 0f, 0f, 0f, 0f};
 }

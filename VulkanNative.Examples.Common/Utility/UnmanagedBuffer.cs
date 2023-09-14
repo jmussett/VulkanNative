@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Microsoft.Extensions.ObjectPool;
+using System.Collections;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -7,7 +8,10 @@ namespace VulkanNative.Examples.Common.Utility;
 public unsafe class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TItem>
     where TItem : unmanaged
 {
-    private readonly bool _fixedLength;
+    private static DefaultObjectPool<UnmanagedBuffer<TItem>> _pool
+        = new(new UnmanageBufferObjectPolicy());
+
+    private bool _fixedLength;
 
     private TItem* _pointer;
     private int _currentLength;
@@ -51,9 +55,26 @@ public unsafe class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TIte
         }
     }
 
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public UnmanagedBuffer(int initialCapacity = 4, bool fixedLength = false)
+    protected UnmanagedBuffer() {}
+
+    public static UnmanagedBuffer<TItem> Create(int initialCapacity = 4, bool fixedLength = false)
     {
+        var buffer = _pool.Get();
+        
+        buffer.Initialize(initialCapacity, fixedLength);
+
+        return buffer;
+    }
+
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    protected void Initialize(int initialCapacity = 4, bool fixedLength = false)
+    {
+        if ((nint)_pointer != nint.Zero)
+        {
+            throw new InvalidOperationException("Object has not been disposed.");
+        }
+
         if (initialCapacity <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(initialCapacity));
@@ -108,12 +129,14 @@ public unsafe class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TIte
         destination = _pointer;
 
         _pointer = null;
+
+        _pool.Return(this);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public UnmanagedSegment<TItem> Slice(int start, int length)
     {
-        if (start < 0 || start + length > _currentLength)
+        if (start < 0 || length < 0 || start + length > _currentLength)
         {
             throw new ArgumentOutOfRangeException();
         }
@@ -129,10 +152,17 @@ public unsafe class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TIte
 
     protected virtual void Dispose(bool disposing)
     {
+        _pool.Return(this);
+    }
+
+    protected void Reset()
+    {
         if ((nint)_pointer != nint.Zero)
         {
             Marshal.FreeHGlobal((nint)_pointer);
         }
+
+        _pointer = null;
     }
 
     ~UnmanagedBuffer()
@@ -240,5 +270,17 @@ public unsafe class UnmanagedBuffer<TItem> : IEnumerable<TItem>, IUnmanaged<TIte
         }
 
         public void Dispose() { }
+    }
+
+    private class UnmanageBufferObjectPolicy : IPooledObjectPolicy<UnmanagedBuffer<TItem>>
+    {
+        public UnmanagedBuffer<TItem> Create() => new();
+        public bool Return(UnmanagedBuffer<TItem> buffer)
+        {
+            // Make sure the buffer is reset before returning
+            buffer.Reset();
+
+            return true;
+        }
     }
 }

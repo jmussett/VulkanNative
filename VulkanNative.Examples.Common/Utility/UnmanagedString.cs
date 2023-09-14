@@ -44,7 +44,7 @@ public unsafe sealed class UnmanagedString : IUnmanaged<char>
     {
         var charCount = encoding.GetNullTerminatingCharCount(bytes);
 
-        _characters = new UnmanagedBuffer<char>(charCount, true);
+        _characters = UnmanagedBuffer<char>.Create(charCount, true);
 
         encoding.GetChars(bytes[..charCount], _characters.AsSpan());
     }

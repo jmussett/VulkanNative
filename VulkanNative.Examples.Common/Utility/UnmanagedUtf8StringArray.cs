@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Buffers;
+using System.Collections;
 using System.Runtime.CompilerServices;
 
 namespace VulkanNative.Examples.Common.Utility;

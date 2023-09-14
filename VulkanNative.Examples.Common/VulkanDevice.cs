@@ -126,18 +126,30 @@ public sealed unsafe class VulkanDevice : IDisposable
         {
             var subpassesPtr = stackalloc VkSubpassDescription[subpassDescriptions.Length];
 
-            for(var i = 0; i < subpassDescriptions.Length; i++)
+            using var inputAttachments = new UnmanagedJaggedArray<VkAttachmentReference>();
+            using var subpassColorAttachments = new UnmanagedJaggedArray<VkAttachmentReference>();
+            using var resolveAttachments = new UnmanagedJaggedArray<VkAttachmentReference>();
+            using var preserveAttachments = new UnmanagedJaggedArray<uint>();
+
+            for (var i = 0; i < subpassDescriptions.Length; i++)
             {
+                inputAttachments.Add(subpassDescriptions[i].InputAttachments);
+                subpassColorAttachments.Add(subpassDescriptions[i].ColorAttachments);
+                resolveAttachments.Add(subpassDescriptions[i].ResolveAttachments);
+                preserveAttachments.Add(subpassDescriptions[i].PreserveAttachments);
+
                 subpassesPtr[i] = new()
                 {
                     pipelineBindPoint = subpassDescriptions[i].BindPoint,
                     inputAttachmentCount = (uint) subpassDescriptions[i].InputAttachments.Length,
-                    pInputAttachments = subpassDescriptions[i].InputAttachments.AsPointer(),
+                    pInputAttachments = inputAttachments.AsPointer()[i],
                     colorAttachmentCount = (uint)subpassDescriptions[i].ColorAttachments.Length,
-                    pColorAttachments = subpassDescriptions[i].ColorAttachments.AsPointer(),
-                    pResolveAttachments = subpassDescriptions[i].ResolveReferences.AsPointer(),
+                    pColorAttachments = subpassColorAttachments.AsPointer()[i],
+                    pResolveAttachments = subpassDescriptions[i].ResolveAttachments.Length == 0 
+                        ? null 
+                        : resolveAttachments.AsPointer()[i], // TODO ???
                     preserveAttachmentCount = (uint) subpassDescriptions[i].PreserveAttachments.Length,
-                    pPreserveAttachments = subpassDescriptions[i].PreserveAttachments.AsPointer(),
+                    pPreserveAttachments = preserveAttachments.AsPointer()[i],
                 };
 
                 if (subpassDescriptions[i].DepthStencilAttachment.HasValue)
@@ -172,6 +184,7 @@ public sealed unsafe class VulkanDevice : IDisposable
 
         VkGraphicsPipelineCreateInfo* vkCreateInfosPtr = stackalloc VkGraphicsPipelineCreateInfo[pipelineDefitions.Length];
 
+        // We need these buffers to persist the memory during the lifetime of vkCreateGraphicsPipelines
         using UnmanagedJaggedArray<VkPipelineDynamicStateCreateInfo> dynamicStates = new();
         using UnmanagedJaggedArray<VkPipelineVertexInputStateCreateInfo> vertextInputStates = new();
         using UnmanagedJaggedArray<VkPipelineInputAssemblyStateCreateInfo> inputAssemblyStates = new();
@@ -181,29 +194,39 @@ public sealed unsafe class VulkanDevice : IDisposable
         using UnmanagedJaggedArray<VkPipelineMultisampleStateCreateInfo> multisampleStates = new();
         using UnmanagedJaggedArray<VkPipelineColorBlendStateCreateInfo> colorBlendStates = new();
         using UnmanagedJaggedArray<VkPipelineColorBlendAttachmentState> colorBlendAttachmentStates = new();
+        using UnmanagedJaggedArray<VkDynamicState> dyanmicStates = new();
+        using UnmanagedJaggedArray<VkVertexInputAttributeDescription> vertextAttributeDescriptions = new();
+        using UnmanagedJaggedArray<VkVertexInputBindingDescription> vertextBindingDescriptions = new();
+        using UnmanagedJaggedArray<VkViewport> viewports = new();
+        using UnmanagedJaggedArray<VkRect2D> scissors = new();
+        using UnmanagedUtf8StringArray stageNames = new();
 
-        // We allocate the nullable types first so they're lifetime is preserved until after vkCreateGraphicsPipelines is called.
         for (var i = 0; i < pipelineDefitions.Length; i++)
         {
+            vertextAttributeDescriptions.Add(pipelineDefitions[i].VertexInputState!.VertexAttributeDescriptions);
+            vertextBindingDescriptions.Add(pipelineDefitions[i].VertexInputState!.VertexBindingDescriptions);
+
             VkPipelineVertexInputStateCreateInfo? vertextInputStateCreateInfo =
                 pipelineDefitions[i].VertexInputState is not null
                     ? new()
                     {
                         vertexAttributeDescriptionCount = (uint)pipelineDefitions[i].VertexInputState!.VertexAttributeDescriptions.Length,
-                        pVertexAttributeDescriptions = pipelineDefitions[i].VertexInputState!.VertexAttributeDescriptions.AsPointer(),
+                        pVertexAttributeDescriptions = vertextAttributeDescriptions.AsPointer()[i],
                         vertexBindingDescriptionCount = (uint)pipelineDefitions[i].VertexInputState!.VertexBindingDescriptions.Length,
-                        pVertexBindingDescriptions = pipelineDefitions[i].VertexInputState!.VertexBindingDescriptions.AsPointer()
+                        pVertexBindingDescriptions = vertextBindingDescriptions.AsPointer()[i]
                     }
                     : null;
 
             vertextInputStates.Add(vertextInputStateCreateInfo);
+
+            dyanmicStates.Add(pipelineDefitions[i].DynamicStates);
 
             VkPipelineDynamicStateCreateInfo? dynamicStateCreateInfo =
                 pipelineDefitions[i].DynamicStates.Length != 0
                     ? new()
                     {
                         dynamicStateCount = (uint)pipelineDefitions[i].DynamicStates.Length,
-                        pDynamicStates = pipelineDefitions[i].DynamicStates.AsPointer()
+                        pDynamicStates = dyanmicStates.AsPointer()[i]
                     }
                     : null;
 
@@ -220,7 +243,7 @@ public sealed unsafe class VulkanDevice : IDisposable
 
             inputAssemblyStates.Add(inputAssemblyStateCreateInf);
 
-            UnmanagedBuffer<VkPipelineShaderStageCreateInfo> stageBuffer = new(pipelineDefitions[i].Stages.Length, true);
+            var stageBuffer = UnmanagedBuffer<VkPipelineShaderStageCreateInfo>.Create(pipelineDefitions[i].Stages.Length, true);
 
             for (var j = 0; j < pipelineDefitions[i].Stages.Length; j++)
             {
@@ -232,11 +255,13 @@ public sealed unsafe class VulkanDevice : IDisposable
                     specializationInfoPtr = &specialziationInfoHandle;
                 }
 
+                stageNames.Add(pipelineDefitions[i].Stages[j].Name);
+
                 stageBuffer[j] = new()
                 {
                     // TODO: pNext
                     flags = pipelineDefitions[i].Stages[j].Flags,
-                    pName = pipelineDefitions[i].Stages[j].Name.AsPointer(),
+                    pName = stageNames.AsPointer()[i * j],
                     stage = pipelineDefitions[i].Stages[j].Stage,
                     module = pipelineDefitions[i].Stages[j].Module.Handle,
                     pSpecializationInfo = specializationInfoPtr,
@@ -245,13 +270,17 @@ public sealed unsafe class VulkanDevice : IDisposable
 
             stages.Add(stageBuffer);
 
+            viewports.Add(pipelineDefitions[i].ViewportState!.Viewports);
+            scissors.Add(pipelineDefitions[i].ViewportState!.Scissors);
+
+
             VkPipelineViewportStateCreateInfo? viewportStateCreateInfo = pipelineDefitions[i].ViewportState is not null
                 ? new()
                 {
                     viewportCount = (uint) pipelineDefitions[i].ViewportState!.Viewports.Length,
-                    pViewports = pipelineDefitions[i].ViewportState!.Viewports.AsPointer(),
+                    pViewports = viewports.AsPointer()[i],
                     scissorCount = (uint) pipelineDefitions[i].ViewportState!.Scissors.Length,
-                    pScissors = pipelineDefitions[i].ViewportState!.Scissors.AsPointer(),
+                    pScissors = scissors.AsPointer()[i],
                 }
                 : null;
 
@@ -292,6 +321,11 @@ public sealed unsafe class VulkanDevice : IDisposable
 
             if (pipelineDefitions[i].ColorBlendState is not null)
             {
+                if (pipelineDefitions[i].ColorBlendState!.BlendConstants.Length != 4)
+                {
+                    throw new InvalidOperationException("ColorBlendState must have 4 Blend Constants");
+                }
+
                 VkPipelineColorBlendStateCreateInfo colorBlendStateCreateInfo = new()
                 {
                     logicOpEnable = (uint)(pipelineDefitions[i].ColorBlendState!.LogicOpEnable ? 1 : 0),
@@ -303,7 +337,7 @@ public sealed unsafe class VulkanDevice : IDisposable
                 colorBlendStateCreateInfo.blendConstants[2] = pipelineDefitions[i].ColorBlendState!.BlendConstants[2];
                 colorBlendStateCreateInfo.blendConstants[3] = pipelineDefitions[i].ColorBlendState!.BlendConstants[3];
 
-                VulkanBuffer<VkPipelineColorBlendAttachmentState> attachmentStateBuffer = new();
+                var attachmentStateBuffer = VulkanBuffer<VkPipelineColorBlendAttachmentState>.Create();
 
                 for (int j = 0; j < pipelineDefitions[i].ColorBlendState!.Attachments.Length; j++)
                 {

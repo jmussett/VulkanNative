@@ -1,23 +1,13 @@
-﻿using VulkanNative.Examples.Common.Utility;
+﻿namespace VulkanNative.Examples.Common;
 
-namespace VulkanNative.Examples.Common;
-
-public class SubpassDescription : IDisposable
+public class SubpassDescription
 {
     public VkPipelineBindPoint BindPoint { get; set; }
 
-    public VulkanBuffer<VkAttachmentReference> InputAttachments { get; set; } = new();
-    public VulkanBuffer<VkAttachmentReference> ColorAttachments { get; set; } = new();
-    public VulkanBuffer<VkAttachmentReference> ResolveReferences { get; set; } = new();
+    public VkAttachmentReference[] InputAttachments { get; set; } = Array.Empty<VkAttachmentReference>();
+    public VkAttachmentReference[] ColorAttachments { get; set; } = Array.Empty<VkAttachmentReference>();
+    public VkAttachmentReference[] ResolveAttachments { get; set; } = Array.Empty<VkAttachmentReference>();
     public VkAttachmentReference? DepthStencilAttachment { get; set; }
 
-    public VulkanBuffer<uint> PreserveAttachments { get; set; } = new();
-
-    public void Dispose()
-    {
-        InputAttachments?.Dispose();
-        ColorAttachments?.Dispose();
-        ResolveReferences?.Dispose();
-        PreserveAttachments?.Dispose();
-    }
+    public uint[] PreserveAttachments { get; set; } = Array.Empty<uint>();
 }

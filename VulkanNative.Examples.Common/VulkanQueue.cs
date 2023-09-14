@@ -19,10 +19,10 @@ public unsafe class VulkanQueue
     {
         var queueSubmitInfoPtr = stackalloc VkSubmitInfo[1];
 
-        using UnmanagedBuffer<VkSemaphore> waitSemaphoreBuffer = new();
-        using UnmanagedBuffer<VkSemaphore> signalSemaphoreBuffer = new();
-        using UnmanagedBuffer<VkCommandBuffer> commandBuffersBuffer = new();
-        using UnmanagedBuffer<VkPipelineStageFlags> waitStagesBuffer = new();
+        using var waitSemaphoreBuffer = UnmanagedBuffer<VkSemaphore>.Create();
+        using var signalSemaphoreBuffer = UnmanagedBuffer<VkSemaphore>.Create();
+        using var commandBuffersBuffer = UnmanagedBuffer<VkCommandBuffer>.Create();
+        using var waitStagesBuffer = UnmanagedBuffer<VkPipelineStageFlags>.Create();
 
         for (var j = 0; j < submission.WaitSemaphores.Count; j++)
         {
@@ -71,10 +71,10 @@ public unsafe class VulkanQueue
 
         for (var i = 0; i < submission.Length; i++)
         {
-            UnmanagedBuffer<VkSemaphore> waitSemaphoreBuffer = new();
-            UnmanagedBuffer<VkSemaphore> signalSemaphoreBuffer = new();
-            UnmanagedBuffer<VkCommandBuffer> commandBuffersBuffer = new();
-            UnmanagedBuffer<VkPipelineStageFlags> waitStagesBuffer = new();
+            var waitSemaphoreBuffer = UnmanagedBuffer<VkSemaphore>.Create();
+            var signalSemaphoreBuffer = UnmanagedBuffer<VkSemaphore>.Create();
+            var commandBuffersBuffer = UnmanagedBuffer<VkCommandBuffer>.Create();
+            var waitStagesBuffer = UnmanagedBuffer<VkPipelineStageFlags>.Create();
 
             for (var j = 0; j < submission[i].WaitSemaphores.Count; j++)
             {
