@@ -1,6 +1,8 @@
-﻿namespace VulkanNative.Examples.Common.Utility;
+﻿using System;
 
-internal static class VkResultExtension
+namespace VulkanNative.Examples.Common.Utility;
+
+public static class VkResultExtension
 {
     public static void ThrowOnError(this VkResult result)
     {
