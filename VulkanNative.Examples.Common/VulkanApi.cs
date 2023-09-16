@@ -52,14 +52,17 @@ public unsafe class VulkanApi
             ppEnabledExtensionNames = enabledExtensionNamesEncoded.AsPointer(),
         };
 
-        _globalCommands.vkCreateInstance(&vkInstanceCreateInfo, null, &instance).ThrowOnError();
+        if (definition.Next is not null)
+        {
+            vkInstanceCreateInfo.pNext = (void*) definition.Next.ChainHandle;
+        }
 
-        //VK_ERROR_INCOMPATIBLE_DRIVER https://vulkan-tutorial.com/Drawing_a_triangle/Setup/Instance
+        _globalCommands.vkCreateInstance(&vkInstanceCreateInfo, null, &instance).ThrowOnError();
 
         return new VulkanInstance(instance, _vulkanLoader);
     }
 
-    public void EnumerateInstanceExtensionProperties(string? layerName, out ExtensionProperties[] properties)
+    public ExtensionProperties[] EnumerateInstanceExtensionProperties(string? layerName = null)
     {
         // Define the state you wish to pass to the callback
         // This can be extended to include other required data, too
@@ -80,7 +83,7 @@ public unsafe class VulkanApi
             EnumerateInstanceExtensionProperties(null, ref state);
         }
 
-        properties = state.Properties;
+        return state.Properties;
     }
 
     private static void EnumerateInstanceExtensionProperties(Span<byte> layerName, ref ExtensionPropertiesState state)
@@ -109,9 +112,9 @@ public unsafe class VulkanApi
         }
     }
 
-    public void EnumerateInstanceLayerProperties(out LayerProperties[] layerProperties)
+    public LayerProperties[] EnumerateInstanceLayerProperties()
     {
-        layerProperties = Array.Empty<LayerProperties>();
+        var layerProperties = Array.Empty<LayerProperties>();
 
         uint propertyCount;
         _globalCommands.vkEnumerateInstanceLayerProperties(&propertyCount, null).ThrowOnError();
@@ -132,6 +135,8 @@ public unsafe class VulkanApi
                 ImplementationVersion = propertiesPtr[i].implementationVersion
             };
         }
+
+        return layerProperties;
     }
 
     private struct ExtensionPropertiesState

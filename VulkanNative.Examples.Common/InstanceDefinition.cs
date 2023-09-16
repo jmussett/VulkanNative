@@ -12,4 +12,19 @@ public class InstanceDefinition
     public VulkanVersion ApiVersion { get; set; }
     public string[] EnabledLayers { get; set; } = Array.Empty<string>();
     public string[] EnabledExtensions { get; set; } = Array.Empty<string>();
+
+    public IExtensionChain<InstanceDefinition>? Next { get; private set; } = null;
+
+    public IExtensionChain<InstanceDefinition> Extend(IExtensionChain<InstanceDefinition> chain)
+    {
+        Next = chain;
+
+        return chain;
+    }
+}
+
+public interface IExtensionChain<T>
+{
+   nint ChainHandle { get; }
+   IExtensionChain<InstanceDefinition> Extend(IExtensionChain<InstanceDefinition> chain);
 }

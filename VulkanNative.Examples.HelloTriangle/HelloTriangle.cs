@@ -281,7 +281,7 @@ internal class HelloTriangle
 
     private void InitializeInstance(VulkanApi api, string[] requiredExtensions)
     {
-        api.EnumerateInstanceExtensionProperties(null, out var availableExtensions);
+        var availableExtensions = api.EnumerateInstanceExtensionProperties(null);
 
         List<string> activeExtension = new();
 
@@ -304,7 +304,7 @@ internal class HelloTriangle
             throw new InvalidOperationException("Required instance extensions are missing.");
         }
 
-        api.EnumerateInstanceLayerProperties(out var availableLayers);
+        var availableLayers = api.EnumerateInstanceLayerProperties();
 
         List<string> activeLayers = new();
 
@@ -319,22 +319,34 @@ internal class HelloTriangle
             throw new InvalidOperationException("Required validation layers are missing.");
         }
 
-        _instance = api.CreateVulkanInstance(new InstanceDefinition
+        var instanceDefinition = new InstanceDefinition
         {
             AppName = "Hello Triangle",
             EngineName = "MyEngine",
             ApiVersion = new VulkanVersion(1, 0, 0),
             EnabledExtensions = activeExtensionNames,
             EnabledLayers = activeLayerNames
-        });
+        };
 
 #if DEBUG
-        var debugUtils = _instance.LoadDebugUtilsExtension();
+        var severity = VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT |
+            VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT |
+            VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT |
+            VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT;
 
-        _debugMessenger = debugUtils.CreateMessenger();
+        var messageType = VkDebugUtilsMessageTypeFlagsEXT.VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT |
+            VkDebugUtilsMessageTypeFlagsEXT.VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT |
+            VkDebugUtilsMessageTypeFlagsEXT.VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
+            VkDebugUtilsMessageTypeFlagsEXT.VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT;
+
+        _debugMessenger = new DebugMessenger(severity, messageType);
 
         _debugMessenger.OnMessage += Console.WriteLine;
+
+        instanceDefinition.Extend(_debugMessenger);
 #endif
+
+        _instance = api.CreateVulkanInstance(instanceDefinition);
     }
 
     private void InitializeDevice(string[] requiredDeviceExtensions)
