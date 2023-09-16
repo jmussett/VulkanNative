@@ -339,14 +339,20 @@ internal class HelloTriangle
             VkDebugUtilsMessageTypeFlagsEXT.VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |
             VkDebugUtilsMessageTypeFlagsEXT.VK_DEBUG_UTILS_MESSAGE_TYPE_DEVICE_ADDRESS_BINDING_BIT_EXT;
 
-        _debugMessenger = new DebugMessenger(severity, messageType);
+        var messengetDefinition = new DebugMessengerDefinition(severity, messageType);
 
-        _debugMessenger.OnMessage += Console.WriteLine;
+        messengetDefinition.OnMessage += Console.WriteLine;
 
-        instanceDefinition.Extend(_debugMessenger);
+        instanceDefinition.Extend(messengetDefinition);
 #endif
 
         _instance = api.CreateVulkanInstance(instanceDefinition);
+
+#if DEBUG
+        var debugUtils = _instance.LoadDebugUtilsExtension();
+
+        _debugMessenger = debugUtils.CreateMessenger(messengetDefinition);
+#endif
     }
 
     private void InitializeDevice(string[] requiredDeviceExtensions)

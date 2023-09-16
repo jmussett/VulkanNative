@@ -11,8 +11,8 @@ public class DebugUtils
         _extension = extension;
     }
 
-    public unsafe DebugMessenger CreateMessenger(VkDebugUtilsMessageSeverityFlagsEXT severity, VkDebugUtilsMessageTypeFlagsEXT messageType)
+    public unsafe DebugMessenger CreateMessenger(DebugMessengerDefinition definition)
     {
-        return new DebugMessenger(_handle, _extension, severity, messageType);
+        return new DebugMessenger(_handle, _extension, definition);
     }
 }
